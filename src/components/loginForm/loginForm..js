@@ -52,10 +52,6 @@ const LoginForm = ({ loginFunction, ...props }) => {
         }
     });
 
-    const handleChange = () => {
-        console.log("stay logged in");
-    }
-
     const classes = useStyles();
 
     const loginLabel = <p>Please log in</p>;
