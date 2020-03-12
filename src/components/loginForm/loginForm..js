@@ -2,9 +2,9 @@ import React from 'react';
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import axios from 'axios';
-
 import Button from '@material-ui/core/Button';
+
+import * as AuthenticationService from '../authenticationService/authenticationService';
 
 const LoginForm = ({ props }) => {
 
@@ -15,17 +15,10 @@ const LoginForm = ({ props }) => {
             jsonObject[key] = value;
         }
         event.target.reset();
-        login(jsonObject.username, jsonObject.password);
+        
+        AuthenticationService.loginUser(jsonObject.username, jsonObject.password);
     }
 
-    const login = (username, password) => {
-        console.log(username, password);
-        axios.post('/user/login', { username, password })
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-            });
-    }
 
     const useStyles = makeStyles(theme => ({
         root: {
