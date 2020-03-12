@@ -70,7 +70,7 @@ const LoginForm = ({ props }) => {
                     <TextField
                         required
                         InputLabelProps={{ required: true }}
-                        id="standard-password-input"
+                        id="password"
                         name="password"
                         label="Password"
                         type="password"
