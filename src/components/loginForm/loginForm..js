@@ -2,10 +2,11 @@ import React from 'react';
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import axios from 'axios';
 
 import Button from '@material-ui/core/Button';
 
-const LoginForm = ({ loginFunction, ...props }) => {
+const LoginForm = ({ props }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -20,7 +21,7 @@ const LoginForm = ({ loginFunction, ...props }) => {
     const useStyles = makeStyles(theme => ({
         root: {
             "& .MuiTextField-root": {
-                margin: theme.spacing(1),
+                margin: theme.spacing(1)
             }
         },
         buttons: {
@@ -54,12 +55,9 @@ const LoginForm = ({ loginFunction, ...props }) => {
 
     const classes = useStyles();
 
-    const loginLabel = <p>Please log in</p>;
-
     return (
         <div>
             <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
-                {loginLabel}
                 <div>
                     <TextField
                         required
