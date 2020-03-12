@@ -15,7 +15,6 @@ const LoginForm = ({ props }) => {
             jsonObject[key] = value;
         }
         event.target.reset();
-        
         AuthenticationService.loginUser(jsonObject.username, jsonObject.password);
     }
 
