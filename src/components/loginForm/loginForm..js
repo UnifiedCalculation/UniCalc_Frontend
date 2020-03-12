@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
 
 const LoginForm = ({ loginFunction, ...props }) => {
@@ -85,11 +83,6 @@ const LoginForm = ({ loginFunction, ...props }) => {
                 </div>
 
                 <ThemeProvider theme={theme}>
-                    <FormControlLabel
-                        value="saveLogin"
-                        control={<Switch color="primary" onChange={handleChange} />}
-                        label="Stay logged in"
-                    />
                     <div className={classes.buttons}>
                         <Button type="submit" variant="contained" color="primary" disabled={false}>
                             Login
