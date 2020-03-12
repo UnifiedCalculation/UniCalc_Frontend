@@ -15,7 +15,16 @@ const LoginForm = ({ props }) => {
             jsonObject[key] = value;
         }
         event.target.reset();
-        console.log(jsonObject.username, jsonObject.password);
+        login(jsonObject.username, jsonObject.password);
+    }
+
+    const login = (username, password) => {
+        console.log(username, password);
+        axios.post('/user/login', { username, password })
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            });
     }
 
     const useStyles = makeStyles(theme => ({
