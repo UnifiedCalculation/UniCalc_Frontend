@@ -1,3 +1,4 @@
+name: CopyToBackend
 on: 
   push:
     branches:
@@ -5,7 +6,7 @@ on:
 jobs:
   CopyFilesToBackend:
     runs-on: ubuntu-latest
-    name: Telling Server to fetch and rebuild...
+    name: Starting copycat action!
     steps:
     - name: CopyCat
       uses: andstor/copycat-action@v3
@@ -13,7 +14,8 @@ jobs:
         personal_token: ${{ secrets.COPYCAT_ACTION_KEY }}
         src_path: /src/components/
         dst_path: /app/javascript/components
-        src_branch: master
-        dst_branch: updateReactComponents
         dst_owner: UnifiedCalculation
         dst_repo_name: UniCalc_backend
+        dst_branch: updateReactComponents
+        src_branch: master
+        
