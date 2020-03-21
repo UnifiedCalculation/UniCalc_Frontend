@@ -12,7 +12,7 @@ jobs:
       with:
         personal_token: ${{ secrets.COPYCAT_ACTION_KEY }}
         src_path: /src/components/
-        dst_path: /app/javascript/components/
+        dst_path: /app/javascript/
         dst_owner: UnifiedCalculation
         dst_repo_name: UniCalc_backend
         dst_branch: updateReactComponents
