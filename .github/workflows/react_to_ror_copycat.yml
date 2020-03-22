@@ -7,12 +7,6 @@ jobs:
   CopyFilesToBackend:
     runs-on: ubuntu-latest
     steps:
-    - name: install gh cli tool
-      run: sudo apt install git && sudo dpkg -i gh_*_linux_amd64.deb
-    - name: clone the backend repository
-      run: git clone https://github.com/UnifiedCalculation/UniCalc_backend 
-    - name: Create new Branch on Backend
-      run: git checkout -b newReactFiles && git push origin newReactFiles
     - name: CopyCat
       uses: andstor/copycat-action@v3
       with:
@@ -23,6 +17,4 @@ jobs:
         dst_repo_name: UniCalc_backend
         dst_branch: newReactFiles
         src_branch: master
-    - name: Create Pull Request
-      run: cd ./UniCalc_backend && gh pr create -B development -b 'New react components from Frontend' -t 'Merge new React components'
         
