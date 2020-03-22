@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: install gh cli tool
-      run: apt install git && dpkg -i gh_*_linux_amd64.deb
+      run: sudo apt install git && sudo dpkg -i gh_*_linux_amd64.deb
     - name: clone the backend repository
       run: git clone https://github.com/UnifiedCalculation/UniCalc_backend 
     - name: Create new Branch on Backend
