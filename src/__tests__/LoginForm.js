@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, getByTestId } from '@testing-library/react';
-import LoginForm from '../components/loginForm/loginForm.';
+import LoginForm from '../components/loginForm/loginForm';
 
 it('renders the username input field', () => {
   const { getByText } = render(<LoginForm />);
