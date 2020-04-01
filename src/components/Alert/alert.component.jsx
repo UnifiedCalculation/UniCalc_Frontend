@@ -7,6 +7,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 
 const Alert = ({ title, text, onAccept, acceptText, onCancel, cancelText, show, ...props }) => {
 
@@ -17,7 +18,7 @@ const Alert = ({ title, text, onAccept, acceptText, onCancel, cancelText, show, 
         <div>
             <Dialog
                 open={show}
-                onClose={}
+                onClose={onCancel}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
                 fullScreen={fullScreen}
@@ -25,14 +26,14 @@ const Alert = ({ title, text, onAccept, acceptText, onCancel, cancelText, show, 
                 <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        {text}}
+                        {text}
           </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} color="primary">
+                    <Button onClick={onCancel} color="primary">
                         {cancelText}
                     </Button>
-                    <Button onClick={handleClose} color="primary" autoFocus>
+                    <Button onClick={onAccept} color="primary" autoFocus>
                         {acceptText}
                     </Button>
                 </DialogActions>

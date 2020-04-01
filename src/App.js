@@ -1,5 +1,5 @@
 import React from 'react';
-import SinglePage from './components/singlePage/singlePage';
+import SinglePage from './components/singlePage/singlePage.component';
 
 function App() {
   return (
