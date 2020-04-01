@@ -8,6 +8,7 @@ const SinglePage = () => {
 
 
     const [open, setOpen] = useState(false);
+    
     const [text, setText] = useState("Accept this request?");
 
 
