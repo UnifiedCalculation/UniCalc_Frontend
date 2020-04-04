@@ -16,6 +16,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
+/**
+ * @param {Array} customer array with customers in the form of [{name: 'Albert Einstein',customerId: '1237120'}]
+ * @param {Function} onAccept
+ * @param {Function} onCancel
+ * @param {Boolean} show
+ */
 const NewProjectDialog = ({ customers, onAccept, onCancel, show, ...props }) => {
 
     
