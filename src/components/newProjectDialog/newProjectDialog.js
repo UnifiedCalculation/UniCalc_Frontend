@@ -34,6 +34,12 @@ const NewProjectDialog = ({ onAccept, onCancel, show, ...props }) => {
             customerId: '1237540'
         }
     ];
+    
+
+    const cancelText = 'Abbrechen';
+    const acceptText = 'Annehmen';
+    const title = 'Neues Projekt erstellen';
+    const text = 'Tragen Sie bitte alle Felder ein, um ein neues Projekt zu erstellen.';
 
     const textfields = [
         {
@@ -68,48 +74,18 @@ const NewProjectDialog = ({ onAccept, onCancel, show, ...props }) => {
         }
     ];
 
-    const useStyles = makeStyles((theme) => ({
-        formControl: {
-            margin: theme.spacing(0),
-            minWidth: 120,
-        },
-        selectEmpty: {
-            marginTop: theme.spacing(5),
-        },
-    }));
-
-    const classes = useStyles();
-    const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-
-    const cancelText = 'Abbrechen';
-    const acceptText = 'Annehmen';
-    const title = 'Neues Projekt erstellen';
-
-    const onSubmit = (event) => {
-        event.preventDefault();
-        let jsonObject = {};
-        for (const [key, value] of new FormData(event.target).entries()) {
-            jsonObject[key] = value;
-        }
-        console.log(JSON.stringify(jsonObject));
-        event.target.reset();
-    };
-
-    const text = 'Tragen Sie bitte alle Felder ein, um ein neues Projekt zu erstellen.';
-
     let emptyNameSelection = new Array();
     emptyNameSelection.push(<option value="" key="0-option"></option>);
-    const customerSelector = emptyNameSelection.concat(customers.map((entry, index) =>
-        <option
-            value={entry.customerId}
-            key={(index + 1) + '-option'}
-        >
-            {entry.name}
-        </option >
-    )
+    const customerSelector = emptyNameSelection.concat(
+        customers.map((entry, index) =>
+            <option
+                value={entry.customerId}
+                key={(index + 1) + '-option'}
+            >
+                {entry.name}
+            </option >
+        )
     );
-
 
 
     const inputFields = textfields.map((entry, index) =>
@@ -126,6 +102,33 @@ const NewProjectDialog = ({ onAccept, onCancel, show, ...props }) => {
 
         />
     );
+
+    const useStyles = makeStyles((theme) => ({
+        formControl: {
+            margin: theme.spacing(0),
+            minWidth: 120,
+        },
+        selectEmpty: {
+            marginTop: theme.spacing(5),
+        },
+    }));
+
+    const classes = useStyles();
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+
+    const onSubmit = (event) => {
+        event.preventDefault();
+        let jsonObject = {};
+        for (const [key, value] of new FormData(event.target).entries()) {
+            jsonObject[key] = value;
+        }
+        console.log(JSON.stringify(jsonObject));
+        event.target.reset();
+    };
+
+    
 
     return (
         <div>
