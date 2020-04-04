@@ -1,5 +1,5 @@
 import React from 'react';
-import Alert from '../alert/alert';
+import NewProjectDialog from '../newProjectDialog/newProjectDialog';
 
 const SinglePage = () => {
 
@@ -7,13 +7,7 @@ const SinglePage = () => {
 
     return (
         <>
-            <Alert
-                title={'title'}
-                text={'text'}
-                onCancel={() => console.log('cancel!')}
-                onAccept={() => console.log('accept!')}
-                show={true}
-            />
+            <NewProjectDialog show={true} />
             <p>Nothing yet...</p>
         </>
     );
