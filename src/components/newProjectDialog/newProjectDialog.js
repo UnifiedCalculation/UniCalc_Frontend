@@ -115,7 +115,7 @@ const NewProjectDialog = ({ customers, onAccept, onCancel, show, ...props }) => 
     };
 
     return (
-        <div>
+        <>
             <Dialog
                 open={show}
                 onClose={onCancel}
@@ -158,8 +158,8 @@ const NewProjectDialog = ({ customers, onAccept, onCancel, show, ...props }) => 
                     </Button>
                 </DialogActions>
             </Dialog>
-        </div>
-    )
+        </>
+    );
 }
 
 NewProjectDialog.propTypes = {
