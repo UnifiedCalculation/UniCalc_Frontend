@@ -1,10 +1,21 @@
 import React from 'react';
+import Alert from '../alert/alert';
 
-class SinglePage extends React.Component {
-    render() {
-        return (
-    <p> Nothing yet...</p >
-     );
-}}
+const SinglePage = () => {
 
+
+
+    return (
+        <>
+            <Alert
+                title={'title'}
+                text={'text'}
+                onCancel={() => console.log('cancel!')}
+                onAccept={() => console.log('accept!')}
+                show={true}
+            />
+            <p>Nothing yet...</p>
+        </>
+    );
+}
 export default SinglePage;
