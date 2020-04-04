@@ -163,7 +163,7 @@ const NewProjectDialog = ({ customers, onAccept, onCancel, show, ...props }) => 
 }
 
 NewProjectDialog.propTypes = {
-    customers: PropTypes.string.isRequired, 
+    customers: PropTypes.array.isRequired, 
     onAccept: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
     show: PropTypes.bool.isRequired
