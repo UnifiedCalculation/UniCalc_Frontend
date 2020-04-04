@@ -19,6 +19,67 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
 const NewProjectDialog = ({ customerList, onSubmit, show, ...props }) => {
+
+
+    const textfields = [
+        {
+            id: 'projectname',
+            label: 'Projektname',
+            type: 'text',
+            required: true
+        },
+        {
+            id: 'adress',
+            label: 'Adresse',
+            type: 'address',
+            required: true
+        },
+        {
+            id: 'adressNumber',
+            label: 'Hausnummer',
+            type: 'number',
+            required: true
+        },
+        {
+            id: 'zipcode',
+            label: 'Postleitzahl',
+            type: 'number',
+            required: true
+        },
+        {
+            id: 'city',
+            label: 'Stadt',
+            type: 'text',
+            required: true
+        },
+        {
+            id: 'description',
+            label: 'Beschreibung',
+            type: 'text',
+            required: true
+        }
+    ];
+
+    return (
+        <div>
+                        {textfields.map(entry => {
+                            console.log(entry)
+                            return <TextField
+                                autoFocus
+                                id={entry.id}
+                                key={entry.id}
+                                label={entry.label}
+                                type={entry.type}
+                                required={entry.required}
+                                fullWidth
+                                multiline
+                                margin='dense'
+                            />
+                        }
+
+                        )}
+        </div>
+    )
 }
 
 export default NewProjectDialog;
