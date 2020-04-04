@@ -46,12 +46,6 @@ const NewProjectDialog = ({ customerList, show, ...props }) => {
             required: true
         },
         {
-            id: 'adressNumber',
-            label: 'Hausnummer',
-            type: 'number',
-            required: true
-        },
-        {
             id: 'zipcode',
             label: 'Postleitzahl',
             type: 'number',
