@@ -8,6 +8,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TableProjects from './tableProjects'
 import TableOffers from './tableOffers'
 import TableContracts from './tableContracts'
+import OwnEntries from "./ownEntries";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,6 +35,7 @@ export default function Dashboard() {
 
   return (
       <div className={classes.root}>
+        <OwnEntries/>
         <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
           <ExpansionPanelSummary
               expandIcon={<ExpandMoreIcon />}
