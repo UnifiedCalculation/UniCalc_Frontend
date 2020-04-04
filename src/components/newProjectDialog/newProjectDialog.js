@@ -60,6 +60,20 @@ const NewProjectDialog = ({ customerList, onSubmit, show, ...props }) => {
         }
     ];
 
+    const useStyles = makeStyles((theme) => ({
+        formControl: {
+            margin: theme.spacing(0),
+            minWidth: 120,
+        },
+        selectEmpty: {
+            marginTop: theme.spacing(5),
+        },
+    }));
+
+    const classes = useStyles();
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
     const onCancel = () => {
         console.log('cancel');
     }
@@ -136,6 +150,16 @@ const NewProjectDialog = ({ customerList, onSubmit, show, ...props }) => {
                         }
 
                         )}
+
+                    </FormControl>
+                </DialogContent>
+                <DialogActions>
+                    {cancelButton}
+                    <Button onClick={onAccept} color="primary" autoFocus>
+                        {acceptText}
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     )
 }
