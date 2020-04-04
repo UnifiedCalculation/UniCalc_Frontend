@@ -60,8 +60,66 @@ const NewProjectDialog = ({ customerList, onSubmit, show, ...props }) => {
         }
     ];
 
+    const onCancel = () => {
+        console.log('cancel');
+    }
+
+    const onClose = () => {
+        console.log('cancel');
+    }
+
+    const onAccept = () => {
+        console.log('accept');
+    }
+
+    const handleChange = (value) => {
+        console.log(value);
+    }
+
+    const cancelText = 'cancel';
+    const acceptText = 'Accept';
+    const title = 'title';
+    const cancelButton = <p>CancelButton</p>;
+
+
+    const closeButton =
+        onCancel ? <Button onClick={onClose} color="primary">
+            {cancelText}
+        </Button > : null;
+
+    const text = 'Tragen Sie bitte alle Felder ein, um ein neues Projekt zu erstellen.';
+
     return (
         <div>
+            <Dialog
+                open={show}
+                onClose={onClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+                fullScreen={fullScreen}
+            >
+                <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+                <DialogContent dividers={true}>
+                    <DialogContentText id="alert-dialog-description">
+                        {text}
+                    </DialogContentText>
+                    <FormControl
+                        className={classes.formControl}
+                        fullWidth
+                    >
+                        <InputLabel id="demo-simple-select-autowidth-label">Kunde</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-autowidth-label"
+                            id="demo-simple-select-autowidth"
+                            //value={}
+                            onChange={handleChange}
+                            fullWidth
+                            margin='dense'
+                        >
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                        </Select>
                         {textfields.map(entry => {
                             console.log(entry)
                             return <TextField
