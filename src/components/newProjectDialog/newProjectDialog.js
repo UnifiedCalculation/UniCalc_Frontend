@@ -24,8 +24,6 @@ import { useTheme } from '@material-ui/core/styles';
  */
 const NewProjectDialog = ({ customers, onAccept, onCancel, show, ...props }) => {
 
-    
-
     const cancelText = 'Abbrechen';
     const acceptText = 'Annehmen';
     const title = 'Neues Projekt erstellen';
@@ -77,7 +75,6 @@ const NewProjectDialog = ({ customers, onAccept, onCancel, show, ...props }) => 
         )
     );
 
-
     const inputFields = textfields.map((entry, index) =>
         <TextField
             id={entry.id}
@@ -89,7 +86,6 @@ const NewProjectDialog = ({ customers, onAccept, onCancel, show, ...props }) => 
             fullWidth
             multiline
             margin='dense'
-
         />
     );
 
@@ -117,8 +113,6 @@ const NewProjectDialog = ({ customers, onAccept, onCancel, show, ...props }) => 
         console.log(JSON.stringify(jsonObject));
         event.target.reset();
     };
-
-    
 
     return (
         <div>
