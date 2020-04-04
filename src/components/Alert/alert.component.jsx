@@ -14,8 +14,8 @@ import { useTheme } from '@material-ui/core/styles';
  * and it will only render the accept button.
  * @param {string} title
  * @param {string} text 
- * @param {string} acceptText
- * @param {string} cancelText
+ * @param {string} acceptText standard value is Accept
+ * @param {string} cancelText standard value is Cancel
  * @param {CallableFunction} onAccept
  * @param {CallableFunction} onCancel
  * @param {boolean} show
@@ -55,6 +55,11 @@ const Alert = ({ title, text, onAccept, acceptText, onCancel, cancelText, show, 
         </div>
     );
 
+}
+
+Alert.defaultProps = {
+    acceptText: 'Accept',
+    cancelText: 'Cancel'
 }
 
 export default Alert;
