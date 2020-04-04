@@ -7,7 +7,13 @@ const SinglePage = () => {
 
     return (
         <>
-            <Alert title={1} text={12} onCancel={() => console.log('okay!')} show={true}/>
+            <Alert
+                title={'title'}
+                text={'text'}
+                onCancel={() => console.log('cancel!')}
+                onAccept={() => console.log('accept!')}
+                show={true}
+            />
             <p>Nothing yet...</p>
         </>
     );
