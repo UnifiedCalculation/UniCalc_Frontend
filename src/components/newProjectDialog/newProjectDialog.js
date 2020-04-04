@@ -99,11 +99,11 @@ const NewProjectDialog = ({ onAccept, onCancel, show, ...props }) => {
     const text = 'Tragen Sie bitte alle Felder ein, um ein neues Projekt zu erstellen.';
 
     let emptyNameSelection = new Array();
-    emptyNameSelection.push(<option value="" key="empty"></option>);
-    const customerSelector = emptyNameSelection.concat(customers.map(entry =>
+    emptyNameSelection.push(<option value="" key="0-option"></option>);
+    const customerSelector = emptyNameSelection.concat(customers.map((entry, index) =>
         <option
-            value={entry.name}
-            key={entry.key}
+            value={entry.customerId}
+            key={(index + 1) + '-option'}
         >
             {entry.name}
         </option >
