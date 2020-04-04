@@ -107,10 +107,11 @@ const NewProjectDialog = ({ customerList, show, ...props }) => {
 
 
 
-    const inputFields = textfields.map(entry =>
+    const inputFields = textfields.map((entry, index) =>
         <TextField
             id={entry.id}
-            key={entry.key}
+            name={entry.id}
+            key={index + '-textField'}
             label={entry.label}
             type={entry.type}
             required={entry.required}
@@ -125,7 +126,7 @@ const NewProjectDialog = ({ customerList, show, ...props }) => {
         <div>
             <Dialog
                 open={show}
-                onClose={onClose}
+                onClose={onCancel}
                 aria-labelledby="new-project-dialog-title"
                 aria-describedby="new-project-dialog-description"
                 fullScreen={fullScreen}
@@ -145,9 +146,8 @@ const NewProjectDialog = ({ customerList, show, ...props }) => {
                             <Select
                                 native
                                 labelId="required-select-autowidth-label"
-                                id="required-select-autowidth"
-                                //value={}
-                                onChange={handleChange}
+                                id="customerId"
+                                name="customerId"
                                 fullWidth
                                 margin='dense'
                             >
@@ -161,7 +161,7 @@ const NewProjectDialog = ({ customerList, show, ...props }) => {
                     <Button onClick={onCancel} color="primary">
                         {cancelText}
                     </Button>
-                    <Button type="submit" form='newProjectForm' onClick={onSubmit} color="primary" autoFocus>
+                    <Button type="submit" form='newProjectForm' color="primary" autoFocus>
                         {acceptText}
                     </Button>
                 </DialogActions>
