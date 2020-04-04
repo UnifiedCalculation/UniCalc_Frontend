@@ -108,6 +108,34 @@ const NewProjectDialog = ({ customerList, show, ...props }) => {
 
     const text = 'Tragen Sie bitte alle Felder ein, um ein neues Projekt zu erstellen.';
 
+    let emptyNameSelection = new Array();
+    emptyNameSelection.push(<option value="" key="empty"></option>);
+    const customerSelector = emptyNameSelection.concat(customers.map(entry =>
+        <option
+            value={entry.name}
+            key={entry.key}
+        >
+            {entry.name}
+        </option >
+    )
+    );
+
+
+
+    const inputFields = textfields.map(entry =>
+        <TextField
+            id={entry.id}
+            key={entry.key}
+            label={entry.label}
+            type={entry.type}
+            required={entry.required}
+            fullWidth
+            multiline
+            margin='dense'
+
+        />
+    );
+
     return (
         <div>
             <Dialog
