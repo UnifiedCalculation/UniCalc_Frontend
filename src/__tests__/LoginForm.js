@@ -1,16 +1,16 @@
 import React from 'react';
 import { render, getByTestId } from '@testing-library/react';
-import LoginForm from '../components/loginForm/loginForm.';
+import LoginForm from '../components/loginForm/loginForm';
 
 it('renders the username input field', () => {
   const { getByText } = render(<LoginForm />);
-  const element = getByText(/username/i);
+  const element = getByText(/E-Mail/i);
   expect(element).toBeInTheDocument();
 });
 
 it('renders the password input field', () => {
   const { getByText } = render(<LoginForm />);
-  const element = getByText(/password/i);
+  const element = getByText(/Password/i);
   expect(element).toBeInTheDocument();
 });
 

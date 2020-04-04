@@ -1,0 +1,20 @@
+name: CopyToBackend
+on: 
+  push:
+    branches:
+      - master
+jobs:
+  CopyFilesToBackend:
+    runs-on: ubuntu-latest
+    steps:
+    - name: CopyCat
+      uses: andstor/copycat-action@v3
+      with:
+        personal_token: ${{ secrets.BOT }}
+        src_path: /src/components/
+        dst_path: /app/javascript/
+        dst_owner: UnifiedCalculation
+        dst_repo_name: UniCalc_backend
+        dst_branch: newReactFiles
+        src_branch: master
+        
