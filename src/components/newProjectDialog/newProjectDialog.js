@@ -20,6 +20,17 @@ import { useTheme } from '@material-ui/core/styles';
 
 const NewProjectDialog = ({ customerList, show, ...props }) => {
 
+    const customers = [
+        {
+            name: 'Albert Einstein'
+        },
+        {
+            name: 'Ferdinand Fritz'
+        },
+        {
+            name: 'Person X'
+        }
+    ];
 
     const textfields = [
         {
