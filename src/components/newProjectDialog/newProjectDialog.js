@@ -18,14 +18,14 @@ import { useTheme } from '@material-ui/core/styles';
 
 /**
  * @param {Array} customer array with customers in the form of [{name: 'Albert Einstein',customerId: '1237120'}]
- * @param {Function} onAccept
  * @param {Function} onCancel
+ * @param {Function} onSubmit 
  * @param {Boolean} show
  */
-const NewProjectDialog = ({ customers, onAccept, onCancel, show, ...props }) => {
+const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => {
 
     const cancelText = 'Abbrechen';
-    const acceptText = 'Annehmen';
+    const acceptText = 'Bestätigen';
     const title = 'Neues Projekt erstellen';
     const text = 'Tragen Sie bitte alle Felder ein, um ein neues Projekt zu erstellen.';
 
@@ -104,14 +104,14 @@ const NewProjectDialog = ({ customers, onAccept, onCancel, show, ...props }) => 
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
 
-    const onSubmit = (event) => {
+    const prepareProjectData = (event) => {
         event.preventDefault();
         let jsonObject = {};
         for (const [key, value] of new FormData(event.target).entries()) {
             jsonObject[key] = value;
         }
-        console.log(JSON.stringify(jsonObject));
         event.target.reset();
+        onSubmit(jsonObject);
     };
 
     return (
@@ -128,7 +128,7 @@ const NewProjectDialog = ({ customers, onAccept, onCancel, show, ...props }) => 
                     <DialogContentText id="new-project-dialog-description">
                         {text}
                     </DialogContentText>
-                    <form id='newProjectForm' onSubmit={onSubmit}>
+                    <form id='newProjectForm' onSubmit={prepareProjectData}>
                         <FormControl
                             required
                             className={classes.formControl}
@@ -164,8 +164,8 @@ const NewProjectDialog = ({ customers, onAccept, onCancel, show, ...props }) => 
 
 NewProjectDialog.propTypes = {
     customers: PropTypes.array.isRequired, 
-    onAccept: PropTypes.func.isRequired,
     onCancel: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
     show: PropTypes.bool.isRequired
 }
 
