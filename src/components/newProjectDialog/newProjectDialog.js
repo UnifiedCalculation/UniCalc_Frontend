@@ -86,10 +86,6 @@ const NewProjectDialog = ({ onAccept, onCancel, show, ...props }) => {
     const acceptText = 'Annehmen';
     const title = 'Neues Projekt erstellen';
 
-    const closeButton =
-        onCancel ? <Button onClick={onClose} color="primary">
-            {cancelText}
-        </Button > : null;
 
     const text = 'Tragen Sie bitte alle Felder ein, um ein neues Projekt zu erstellen.';
 
