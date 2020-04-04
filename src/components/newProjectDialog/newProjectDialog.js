@@ -63,7 +63,7 @@ const NewProjectDialog = ({ customers, onAccept, onCancel, show, ...props }) => 
     ];
 
     let emptyNameSelection = new Array();
-    emptyNameSelection.push(<option value="" key="0-option"></option>);
+    emptyNameSelection.push(<option value="" id="emptyOption" key="0-option"></option>);
     const customerSelector = emptyNameSelection.concat(
         customers.map((entry, index) =>
             <option
