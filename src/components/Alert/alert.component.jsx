@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -8,6 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+
 
 /**
  * This component creates an alert dialog with cancel and accept options. You can leave `onCancel` null,
@@ -57,9 +59,18 @@ const Alert = ({ title, text, onAccept, acceptText, onCancel, cancelText, show, 
 
 }
 
+
 Alert.defaultProps = {
     acceptText: 'Accept',
     cancelText: 'Cancel'
+}
+
+Alert.propTypes = {
+    title: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    acceptText: PropTypes.string,
+    cancelText: PropTypes.string,
+    show: PropTypes.bool.isRequired
 }
 
 export default Alert;
