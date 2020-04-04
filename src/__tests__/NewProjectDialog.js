@@ -1,77 +1,76 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Alert from '../components/alert/alert';
+import NewProjectDialog from '../components/newProjectDialog/newProjectDialog';
 
-describe('Customers', () => {
+describe('Rendering', () => {
 
     const customers = [
         {
-            name: 'Albert Einstein',
-            customerId: '1237120'
+            name: "Name one",
+            customerId: 1234
         },
         {
-            name: 'Ferdinand Fritz',
-            customerId: '1237230'
+            name: "Name two",
+            customerId: 1235
         },
         {
-            name: 'Person X',
-            customerId: '1237540'
+            name: "Name three",
+            customerId: 1236
         }
-    ];
+    ]
 
-    it('renders standard accept button text', () => {
-        const { getByText } = render(<Alert show={true} />);
-        expect(getByText(Alert.defaultProps.acceptText)).toBeInTheDocument();
+    it('renders the hardcoded text', () => {
+        const { getByText } = render(
+            <NewProjectDialog
+                customers={customers}
+                show={true}
+            />
+        );
+        expect(getByText("Neues Projekt erstellen")).toBeInTheDocument();
+        expect(getByText("Tragen Sie bitte alle Felder ein, um ein neues Projekt zu erstellen.")).toBeInTheDocument();
     });
 
-    it('renders the standard cancel button text if a cancel function is supplied', () => {
-        const { getByText } = render(<Alert onCancel={() => console.log('testing')} show={true} />);
-        expect(getByText(Alert.defaultProps.cancelText)).toBeInTheDocument();
+    it('renders the selector', () => {
+        const { getByText, getByTestId, getByRole } = render(
+            <NewProjectDialog
+                customers={customers}
+                show={true}
+            />
+        );
+        expect(getByRole("combobox")).toBeInTheDocument();
     });
 
-    it('Does not render the cancel button if no cancel function is supplied', () => {
-        const { queryByText } = render(<Alert show={true} />);
-        expect(queryByText(Alert.defaultProps.cancelText)).toBeNull()
+    it('renders the correct amount of options for the selector', () => {
+        const { getByText, getByTestId, getByRole } = render(
+            <NewProjectDialog
+                customers={customers}
+                show={true}
+            />
+        );
+        expect(getByRole("combobox").children.length).toEqual(customers.length + 1);
     });
 
-    describe('Button functions', () => {
-
-        it('Should call the onAccept function when the accept button is pressed', () => {
-            const onAcceptSpy = jest.fn();
-            const { getByText } = render(<Alert onAccept={onAcceptSpy} show={true} />);
-            getByText(Alert.defaultProps.acceptText).dispatchEvent(new MouseEvent("click", { bubbles: true }));
-            expect(onAcceptSpy).toHaveBeenCalled();
-        });
-
-        it('Should call the onCancel function when the cancel button is pressed', () => {
-            const onCancelSpy = jest.fn();
-            const { getByText } = render(<Alert onCancel={onCancelSpy} show={true} />);
-            getByText(Alert.defaultProps.cancelText).dispatchEvent(new MouseEvent("click", { bubbles: true }));
-            expect(onCancelSpy).toHaveBeenCalled();
-        });
-
+    it('renders an additional empty option at the beginning of the array for the selector', () => {
+        const { getByText, getByTestId, getByRole } = render(
+            <NewProjectDialog
+                customers={customers}
+                show={true}
+            />
+        );
+        expect(getByRole("combobox").children[0].value).toBe("");
     });
 
-});
-
-describe('Textfields', () => {
-
-    it('renders the title correctly', () => {
-        const title = 'titleRenderText';
-        const { getByText } = render(<Alert title={title} show={true} />);
-        expect(getByText(title)).toBeInTheDocument();
+    it('renders an additional empty option at the beginning of the array for the selector even without any customers', () => {
+        const { getByText, getByTestId, getByRole } = render(
+            <NewProjectDialog
+                customers={[]}
+                show={true}
+            />
+        );
+        
+        expect(getByRole("combobox").children.length).toEqual(1);
+        expect(getByRole("combobox").children[0].value).toBe("");
     });
 
-    it('renders the text correctly', () => {
-        const text = 'This is some arbitrary text';
-        const { getByText } = render(<Alert text={text} show={true} />);
-        expect(getByText(text)).toBeInTheDocument();
-    });
-
-    it('render special chars correctly', () => {
-        const text = 'öäü£!àè`?^😀';
-        const { getByText } = render(<Alert text={text} show={true} />);
-        expect(getByText(text)).toBeInTheDocument();
-    });
 
 });
