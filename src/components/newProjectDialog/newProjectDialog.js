@@ -141,54 +141,42 @@ const NewProjectDialog = ({ customerList, show, ...props }) => {
             <Dialog
                 open={show}
                 onClose={onClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
+                aria-labelledby="new-project-dialog-title"
+                aria-describedby="new-project-dialog-description"
                 fullScreen={fullScreen}
             >
-                <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+                <DialogTitle id="new-project-dialog-title">{title}</DialogTitle>
                 <DialogContent dividers={true}>
-                    <DialogContentText id="alert-dialog-description">
+                    <DialogContentText id="new-project-dialog-description">
                         {text}
                     </DialogContentText>
-                    <FormControl
-                        className={classes.formControl}
-                        fullWidth
-                    >
-                        <InputLabel id="demo-simple-select-autowidth-label">Kunde</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-autowidth-label"
-                            id="demo-simple-select-autowidth"
-                            //value={}
-                            onChange={handleChange}
+                    <form id='newProjectForm' onSubmit={onSubmit}>
+                        <FormControl
+                            required
+                            className={classes.formControl}
                             fullWidth
-                            margin='dense'
                         >
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
-                        </Select>
-                        {textfields.map(entry => {
-                            console.log(entry)
-                            return <TextField
-                                autoFocus
-                                id={entry.id}
-                                key={entry.id}
-                                label={entry.label}
-                                type={entry.type}
-                                required={entry.required}
+                            <InputLabel id="required-select-autowidth-label">Kunde</InputLabel>
+                            <Select
+                                native
+                                labelId="required-select-autowidth-label"
+                                id="required-select-autowidth"
+                                //value={}
+                                onChange={handleChange}
                                 fullWidth
-                                multiline
                                 margin='dense'
-                            />
-                        }
-
-                        )}
-
-                    </FormControl>
+                            >
+                                {customerSelector}
+                            </Select>
+                        </FormControl>
+                        {inputFields}
+                    </form>
                 </DialogContent>
                 <DialogActions>
-                    {cancelButton}
-                    <Button onClick={onAccept} color="primary" autoFocus>
+                    <Button onClick={onCancel} color="primary">
+                        {cancelText}
+                    </Button>
+                    <Button type="submit" form='newProjectForm' onClick={onSubmit} color="primary" autoFocus>
                         {acceptText}
                     </Button>
                 </DialogActions>
