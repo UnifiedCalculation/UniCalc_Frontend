@@ -97,7 +97,7 @@ const NewProjectDialog = ({ customerList, show, ...props }) => {
 
     const cancelText = 'cancel';
     const acceptText = 'Accept';
-    const title = 'title';
+    const title = 'Neues Projekt erstellen';
     const cancelButton = <p>CancelButton</p>;
 
 
