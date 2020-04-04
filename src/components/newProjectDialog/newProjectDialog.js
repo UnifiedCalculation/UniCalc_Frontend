@@ -45,7 +45,7 @@ const NewProjectDialog = ({ customerList, show, ...props }) => {
         {
             id: 'adress',
             label: 'Adresse',
-            type: 'address',
+            type: 'text',
             required: true
         },
         {
@@ -82,27 +82,9 @@ const NewProjectDialog = ({ customerList, show, ...props }) => {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
-    const onCancel = () => {
-        console.log('cancel');
-    }
-
-    const onClose = () => {
-        console.log('cancel');
-    }
-
-    const onAccept = () => {
-        console.log('accept');
-    }
-
-    const handleChange = (value) => {
-        console.log(value);
-    }
-
-    const cancelText = 'cancel';
-    const acceptText = 'Accept';
+    const cancelText = 'Abbrechen';
+    const acceptText = 'Annehmen';
     const title = 'Neues Projekt erstellen';
-    const cancelButton = <p>CancelButton</p>;
-
 
     const closeButton =
         onCancel ? <Button onClick={onClose} color="primary">
