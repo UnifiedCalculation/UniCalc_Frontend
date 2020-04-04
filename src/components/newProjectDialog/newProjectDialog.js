@@ -86,6 +86,15 @@ const NewProjectDialog = ({ onAccept, onCancel, show, ...props }) => {
     const acceptText = 'Annehmen';
     const title = 'Neues Projekt erstellen';
 
+    const onSubmit = (event) => {
+        event.preventDefault();
+        let jsonObject = {};
+        for (const [key, value] of new FormData(event.target).entries()) {
+            jsonObject[key] = value;
+        }
+        console.log(JSON.stringify(jsonObject));
+        event.target.reset();
+    };
 
     const text = 'Tragen Sie bitte alle Felder ein, um ein neues Projekt zu erstellen.';
 
