@@ -18,22 +18,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
-const NewProjectDialog = ({ onAccept, onCancel, show, ...props }) => {
+const NewProjectDialog = ({ customers, onAccept, onCancel, show, ...props }) => {
 
-    const customers = [
-        {
-            name: 'Albert Einstein',
-            customerId: '1237120'
-        },
-        {
-            name: 'Ferdinand Fritz',
-            customerId: '1237230'
-        },
-        {
-            name: 'Person X',
-            customerId: '1237540'
-        }
-    ];
     
 
     const cancelText = 'Abbrechen';
