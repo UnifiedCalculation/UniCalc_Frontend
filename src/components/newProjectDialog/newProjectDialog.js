@@ -22,13 +22,16 @@ const NewProjectDialog = ({ customerList, show, ...props }) => {
 
     const customers = [
         {
-            name: 'Albert Einstein'
+            name: 'Albert Einstein',
+            customerId: '1237120'
         },
         {
-            name: 'Ferdinand Fritz'
+            name: 'Ferdinand Fritz',
+            customerId: '1237230'
         },
         {
-            name: 'Person X'
+            name: 'Person X',
+            customerId: '1237540'
         }
     ];
 
