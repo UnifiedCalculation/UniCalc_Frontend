@@ -1,5 +1,5 @@
 import React from 'react';
-import Alert from '../alert/alert.component';
+import Alert from '../alert/alert';
 
 const SinglePage = () => {
 

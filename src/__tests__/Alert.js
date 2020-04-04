@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Alert from '../components/alert/alert.component';
+import Alert from '../components/alert/alert';
 
 describe('Buttons', () => {
 
@@ -34,7 +34,7 @@ describe('Buttons', () => {
       getByText(Alert.defaultProps.cancelText).dispatchEvent(new MouseEvent("click", { bubbles: true }));
       expect(onCancelSpy).toHaveBeenCalled();
     });
-    
+
   });
 
 });
