@@ -9,10 +9,26 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
+/**
+ * This component creates an alert dialog with cancel and accept options. You can leave `onCancel` null,
+ * and it will only render the accept button.
+ * @param {string} title
+ * @param {string} text 
+ * @param {string} acceptText
+ * @param {string} cancelText
+ * @param {CallableFunction} onAccept
+ * @param {CallableFunction} onCancel
+ * @param {boolean} show
+ */
 const Alert = ({ title, text, onAccept, acceptText, onCancel, cancelText, show, ...props }) => {
 
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+    const cancelButton =
+        onCancel ? <Button onClick={onCancel} color="primary">
+            {cancelText}
+        </Button > : null;
 
     return (
         <div>
@@ -27,12 +43,10 @@ const Alert = ({ title, text, onAccept, acceptText, onCancel, cancelText, show, 
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         {text}
-          </DialogContentText>
+                    </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={onCancel} color="primary">
-                        {cancelText}
-                    </Button>
+                    {cancelButton}
                     <Button onClick={onAccept} color="primary" autoFocus>
                         {acceptText}
                     </Button>
