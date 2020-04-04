@@ -162,4 +162,11 @@ const NewProjectDialog = ({ customers, onAccept, onCancel, show, ...props }) => 
     )
 }
 
+NewProjectDialog.propTypes = {
+    customers: PropTypes.string.isRequired, 
+    onAccept: PropTypes.func.isRequired,
+    onCancel: PropTypes.func.isRequired,
+    show: PropTypes.bool.isRequired
+}
+
 export default NewProjectDialog;
