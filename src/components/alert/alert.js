@@ -56,9 +56,7 @@ const Alert = ({ title, text, onAccept, acceptText, onCancel, cancelText, show, 
             </Dialog>
         </div>
     );
-
 }
-
 
 Alert.defaultProps = {
     acceptText: 'Accept',
@@ -70,6 +68,8 @@ Alert.propTypes = {
     text: PropTypes.string.isRequired,
     acceptText: PropTypes.string,
     cancelText: PropTypes.string,
+    onAccept: PropTypes.func.isRequired,
+    onCancel: PropTypes.func.isRequired,
     show: PropTypes.bool.isRequired
 }
 
