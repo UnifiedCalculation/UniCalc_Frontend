@@ -1,5 +1,8 @@
 import React from 'react';
-import Alert from '../alert/alert';
+import Alert from '../Alert/alert';
+import Navigation from '../layouts/navigation'
+
+
 
 const SinglePage = () => {
 
@@ -15,6 +18,7 @@ const SinglePage = () => {
                 show={true}
             />
             <p>Nothing yet...</p>
+          <Navigation />
         </>
     );
 }
