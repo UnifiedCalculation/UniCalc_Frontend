@@ -7,10 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
 
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -22,35 +19,17 @@ import { useTheme } from '@material-ui/core/styles';
  * @param {Function} onSubmit 
  * @param {Boolean} show
  */
-const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => {
+const NewOfferDialog = ({ customers, onCancel, onSubmit, show, ...props }) => {
 
     const cancelText = 'Abbrechen';
     const acceptText = 'Bestätigen';
-    const title = 'Neues Projekt erstellen';
-    const text = 'Tragen Sie bitte alle Felder ein, um ein neues Projekt zu erstellen.';
+    const title = 'Neue Offerte erstellen';
+    const text = 'Tragen Sie bitte alle Felder ein, um eine neue Offerte zu erstellen.';
 
     const textfields = [
         {
-            id: 'projectname',
-            label: 'Projektname',
-            type: 'text',
-            required: true
-        },
-        {
-            id: 'adress',
-            label: 'Adresse',
-            type: 'text',
-            required: true
-        },
-        {
-            id: 'zipcode',
-            label: 'Postleitzahl',
-            type: 'number',
-            required: true
-        },
-        {
-            id: 'city',
-            label: 'Stadt',
+            id: 'offername',
+            label: 'Offertenbezeichnung',
             type: 'text',
             required: true
         },
@@ -61,19 +40,6 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
             required: true
         }
     ];
-
-    let emptyNameSelection = new Array();
-    emptyNameSelection.push(<option id="emptyOption" key="0-option"></option>);
-    const customerSelector = customers ? emptyNameSelection.concat(
-        customers.map((entry, index) =>
-            <option
-                value={entry.customerId}
-                key={(index + 1) + '-option'}
-            >
-                {entry.name}
-            </option >
-        )
-    ) : emptyNameSelection;
 
     const inputFields = textfields.map((entry, index) =>
         <TextField
@@ -89,17 +55,6 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
         />
     );
 
-    const useStyles = makeStyles((theme) => ({
-        formControl: {
-            margin: theme.spacing(0),
-            minWidth: 120,
-        },
-        selectEmpty: {
-            marginTop: theme.spacing(5),
-        },
-    }));
-
-    const classes = useStyles();
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -129,23 +84,6 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
                         {text}
                     </DialogContentText>
                     <form id='newProjectForm' onSubmit={prepareProjectData}>
-                        <FormControl
-                            required
-                            className={classes.formControl}
-                            fullWidth
-                        >
-                            <InputLabel id="required-select-autowidth-label">Kunde</InputLabel>
-                            <Select
-                                native
-                                labelId="required-select-autowidth-label"
-                                id="customerId"
-                                name="customerId"
-                                fullWidth
-                                margin='dense'
-                            >
-                                {customerSelector}
-                            </Select>
-                        </FormControl>
                         {inputFields}
                     </form>
                 </DialogContent>
@@ -162,11 +100,10 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
     );
 }
 
-NewProjectDialog.propTypes = {
-    customers: PropTypes.array.isRequired, 
+NewOfferDialog.propTypes = {
     onCancel: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     show: PropTypes.bool.isRequired
 }
 
-export default NewProjectDialog;
+export default NewOfferDialog;
