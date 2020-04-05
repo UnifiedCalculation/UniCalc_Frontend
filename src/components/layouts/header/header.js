@@ -2,7 +2,6 @@ import React from 'react';
 import Logo from './logo.png';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { makeStyles } from '@material-ui/core/styles';
-import {isReactElementAlike} from "enzyme/src/Utils";
 
 const useStyles = makeStyles({
   header:{

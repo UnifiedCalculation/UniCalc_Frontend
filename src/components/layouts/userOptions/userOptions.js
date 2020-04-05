@@ -12,13 +12,14 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import HomeIcon from '@material-ui/icons/Home';
 import LanguageIcon from '@material-ui/icons/Language';
 
-
-
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   password: {
-    marginTop: '10px'
+    marginTop: '10px',
+    marginBottom: '10px'
   },
+  margin: {
+    marginTop: '20px'
+  }
 }));
 
 export default function UserOptions() {

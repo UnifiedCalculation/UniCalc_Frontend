@@ -15,6 +15,7 @@ const useStyles = makeStyles({
     bottom: 0,
     color: '#FFF',
     backgroundColor: '#2E75B6',
+    height: '50px'
   },
   selected: {
     color: '#FFF'
