@@ -7,10 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
 
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -71,17 +68,6 @@ const NewOfferDialog = ({ customers, onCancel, onSubmit, show, ...props }) => {
         />
     );
 
-    const useStyles = makeStyles((theme) => ({
-        formControl: {
-            margin: theme.spacing(0),
-            minWidth: 120,
-        },
-        selectEmpty: {
-            marginTop: theme.spacing(5),
-        },
-    }));
-
-    const classes = useStyles();
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -111,23 +97,6 @@ const NewOfferDialog = ({ customers, onCancel, onSubmit, show, ...props }) => {
                         {text}
                     </DialogContentText>
                     <form id='newProjectForm' onSubmit={prepareProjectData}>
-                        <FormControl
-                            required
-                            className={classes.formControl}
-                            fullWidth
-                        >
-                            <InputLabel id="required-select-autowidth-label">Kunde</InputLabel>
-                            <Select
-                                native
-                                labelId="required-select-autowidth-label"
-                                id="customerId"
-                                name="customerId"
-                                fullWidth
-                                margin='dense'
-                            >
-                                {customerSelector}
-                            </Select>
-                        </FormControl>
                         {inputFields}
                     </form>
                 </DialogContent>
