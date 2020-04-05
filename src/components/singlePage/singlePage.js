@@ -2,6 +2,7 @@ import React from 'react';
 import Alert from '../Alert/alert';
 import Navigation from '../layouts/navigation'
 import Header from "../layouts/header/header";
+import UserOptions from "../layouts/userOptions/userOptions";
 
 const SinglePage = () => {
 
@@ -9,6 +10,7 @@ const SinglePage = () => {
         <>
           <Header/>
           <p>Nothing yet...</p>
+          <UserOptions/>
           <Navigation />
         </>
     );
