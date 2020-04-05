@@ -31,26 +31,8 @@ const NewOfferDialog = ({ customers, onCancel, onSubmit, show, ...props }) => {
 
     const textfields = [
         {
-            id: 'projectname',
-            label: 'Projektname',
-            type: 'text',
-            required: true
-        },
-        {
-            id: 'adress',
-            label: 'Adresse',
-            type: 'text',
-            required: true
-        },
-        {
-            id: 'zipcode',
-            label: 'Postleitzahl',
-            type: 'number',
-            required: true
-        },
-        {
-            id: 'city',
-            label: 'Stadt',
+            id: 'offername',
+            label: 'Offertenbezeichnung',
             type: 'text',
             required: true
         },
@@ -162,7 +144,7 @@ const NewOfferDialog = ({ customers, onCancel, onSubmit, show, ...props }) => {
     );
 }
 
-NewProjectDialog.propTypes = {
+NewOfferDialog.propTypes = {
     customers: PropTypes.array.isRequired, 
     onCancel: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
