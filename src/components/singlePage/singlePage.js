@@ -1,19 +1,27 @@
 import React from 'react';
-import Alert from '../alert/alert';
+import NewProjectDialog from '../newProjectDialog/newProjectDialog';
 
 const SinglePage = () => {
 
+    const customers = [
+        {
+            name: 'Albert Einstein',
+            customerId: '1237120'
+        },
+        {
+            name: 'Ferdinand Fritz',
+            customerId: '1237230'
+        },
+        {
+            name: 'Person X',
+            customerId: '1237540'
+        }
+    ];
 
 
     return (
         <>
-            <Alert
-                title={'title'}
-                text={'text'}
-                onCancel={() => console.log('cancel!')}
-                onAccept={() => console.log('accept!')}
-                show={true}
-            />
+            <NewProjectDialog customers={customers} show={true} />
             <p>Nothing yet...</p>
         </>
     );
