@@ -18,6 +18,9 @@ const useStyles = makeStyles({
   },
   selected: {
     color: '#FFF'
+  },
+  naviElement: {
+    color: '#D3D3D3'
   }
 });
 
@@ -35,9 +38,9 @@ export default function SimpleBottomNavigation() {
           showLabels
           className={classes.root}
       >
-        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+        <BottomNavigationAction className={classes.naviElement} label="Recents" icon={<RestoreIcon />} />
+        <BottomNavigationAction className={classes.naviElement} label="Favorites" icon={<FavoriteIcon />} />
+        <BottomNavigationAction className={classes.naviElement} label="Nearby" icon={<LocationOnIcon />} />
       </BottomNavigation>
   );
 }
