@@ -1,15 +1,16 @@
 import React from 'react';
 import Alert from '../Alert/alert';
 import Navigation from '../layouts/navigation'
-import Dashboard from "../layouts/dashboard/dashboard";
+import Header from "../layouts/header/header";
 
 const SinglePage = () => {
 
-  return (
-      <>
-        <p>Nothing yet...</p>
-        <Navigation />
-      </>
-  );
+    return (
+        <>
+          <Header/>
+          <p>Nothing yet...</p>
+          <Navigation />
+        </>
+    );
 }
 export default SinglePage;

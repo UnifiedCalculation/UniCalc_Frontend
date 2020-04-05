@@ -7,7 +7,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 const useStyles = makeStyles({
-  // todo Make active ribbon icon and text in white, inactive ribbons icon and text in grey, didn't get it to work yet.
+  // todo Make active ribbon in #FFF
   // Check following link in future: https://material-ui.com/customization/components/#overriding-with-classes
   root: {
     width: '100%',
@@ -18,6 +18,9 @@ const useStyles = makeStyles({
   },
   selected: {
     color: '#FFF'
+  },
+  naviElement: {
+    color: '#D3D3D3'
   }
 });
 
@@ -35,9 +38,9 @@ export default function SimpleBottomNavigation() {
           showLabels
           className={classes.root}
       >
-        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+        <BottomNavigationAction className={classes.naviElement} label="Recents" icon={<RestoreIcon />} />
+        <BottomNavigationAction className={classes.naviElement} label="Favorites" icon={<FavoriteIcon />} />
+        <BottomNavigationAction className={classes.naviElement} label="Nearby" icon={<LocationOnIcon />} />
       </BottomNavigation>
   );
 }
