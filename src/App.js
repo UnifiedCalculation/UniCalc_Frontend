@@ -4,10 +4,10 @@ import SinglePage from './components/singlePage/singlePage';
 
 function App() {
   return (
-      <div className="App">
-        // Add your code here
-        <SinglePage />
-      </div>
+    <div className="App">
+      // Add your code here
+      <SinglePage />
+    </div>
   );
 }
 
