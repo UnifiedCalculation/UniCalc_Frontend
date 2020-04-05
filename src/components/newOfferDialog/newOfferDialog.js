@@ -41,19 +41,6 @@ const NewOfferDialog = ({ customers, onCancel, onSubmit, show, ...props }) => {
         }
     ];
 
-    let emptyNameSelection = new Array();
-    emptyNameSelection.push(<option id="emptyOption" key="0-option"></option>);
-    const customerSelector = customers ? emptyNameSelection.concat(
-        customers.map((entry, index) =>
-            <option
-                value={entry.customerId}
-                key={(index + 1) + '-option'}
-            >
-                {entry.name}
-            </option >
-        )
-    ) : emptyNameSelection;
-
     const inputFields = textfields.map((entry, index) =>
         <TextField
             id={entry.id}
@@ -114,7 +101,6 @@ const NewOfferDialog = ({ customers, onCancel, onSubmit, show, ...props }) => {
 }
 
 NewOfferDialog.propTypes = {
-    customers: PropTypes.array.isRequired, 
     onCancel: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     show: PropTypes.bool.isRequired
