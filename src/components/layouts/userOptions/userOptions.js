@@ -10,13 +10,14 @@ import MailIcon from '@material-ui/icons/Mail';
 import BusinessIcon from '@material-ui/icons/Business';
 import PhoneIcon from '@material-ui/icons/Phone';
 import HomeIcon from '@material-ui/icons/Home';
-import HttpIcon from '@material-ui/icons/Http';
+import LanguageIcon from '@material-ui/icons/Language';
+
 
 
 
 const useStyles = makeStyles((theme) => ({
   password: {
-    //top: '50px'
+    marginTop: '10px'
   },
 }));
 
@@ -63,6 +64,7 @@ export default function UserOptions() {
           <Button className={classes.password} variant="outlined">Passwort ändern</Button>
         </div>
 
+        // This block will just be displayed for the role CEO
         <div className={classes.companyDetails}>
           <FormControl style = {{width: '80%'}} className={classes.margin}>
             <InputLabel htmlFor="input-with-icon-adornment">Firma</InputLabel>
@@ -71,17 +73,6 @@ export default function UserOptions() {
                 startAdornment={
                   <InputAdornment position="start">
                     <BusinessIcon />
-                  </InputAdornment>
-                }
-            />
-          </FormControl>
-          <FormControl style = {{width: '80%'}} className={classes.margin}>
-            <InputLabel htmlFor="input-with-icon-adornment">URL</InputLabel>
-            <Input
-                id="input-with-icon-adornment"
-                startAdornment={
-                  <InputAdornment position="start">
-                    <HttpIcon />
                   </InputAdornment>
                 }
             />
@@ -141,8 +132,19 @@ export default function UserOptions() {
                 }
             />
           </FormControl>
-          <Button className={classes.password} variant="outlined">Änderungen speichern</Button>
+          <FormControl style = {{width: '80%'}} className={classes.margin}>
+            <InputLabel htmlFor="input-with-icon-adornment">URL</InputLabel>
+            <Input
+                id="input-with-icon-adornment"
+                startAdornment={
+                  <InputAdornment position="start">
+                    <LanguageIcon />
+                  </InputAdornment>
+                }
+            />
+          </FormControl>
         </div>
+        <Button className={classes.password} variant="outlined">Änderungen speichern</Button>
       </div>
   );
 }
