@@ -1,10 +1,13 @@
 import React from 'react';
+import './App.css';
 import SinglePage from './components/singlePage/singlePage';
-import Dashboard from './components/layouts/dashboard/dashboard'
 
 function App() {
   return (
-        <Dashboard/>
+      <div className="App">
+        // Add your code here
+        <SinglePage />
+      </div>
   );
 }
 
