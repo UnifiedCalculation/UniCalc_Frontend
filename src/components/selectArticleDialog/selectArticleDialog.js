@@ -66,9 +66,9 @@ const SelectArticleDialog = ({ /*articles,*/ onCancel, onSubmit, show, ...props 
     ];
 
     let emptyArticlesList = [];
-    emptyNameSelection.push(<option id="emptyOption" key="0-option"></option>);
-    const articlesSelection = customers ? emptyNameSelection.concat(
-        customers.map((entry, index) =>
+    emptyArticlesList.push(<option id="emptyOption" key="0-option"></option>);
+    const articlesSelection = articles ? emptyArticlesList.concat(
+        articles.map((entry, index) =>
             <option
                 value={entry.article_id}
                 key={(index + 1) + '-option'}
