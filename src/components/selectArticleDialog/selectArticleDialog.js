@@ -131,13 +131,13 @@ const SelectArticleDialog = ({ /*articles,*/ onCancel, onSubmit, show, ...props 
                     <DialogContentText id="new-project-dialog-description">
                         {text}
                     </DialogContentText>
-                    <form id='newArticleForm' onSubmit={prepareProjectData}>
+                    <form id='newArticleForm' onSubmit={prepareArticleData}>
                         <FormControl
                             required
                             className={classes.formControl}
                             fullWidth
                         >
-                            <InputLabel id="required-select-autowidth-label">Kunde</InputLabel>
+                            <InputLabel id="required-select-autowidth-label">Artikel</InputLabel>
                             <Select
                                 native
                                 labelId="required-select-autowidth-label"
@@ -146,7 +146,7 @@ const SelectArticleDialog = ({ /*articles,*/ onCancel, onSubmit, show, ...props 
                                 fullWidth
                                 margin='dense'
                             >
-                                {customerSelector}
+                                {articlesSelection}
                             </Select>
                         </FormControl>
                         {inputFields}
