@@ -151,7 +151,7 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
 }
 
 SelectArticleDialog.propTypes = {
-    customers: PropTypes.array.isRequired, 
+    articles: PropTypes.array.isRequired, 
     onCancel: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     show: PropTypes.bool.isRequired
