@@ -138,8 +138,8 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
                             <Select
                                 native
                                 labelId="required-select-autowidth-label"
-                                id="customerId"
-                                name="customerId"
+                                id="customer_id"
+                                name="customer_id"
                                 fullWidth
                                 margin='dense'
                             >
