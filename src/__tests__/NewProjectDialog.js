@@ -10,15 +10,15 @@ describe('Testing', () => {
     const customers = [
         {
             name: "Name one",
-            customerId: 1234
+            customer_id: 1234
         },
         {
             name: "Name two",
-            customerId: 1235
+            customer_id: 1235
         },
         {
             name: "Name three",
-            customerId: 1236
+            customer_id: 1236
         }
     ]
 
@@ -191,7 +191,7 @@ describe('Testing', () => {
             expect(onSubmitSpy).toHaveBeenCalled();
             expect(onSubmitSpy.mock.calls[0][0]).toStrictEqual(
                 {
-                    customerId: customers[0].customerId.toString(),
+                    customer_id: customers[0].customer_id.toString(),
                     projectname: projectName,
                     adress: address,
                     zipcode: zipCode,
