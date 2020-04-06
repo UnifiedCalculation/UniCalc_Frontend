@@ -17,7 +17,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
 /**
- * @param {Array} customer array with customers in the form of [{name: 'Albert Einstein',customerId: '1237120'}]
+ * @param {Array} articles array with articles
  * @param {Function} onCancel
  * @param {Function} onSubmit 
  * @param {Boolean} show
