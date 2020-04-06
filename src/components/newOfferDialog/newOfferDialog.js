@@ -59,7 +59,7 @@ const NewOfferDialog = ({ customers, onCancel, onSubmit, show, ...props }) => {
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
 
-    const prepareProjectData = (event) => {
+    const prepareOfferData = (event) => {
         event.preventDefault();
         let jsonObject = {};
         for (const [key, value] of new FormData(event.target).entries()) {
@@ -83,7 +83,7 @@ const NewOfferDialog = ({ customers, onCancel, onSubmit, show, ...props }) => {
                     <DialogContentText id="new-project-dialog-description">
                         {text}
                     </DialogContentText>
-                    <form id='newOfferForm' onSubmit={prepareProjectData}>
+                    <form id='newOfferForm' onSubmit={prepareOfferData}>
                         {inputFields}
                     </form>
                 </DialogContent>
