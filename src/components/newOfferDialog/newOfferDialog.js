@@ -14,12 +14,11 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
 /**
- * @param {Array} customer array with customers in the form of [{name: 'Albert Einstein',customerId: '1237120'}]
  * @param {Function} onCancel
  * @param {Function} onSubmit 
  * @param {Boolean} show
  */
-const NewOfferDialog = ({ customers, onCancel, onSubmit, show, ...props }) => {
+const NewOfferDialog = ({ onCancel, onSubmit, show, ...props }) => {
 
     const cancelText = 'Abbrechen';
     const acceptText = 'Bestätigen';
