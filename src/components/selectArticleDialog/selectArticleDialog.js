@@ -53,7 +53,7 @@ const SelectArticleDialog = ({ /*articles,*/ onCancel, onSubmit, show, ...props 
         },
         {
             id: 'discount',
-            label: 'Rabatt',
+            label: 'Rabatt in Prozent',
             type: 'number',
             required: true
         },
