@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, getAllByRole } from '@testing-library/react';
-import userEvent from "@testing-library/user-event";
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme, { mount } from 'enzyme';
 import NewProjectDialog from '../components/newProjectDialog/newProjectDialog';
