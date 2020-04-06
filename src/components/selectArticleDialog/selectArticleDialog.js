@@ -22,27 +22,12 @@ import { useTheme } from '@material-ui/core/styles';
  * @param {Function} onSubmit 
  * @param {Boolean} show
  */
-const SelectArticleDialog = ({ /*articles,*/ onCancel, onSubmit, show, ...props }) => {
+const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) => {
 
     const cancelText = 'Abbrechen';
     const acceptText = 'Bestätigen';
-    const title = 'Artikel hinzufüge';
-    const text = 'Alle Felder eintragen, um einen Artikel hinzuzufügen';
-
-    const articles = [
-        {
-            name: "Steckdose T13 3-fach UP weiss",
-            article_id: 1234123,
-            unit: "Stk.",
-            price: 125.80,
-        },
-        {
-            name: "Steckdose T13 3-fach AP weiss",
-            article_id: 1234123,
-            unit: "Stk.",
-            price: 220.25,
-        }
-    ]
+    const title = 'Artikel hinzufügen';
+    const text = 'Alle Felder eintragen, um einen Artikel hinzuzufügen.';
 
     const textfields = [
         {
