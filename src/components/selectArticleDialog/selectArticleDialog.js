@@ -107,7 +107,7 @@ const SelectArticleDialog = ({ /*articles,*/ onCancel, onSubmit, show, ...props 
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
 
-    const prepareProjectData = (event) => {
+    const prepareArticleData = (event) => {
         event.preventDefault();
         let jsonObject = {};
         for (const [key, value] of new FormData(event.target).entries()) {
