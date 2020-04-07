@@ -6,6 +6,7 @@ import './singlePage.css'
 
 import ProjectCard from '../projectCard/projectCard';
 import NewProjectDialog from '../newProjectDialog/newProjectDialog';
+import ProjectDisplay from '../projectDisplay/projectDisplay';
 import * as API from '../connectionHandler/connectionHandler';
 
 const useStyles = makeStyles({
@@ -14,18 +15,23 @@ const useStyles = makeStyles({
 
 const SinglePage = () => {
 
-  const [projectData, setProjectData] = useState([]);
+  const [projects, setProjects] = useState([]);
   const [showProject, setShowProjectViewState] = useState(false);
+  const [projectData, setProjectData] = useState(null);
   const [customerData, setCustomerData] = useState([]);
   const [showNewProjectDialog, setNewProjectDialogViewState] = useState(false);
 
   useEffect(() => {
-    API.getUserProjects(setProjectData);
+    API.getUserProjects(setProjects);
   }, []);
 
   const openProject = (projectId) => {
+    API.getProjectData(projectId, openProjetDetailsWithData);
+  };
 
-
+  const openProjetDetailsWithData = (projectData) => {
+    setProjectData(projectData);
+    setShowProjectViewState(true);
   };
 
   const openNewProjectDialog = () => {
@@ -41,6 +47,8 @@ const SinglePage = () => {
   const submitNewProject = (newProjectData) => {
     setNewProjectDialogViewState(false);
     console.log(JSON.stringify(newProjectData));
+    API.submitNewProject(newProjectData, API.getUserProjects(setProjects));
+    ;
   }
 
   const addNewProjectDialog =
@@ -63,9 +71,10 @@ const SinglePage = () => {
     />
   );
 
-  const projectCards =
+  const projectCards = showProject ?
+    null :
     addProjectCard.concat(
-      projectData.map((entry, index) =>
+      projects.map((entry, index) =>
         <ProjectCard
           key={index + "-projectCard"}
           onClick={() => openProject(entry.project_id)}
@@ -79,6 +88,7 @@ const SinglePage = () => {
       <Header />
       {addNewProjectDialog}
       {projectCards}
+      <ProjectDisplay show={showProject} />
       <Navigation />
     </>
   );
