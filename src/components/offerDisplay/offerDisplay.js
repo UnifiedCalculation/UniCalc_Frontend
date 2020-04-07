@@ -5,6 +5,9 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Button from '@material-ui/core/Button';
+import NewEntrySegmentDialog from '../newEntrySegmentDialog/newEntrySegmentDialog';
+import SelectArticleDialog from '../selectArticleDialog/selectArticleDialog';
 
 import ArticleTable from '../articleTable/articleTable';
 
@@ -16,6 +19,13 @@ import '../singlePage/singlePage.css'
 const OfferDisplay = ({ offer, projectId, onClose, ...props }) => {
 
     const [entries, setEntries] = useState(offer.entries);
+    const [articles, setArticles] = useState([]);
+    const [showNewSegmentDialog, setNewEntrySegmentDialogViewState] = useState(false);
+    const [showNewArticleDialog, setNewArticleDialogViewState] = useState(0);
+
+    useEffect(() => {
+        API.getArticles(setArticles);
+    },[]);
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -30,14 +40,31 @@ const OfferDisplay = ({ offer, projectId, onClose, ...props }) => {
         },
     }));
 
+    const openNewArticleDialog = () => {
+        setNewArticleDialogViewState(true);
+    }
+
     const classes = useStyles();
 
     const addEntry = (entry) => {
+        setNewEntrySegmentDialogViewState(false);
         setEntries([
             ...entries,
-            entry
+            {
+                name: entry.name,
+                discount: null,
+                articles: []
+            }
         ]);
     }
+
+    const addArticle = (article) => {
+        setEntries(prev => prev.map((a, index) => index === showNewArticleDialog-1 ? ({
+        ...a,
+        articles: a.articles.concat(article)
+      }) : a));
+      setNewArticleDialogViewState(0);
+    };
 
     const entryPanel = entries.map((entry, index) =>
         <ExpansionPanel key={index + "entries-list"}>
@@ -48,10 +75,9 @@ const OfferDisplay = ({ offer, projectId, onClose, ...props }) => {
             >
                 <Typography className={classes.heading}>{entry.name}</Typography>
             </ExpansionPanelSummary>
+            <Button onClick={() => openNewArticleDialog(index+1)}>Neuen Artikel hinzufügen</Button>
             <ExpansionPanelDetails>
-                <Typography>
-                    <ArticleTable articles={entry.articles} />
-          </Typography>
+                    {entry.articles.length > 0 ? <ArticleTable articles={entry.articles} /> : null}
             </ExpansionPanelDetails>
         </ExpansionPanel>
     );
@@ -59,6 +85,17 @@ const OfferDisplay = ({ offer, projectId, onClose, ...props }) => {
 
     return (
         <>
+            <NewEntrySegmentDialog
+                show={showNewSegmentDialog}
+                onCancel={() => setNewEntrySegmentDialogViewState(false)}
+                onSubmit={addEntry}
+            />
+            <SelectArticleDialog 
+                show={showNewArticleDialog != 0}
+                articles={articles}
+                onCancel={() => setNewArticleDialogViewState(0)}
+                onSubmit={addArticle}
+            />
             <div className={classes.root}>
                 <ExpansionPanel expanded={true}>
                     <ExpansionPanelSummary
@@ -68,6 +105,9 @@ const OfferDisplay = ({ offer, projectId, onClose, ...props }) => {
                     >
                         <Typography gutterBottom variant="h5" component="h2">{offer.name}</Typography>
                     </ExpansionPanelSummary>
+                    <Button onClick={() => setNewEntrySegmentDialogViewState(true)}>Neuen Segment hinzufügen</Button>
+                    <Button>Offerte speichern</Button>
+                    <Button>Offerte als PDF laden</Button>
                     <ExpansionPanelDetails>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
