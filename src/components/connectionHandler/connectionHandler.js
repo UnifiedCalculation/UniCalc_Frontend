@@ -100,6 +100,25 @@ export async function getOffersFromProject(projectId, callback) {
     callback(offerData);
 }
 
+export async function getArticles(callback){
+    const articles = [
+        {
+            name: "Steckdose T13 3-fach UP weiss",
+            article_id: 1234123,
+            unit: "Stk.",
+            price: 125.80,
+        },
+        {
+            name: "Steckdose T13 3-fach AP weiss",
+            article_id: 1234123,
+            unit: "Stk.",
+            price: 220.25,
+        }
+    ]
+
+    callback(articles);
+}
+
 export async function getOfferData(projectId, offerId, callback){
     const offer = {
         name: "offer 1",
