@@ -39,8 +39,7 @@ export default function ProjectCard({ projectName, description, buttonName, onCl
 ProjectCard.propTypes = {
     projectName: PropTypes.string.isRequired, 
     buttonName: PropTypes.string,
-    onClick: PropTypes.func.isRequired,
-    show: PropTypes.bool.isRequired
+    onClick: PropTypes.func.isRequired
 }
 
 ProjectCard.defaultProps = {
