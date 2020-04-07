@@ -87,7 +87,9 @@ const SinglePage = () => {
     <>
       <Header />
       {addNewProjectDialog}
-      {projectCards}
+      <div class="flexCards">
+        {projectCards}
+      </div>
       <ProjectDisplay show={showProject} />
       <Navigation />
     </>
