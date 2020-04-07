@@ -56,6 +56,15 @@ const OfferDisplay = ({ offer, projectId, onClose, ...props }) => {
                 articles: []
             }
         ]);
+        offer.entries = entries;
+    }
+
+    const saveOffer = () => {
+        API.saveOfferToProject(projectId, offer);
+    }
+
+    const getOfferAsPDF = () => {
+        API.getOfferAsPDF(projectId, offer);
     }
 
     const addArticle = (article) => {
@@ -106,8 +115,8 @@ const OfferDisplay = ({ offer, projectId, onClose, ...props }) => {
                         <Typography gutterBottom variant="h5" component="h2">{offer.name}</Typography>
                     </ExpansionPanelSummary>
                     <Button onClick={() => setNewEntrySegmentDialogViewState(true)}>Neuen Segment hinzufügen</Button>
-                    <Button>Offerte speichern</Button>
-                    <Button>Offerte als PDF laden</Button>
+                    <Button onClick={saveOffer}>Offerte speichern</Button>
+                    <Button onClick={getOfferAsPDF}>Offerte als PDF laden</Button>
                     <ExpansionPanelDetails>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
