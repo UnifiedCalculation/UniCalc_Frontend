@@ -21,13 +21,18 @@ import * as API from '../connectionHandler/connectionHandler';
 import '../singlePage/singlePage.css'
 
 
-const ProjectDisplay = ({ projectData, ...props }) => {
+const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
 
     const [offers, setOfferData] = useState(null);
 
+    const dateOptions = {
+        timeZone: "Europe/Zurich",
+        hour12: false
+    };
+
     useEffect(() => {
         API.getOffersFromProject(projectData.project_id, setOfferData);
-    },[]);
+    }, []);
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -41,10 +46,6 @@ const ProjectDisplay = ({ projectData, ...props }) => {
             minWidth: 300,
         },
     }));
-
-    const openOffer = (offerId) => {
-
-    }
 
     const openNewOfferDialog = () => {
 
@@ -63,49 +64,53 @@ const ProjectDisplay = ({ projectData, ...props }) => {
         />
     );
 
-    const offerCards = offers ? 
+    const offerCards = offers ?
         addOfferCard.concat(
             offers.map((entry, index) =>
                 <ProjectCard
                     key={(index + 1) + "-offerCard"}
-                    onClick={() => openOffer(entry.offer_id)}
-                    projectName={entry.offer_name}
-                    description={entry.description} />
+                    onClick={() => onShowOffer(entry.offer_id)}
+                    projectName={entry.name}
+                    description={"Zuletz bearbeitet am: " +
+                        new Date(entry.updated_at)
+                            .toLocaleString("de-DE", dateOptions)
+                            .replace(/(.*)\D\d+/, "$1")}
+                />
             )
-        ) 
-        : <Loading text={'Lade Offerten...'}/>;
+        )
+        : <Loading text={'Lade Offerten...'} />;
 
 
-    const projectDetails = projectData ? 
+    const projectDetails = projectData ?
         <TableContainer >
             <Table className={classes.table} aria-label="simple table">
                 <TableBody>
-                    <TableRow key={0}>
+                    <TableRow key={0 + "-projectDetails"}>
                         <TableCell component="th" scope="row">
                             Adresse
                             </TableCell>
                         <TableCell align="right">{projectData.address}</TableCell>
                     </TableRow>
-                    <TableRow key={1}>
+                    <TableRow key={1 + "-projectDetails"}>
                         <TableCell component="th" scope="row">
                             Postleitzahl
                             </TableCell>
                         <TableCell align="right">{projectData.zip}</TableCell>
                     </TableRow>
-                    <TableRow key={1}>
+                    <TableRow key={2 + "-projectDetails"}>
                         <TableCell component="th" scope="row">
                             Stadt
                             </TableCell>
                         <TableCell align="right">{projectData.city}</TableCell>
                     </TableRow>
-                    <TableRow key={1}>
+                    <TableRow key={3 + "-projectDetails"}>
                         <TableCell component="th" scope="row">
                             Beschreibung
                             </TableCell>
                         <TableCell align="right">{projectData.description}</TableCell>
                     </TableRow>
-                    
-                    <TableRow key={1}>
+
+                    <TableRow key={4 + "-projectDetails"}>
                         <TableCell component="th" scope="row">
                             Festgelegte Zeit zu zahlen
                             </TableCell>
