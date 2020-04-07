@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -15,10 +15,19 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 import ProjectCard from '../projectCard/projectCard';
+import Loading from '../loading/loading';
+import * as API from '../connectionHandler/connectionHandler';
 
 import '../singlePage/singlePage.css'
 
-const ProjectDisplay = ({ projectData, offers, ...props }) => {
+
+const ProjectDisplay = ({ projectData, ...props }) => {
+
+    const [offers, setOfferData] = useState(null);
+
+    useEffect(() => {
+        API.getOffersFromProject(projectData.project_id, setOfferData);
+    },[]);
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -63,7 +72,9 @@ const ProjectDisplay = ({ projectData, offers, ...props }) => {
                     projectName={entry.offer_name}
                     description={entry.description} />
             )
-        );
+        ) 
+        : <Loading text={'Lade Offerten...'}/>;
+
 
     const projectDetails = projectData ? 
         <TableContainer >
@@ -127,6 +138,7 @@ const ProjectDisplay = ({ projectData, offers, ...props }) => {
         </>
     );
 }
+
 
 export default ProjectDisplay;
 
