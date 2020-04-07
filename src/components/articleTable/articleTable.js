@@ -25,7 +25,6 @@ const useStyles = makeStyles({
         <TableHead>
           <TableRow>
             <TableCell>Artikel</TableCell>
-            <TableCell align="right">Name</TableCell>
             <TableCell align="right">Anzahl</TableCell>
             <TableCell align="right">Einheit</TableCell>
             <TableCell align="right">Preis</TableCell>
@@ -34,15 +33,16 @@ const useStyles = makeStyles({
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
+          {articles.map((entry, index) => (
+            <TableRow key={index + entry.name + entry.amount}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {entry.name}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{entry.amount}</TableCell>
+              <TableCell align="right">{entry.unit}</TableCell>
+              <TableCell align="right">{entry.price}</TableCell>
+              <TableCell align="right">{entry.discount ? entry.discount : 0}</TableCell>
+              <TableCell align="right">{(entry.discount ? entry.amount*entry.price*(1-(entry.discount/100)) : entry.amount*entry.price).toFixed(2)}</TableCell>
             </TableRow>
           ))}
         </TableBody>
