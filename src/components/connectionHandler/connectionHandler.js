@@ -137,7 +137,7 @@ export async function getOfferData(projectId, offerId, callback){
                     },
                     {
                         name: "Steckdose T13 3-fach AP weiss",
-                        article_id: 1234123,
+                        article_id: 1234124,
                         unit: "Stk.",
                         price: 220.25,
                         amount: 120,
@@ -159,7 +159,7 @@ export async function getOfferData(projectId, offerId, callback){
                     },
                     {
                         name: "Steckdose T13 3-fach AP weiss",
-                        article_id: 1234123,
+                        article_id: 1234124,
                         unit: "Stk.",
                         price: 220.25,
                         amount: 120,
