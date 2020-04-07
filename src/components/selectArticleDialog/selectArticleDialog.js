@@ -7,29 +7,39 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
 
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
 /**
+ * @param {Array} articles array with articles
  * @param {Function} onCancel
  * @param {Function} onSubmit 
  * @param {Boolean} show
  */
-const NewOfferDialog = ({ onCancel, onSubmit, show, ...props }) => {
+const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) => {
 
     const cancelText = 'Abbrechen';
     const acceptText = 'Bestätigen';
-    const title = 'Neue Offerte erstellen';
-    const text = 'Tragen Sie bitte alle Felder ein, um eine neue Offerte zu erstellen.';
+    const title = 'Artikel hinzufügen';
+    const text = 'Alle Felder eintragen, um einen Artikel hinzuzufügen.';
 
     const textfields = [
         {
-            id: 'offername',
-            label: 'Offertenbezeichnung',
-            type: 'text',
+            id: 'amount',
+            label: 'Anzahl',
+            type: 'number',
+            required: true
+        },
+        {
+            id: 'discount',
+            label: 'Rabatt in Prozent',
+            type: 'number',
             required: true
         },
         {
@@ -39,6 +49,19 @@ const NewOfferDialog = ({ onCancel, onSubmit, show, ...props }) => {
             required: true
         }
     ];
+
+    let emptyArticlesList = [];
+    emptyArticlesList.push(<option id="emptyOption" key="0-option"></option>);
+    const articlesSelection = articles ? emptyArticlesList.concat(
+        articles.map((entry, index) =>
+            <option
+                value={entry.article_id}
+                key={(index + 1) + '-option'}
+            >
+                {entry.name}
+            </option >
+        )
+    ) : emptyArticlesList;
 
     const inputFields = textfields.map((entry, index) =>
         <TextField
@@ -54,11 +77,22 @@ const NewOfferDialog = ({ onCancel, onSubmit, show, ...props }) => {
         />
     );
 
+    const useStyles = makeStyles((theme) => ({
+        formControl: {
+            margin: theme.spacing(0),
+            minWidth: 120,
+        },
+        selectEmpty: {
+            marginTop: theme.spacing(5),
+        },
+    }));
+
+    const classes = useStyles();
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
 
-    const prepareOfferData = (event) => {
+    const prepareArticleData = (event) => {
         event.preventDefault();
         let jsonObject = {};
         for (const [key, value] of new FormData(event.target).entries()) {
@@ -82,7 +116,24 @@ const NewOfferDialog = ({ onCancel, onSubmit, show, ...props }) => {
                     <DialogContentText id="new-project-dialog-description">
                         {text}
                     </DialogContentText>
-                    <form id='newOfferForm' onSubmit={prepareOfferData}>
+                    <form id='newArticleForm' onSubmit={prepareArticleData}>
+                        <FormControl
+                            required
+                            className={classes.formControl}
+                            fullWidth
+                        >
+                            <InputLabel id="required-select-autowidth-label">Artikel</InputLabel>
+                            <Select
+                                native
+                                labelId="required-select-autowidth-label"
+                                id="article_id"
+                                name="article_id"
+                                fullWidth
+                                margin='dense'
+                            >
+                                {articlesSelection}
+                            </Select>
+                        </FormControl>
                         {inputFields}
                     </form>
                 </DialogContent>
@@ -90,7 +141,7 @@ const NewOfferDialog = ({ onCancel, onSubmit, show, ...props }) => {
                     <Button onClick={onCancel} color="primary">
                         {cancelText}
                     </Button>
-                    <Button type="submit" form='newOfferForm' color="primary" autoFocus>
+                    <Button type="submit" form='newArticleForm' color="primary" autoFocus>
                         {acceptText}
                     </Button>
                 </DialogActions>
@@ -99,10 +150,11 @@ const NewOfferDialog = ({ onCancel, onSubmit, show, ...props }) => {
     );
 }
 
-NewOfferDialog.propTypes = {
+SelectArticleDialog.propTypes = {
+    articles: PropTypes.array.isRequired, 
     onCancel: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     show: PropTypes.bool.isRequired
 }
 
-export default NewOfferDialog;
+export default SelectArticleDialog;

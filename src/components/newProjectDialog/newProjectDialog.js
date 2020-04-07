@@ -67,7 +67,7 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
     const customerSelector = customers ? emptyNameSelection.concat(
         customers.map((entry, index) =>
             <option
-                value={entry.customerId}
+                value={entry.customer_id}
                 key={(index + 1) + '-option'}
             >
                 {entry.name}
@@ -138,8 +138,8 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
                             <Select
                                 native
                                 labelId="required-select-autowidth-label"
-                                id="customerId"
-                                name="customerId"
+                                id="customer_id"
+                                name="customer_id"
                                 fullWidth
                                 margin='dense'
                             >
