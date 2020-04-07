@@ -13,6 +13,26 @@ const SinglePage = () => {
 
   const classes = useStyles();
 
+  let addProjectCard = [];
+  addProjectCard.push(
+    <ProjectCard
+      projectName={'Neues Projekt'}
+      buttonName={'Neues Projekt hinzufügen...'}
+      onClick={openNewProjectDialog}
+    />
+  );
+
+  const projectCards =
+    addProjectCard.concat(
+      projectData.map((entry, index) =>
+        <ProjectCard
+          key={index + "-projectCard"}
+          onClick={() => openProject(entry.project_id)}
+          projectName={entry.project_name}
+          description={entry.description} />
+      )
+    );
+
   return (
       <>
         <div className={"content"}>
