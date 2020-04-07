@@ -30,6 +30,7 @@ const SinglePage = () => {
   };
 
   const openProjetDetailsWithData = (projectData) => {
+    console.log(projectData);
     setProjectData(projectData);
     setShowProjectViewState(true);
   };
@@ -65,7 +66,9 @@ const SinglePage = () => {
   let addProjectCard = [];
   addProjectCard.push(
     <ProjectCard
+      key={'0-projectCard'}
       projectName={'Neues Projekt'}
+      description={'Hier eine neues Projekt erstellen!'}
       buttonName={'Neues Projekt hinzufügen...'}
       onClick={openNewProjectDialog}
     />
@@ -76,21 +79,25 @@ const SinglePage = () => {
     addProjectCard.concat(
       projects.map((entry, index) =>
         <ProjectCard
-          key={index + "-projectCard"}
+          key={(index + 1) + "-projectCard"}
           onClick={() => openProject(entry.project_id)}
           projectName={entry.project_name}
           description={entry.description} />
       )
     );
 
+  const projectDisplay = projectData ?
+    <ProjectDisplay projectData={projectData} />
+    : null;
+
   return (
     <>
       <Header />
       {addNewProjectDialog}
-      <div class="flexCards">
-        {projectCards}
-      </div>
-      <ProjectDisplay show={showProject} />
+        <div className="flexCards">
+          {projectCards}
+        </div>
+        {projectDisplay}
       <Navigation />
     </>
   );
