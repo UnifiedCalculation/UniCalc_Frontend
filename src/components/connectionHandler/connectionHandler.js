@@ -27,13 +27,28 @@ export async function getUserProjects(callback) {
             project_name: "Villa am See",
             description: "Neubau in Zürich"
        },
-       {
-        project_id: 1273,
-        project_name: "Villa am Berg",
-        description: "Neubau in Chur"
+        {
+            project_id: 1273,
+            project_name: "Villa am Berg",
+            description: "Neubau in Chur"
        }
    ]
    callback(testProjectData);
+}
+
+export async function getProjectData(projectId, callback) {
+    /*
+    axios.get('company/projects/' + projectId)
+    .then(res => {
+        console.log(res);
+        console.log(res.data);
+        if(callback){
+            callback(res.data);
+        }
+    });
+    */
+
+    callback();
 }
 
 export async function submitNewProject(projectData, callback){
@@ -43,7 +58,7 @@ export async function submitNewProject(projectData, callback){
 
 export async function getCustomers(callback) {
     /*
-    axios.get('company/projects')
+    axios.get('company/customers')
     .then(res => {
         console.log(res);
         console.log(res.data);
