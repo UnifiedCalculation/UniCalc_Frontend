@@ -36,6 +36,11 @@ export async function getUserProjects(callback) {
    callback(testProjectData);
 }
 
+export async function submitNewProject(projectData, callback){
+    axios.post('projects/new', projectData)
+    .then(callback);
+}
+
 export async function getCustomers(callback) {
     /*
     axios.get('company/projects')
