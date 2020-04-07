@@ -48,7 +48,21 @@ export async function getProjectData(projectId, callback) {
     });
     */
 
-    callback();
+    const projectData = {
+        "id": 1,
+        "customer_id": 1,
+        "company_id": 1,
+        "name": "Testproject",
+        "address": "Teststreet 123",
+        "zip": "8001",
+        "city": "Zurich",
+        "created_at": "2020-04-07T15:44:02.921Z",
+        "updated_at": "2020-04-07T15:44:02.921Z",
+        "description": "This is a test Project",
+        "payment_target": "30 Tage"
+      }
+
+    callback(projectData);
 }
 
 export async function submitNewProject(projectData, callback){
