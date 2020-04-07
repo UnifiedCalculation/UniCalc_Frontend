@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import Navigation from '../layouts/navigation'
 import Header from "../layouts/header/header";
-import { makeStyles } from "@material-ui/core/styles";
 import './singlePage.css'
 
 import ProjectCard from '../projectCard/projectCard';
 import NewProjectDialog from '../newProjectDialog/newProjectDialog';
 import ProjectDisplay from '../projectDisplay/projectDisplay';
+import OfferDisplay from '../offerDisplay/offerDisplay';
 import * as API from '../connectionHandler/connectionHandler';
 
-const useStyles = makeStyles({
-}
-);
 
 const SinglePage = () => {
 
   const [projects, setProjects] = useState([]);
   const [showProject, setShowProjectViewState] = useState(false);
+  const [offerData, setOfferData] = useState(null);
   const [projectData, setProjectData] = useState(null);
   const [customerData, setCustomerData] = useState([]);
   const [showNewProjectDialog, setNewProjectDialogViewState] = useState(false);
@@ -52,6 +50,10 @@ const SinglePage = () => {
     ;
   }
 
+  const onShowOffer = (offerId) => {
+    API.getOfferData(projectData.project_id, offerId, setOfferData);
+  }
+
   const addNewProjectDialog =
     <NewProjectDialog
       show={showNewProjectDialog}
@@ -59,9 +61,6 @@ const SinglePage = () => {
       onCancel={closeNewProjectDialog}
       onSubmit={submitNewProject}
     />
-
-
-  const classes = useStyles();
 
   let addProjectCard = [];
   addProjectCard.push(
@@ -86,9 +85,14 @@ const SinglePage = () => {
       )
     );
 
-  const projectDisplay = projectData ?
-    <ProjectDisplay projectData={projectData} />
+  const projectDisplay = projectData && !offerData ?
+    <ProjectDisplay projectData={projectData} onShowOffer={onShowOffer} />
     : null;
+
+  const offerDisplay = offerData ? 
+  <OfferDisplay offer={offerData} projectId={projectData.project_id} onClose={() => setOfferData(null)} />
+  : null;
+
 
   return (
     <>
@@ -98,6 +102,7 @@ const SinglePage = () => {
           {projectCards}
         </div>
         {projectDisplay}
+        {offerDisplay}
       <Navigation />
     </>
   );
