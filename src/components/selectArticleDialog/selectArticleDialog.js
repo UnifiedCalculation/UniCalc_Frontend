@@ -98,8 +98,12 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
         for (const [key, value] of new FormData(event.target).entries()) {
             jsonObject[key] = value;
         }
+        let art = articles.filter(article => article.article_id === parseInt(jsonObject.article_id));
+        art[0].discount = parseInt(jsonObject.discount);
+        art[0].amount = parseInt(jsonObject.amount);
+        art[0].description = jsonObject.description;
         event.target.reset();
-        onSubmit(jsonObject);
+        onSubmit(art[0]);
     };
 
     return (
