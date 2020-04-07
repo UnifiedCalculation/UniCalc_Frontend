@@ -34,14 +34,12 @@ const SinglePage = () => {
     );
 
   return (
-      <>
-        <div className={"content"}>
-          <Header/>
-          <p>Nothing yet...</p>
-          <UserOptions/>
-        </div>
-        <Navigation />
-      </>
+    <>
+      <Header />
+      {addNewProjectDialog}
+      {projectCards}
+      <Navigation />
+    </>
   );
 };
 export default SinglePage;
