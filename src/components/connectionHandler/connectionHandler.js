@@ -110,7 +110,7 @@ export async function getArticles(callback){
         },
         {
             name: "Steckdose T13 3-fach AP weiss",
-            article_id: 1234123,
+            article_id: 1234124,
             unit: "Stk.",
             price: 220.25,
         }
