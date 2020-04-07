@@ -28,7 +28,6 @@ const SinglePage = () => {
   };
 
   const openProjetDetailsWithData = (projectData) => {
-    console.log(projectData);
     setProjectData(projectData);
     setShowProjectViewState(true);
   };
