@@ -15,6 +15,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 import ProjectCard from '../projectCard/projectCard';
+import NewOfferDialog from '../newOfferDialog/newOfferDialog';
 import Loading from '../loading/loading';
 import * as API from '../connectionHandler/connectionHandler';
 
@@ -24,6 +25,7 @@ import '../singlePage/singlePage.css'
 const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
 
     const [offers, setOfferData] = useState(null);
+    const [showNewOfferDialog, setNewOfferDialogViewState] = useState(false);
 
     const dateOptions = {
         timeZone: "Europe/Zurich",
@@ -47,8 +49,23 @@ const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
         },
     }));
 
-    const openNewOfferDialog = () => {
+    const addNewOffer = (offer) => {
+        setNewOfferDialogViewState(false);
+        setOfferData([
+            ...offers,
+            {
+                name: offer.offername,
+                updated_at: new Date()
+                .toLocaleString("de-DE", dateOptions)
+                .replace(/(.*)\D\d+/, "$1")
+            }
+        ]);
+        API.postNewOfferToProject(projectData.id);
+        API.getOffersFromProject(projectData.id, setOfferData);
+    }
 
+    const openNewOfferDialog = () => {
+        setNewOfferDialogViewState(true);
     }
 
     const classes = useStyles();
@@ -123,6 +140,11 @@ const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
 
     return (
         <>
+            <NewOfferDialog
+                onCancel={() => setNewOfferDialogViewState(false)}
+                onSubmit={addNewOffer}
+                show={showNewOfferDialog}
+            />
             <div className={classes.root}>
                 <ExpansionPanel expanded={true}>
                     <ExpansionPanelSummary
