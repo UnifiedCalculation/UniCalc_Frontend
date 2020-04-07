@@ -29,7 +29,7 @@ const ProjectDisplay = ({ projectData, offers, ...props }) => {
             fontWeight: theme.typography.fontWeightRegular,
         },
         table: {
-            minWidth: 650,
+            minWidth: 300,
         },
     }));
 
@@ -54,7 +54,7 @@ const ProjectDisplay = ({ projectData, offers, ...props }) => {
         />
     );
 
-    const offerCards =
+    const offerCards = offers ? 
         addOfferCard.concat(
             offers.map((entry, index) =>
                 <ProjectCard
