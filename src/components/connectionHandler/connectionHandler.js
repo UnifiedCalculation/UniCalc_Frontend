@@ -46,6 +46,11 @@ export async function getUserProjects(callback) {
     callback(testProjectData);
 }
 
+export async function postNewOfferToProject(projectId, offer){
+    console.log(offer);
+    axios.post('company/projects/' + projectId +"/offer/new", offer);
+}
+
 export async function getProjectData(projectId, callback) {
     /*
     axios.get('company/projects/' + projectId)
@@ -98,6 +103,14 @@ export async function getOffersFromProject(projectId, callback) {
       ]
 
     callback(offerData);
+}
+
+export async function saveOfferToProject(projectId, offer, callback){
+    console.log(JSON.stringify(offer));
+}
+
+export async function getOfferAsPDF(projectId, offer, callback){
+
 }
 
 export async function getArticles(callback){
