@@ -1,27 +1,109 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navigation from '../layouts/navigation'
 import Header from "../layouts/header/header";
-import UserOptions from "../layouts/userOptions/userOptions";
-import {makeStyles} from "@material-ui/core/styles";
 import './singlePage.css'
 
-const useStyles = makeStyles({
-    }
-);
+import ProjectCard from '../projectCard/projectCard';
+import NewProjectDialog from '../newProjectDialog/newProjectDialog';
+import ProjectDisplay from '../projectDisplay/projectDisplay';
+import OfferDisplay from '../offerDisplay/offerDisplay';
+import * as API from '../connectionHandler/connectionHandler';
+
 
 const SinglePage = () => {
 
-  const classes = useStyles();
+  const [projects, setProjects] = useState([]);
+  const [showProject, setShowProjectViewState] = useState(false);
+  const [offerData, setOfferData] = useState(null);
+  const [projectData, setProjectData] = useState(null);
+  const [customerData, setCustomerData] = useState([]);
+  const [showNewProjectDialog, setNewProjectDialogViewState] = useState(false);
+
+  useEffect(() => {
+    API.getUserProjects(setProjects);
+  }, []);
+
+  const openProject = (projectId) => {
+    API.getProjectData(projectId, openProjetDetailsWithData);
+  };
+
+  const openProjetDetailsWithData = (projectData) => {
+    setProjectData(projectData);
+    setShowProjectViewState(true);
+  };
+
+  const openNewProjectDialog = () => {
+    API.getCustomers(setCustomerData);
+    setNewProjectDialogViewState(true);
+  }
+
+  const closeNewProjectDialog = () => {
+    setNewProjectDialogViewState(false);
+    setCustomerData([]);
+  }
+
+  const submitNewProject = (newProjectData) => {
+    setNewProjectDialogViewState(false);
+    console.log(JSON.stringify(newProjectData));
+    API.submitNewProject(newProjectData, API.getUserProjects(setProjects));
+    ;
+  }
+
+  const onShowOffer = (offerId) => {
+    API.getOfferData(projectData.project_id, offerId, setOfferData);
+  }
+
+  const addNewProjectDialog =
+    <NewProjectDialog
+      show={showNewProjectDialog}
+      customers={customerData}
+      onCancel={closeNewProjectDialog}
+      onSubmit={submitNewProject}
+    />
+
+  let addProjectCard = [];
+  addProjectCard.push(
+    <ProjectCard
+      key={'0-projectCard'}
+      projectName={'Neues Projekt'}
+      description={'Hier eine neues Projekt erstellen!'}
+      buttonName={'Neues Projekt hinzufügen...'}
+      onClick={openNewProjectDialog}
+    />
+  );
+
+  const projectCards = showProject ?
+    null :
+    addProjectCard.concat(
+      projects.map((entry, index) =>
+        <ProjectCard
+          key={(index + 1) + "-projectCard"}
+          onClick={() => openProject(entry.project_id)}
+          projectName={entry.project_name}
+          description={entry.description} />
+      )
+    );
+
+  const projectDisplay = projectData && !offerData ?
+    <ProjectDisplay projectData={projectData} onShowOffer={onShowOffer} />
+    : null;
+
+  const offerDisplay = offerData ? 
+  <OfferDisplay offer={offerData} projectId={projectData.project_id} onClose={() => setOfferData(null)} />
+  : null;
+
 
   return (
-      <>
-        <div className={"content"}>
-          <Header/>
-          <p>Nothing yet...</p>
-          <UserOptions/>
+    <>
+      <Header />
+      {addNewProjectDialog}
+        <div className="flexCards">
+          {projectCards}
         </div>
-        <Navigation />
-      </>
+        {projectDisplay}
+        {offerDisplay}
+      <Navigation />
+    </>
   );
 };
 export default SinglePage;

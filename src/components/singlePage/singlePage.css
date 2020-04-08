@@ -1,5 +1,10 @@
-.content {
-    height: calc(100% - 50px);
-    overflow-y: scroll;
-    margin-bottom: 50px;
+.flexCards {
+    display: flex;
+    flex-direction: row;
+    padding: 25px;
+    margin: auto;
+    flex-wrap: wrap;
+    align-self: auto;
+    align-items: center;
+    justify-content: center
 }
