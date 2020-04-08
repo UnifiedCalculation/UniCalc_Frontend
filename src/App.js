@@ -3,7 +3,9 @@ import SinglePage from './components/singlePage/singlePage';
 
 function App() {
   return (
-        <SinglePage />
+    <div className="App">
+      <SinglePage />
+    </div>
   );
 }
 

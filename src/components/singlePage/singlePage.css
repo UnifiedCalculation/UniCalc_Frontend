@@ -1,0 +1,10 @@
+.flexCards {
+    display: flex;
+    flex-direction: row;
+    padding: 25px;
+    margin: auto;
+    flex-wrap: wrap;
+    align-self: auto;
+    align-items: center;
+    justify-content: center
+}
