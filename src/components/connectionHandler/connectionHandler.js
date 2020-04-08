@@ -11,16 +11,15 @@ export async function loginUser(username, password, callback) {
 }
 
 export async function getUserProjects(callback) {
-    /*
     axios.get('company/projects')
-    .then(res => {
-        console.log(res);
-        console.log(res.data);
-        if(callback){
-            callback(res.data);
-        }
-    });
-    */
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+            if (callback) {
+                callback(res.data);
+            }
+        });
+    /*
     const testProjectData = [
         {
             project_id: 1272,
@@ -44,25 +43,24 @@ export async function getUserProjects(callback) {
         }
     ]
     callback(testProjectData);
+    */
 }
 
-export async function postNewOfferToProject(projectId, offer){
-    console.log(offer);
-    axios.post('company/projects/' + projectId +"/offer/new", offer);
+export async function postNewOfferToProject(projectId, offer, callback) {
+    axios.post('company/projects/' + projectId + "/offer/new", offer)
+    .then(()=> callback ? callback() : null);
 }
 
 export async function getProjectData(projectId, callback) {
-    /*
     axios.get('company/projects/' + projectId)
-    .then(res => {
-        console.log(res);
-        console.log(res.data);
-        if(callback){
-            callback(res.data);
-        }
-    });
-    */
-
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+            if (callback) {
+                callback(res.data);
+            }
+        });
+    /*
     const projectData = {
         "id": 1,
         "customer_id": 1,
@@ -78,9 +76,19 @@ export async function getProjectData(projectId, callback) {
     }
 
     callback(projectData);
+    */
 }
 
 export async function getOffersFromProject(projectId, callback) {
+    axios.get('company/projects/' + projectId + '/offers')
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+            if (callback) {
+                callback(res.data);
+            }
+        });
+    /*
     const offerData = [
         {
           id: 2,
@@ -103,17 +111,45 @@ export async function getOffersFromProject(projectId, callback) {
       ]
 
     callback(offerData);
+      */
 }
 
-export async function saveOfferToProject(projectId, offer, callback){
-    console.log(JSON.stringify(offer));
+export async function saveOfferToProject(projectId, offer, callback) {
+    offer.id ?
+        axios.post('company/projects/' + projectId + '/offers/' + offer.id, { offer })
+            .then(res => {
+                if (callback) {
+                    callback();
+                }
+            })
+        :
+        axios.post('company/projects/' + projectId + '/offers', { offer })
+            .then(res => {
+                if (callback) {
+                    callback();
+                }
+            });
 }
 
-export async function getOfferAsPDF(projectId, offer, callback){
-
+export async function getOfferAsPDF(projectId, offer) {
+    if(offer.id){
+        axios.get('company/projects/' + projectId + '/offers/' + offer.id);
+    }
 }
 
-export async function getArticles(callback){
+export async function getArticles(callback) {
+
+    axios.get('company/articles')
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+            if (callback) {
+                callback(res.data);
+            }
+        });
+
+
+    /*
     const articles = [
         {
             name: "Steckdose T13 3-fach UP weiss",
@@ -130,9 +166,20 @@ export async function getArticles(callback){
     ]
 
     callback(articles);
+    */
 }
 
-export async function getOfferData(projectId, offerId, callback){
+export async function getOfferData(projectId, offerId, callback) {
+    axios.get('company/projects/' + projectId + '/offers/' + offerId)
+    .then(res => {
+        console.log(res);
+        console.log(res.data);
+        if (callback) {
+            callback(res.data);
+        }
+    });
+
+    /*
     const offer = {
         name: "offer 1",
         entries: [
@@ -184,6 +231,7 @@ export async function getOfferData(projectId, offerId, callback){
     }
 
     callback(offer);
+    */
 }
 
 export async function submitNewProject(projectData, callback) {
@@ -192,7 +240,6 @@ export async function submitNewProject(projectData, callback) {
 }
 
 export async function getCustomers(callback) {
-    /*
     axios.get('company/customers')
     .then(res => {
         console.log(res);
@@ -201,7 +248,8 @@ export async function getCustomers(callback) {
             callback(res.data);
         }
     });
-    */
+
+    /*
     const testCustomerData = [
         {
             name: "Name one",
@@ -217,4 +265,5 @@ export async function getCustomers(callback) {
         }
     ]
     callback(testCustomerData);
+    */
 }
