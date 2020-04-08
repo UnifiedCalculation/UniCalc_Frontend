@@ -79,7 +79,7 @@ const SinglePage = () => {
         <ProjectCard
           key={(index + 1) + "-projectCard"}
           onClick={() => openProject(entry.project_id)}
-          projectName={entry.project_name}
+          projectName={entry.name}
           description={entry.description} />
       )
     );
