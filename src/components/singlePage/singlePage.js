@@ -50,7 +50,7 @@ const SinglePage = () => {
   }
 
   const onShowOffer = (offerId) => {
-    API.getOfferData(projectData.project_id, offerId, setOfferData);
+    API.getOfferData(projectData.id, offerId, setOfferData);
   }
 
   const addNewProjectDialog =
@@ -78,7 +78,7 @@ const SinglePage = () => {
       projects.map((entry, index) =>
         <ProjectCard
           key={(index + 1) + "-projectCard"}
-          onClick={() => openProject(entry.project_id)}
+          onClick={() => openProject(entry.id)}
           projectName={entry.name}
           description={entry.description} />
       )
@@ -89,7 +89,7 @@ const SinglePage = () => {
     : null;
 
   const offerDisplay = offerData ? 
-  <OfferDisplay offer={offerData} projectId={projectData.project_id} onClose={() => setOfferData(null)} />
+  <OfferDisplay offer={offerData} projectId={projectData.id} onClose={() => setOfferData(null)} />
   : null;
 
 
