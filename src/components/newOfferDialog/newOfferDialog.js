@@ -27,14 +27,8 @@ const NewOfferDialog = ({ onCancel, onSubmit, show, ...props }) => {
 
     const textfields = [
         {
-            id: 'offername',
+            id: 'name',
             label: 'Offertenbezeichnung',
-            type: 'text',
-            required: true
-        },
-        {
-            id: 'description',
-            label: 'Beschreibung',
             type: 'text',
             required: true
         }

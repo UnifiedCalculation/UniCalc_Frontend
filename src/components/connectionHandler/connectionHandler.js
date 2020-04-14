@@ -11,7 +11,7 @@ export async function loginUser(username, password, callback) {
 }
 
 export async function getUserProjects(callback) {
-    axios.get('company/projects')
+    axios.get('companies/projects')
         .then(res => {
             console.log(res);
             console.log(res.data);
@@ -47,12 +47,12 @@ export async function getUserProjects(callback) {
 }
 
 export async function postNewOfferToProject(projectId, offer, callback) {
-    axios.post('company/projects/' + projectId + "/offer/new", offer)
+    axios.post('projects/' + projectId + "/offers", offer)
     .then(()=> callback ? callback() : null);
 }
 
 export async function getProjectData(projectId, callback) {
-    axios.get('company/projects/' + projectId)
+    axios.get('projects/' + projectId)
         .then(res => {
             console.log(res);
             console.log(res.data);
@@ -80,7 +80,7 @@ export async function getProjectData(projectId, callback) {
 }
 
 export async function getOffersFromProject(projectId, callback) {
-    axios.get('company/projects/' + projectId + '/offers')
+    axios.get('projects/' + projectId + '/offers')
         .then(res => {
             console.log(res);
             console.log(res.data);
@@ -116,14 +116,14 @@ export async function getOffersFromProject(projectId, callback) {
 
 export async function saveOfferToProject(projectId, offer, callback) {
     offer.id ?
-        axios.post('company/projects/' + projectId + '/offers/' + offer.id, { offer })
+        axios.put('projects/' + projectId + '/offers/' + offer.id, { offer })
             .then(res => {
                 if (callback) {
                     callback();
                 }
             })
         :
-        axios.post('company/projects/' + projectId + '/offers', { offer })
+        axios.post('projects/' + projectId + '/offers', { offer })
             .then(res => {
                 if (callback) {
                     callback();
@@ -133,13 +133,13 @@ export async function saveOfferToProject(projectId, offer, callback) {
 
 export async function getOfferAsPDF(projectId, offer) {
     if(offer.id){
-        axios.get('company/projects/' + projectId + '/offers/' + offer.id);
+        axios.get('projects/' + projectId + '/offers/' + offer.id);
     }
 }
 
 export async function getArticles(callback) {
 
-    axios.get('company/articles')
+    axios.get('articles')
         .then(res => {
             console.log(res);
             console.log(res.data);
@@ -170,7 +170,7 @@ export async function getArticles(callback) {
 }
 
 export async function getOfferData(projectId, offerId, callback) {
-    axios.get('company/projects/' + projectId + '/offers/' + offerId)
+    axios.get('projects/' + projectId + '/offers/' + offerId)
     .then(res => {
         console.log(res);
         console.log(res.data);
@@ -235,12 +235,12 @@ export async function getOfferData(projectId, offerId, callback) {
 }
 
 export async function submitNewProject(projectData, callback) {
-    axios.post('projects/new', projectData)
+    axios.post('projects', projectData)
         .then(callback);
 }
 
 export async function getCustomers(callback) {
-    axios.get('company/customers')
+    axios.get('companies/customers')
     .then(res => {
         console.log(res);
         console.log(res.data);

@@ -45,7 +45,7 @@ const SinglePage = () => {
   const submitNewProject = (newProjectData) => {
     setNewProjectDialogViewState(false);
     console.log(JSON.stringify(newProjectData));
-    API.submitNewProject(newProjectData, API.getUserProjects(setProjects));
+    API.submitNewProject(newProjectData, function(){ return API.getUserProjects(setProjects); });
     ;
   }
 
