@@ -31,19 +31,19 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
 
     const textfields = [
         {
-            id: 'projectname',
+            id: 'name',
             label: 'Projektname',
             type: 'text',
             required: true
         },
         {
-            id: 'adress',
+            id: 'address',
             label: 'Adresse',
             type: 'text',
             required: true
         },
         {
-            id: 'zipcode',
+            id: 'zip',
             label: 'Postleitzahl',
             type: 'number',
             required: true
@@ -67,10 +67,10 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
     const customerSelector = customers ? emptyNameSelection.concat(
         customers.map((entry, index) =>
             <option
-                value={entry.customer_id}
+                value={entry.id}
                 key={(index + 1) + '-option'}
             >
-                {entry.name}
+                {entry.user.lastname + ' ' + entry.user.firstname}
             </option >
         )
     ) : emptyNameSelection;

@@ -33,7 +33,7 @@ const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
     };
 
     useEffect(() => {
-        API.getOffersFromProject(projectData.project_id, setOfferData);
+        API.getOffersFromProject(projectData.id, setOfferData);
     }, []);
 
     const useStyles = makeStyles((theme) => ({
@@ -60,8 +60,8 @@ const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
                 .replace(/(.*)\D\d+/, "$1")
             }
         ]);
-        API.postNewOfferToProject(projectData.id);
-        API.getOffersFromProject(projectData.id, setOfferData);
+        API.postNewOfferToProject(projectData.id, offer, function(){ 
+            API.getOffersFromProject(projectData.id, setOfferData); });
     }
 
     const openNewOfferDialog = () => {
@@ -86,7 +86,7 @@ const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
             offers.map((entry, index) =>
                 <ProjectCard
                     key={(index + 1) + "-offerCard"}
-                    onClick={() => onShowOffer(entry.offer_id)}
+                    onClick={() => onShowOffer(entry.id)}
                     projectName={entry.name}
                     description={"Zuletz bearbeitet am: " +
                         new Date(entry.updated_at)
