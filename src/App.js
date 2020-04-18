@@ -4,9 +4,7 @@ import SinglePage from './components/singlePage/singlePage';
 
 function App() {
   return (
-    <div className="App">
       <SinglePage />
-    </div>
   );
 }
 
