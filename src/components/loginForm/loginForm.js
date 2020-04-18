@@ -19,9 +19,7 @@ class LoginForm extends React.Component {
         },
         MuiButton: {
           root: {
-            marginRight: 25,
-            marginLeft: 5,
-            marginTop: 15,
+            margin: 15,
           }
         }
       }
@@ -42,29 +40,29 @@ class LoginForm extends React.Component {
           </div>
 
           <div className="cardStyle">
-            <TextField
-              required
-              InputLabelProps={{ required: true }}
-              id="password"
-              name="password"
-              label="Password"
-              type="password"
-            />
+          <TextField
+            required
+            InputLabelProps={{ required: true }}
+            id="password"
+            name="password"
+            label="Password"
+            type="password"
+          />
+        </div>
+
+        <ThemeProvider theme={theme}>
+
+          <div className="cardStyle">
+            <Button type="submit" variant="contained" color="primary" disabled={false}>
+              Login
+                      </Button>
+            <Button type="button" variant="contained" color="secondary" disabled={true}>
+              Logout
+                      </Button>
           </div>
+        </ThemeProvider>
 
-          <ThemeProvider theme={theme}>
-
-            <div className="cardStyle">
-              <Button type="submit" variant="contained" color="primary" disabled={false}>
-                Login
-                      </Button>
-              <Button type="button" variant="contained" color="secondary" disabled={true} >
-                Logout
-                      </Button>
-            </div>
-          </ThemeProvider>
-
-        </div >
+      </div >
       </>
     );
   }
