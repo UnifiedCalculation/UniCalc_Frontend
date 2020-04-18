@@ -7,9 +7,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -21,7 +18,7 @@ import { useTheme } from '@material-ui/core/styles';
  * @param {Function} onAccept 
  * @param {Boolean} show
  */
-const InputDialog = ({ title, text, onCancel, cancelButtonText, onAccept, acceptButtonText, show, children, ...props }) => {
+const DynamicFormDialog = ({ title, text, onCancel, cancelButtonText, onAccept, acceptButtonText, show, children, ...props }) => {
 
     const useStyles = makeStyles((theme) => ({
         formControl: {
@@ -48,7 +45,7 @@ const InputDialog = ({ title, text, onCancel, cancelButtonText, onAccept, accept
         onAccept(jsonObject);
     };
 
-    const form = children ?
+    const completeForm = children ?
         <form id={title + '-inputFormDialog'} onSubmit={prepareFormData}>
             <FormControl
                 required
@@ -80,15 +77,7 @@ const InputDialog = ({ title, text, onCancel, cancelButtonText, onAccept, accept
                     <DialogContentText id={title + '-new-form-dialog-description'}>
                         {text}
                     </DialogContentText>
-                    <form id={title + '-inputFormDialog'} onSubmit={prepareFormData}>
-                        <FormControl
-                            required
-                            className={classes.formControl}
-                            fullWidth
-                        >
-                        </FormControl>
-                        {children}
-                    </form>
+                    {completeForm}
                 </DialogContent>
                 <DialogActions>
                     {cancelButton}
@@ -101,17 +90,17 @@ const InputDialog = ({ title, text, onCancel, cancelButtonText, onAccept, accept
     );
 }
 
-InputDialog.defaultProps = {
+DynamicFormDialog.defaultProps = {
     title: 'defaultTitle',
     text: 'defaultText',
     acceptButtonText: 'Accept'
 }
 
-InputDialog.propTypes = {
+DynamicFormDialog.propTypes = {
     customers: PropTypes.array.isRequired,
     onCancel: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     show: PropTypes.bool.isRequired
 }
 
-export default InputDialog;
+export default DynamicFormDialog;
