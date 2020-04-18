@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 
+import './loginForm.css';
+
 class LoginForm extends React.Component {
   render() {
     let theme = createMuiTheme({
@@ -25,25 +27,11 @@ class LoginForm extends React.Component {
       }
     });
 
-    let classes = makeStyles(theme => ({
-      root: {
-        "& .MuiTextField-root": {
-          margin: theme.spacing(1)
-        }
-      },
-      buttons: {
-        buttons: {
-          margin: 'auto',
-          flexWrap: 'wrap',
-          alignSelf: 'auto',
-          justifyContent: 'center',
-        }
-      }
-    }));
 
     return (
-      <div>
-          <div>
+      <>
+        <div className="LoginForm">
+          <div className="cardStyle">
             <TextField
               required
               InputLabelProps={{ required: true }}
@@ -51,6 +39,9 @@ class LoginForm extends React.Component {
               id="email"
               label="E-Mail"
             />
+          </div>
+
+          <div className="cardStyle">
             <TextField
               required
               InputLabelProps={{ required: true }}
@@ -62,7 +53,8 @@ class LoginForm extends React.Component {
           </div>
 
           <ThemeProvider theme={theme}>
-            <div className={classes.buttons}>
+
+            <div className="cardStyle">
               <Button type="submit" variant="contained" color="primary" disabled={false}>
                 Login
                       </Button>
@@ -72,7 +64,8 @@ class LoginForm extends React.Component {
             </div>
           </ThemeProvider>
 
-      </div>
+        </div >
+      </>
     );
   }
 }
