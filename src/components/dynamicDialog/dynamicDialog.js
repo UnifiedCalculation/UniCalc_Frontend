@@ -81,7 +81,12 @@ const DynamicDialog = ({ title, text, onCancel, cancelButtonText, onAccept, acce
                 </DialogContent>
                 <DialogActions>
                     {cancelButton}
-                    <Button type="submit" form={title + '-inputFormDialog'} color="primary" autoFocus>
+                    <Button
+                        type="submit"
+                        form={title + '-inputFormDialog'}
+                        color="primary"
+                        autoFocus
+                        onClick={onAccept}>
                         {acceptButtonText}
                     </Button>
                 </DialogActions>
