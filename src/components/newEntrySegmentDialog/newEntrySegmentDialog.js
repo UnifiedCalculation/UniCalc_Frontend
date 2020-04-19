@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DynamicFormDialog from '../dynamicFormDialog/dynamicFormDialog';
+import DynamicFormDialog from '../dynamicDialog/dynamicDialog';
 
 import TextField from '@material-ui/core/TextField';
 
