@@ -18,7 +18,7 @@ import { useTheme } from '@material-ui/core/styles';
  * @param {Function} onAccept 
  * @param {Boolean} show
  */
-const DynamicFormDialog = ({ title, text, onCancel, cancelButtonText, onAccept, acceptButtonText, show, children, ...props }) => {
+const DynamicDialog = ({ title, text, onCancel, cancelButtonText, onAccept, acceptButtonText, show, children, ...props }) => {
 
     const useStyles = makeStyles((theme) => ({
         formControl: {
@@ -90,17 +90,17 @@ const DynamicFormDialog = ({ title, text, onCancel, cancelButtonText, onAccept, 
     );
 }
 
-DynamicFormDialog.defaultProps = {
+DynamicDialog.defaultProps = {
     title: 'defaultTitle',
     text: 'defaultText',
     acceptButtonText: 'Accept'
 }
 
-DynamicFormDialog.propTypes = {
+DynamicDialog.propTypes = {
     customers: PropTypes.array.isRequired,
     onCancel: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     show: PropTypes.bool.isRequired
 }
 
-export default DynamicFormDialog;
+export default DynamicDialog;
