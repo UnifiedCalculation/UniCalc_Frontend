@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DynamicFormDialog from '../dynamicDialog/dynamicDialog';
+import DynamicDialog from '../dynamicDialog/dynamicDialog';
 
 import TextField from '@material-ui/core/TextField';
 
@@ -50,7 +50,7 @@ const NewOfferDialog = ({ onCancel, onSubmit, show, ...props }) => {
     };
 
     return (
-        <DynamicFormDialog
+        <DynamicDialog
             title={title}
             text={text}
             onCancel={onCancel}
@@ -60,7 +60,7 @@ const NewOfferDialog = ({ onCancel, onSubmit, show, ...props }) => {
             show={show}
         >
             {inputFields}
-        </DynamicFormDialog>
+        </DynamicDialog>
     );
 }
 
