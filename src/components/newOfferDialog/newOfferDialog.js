@@ -27,14 +27,14 @@ const NewOfferDialog = ({ onCancel, onSubmit, show, ...props }) => {
 
     const inputFields = textfields.map((entry, index) =>
         <TextField
+            type={entry.type}
             id={entry.id}
             name={entry.id}
             key={index + '-textField'}
             label={entry.label}
-            type={entry.type}
             required={entry.required}
             fullWidth
-            multiline
+            multiline={entry.type !== "email" && entry.type !== "number"}
             margin='dense'
         />
     );

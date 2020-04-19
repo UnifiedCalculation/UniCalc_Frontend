@@ -65,14 +65,14 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
 
     const inputFields = textfields.map((entry, index) =>
         <TextField
+            type={entry.type}
             id={entry.id}
             name={entry.id}
             key={index + '-textField'}
             label={entry.label}
-            type={entry.type}
             required={entry.required}
             fullWidth
-            multiline
+            multiline={entry.type !== "email" && entry.type !== "number"}
             margin='dense'
         />
     );
@@ -155,7 +155,7 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
 }
 
 SelectArticleDialog.propTypes = {
-    articles: PropTypes.array.isRequired, 
+    articles: PropTypes.array.isRequired,
     onCancel: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     show: PropTypes.bool.isRequired
