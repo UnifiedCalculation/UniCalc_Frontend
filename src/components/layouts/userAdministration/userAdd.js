@@ -79,7 +79,7 @@ export default function UserAdd() {
 
             <FormControl style = {{width: '80%'}} className={classes.userDetails}>
               <InputLabel htmlFor="input-with-icon-adornment">Email</InputLabel>
-              <Input className={classes.inputText}
+              <Input
                      id="input-with-icon-adornment"
                      startAdornment={
                        <InputAdornment position="start">
@@ -131,7 +131,6 @@ export default function UserAdd() {
                     label="Handwerker"
                 />
               </FormGroup>
-              <FormHelperText></FormHelperText>
             </FormControl>
 
           </DialogContent>

@@ -7,12 +7,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Switch from '@material-ui/core/Switch';
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
@@ -75,7 +73,7 @@ export default function UserEdit() {
 
             <FormControl style = {{width: '80%'}} className={classes.userDetails}>
               <InputLabel htmlFor="input-with-icon-adornment">Email</InputLabel>
-              <Input className={classes.inputText}
+              <Input
                      id="input-with-icon-adornment"
                      startAdornment={
                        <InputAdornment position="start">
@@ -127,7 +125,6 @@ export default function UserEdit() {
                     label="Handwerker"
                 />
               </FormGroup>
-              <FormHelperText></FormHelperText>
             </FormControl>
 
           </DialogContent>
