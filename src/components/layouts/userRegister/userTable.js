@@ -39,7 +39,7 @@ export default function UserTable() {
             <TableRow>
               <TableCell>Vorname</TableCell>
               <TableCell>Nachname</TableCell>
-              <TableCell>Rollen</TableCell>
+              <TableCell>Einstellungen</TableCell>
               <TableCell>Archivieren</TableCell>
             </TableRow>
           </TableHead>

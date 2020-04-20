@@ -19,8 +19,6 @@ import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import MailIcon from "@material-ui/icons/Mail";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import ListAltIcon from '@material-ui/icons/ListAlt';
-
 
 const useStyles = makeStyles(() => ({
   password: {
@@ -29,10 +27,16 @@ const useStyles = makeStyles(() => ({
   },
   userDetails: {
     marginTop: '20px'
+  },
+  addEmployee: {
+    marginBottom: '20px'
+  },
+  userRoles: {
+    marginTop: '40px'
   }
 }));
 
-export default function UserEdit() {
+export default function UserAdd() {
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -59,8 +63,8 @@ export default function UserEdit() {
 
   return (
       <div>
-        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-          <ListAltIcon/> Anpassen
+        <Button className={classes.addEmployee} variant="outlined" color="primary" onClick={handleClickOpen}>
+          <PersonAddIcon/> Mitarbeiter erstellen
         </Button>
         <Dialog
             fullScreen={fullScreen}
@@ -69,7 +73,7 @@ export default function UserEdit() {
             aria-labelledby="responsive-dialog-title"
         >
           <DialogTitle id="responsive-dialog-title">{"Mitarbeiter erfassen"}</DialogTitle>
-          <DialogContent>
+          <DialogContent className={classes.userDetails}>
             <DialogContentText>
             </DialogContentText>
 
@@ -107,8 +111,8 @@ export default function UserEdit() {
               />
             </FormControl>
 
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Rollen zuweisen</FormLabel>
+            <FormControl className={classes.userRoles} component="fieldset">
+              <FormLabel style = {{marginBottom: '10px'}} component="legend">Rollen zuweisen</FormLabel>
               <FormGroup>
                 <FormControlLabel
                     control={<Switch checked={state.admin} onChange={handleChange} name="admin" />}

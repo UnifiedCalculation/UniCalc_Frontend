@@ -7,50 +7,15 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import UserRegister from "./userRegister";
+import UserAdd from "./userAdd";
 import UserTable from "./userTable";
 
+
 export default function UserOverview() {
-  const [open, setOpen] = React.useState(false);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
       <div>
-        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-          Mitarbeiter registrieren
-        </Button>
-        <Dialog
-            fullScreen={fullScreen}
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="responsive-dialog-title"
-        >
-          <DialogTitle id="responsive-dialog-title">{"Use Google's location service?"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Bitte erfassen Sie die notwendigen Angaben für den neuen Benutzer
-            </DialogContentText>
-            <UserRegister/>
-
-          </DialogContent>
-          <DialogActions>
-            <Button autoFocus onClick={handleClose} color="primary">
-              Abbrechen
-            </Button>
-            <Button onClick={handleClose} color="primary" autoFocus>
-              Bestätigen
-            </Button>
-          </DialogActions>
-        </Dialog>
+        <UserAdd/>
         <UserTable/>
       </div>
   );
