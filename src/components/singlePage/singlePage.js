@@ -8,6 +8,8 @@ import NewProjectDialog from '../newProjectDialog/newProjectDialog';
 import ProjectDisplay from '../projectDisplay/projectDisplay';
 import OfferDisplay from '../offerDisplay/offerDisplay';
 import * as API from '../connectionHandler/connectionHandler';
+import UserRegister from "../layouts/userRegister/userRegister";
+import UserOverview from "../layouts/userRegister/userOverview";
 
 
 const SinglePage = () => {
@@ -102,6 +104,7 @@ const SinglePage = () => {
         </div>
         {projectDisplay}
         {offerDisplay}
+        <UserOverview/>
       <Navigation />
     </>
   );
