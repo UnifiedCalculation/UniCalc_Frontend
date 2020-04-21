@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DynamicDialog from '../dynamicDialog/dynamicDialog';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import TextField from '@material-ui/core/TextField';
 /**
@@ -50,47 +51,36 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
     ];
 
     const customerSelector =
-        <FormControl
-            required
-            className={classes.formControl}
-            fullWidth
-        >
-            <InputLabel id="required-select-autowidth-label">Kunde</InputLabel>
-            <Select
-                native
-                labelId="required-select-autowidth-label"
-                id="customer_id"
-                name="customer_id"
-                fullWidth
-                margin='dense'
-            >
-                {customers ? emptyNameSelection.concat(
-                    customers.map((entry, index) =>
-                        <option
-                            value={entry.id}
-                            key={(index + 1) + '-option'}
-                        >
-                            {entry.user.lastname + ' ' + entry.user.firstname}
-                        </option >
-                    )
-                ) : emptyNameSelection}
-            </Select>
-        </FormControl>
+        <Autocomplete
+            id="combo-box-demo"
+            options={
+                customers ? customers : []
+            }
+            getOptionLabel={(option) => option.lastName + ' ' + option.firstName}
+            renderInput={(params)=> 
+                <TextField
+                    {...params}
+                    id="required-select-field"
+                    label="Kunde"
+                    fullWidth
+                    required />
+            }
+        />
 
     const inputFields = textfields.map((entry, index) => {
-        return <TextField
-            type={entry.type}
-            id={entry.id}
-            name={entry.id}
-            key={index + '-textField'}
-            label={entry.label}
-            required={entry.required}
-            fullWidth
-            multiline={entry.type !== "email" && entry.type !== "number"}
-            margin='dense'
-        />
-    }
-    );
+            return <TextField
+                type={entry.type}
+                id={entry.id}
+                name={entry.id}
+                key={index + '-textField'}
+                label={entry.label}
+                required={entry.required}
+                fullWidth
+                multiline={entry.type !== "email" && entry.type !== "number"}
+                margin='dense'
+            />
+        }
+        );
 
     const prepareProjectData = (event) => {
         event.preventDefault();
