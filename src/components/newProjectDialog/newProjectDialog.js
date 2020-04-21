@@ -52,18 +52,19 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
 
     const customerSelector =
         <Autocomplete
-            id="combo-box-demo"
-            options={
-                customers ? customers : []
-            }
+            id="customer-autocomplete"
+            options={customers}
             getOptionLabel={(option) => option.lastName + ' ' + option.firstName}
             renderInput={(params)=> 
                 <TextField
                     {...params}
-                    id="required-select-field"
+                    id="customer"
                     label="Kunde"
+                    type="textarea"
+                    name="customer"
                     fullWidth
-                    required />
+                    required 
+                    margin='dense'/>
             }
         />
 
@@ -82,23 +83,13 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
         }
         );
 
-    const prepareProjectData = (event) => {
-        event.preventDefault();
-        let jsonObject = {};
-        for (const [key, value] of new FormData(event.target).entries()) {
-            jsonObject[key] = value;
-        }
-        event.target.reset();
-        onSubmit(jsonObject);
-    };
-
     return (
         <DynamicDialog
             title={title}
             text={text}
             onCancel={onCancel}
             cancelButtonText={cancelButtonText}
-            onAccept={prepareProjectData}
+            onAccept={onSubmit}
             acceptButtonText={acceptButtonText}
             show={show}
         >
