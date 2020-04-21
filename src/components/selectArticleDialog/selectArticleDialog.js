@@ -98,7 +98,7 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
         />
     );
 
-    const prepareArticleData = (jsonObject) => {
+    const parseNewArticle = (jsonObject) => {
         console.log(JSON.stringify(jsonObject));
         jsonObject.discount = parseInt(jsonObject.discount);
         jsonObject.amount = parseInt(jsonObject.amount);
@@ -112,7 +112,7 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
             text={text}
             onCancel={onCancel}
             cancelButtonText={cancelButtonText}
-            onAccept={prepareArticleData}
+            onAccept={parseNewArticle}
             acceptButtonText={acceptButtonText}
             show={show}
         >
