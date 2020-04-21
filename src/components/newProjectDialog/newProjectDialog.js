@@ -2,11 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DynamicDialog from '../dynamicDialog/dynamicDialog';
 
-import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import { makeStyles } from '@material-ui/core/styles';
 /**
  * @param {Array} customer array with customers in the form of [{name: 'Albert Einstein',customerId: '1237120'}]
  * @param {Function} onCancel
@@ -52,21 +48,6 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
             required: true
         }
     ];
-
-    const useStyles = makeStyles((theme) => ({
-        formControl: {
-            margin: theme.spacing(0),
-            minWidth: 120,
-        },
-        selectEmpty: {
-            marginTop: theme.spacing(5),
-        },
-    }));
-
-    const classes = useStyles();
-
-    let emptyNameSelection = [];
-    emptyNameSelection.push(<option id="emptyOption" key="0-option"></option>);
 
     const customerSelector =
         <FormControl
