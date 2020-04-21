@@ -39,23 +39,13 @@ const NewEntrySegmentDialog = ({ onCancel, onSubmit, show, ...props }) => {
         />
     );
 
-    const prepareProjectData = (event) => {
-        event.preventDefault();
-        let jsonObject = {};
-        for (const [key, value] of new FormData(event.target).entries()) {
-            jsonObject[key] = value;
-        }
-        event.target.reset();
-        onSubmit(jsonObject);
-    };
-
     return (
         <DynamicFormDialog
             title={title}
             text={text}
             onCancel={onCancel}
             cancelButtonText={cancelButtonText}
-            onAccept={prepareProjectData}
+            onAccept={onSubmit}
             acceptButtonText={acceptButtonText}
             show={show}
         >

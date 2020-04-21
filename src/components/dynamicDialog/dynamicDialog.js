@@ -63,6 +63,23 @@ const DynamicDialog = ({ title, text, onCancel, cancelButtonText, onAccept, acce
         </Button>
         : null;
 
+    const acceptButton = children ?
+        <Button
+            type="submit"
+            form={title + '-inputFormDialog'}
+            color="primary"
+            autoFocus
+        >
+            {acceptButtonText}
+        </Button>
+        :
+        <Button
+            color="primary"
+            autoFocus
+            onClick={onAccept}>
+            {acceptButtonText}
+        </Button>
+
     return (
         <>
             <Dialog
@@ -81,26 +98,11 @@ const DynamicDialog = ({ title, text, onCancel, cancelButtonText, onAccept, acce
                 </DialogContent>
                 <DialogActions>
                     {cancelButton}
-                    <Button type="submit" form={title + '-inputFormDialog'} color="primary" autoFocus>
-                        {acceptButtonText}
-                    </Button>
+                    {acceptButton}
                 </DialogActions>
             </Dialog>
         </>
     );
-}
-
-DynamicDialog.defaultProps = {
-    title: 'defaultTitle',
-    text: 'defaultText',
-    acceptButtonText: 'Accept'
-}
-
-DynamicDialog.propTypes = {
-    customers: PropTypes.array.isRequired,
-    onCancel: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    show: PropTypes.bool.isRequired
 }
 
 export default DynamicDialog;

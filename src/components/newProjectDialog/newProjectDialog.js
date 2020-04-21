@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DynamicDialog from '../dynamicDialog/dynamicDialog';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
-import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import { makeStyles } from '@material-ui/core/styles';
 /**
  * @param {Array} customer array with customers in the form of [{name: 'Albert Einstein',customerId: '1237120'}]
  * @param {Function} onCancel
@@ -24,13 +21,13 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
         {
             id: 'name',
             label: 'Projektname',
-            type: 'text',
+            type: 'textarea',
             required: true
         },
         {
             id: 'address',
             label: 'Adresse',
-            type: 'text',
+            type: 'textarea',
             required: true
         },
         {
@@ -42,84 +39,49 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
         {
             id: 'city',
             label: 'Stadt',
-            type: 'text',
+            type: 'textarea',
             required: true
         },
         {
             id: 'description',
             label: 'Beschreibung',
-            type: 'text',
+            type: 'textarea',
             required: true
         }
     ];
 
-    const useStyles = makeStyles((theme) => ({
-        formControl: {
-            margin: theme.spacing(0),
-            minWidth: 120,
-        },
-        selectEmpty: {
-            marginTop: theme.spacing(5),
-        },
-    }));
-
-    const classes = useStyles();
-
-    let emptyNameSelection = [];
-    emptyNameSelection.push(<option id="emptyOption" key="0-option"></option>);
-
     const customerSelector =
-        <FormControl
-            required
-            className={classes.formControl}
-            fullWidth
-        >
-            <InputLabel id="required-select-autowidth-label">Kunde</InputLabel>
-            <Select
-                native
-                labelId="required-select-autowidth-label"
-                id="customer_id"
-                name="customer_id"
-                fullWidth
-                margin='dense'
-            >
-                {customers ? emptyNameSelection.concat(
-                    customers.map((entry, index) =>
-                        <option
-                            value={entry.id}
-                            key={(index + 1) + '-option'}
-                        >
-                            {entry.user.lastname + ' ' + entry.user.firstname}
-                        </option >
-                    )
-                ) : emptyNameSelection}
-            </Select>
-        </FormControl>
+        <Autocomplete
+            id="customer-autocomplete"
+            options={customers}
+            getOptionLabel={(option) => option.lastName + ' ' + option.firstName}
+            renderInput={(params)=> 
+                <TextField
+                    {...params}
+                    id="customer"
+                    label="Kunde"
+                    type="textarea"
+                    name="customer"
+                    fullWidth
+                    required 
+                    margin='dense'/>
+            }
+        />
 
     const inputFields = textfields.map((entry, index) => {
-        return <TextField
-            type={entry.type}
-            id={entry.id}
-            name={entry.id}
-            key={index + '-textField'}
-            label={entry.label}
-            required={entry.required}
-            fullWidth
-            multiline={entry.type !== "email" && entry.type !== "number"}
-            margin='dense'
-        />
-    }
-    );
-
-    const prepareProjectData = (event) => {
-        event.preventDefault();
-        let jsonObject = {};
-        for (const [key, value] of new FormData(event.target).entries()) {
-            jsonObject[key] = value;
+            return <TextField
+                type={entry.type}
+                id={entry.id}
+                name={entry.id}
+                key={index + '-textField'}
+                label={entry.label}
+                required={entry.required}
+                fullWidth
+                multiline={entry.type !== "email" && entry.type !== "number"}
+                margin='dense'
+            />
         }
-        event.target.reset();
-        onSubmit(jsonObject);
-    };
+        );
 
     return (
         <DynamicDialog
@@ -127,7 +89,7 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
             text={text}
             onCancel={onCancel}
             cancelButtonText={cancelButtonText}
-            onAccept={prepareProjectData}
+            onAccept={onSubmit}
             acceptButtonText={acceptButtonText}
             show={show}
         >

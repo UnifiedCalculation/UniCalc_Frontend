@@ -66,8 +66,8 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
             <Select
                 native
                 labelId="required-select-autowidth-label"
-                id="customer_id"
-                name="customer_id"
+                id="article_id"
+                name="article_id"
                 fullWidth
                 margin='dense'
             >
@@ -98,18 +98,12 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
         />
     );
 
-    const prepareArticleData = (event) => {
-        event.preventDefault();
-        let jsonObject = {};
-        for (const [key, value] of new FormData(event.target).entries()) {
-            jsonObject[key] = value;
-        }
-        let art = articles.filter(article => article.article_id === parseInt(jsonObject.article_id));
-        art[0].discount = parseInt(jsonObject.discount);
-        art[0].amount = parseInt(jsonObject.amount);
-        art[0].description = jsonObject.description;
-        event.target.reset();
-        onSubmit(art[0]);
+    const parseNewArticle = (jsonObject) => {
+        console.log(JSON.stringify(jsonObject));
+        jsonObject.discount = parseInt(jsonObject.discount);
+        jsonObject.amount = parseInt(jsonObject.amount);
+        console.log(JSON.stringify(jsonObject));
+        onSubmit(jsonObject);
     };
 
     return (
@@ -118,7 +112,7 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
             text={text}
             onCancel={onCancel}
             cancelButtonText={cancelButtonText}
-            onAccept={prepareArticleData}
+            onAccept={parseNewArticle}
             acceptButtonText={acceptButtonText}
             show={show}
         >

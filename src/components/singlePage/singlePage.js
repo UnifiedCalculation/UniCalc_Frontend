@@ -94,7 +94,7 @@ const SinglePage = () => {
 
 
   return (
-    <>
+    <div class="mainPage">
       <Header />
       {addNewProjectDialog}
         <div className="flexCards">
@@ -103,7 +103,7 @@ const SinglePage = () => {
         {projectDisplay}
         {offerDisplay}
       <Navigation />
-    </>
+    </div>
   );
 };
 export default SinglePage;
