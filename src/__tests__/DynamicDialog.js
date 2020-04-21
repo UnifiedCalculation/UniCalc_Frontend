@@ -2,6 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import DynamicDialog from '../components/dynamicDialog/dynamicDialog';
 import TextField from '@material-ui/core/TextField';
+import Adapter from 'enzyme-adapter-react-16';
+import Enzyme, { mount } from 'enzyme';
 
 describe('Testing', () => {
 
@@ -105,29 +107,35 @@ describe('Testing', () => {
 
         describe('forms', () => {
 
+            Enzyme.configure({ adapter: new Adapter() });
+
             const textFields = [
                 {
                     id: 'name',
                     label: 'Projektname',
                     type: 'textarea',
+                    value: 'NameForThisField',
                     required: true
                 },
                 {
                     id: 'address',
                     label: 'Adresse',
                     type: 'textarea',
+                    value: 'adressThatTotallyExistsLikeThis q23-123a',
                     required: true
                 },
                 {
                     id: 'city',
                     label: 'Stadt',
                     type: 'textarea',
+                    value: 'bestCityEver',
                     required: true
                 },
                 {
                     id: 'description',
                     label: 'Beschreibung',
                     type: 'textarea',
+                    value: 'This is a long descirption that works pretty well. It might even support weird stuff like äöü $¨0 and 😎',
                     required: true
                 }
             ];
@@ -148,8 +156,7 @@ describe('Testing', () => {
 
 
             it('renders the given input fields with the correct settings', () => {
-
-                const { getByRole, getAllByRole } = render(
+                const { getAllByRole } = render(
                     <DynamicDialog
                         show={true}
                     >
@@ -158,14 +165,43 @@ describe('Testing', () => {
                 );
                 const renderedFields = getAllByRole("textbox");
                 expect(renderedFields.length).toBe(textFields.length);
-                
+
                 renderedFields.map((entry, index) => {
                     expect(entry.id).toBe(textFields[index].id)
                     expect(entry.type).toBe(textFields[index].type)
                     expect(entry.required).toBe(textFields[index].required)
                 });
-
             });
+
+            it('return the correct JSON of the form', () => {
+                const onSubmitSpy = jest.fn();
+
+                const component = mount(
+                    <DynamicDialog
+                        show={true}
+                        onAccept={onSubmitSpy}
+                    >
+                        {inputFields}
+                    </DynamicDialog>
+                );
+
+                //Attention, you need to skip 1 per textarea because Material-ui renders 2 textareas, but one is hidden!
+                component.find('textarea').at(0).instance().value = textFields[0].value; // 
+                component.find('textarea').at(2).instance().value = textFields[1].value; //
+                component.find('textarea').at(4).instance().value = textFields[2].value; //
+                component.find('textarea').at(6).instance().value = textFields[3].value; //
+                component.find('form').simulate('submit');
+
+                expect(onSubmitSpy).toHaveBeenCalled();
+                expect(onSubmitSpy.mock.calls[0][0]).toStrictEqual(
+                    {
+                        name: textFields[0].value,
+                        address: textFields[1].value,
+                        city: textFields[2].value,
+                        description: textFields[3].value
+                    }
+                );
+            })
         });
     });
 
