@@ -24,13 +24,13 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
         {
             id: 'name',
             label: 'Projektname',
-            type: 'text',
+            type: 'textarea',
             required: true
         },
         {
             id: 'address',
             label: 'Adresse',
-            type: 'text',
+            type: 'textarea',
             required: true
         },
         {
@@ -42,13 +42,13 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
         {
             id: 'city',
             label: 'Stadt',
-            type: 'text',
+            type: 'textarea',
             required: true
         },
         {
             id: 'description',
             label: 'Beschreibung',
-            type: 'text',
+            type: 'textarea',
             required: true
         }
     ];
