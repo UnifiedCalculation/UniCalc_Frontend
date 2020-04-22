@@ -30,7 +30,7 @@ export default function UserOptions() {
         <div className={classes.userDetails}>
           <FormControl style = {{width: '80%'}} className={classes.margin} disabled>
             <InputLabel htmlFor="input-with-icon-adornment">Email</InputLabel>
-            <Input className={classes.inputText}
+            <Input
                 defaultValue={'standard@mailadress.se'}
                 id="input-with-icon-adornment"
                 startAdornment={
