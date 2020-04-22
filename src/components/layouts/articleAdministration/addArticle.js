@@ -1,26 +1,19 @@
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import DescriptionIcon from '@material-ui/icons/Description';
-import ClassIcon from '@material-ui/icons/Class';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-
-
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import MailIcon from "@material-ui/icons/Mail";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import DescriptionIcon from '@material-ui/icons/Description';
+import ClassIcon from '@material-ui/icons/Class';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 const useStyles = makeStyles(() => ({
   password: {
@@ -80,7 +73,53 @@ export default function AddArticle() {
           <DialogTitle id="responsive-dialog-title">{"Artikel erstellen"}</DialogTitle>
           <DialogContent>
 
+            <FormControl style = {{width: '80%'}} className={classes.userDetails}>
+              <InputLabel htmlFor="input-with-icon-adornment">Name</InputLabel>
+              <Input
+                  id="input-with-icon-adornment"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <AssignmentIcon />
+                    </InputAdornment>
+                  }
+              />
+            </FormControl>
 
+            <FormControl style = {{width: '80%'}} className={classes.userDetails}>
+              <InputLabel htmlFor="input-with-icon-adornment">Beschreibung</InputLabel>
+              <Input
+                  id="input-with-icon-adornment"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <DescriptionIcon />
+                    </InputAdornment>
+                  }
+              />
+            </FormControl>
+
+            <FormControl style = {{width: '80%'}} className={classes.userDetails}>
+              <InputLabel htmlFor="input-with-icon-adornment">Preis</InputLabel>
+              <Input
+                  id="input-with-icon-adornment"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <LocalOfferIcon />
+                    </InputAdornment>
+                  }
+              />
+            </FormControl>
+
+            <FormControl style = {{width: '80%'}} className={classes.userDetails}>
+              <InputLabel htmlFor="input-with-icon-adornment">Einheit</InputLabel>
+              <Input
+                  id="input-with-icon-adornment"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <ClassIcon />
+                    </InputAdornment>
+                  }
+              />
+            </FormControl>
 
           </DialogContent>
           <DialogActions>
