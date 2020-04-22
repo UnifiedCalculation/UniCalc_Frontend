@@ -8,6 +8,8 @@ import NewProjectDialog from '../newProjectDialog/newProjectDialog';
 import ProjectDisplay from '../projectDisplay/projectDisplay';
 import OfferDisplay from '../offerDisplay/offerDisplay';
 import * as API from '../connectionHandler/connectionHandler';
+import UserOverview from "../layouts/userAdministration/userOverview";
+
 
 
 const SinglePage = () => {
@@ -45,12 +47,15 @@ const SinglePage = () => {
   const submitNewProject = (newProjectData) => {
     setNewProjectDialogViewState(false);
     console.log(JSON.stringify(newProjectData));
-    API.submitNewProject(newProjectData, API.getUserProjects(setProjects));
+
+    API.submitNewProject(newProjectData, function(){ return API.getUserProjects(setProjects); });
+
     ;
   }
 
   const onShowOffer = (offerId) => {
-    API.getOfferData(projectData.project_id, offerId, setOfferData);
+    API.getOfferData(projectData.id, offerId, setOfferData);
+
   }
 
   const addNewProjectDialog =
@@ -78,8 +83,8 @@ const SinglePage = () => {
       projects.map((entry, index) =>
         <ProjectCard
           key={(index + 1) + "-projectCard"}
-          onClick={() => openProject(entry.project_id)}
-          projectName={entry.project_name}
+          onClick={() => openProject(entry.id)}
+          projectName={entry.name}
           description={entry.description} />
       )
     );
@@ -89,12 +94,12 @@ const SinglePage = () => {
     : null;
 
   const offerDisplay = offerData ? 
-  <OfferDisplay offer={offerData} projectId={projectData.project_id} onClose={() => setOfferData(null)} />
+  <OfferDisplay offer={offerData} projectId={projectData.id} onClose={() => setOfferData(null)} />
   : null;
 
 
   return (
-    <>
+    <div class="mainPage">
       <Header />
       {addNewProjectDialog}
         <div className="flexCards">
@@ -102,8 +107,9 @@ const SinglePage = () => {
         </div>
         {projectDisplay}
         {offerDisplay}
+        <UserOverview/>
       <Navigation />
-    </>
+    </div>
   );
 };
 export default SinglePage;
