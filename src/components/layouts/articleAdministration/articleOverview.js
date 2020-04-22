@@ -1,6 +1,6 @@
 import React from 'react';
-import UserAdd from "./userAdd";
-import UserTable from "./userTable";
+import AddArticle from "./addArticle";
+import ArticleTable from "./articleTable";
 
 
 export default function ArticleOverview() {
