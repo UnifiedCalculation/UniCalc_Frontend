@@ -102,6 +102,7 @@ const SinglePage = () => {
         </div>
         {projectDisplay}
         {offerDisplay}
+        <ArticleOverview/>
       <Navigation />
     </>
   );
