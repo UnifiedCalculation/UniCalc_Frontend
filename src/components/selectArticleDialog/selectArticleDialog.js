@@ -16,6 +16,7 @@ import DynamicDialog from '../dynamicDialog/dynamicDialog';
  */
 const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) => {
 
+
     const cancelButtonText = 'Abbrechen';
     const acceptButtonText = 'Bestätigen';
     const title = 'Artikel hinzufügen';

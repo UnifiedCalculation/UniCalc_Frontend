@@ -11,6 +11,7 @@ import * as API from '../connectionHandler/connectionHandler';
 import UserOverview from "../layouts/userAdministration/userOverview";
 
 
+
 const SinglePage = () => {
 
   const [projects, setProjects] = useState([]);
@@ -46,12 +47,15 @@ const SinglePage = () => {
   const submitNewProject = (newProjectData) => {
     setNewProjectDialogViewState(false);
     console.log(JSON.stringify(newProjectData));
+
     API.submitNewProject(newProjectData, function(){ return API.getUserProjects(setProjects); });
+
     ;
   }
 
   const onShowOffer = (offerId) => {
     API.getOfferData(projectData.id, offerId, setOfferData);
+
   }
 
   const addNewProjectDialog =
