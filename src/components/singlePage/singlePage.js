@@ -11,9 +11,11 @@ import * as API from '../connectionHandler/connectionHandler';
 import UserOverview from "../layouts/userAdministration/userOverview";
 
 
+import SnackbarOverlay from '../snackbar/snackbar';
 
 const SinglePage = () => {
 
+  const [errorMessage, setErrorMessage] = useState("");
   const [projects, setProjects] = useState([]);
   const [showProject, setShowProjectViewState] = useState(false);
   const [offerData, setOfferData] = useState(null);
