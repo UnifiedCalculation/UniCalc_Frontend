@@ -25,11 +25,15 @@ const SinglePage = () => {
 
   useEffect(() => {
     API.getUserProjects(setProjects);
+    API.getUserProjects(setProjects, setErrorMessage);
   }, []);
 
   const openProject = (projectId) => {
     API.getProjectData(projectId, openProjetDetailsWithData);
   };
+  const emptyErrorMessage = () => {
+    setErrorMessage("");
+  }
 
   const openProjetDetailsWithData = (projectData) => {
     setProjectData(projectData);
@@ -38,6 +42,7 @@ const SinglePage = () => {
 
   const openNewProjectDialog = () => {
     API.getCustomers(setCustomerData);
+    API.getCustomers(setCustomerData, setErrorMessage);
     setNewProjectDialogViewState(true);
   }
 
@@ -94,6 +99,13 @@ const SinglePage = () => {
   const projectDisplay = projectData && !offerData ?
     <ProjectDisplay projectData={projectData} onShowOffer={onShowOffer} />
     : null;
+  const snackbar =
+    <SnackbarOverlay
+      show={errorMessage !== ""}
+      text={errorMessage}
+      severity="error"
+      onClose={emptyErrorMessage}
+    />
 
   const offerDisplay = offerData ? 
   <OfferDisplay offer={offerData} projectId={projectData.id} onClose={() => setOfferData(null)} />
@@ -111,6 +123,7 @@ const SinglePage = () => {
         {offerDisplay}
         <UserOverview/>
       <Navigation />
+      {snackbar}
     </div>
   );
 };
