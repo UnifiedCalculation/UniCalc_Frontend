@@ -1,21 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import DynamicDialog from '../dynamicDialog/dynamicDialog';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
-import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import { makeStyles } from '@material-ui/core/styles';
-
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
-
 /**
  * @param {Array} customer array with customers in the form of [{name: 'Albert Einstein',customerId: '1237120'}]
  * @param {Function} onCancel
@@ -24,8 +12,8 @@ import { useTheme } from '@material-ui/core/styles';
  */
 const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => {
 
-    const cancelText = 'Abbrechen';
-    const acceptText = 'Bestätigen';
+    const cancelButtonText = 'Abbrechen';
+    const acceptButtonText = 'Bestätigen';
     const title = 'Neues Projekt erstellen';
     const text = 'Tragen Sie bitte alle Felder ein, um ein neues Projekt zu erstellen.';
 
@@ -33,13 +21,13 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
         {
             id: 'name',
             label: 'Projektname',
-            type: 'text',
+            type: 'textarea',
             required: true
         },
         {
             id: 'address',
             label: 'Adresse',
-            type: 'text',
+            type: 'textarea',
             required: true
         },
         {
@@ -51,119 +39,68 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
         {
             id: 'city',
             label: 'Stadt',
-            type: 'text',
+            type: 'textarea',
             required: true
         },
         {
             id: 'description',
             label: 'Beschreibung',
-            type: 'text',
+            type: 'textarea',
             required: true
         }
     ];
 
-    let emptyNameSelection = [];
-    emptyNameSelection.push(<option id="emptyOption" key="0-option"></option>);
-    const customerSelector = customers ? emptyNameSelection.concat(
-        customers.map((entry, index) =>
-            <option
-                value={entry.id}
-                key={(index + 1) + '-option'}
-            >
-                {entry.user.lastname + ' ' + entry.user.firstname}
-            </option >
-        )
-    ) : emptyNameSelection;
-
-    const inputFields = textfields.map((entry, index) =>
-        <TextField
-            id={entry.id}
-            name={entry.id}
-            key={index + '-textField'}
-            label={entry.label}
-            type={entry.type}
-            required={entry.required}
-            fullWidth
-            multiline
-            margin='dense'
+    const customerSelector =
+        <Autocomplete
+            id="customer-autocomplete"
+            options={customers}
+            getOptionLabel={(option) => option.lastName + ' ' + option.firstName}
+            renderInput={(params)=> 
+                <TextField
+                    {...params}
+                    id="customer"
+                    label="Kunde"
+                    type="textarea"
+                    name="customer"
+                    fullWidth
+                    required 
+                    margin='dense'/>
+            }
         />
-    );
 
-    const useStyles = makeStyles((theme) => ({
-        formControl: {
-            margin: theme.spacing(0),
-            minWidth: 120,
-        },
-        selectEmpty: {
-            marginTop: theme.spacing(5),
-        },
-    }));
-
-    const classes = useStyles();
-    const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-
-
-    const prepareProjectData = (event) => {
-        event.preventDefault();
-        let jsonObject = {};
-        for (const [key, value] of new FormData(event.target).entries()) {
-            jsonObject[key] = value;
+    const inputFields = textfields.map((entry, index) => {
+            return <TextField
+                type={entry.type}
+                id={entry.id}
+                name={entry.id}
+                key={index + '-textField'}
+                label={entry.label}
+                required={entry.required}
+                fullWidth
+                multiline={entry.type !== "email" && entry.type !== "number"}
+                margin='dense'
+            />
         }
-        event.target.reset();
-        onSubmit(jsonObject);
-    };
+        );
 
     return (
-        <>
-            <Dialog
-                open={show}
-                onClose={onCancel}
-                aria-labelledby="new-project-dialog-title"
-                aria-describedby="new-project-dialog-description"
-                fullScreen={fullScreen}
-            >
-                <DialogTitle id="new-project-dialog-title">{title}</DialogTitle>
-                <DialogContent dividers={true}>
-                    <DialogContentText id="new-project-dialog-description">
-                        {text}
-                    </DialogContentText>
-                    <form id='newProjectForm' onSubmit={prepareProjectData}>
-                        <FormControl
-                            required
-                            className={classes.formControl}
-                            fullWidth
-                        >
-                            <InputLabel id="required-select-autowidth-label">Kunde</InputLabel>
-                            <Select
-                                native
-                                labelId="required-select-autowidth-label"
-                                id="customer_id"
-                                name="customer_id"
-                                fullWidth
-                                margin='dense'
-                            >
-                                {customerSelector}
-                            </Select>
-                        </FormControl>
-                        {inputFields}
-                    </form>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={onCancel} color="primary">
-                        {cancelText}
-                    </Button>
-                    <Button type="submit" form='newProjectForm' color="primary" autoFocus>
-                        {acceptText}
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        </>
+        <DynamicDialog
+            title={title}
+            text={text}
+            onCancel={onCancel}
+            cancelButtonText={cancelButtonText}
+            onAccept={onSubmit}
+            acceptButtonText={acceptButtonText}
+            show={show}
+        >
+            {customerSelector}
+            {inputFields}
+        </DynamicDialog>
     );
 }
 
 NewProjectDialog.propTypes = {
-    customers: PropTypes.array.isRequired, 
+    customers: PropTypes.array.isRequired,
     onCancel: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     show: PropTypes.bool.isRequired

@@ -1,0 +1,18 @@
+.LoginForm {
+    text-align: center;
+    background-color: lightgray;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+.cardStyle {
+    display: flex;
+    align-self: auto;
+    flex-wrap: wrap;
+    margin: 25px;
+    justify-content: center;
+}
+  
