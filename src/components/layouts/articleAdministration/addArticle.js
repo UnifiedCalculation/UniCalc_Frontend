@@ -1,136 +1,89 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import {makeStyles, useTheme} from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from "@material-ui/core/InputLabel";
-import Input from "@material-ui/core/Input";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import DescriptionIcon from '@material-ui/icons/Description';
-import ClassIcon from '@material-ui/icons/Class';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import DynamicDialog from "../../dynamicDialog/dynamicDialog";
+import PropTypes from "prop-types";
 
-const useStyles = makeStyles(() => ({
-  password: {
-    marginTop: '10px',
-    marginBottom: '10px'
-  },
-  userDetails: {
-    marginTop: '20px'
-  },
-  addArticle: {
-    marginBottom: '20px'
-  },
-  userRoles: {
-    marginTop: '40px'
-  },
-  artIcon: {
-    marginRight: '10px'
-  }
-}));
+const AddArticleDialog = ({ customers, onCancel, onSubmit, show, ...props }) => {
 
-export default function AddArticle() {
-  const [open, setOpen] = React.useState(false);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const classes = useStyles();
+  const cancelButtonText = 'Abbrechen';
+  const acceptButtonText = 'Bestätigen';
+  const title = 'Neuen Artikel erstellen';
+  const text = 'Füllen Sie alle Felder ab um einen neuen Artikel zu erstellen.';
 
-  const [state, setState] = React.useState({
-    name: false,
-    price: false,
-    description: false,
-    unit: false,
-  });
+  const textfields = [
+    {
+      id: 'articleNumber',
+      label: 'Artikelnummer',
+      type: 'textarea',
+      required: true
+    },
+    {
+      id: 'npk',
+      label: 'NPK',
+      type: 'number',
+      required: true
+    },
+    {
+      id: 'articleName',
+      label: 'Artikelbezeichnung',
+      type: 'textarea',
+      required: true
+    },
+    {
+      id: 'price',
+      label: 'Preis',
+      type: 'number',
+      required: true
+    },
+    {
+      id: 'unit',
+      label: 'Einheit',
+      type: 'textarea',
+      required: true
+    },
+    {
+      id: 'description',
+      label: 'Beschreibung',
+      type: 'textarea',
+      required: true
+    }
+  ];
 
-  const handleChange = (event) => {
-    setState({...state, [event.target.name]: event.target.checked});
-  };
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const inputFields = textfields.map((entry, index) => {
+        return <TextField
+            type={entry.type}
+            id={entry.id}
+            name={entry.id}
+            key={index + '-textField'}
+            label={entry.label}
+            required={entry.required}
+            fullWidth
+            multiline={entry.type !== "email" && entry.type !== "number"}
+            margin='dense'
+        />
+      }
+  );
 
   return (
-      <div>
-        <Button className={classes.addArticle} variant="outlined" color="primary" onClick={handleClickOpen}>
-          <AssignmentIcon className={classes.artIcon}/> Artikel erstellen
-        </Button>
-        <Dialog
-            fullScreen={fullScreen}
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="responsive-dialog-title"
-        >
-          <DialogTitle id="responsive-dialog-title">{"Artikel erstellen"}</DialogTitle>
-          <DialogContent>
-
-            <FormControl style = {{width: '80%'}} className={classes.userDetails}>
-              <InputLabel htmlFor="input-with-icon-adornment">Name</InputLabel>
-              <Input
-                  id="input-with-icon-adornment"
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <AssignmentIcon />
-                    </InputAdornment>
-                  }
-              />
-            </FormControl>
-
-            <FormControl style = {{width: '80%'}} className={classes.userDetails}>
-              <InputLabel htmlFor="input-with-icon-adornment">Beschreibung</InputLabel>
-              <Input
-                  id="input-with-icon-adornment"
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <DescriptionIcon />
-                    </InputAdornment>
-                  }
-              />
-            </FormControl>
-
-            <FormControl style = {{width: '80%'}} className={classes.userDetails}>
-              <InputLabel htmlFor="input-with-icon-adornment">Preis</InputLabel>
-              <Input
-                  id="input-with-icon-adornment"
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <LocalOfferIcon />
-                    </InputAdornment>
-                  }
-              />
-            </FormControl>
-
-            <FormControl style = {{width: '80%'}} className={classes.userDetails}>
-              <InputLabel htmlFor="input-with-icon-adornment">Einheit</InputLabel>
-              <Input
-                  id="input-with-icon-adornment"
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <ClassIcon />
-                    </InputAdornment>
-                  }
-              />
-            </FormControl>
-
-          </DialogContent>
-          <DialogActions>
-            <Button autoFocus onClick={handleClose} color="primary">
-              Abbrechen
-            </Button>
-            <Button onClick={handleClose} color="primary" autoFocus>
-              Annehmen
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+      <DynamicDialog
+          title={title}
+          text={text}
+          onCancel={onCancel}
+          cancelButtonText={cancelButtonText}
+          onAccept={onSubmit}
+          acceptButtonText={acceptButtonText}
+          show={show}
+      >
+        {customerSelector}
+        {inputFields}
+      </DynamicDialog>
   );
 }
+
+AddArticleDialog.propTypes = {
+  customers: PropTypes.array.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired
+}
+
+export default AddArticleDialog;
