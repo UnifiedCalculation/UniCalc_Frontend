@@ -123,7 +123,9 @@ const SinglePage = () => {
         {offerDisplay}
         <UserOverview/>
       <Navigation />
+      <div className="content">
       {snackbar}
+      </div>
     </div>
   );
 };
