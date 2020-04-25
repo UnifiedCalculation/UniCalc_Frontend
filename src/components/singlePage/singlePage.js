@@ -41,7 +41,6 @@ const SinglePage = () => {
   };
 
   const openNewProjectDialog = () => {
-    API.getCustomers(setCustomerData);
     API.getCustomers(setCustomerData, setErrorMessage);
     setNewProjectDialogViewState(true);
   }
