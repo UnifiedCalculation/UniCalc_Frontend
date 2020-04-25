@@ -24,12 +24,12 @@ const SinglePage = () => {
   const [showNewProjectDialog, setNewProjectDialogViewState] = useState(false);
 
   useEffect(() => {
-    API.getUserProjects(setProjects);
+    API.getUserProjects(setProjects, setErrorMessage);
     API.getUserProjects(setProjects, setErrorMessage);
   }, []);
 
   const openProject = (projectId) => {
-    API.getProjectData(projectId, openProjetDetailsWithData);
+    API.getProjectData(projectId, openProjetDetailsWithData, setErrorMessage);
   };
   const emptyErrorMessage = () => {
     setErrorMessage("");
@@ -54,13 +54,13 @@ const SinglePage = () => {
     setNewProjectDialogViewState(false);
     console.log(JSON.stringify(newProjectData));
 
-    API.submitNewProject(newProjectData, function(){ return API.getUserProjects(setProjects); });
+    API.submitNewProject(newProjectData, function(){ return API.getUserProjects(setProjects, setErrorMessage); }, setErrorMessage);
 
     ;
   }
 
   const onShowOffer = (offerId) => {
-    API.getOfferData(projectData.id, offerId, setOfferData);
+    API.getOfferData(projectData.id, offerId, setOfferData, setErrorMessage);
 
   }
 
