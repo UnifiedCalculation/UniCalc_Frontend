@@ -18,8 +18,6 @@ function handleErrors(error, callback){
     }
 }
 
-export async function loginUser(username, password, callback) {
-    axios.post('/user/login', { username, password })
         .then(res => {
             console.log(res);
             console.log(res.data);
