@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import DynamicDialog from '../dynamicDialog/dynamicDialog';
 
@@ -40,32 +41,22 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
     ];
 
     const articlesSelection =
-        <FormControl
-            required
-            className={classes.formControl}
-            fullWidth
-        >
-            <InputLabel id="required-select-autowidth-label">Artikel</InputLabel>
-            <Select
-                native
-                labelId="required-select-autowidth-label"
-                id="article_id"
-                name="article_id"
-                fullWidth
-                margin='dense'
-            >
-                {articles ? emptyArticlesList.concat(
-                    articles.map((entry, index) =>
-                        <option
-                            value={entry.article_id}
-                            key={(index + 1) + '-option'}
-                        >
-                            {entry.name}
-                        </option >
-                    )
-                ) : emptyArticlesList}
-            </Select>
-        </FormControl>
+        <Autocomplete
+            id="customer-autocomplete"
+            options={articles}
+            getOptionLabel={(article) => article.name}
+            renderInput={(params)=> 
+                <TextField
+                    {...params}
+                    id="article_id"
+                    label="Artikel"
+                    type="textarea"
+                    name="article_id"
+                    fullWidth
+                    required 
+                    margin='dense'/>
+            }
+        />
 
     const inputFields = textfields.map((entry, index) =>
         <TextField
