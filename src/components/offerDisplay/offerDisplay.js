@@ -17,11 +17,10 @@ import BackButton from '../layouts/backButton/backButton';
 
 const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
 
+    const [offer, setOffer] = useState(offerData);
+    const [entries, setEntries] = useState(null);
 
-    const [entries, setEntries] = useState(offer.entries);
-    const [articles, setArticles] = useState([]);
-    const [showNewSegmentDialog, setNewEntrySegmentDialogViewState] = useState(false);
-    const [showNewArticleDialog, setNewArticleDialogViewState] = useState(0);
+    const [newEntryDialog, setNewEntryDialogViewState] = useState(false);
 
     useEffect(() => {
         API.getArticles(setArticles);
