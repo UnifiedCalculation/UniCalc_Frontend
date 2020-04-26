@@ -93,23 +93,36 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
 
     const classes = useStyles();
 
-
-    const entryPanel = entries.map((entry, index) =>
-        <ExpansionPanel key={index + "entries-list"}>
+    const header = offer ?
+        <ExpansionPanel expanded={true}>
             <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel2a-content"
-                id="panel2a-header"
+                aria-controls="panel1a-content"
+                id="panel1a-header"
             >
-                <Typography className={classes.heading}>{entry.name}</Typography>
+                <Typography className={classes.offerTitle} >{offer.name}</Typography>
             </ExpansionPanelSummary>
-            <Button onClick={() => openNewArticleDialog(index+1)}>Neuen Artikel hinzufügen</Button>
+            <div className={classes.buttonsAlign}>
+                <Button
+                    onClick={() => setNewEntryDialogViewState(true)}
+                >
+                    Neuen Segment hinzufügen
+                </Button>
+                <Button
+                    disabled={offer.id ? false : true}
+                    onClick={loadOfferAsPdf}
+                >
+                    Offerte als PDF laden
+                </Button>
+                <Button
+                    disabled={offer.id ? false : true}
+                    onClick={turnOfferIntoContract}
+                >
+                    Offerte zu Auftrag umwandeln
+                </Button>
+            </div>
             <ExpansionPanelDetails>
-                    {entry.articles.length > 0 ? <ArticleTable articles={entry.articles} /> : null}
             </ExpansionPanelDetails>
         </ExpansionPanel>
-    );
-
 
     return (
         <>
@@ -144,6 +157,7 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
             <div className='flexCards'>
             </div>
         </>
+            {header}
     );
 }
 
