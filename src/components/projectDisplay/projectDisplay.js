@@ -50,17 +50,10 @@ const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
 
     const addNewOffer = (offer) => {
         setNewOfferDialogViewState(false);
-        setOfferData([
-            ...offers,
-            {
-                name: offer.offername,
-                updated_at: new Date()
-                .toLocaleString("de-DE", dateOptions)
-                .replace(/(.*)\D\d+/, "$1")
-            }
-        ]);
-        API.postNewOfferToProject(projectData.id, offer, function(){ 
-            API.getOffersFromProject(projectData.id, setOfferData); });
+        offer.payment_target += ' Tage';
+        offer.updated_at = new Date();
+        offer.projectId = projectData.id;
+        API.saveOfferToProject(projectData.id, offer, onError, getOffersFromProject);
     }
 
     const openNewOfferDialog = () => {
