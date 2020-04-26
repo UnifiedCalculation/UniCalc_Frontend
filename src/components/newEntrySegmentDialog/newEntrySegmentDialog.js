@@ -54,12 +54,11 @@ const NewEntrySegmentDialog = ({ onCancel, onSubmit, show, segmentName, discount
             margin='dense'
         />
     );
-
+  
     const parseNewEntry = (entry) => {
         entry.discount = Number(entry.discount);
         onSubmit(entry);
     };
-
     return (
         <DynamicFormDialog
             title={title}

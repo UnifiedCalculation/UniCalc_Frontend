@@ -34,6 +34,7 @@ export async function getUserProjects(onError, callback) {
         .catch(error => handleErrors(error, onError));
 }
 
+
 export async function updateEntryData(projectId, offerId, entryId, entry, onError, callback) {
     axios.put('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId, entry)
         .then(res => {
@@ -143,8 +144,8 @@ export async function getOfferAsPDF(projectId, offer, onError, callback) {
     }
 }
 
-export async function getArticles(onError, callback) {
 
+export async function getArticles(onError, callback) {
     axios.get('articles')
         .then(res => {
             if (callback) {
