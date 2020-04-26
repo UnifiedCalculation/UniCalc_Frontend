@@ -147,39 +147,13 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
         />
 
     return (
-        <>
-            <NewEntrySegmentDialog
-                show={showNewSegmentDialog}
-                onCancel={() => setNewEntrySegmentDialogViewState(false)}
-                onSubmit={addEntry}
-            />
-            <SelectArticleDialog 
-                show={showNewArticleDialog != 0}
-                articles={articles}
-                onCancel={() => setNewArticleDialogViewState(0)}
-                onSubmit={addArticle}
-            />
-            <div className={classes.root}>
-                <ExpansionPanel expanded={true}>
-                    <ExpansionPanelSummary
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-
-                    >
-                        <Typography gutterBottom variant="h5" component="h2">{offer.name}</Typography>
-                    </ExpansionPanelSummary>
-                    <Button onClick={() => setNewEntrySegmentDialogViewState(true)}>Neuen Segment hinzufügen</Button>
-                    <Button onClick={saveOffer}>Offerte speichern</Button>
-                    <Button onClick={getOfferAsPDF}>Offerte als PDF laden</Button>
-                    <ExpansionPanelDetails>
-                    </ExpansionPanelDetails>
-                </ExpansionPanel>
-                {entryPanel}
-            </div>
-            <div className='flexCards'>
-            </div>
-        </>
+        <div className={classes.root}>
+            <BackButton onClick={onClose}/>
+            {newSegmentDialog}
             {header}
+            {segments}
+            {loading}
+        </div>
     );
 }
 
