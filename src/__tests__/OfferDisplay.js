@@ -33,7 +33,8 @@ describe('Testing', () => {
 
     const emptyOffer = {
         name: "emptyOffer",
-        entries: []
+        entries: [],
+        id: 123456,
     };
 
     const offer = {
@@ -68,15 +69,13 @@ describe('Testing', () => {
     describe('buttons', () => {
 
         it('renders the correct buttons in an empty offer', async () => {
+            console.log(emptyOffer);
             const { getByTestId, queryByText, getByText } = render(
-                <OfferDisplay offer={emptyOffer} />
+                <OfferDisplay offerData={emptyOffer} onError={console.log}/>
             );
 
-            await waitForElement(() => getByTestId('offerDisplay-container'));
+            await waitForElement(() => getByTestId('offerDisplay-header'));
 
-
-            expect(queryByText("Neuen Artikel hinzufügen")).toBeNull();
-            expect(getByText("Offerte speichern")).toBeInTheDocument();
             expect(getByText("Offerte als PDF laden")).toBeInTheDocument();
             expect(getByText("Neuen Segment hinzufügen")).toBeInTheDocument();
 
@@ -84,13 +83,11 @@ describe('Testing', () => {
 
         it('renders the correct buttons in an existing offer', async () => {
             const { getByTestId, getByText } = render(
-                <OfferDisplay offer={offer} />
+                <OfferDisplay offerData={offer} onError={console.log}/>
             );
 
-            await waitForElement(() => getByTestId('offerDisplay-container'));
+            await waitForElement(() => getByTestId('offerDisplay-header'));
 
-            expect(getByText("Neuen Artikel hinzufügen")).toBeInTheDocument();
-            expect(getByText("Offerte speichern")).toBeInTheDocument();
             expect(getByText("Offerte als PDF laden")).toBeInTheDocument();
             expect(getByText("Neuen Segment hinzufügen")).toBeInTheDocument();
 
@@ -102,20 +99,6 @@ describe('Testing', () => {
 
         const projectId = 123456;
         const postUrl = "projects/" + projectId + "/offers";
-
-        it('should start a post request to save an offer', async () => {
-
-            const { getByTestId, getByText } = render(
-                <OfferDisplay projectId={projectId} offer={emptyOffer} />
-            );
-
-            await waitForElement(() => getByTestId('offerDisplay-container'))
-
-
-            fireEvent.click(getByText('Offerte speichern'));
-
-            expect(axios.post).toHaveBeenCalledWith(postUrl, emptyOffer);
-        });
 
         describe('new segments', () => {
 
@@ -130,16 +113,14 @@ describe('Testing', () => {
                 });
 
                 const { getByTestId, getByText } = render(
-                    <OfferDisplay projectId={projectId} offer={emptyOffer} />
+                    <OfferDisplay projectId={projectId} offerData={emptyOffer} onError={console.log}/>
                 );
     
-                await waitForElement(() => getByTestId('offerDisplay-container'))
+                await waitForElement(() => getByTestId('offerDisplay-header'))
     
                 fireEvent.click(getByText('Neuen Segment hinzufügen'));
                 fireEvent.change(getByTestId('newSegment-testing-name'), segmentName);
                 fireEvent.click(getByText('Annehmen'));
-
-                fireEvent.click(getByText('Offerte speichern'));
                 expect(axios.post).toHaveBeenCalledWith(postUrl, emptyOfferWithNewSegment);
 
             });
@@ -168,13 +149,13 @@ describe('Testing', () => {
                 emptyOfferWithNewSegment.entries = newSegments;
 
                 const { getByTestId, getByText } = render(
-                    <OfferDisplay projectId={projectId} onClose={(offer) => emptyOffer = offer} offer={emptyOffer} />
+                    <OfferDisplay projectId={projectId} onClose={(offer) => emptyOffer = offer} offerData={emptyOffer} onError={console.log}/>
                 );
     
-                await waitForElement(() => getByTestId('offerDisplay-container'))
+                await waitForElement(() => getByTestId('offerDisplay-header'))
     
                 newSegments.map(entry => {
-                    fireEvent.click(getByText('Neuen Segment hinzufügen'));
+                    fireEvent.click(getByTestId('offerDisplay-button-newSegment'));
                     fireEvent.change(getByTestId('newSegment-testing-name'), entry.name);
                     if(entry.discount) fireEvent.change(getByTestId('newSegment-testing-discount'), entry.discount);
                     fireEvent.click(getByText('Annehmen'));

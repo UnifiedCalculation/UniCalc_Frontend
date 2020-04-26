@@ -94,7 +94,7 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
     const classes = useStyles();
 
     const header = offer ?
-        <ExpansionPanel expanded={true}>
+        <ExpansionPanel expanded={true} data-testid="offerDisplay-header">
             <ExpansionPanelSummary
                 aria-controls="panel1a-content"
                 id="panel1a-header"
@@ -104,6 +104,7 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
             <div className={classes.buttonsAlign}>
                 <Button
                     onClick={() => setNewEntryDialogViewState(true)}
+                    data-testid="offerDisplay-button-newSegment"
                 >
                     Neuen Segment hinzufügen
                 </Button>
@@ -147,7 +148,7 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
         />
 
     return (
-        <div className={classes.root}>
+        <div className={classes.root} data-testid={"offerDisplay-container"}>
             <BackButton onClick={onClose}/>
             {newSegmentDialog}
             {header}
