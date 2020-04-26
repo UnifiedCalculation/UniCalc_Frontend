@@ -55,14 +55,39 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
 
     const useStyles = makeStyles((theme) => ({
         root: {
-            width: '100%',
+            width: '90%',
+            margin: 'auto',
         },
         heading: {
             fontSize: theme.typography.pxToRem(15),
+            flexBasis: '33.33%',
+            flexShrink: 0,
+        },
+        secondaryHeading: {
+            fontSize: theme.typography.pxToRem(15),
+            flexBasis: '33.33%',
+            color: theme.palette.text.secondary,
+        },
+        tertiaryHeading: {
+            fontSize: theme.typography.pxToRem(15),
+            flexBasis: '33.33%',
+        },
+        offerTitle: {
+            fontSize: theme.typography.pxToRem(35),
             fontWeight: theme.typography.fontWeightRegular,
+            margin: "auto"
+        },
+        noSegmentsTitle: {
+            fontSize: theme.typography.pxToRem(25),
+            fontWeight: theme.typography.fontWeightRegular,
+            textAlign: "center",
+            padding: 50,
         },
         table: {
             minWidth: 300,
+        },
+        buttonsAlign: {
+            textAlign: "center",
         },
     }));
 
