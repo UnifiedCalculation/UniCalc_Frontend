@@ -47,6 +47,12 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
             label: 'Beschreibung',
             type: 'textarea',
             required: true
+        },
+        {
+            id: 'payment_target',
+            label: 'Tage, um Rechnungen zu zahlen',
+            type: 'text',
+            required: false
         }
     ];
 
@@ -54,8 +60,8 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
         <Autocomplete
             id="customer-autocomplete"
             options={customers}
-            getOptionLabel={(option) => option.lastName + ' ' + option.firstName}
-            renderInput={(params)=> 
+            getOptionLabel={option => option.lastName + ' ' + option.firstName}
+            renderInput={(params) =>
                 <TextField
                     {...params}
                     id="customer"
@@ -69,19 +75,29 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
         />
 
     const inputFields = textfields.map((entry, index) => {
-            return <TextField
-                type={entry.type}
-                id={entry.id}
-                name={entry.id}
-                key={index + '-textField'}
-                label={entry.label}
-                required={entry.required}
-                fullWidth
-                multiline={entry.type !== "email" && entry.type !== "number"}
-                margin='dense'
-            />
-        }
-        );
+        return <TextField
+            inputProps={entry.inputProps}
+            type={entry.type}
+            id={entry.id}
+            name={entry.id}
+            key={index + '-textField'}
+            label={entry.label}
+            required={entry.required}
+            fullWidth
+            multiline={entry.type !== "email" && entry.type !== "number"}
+            margin='dense'
+        />
+    }
+    );
+
+    const prepareData = (data) => {
+        data.customer_id = customers.find(element => 
+            (element.lastName + ' ' + element.firstName) === data.customer);
+            data.payment_target = data.payment_target || "30 Tage";
+        delete data.customer;
+
+        onSubmit(data);
+    }
 
     return (
         <DynamicDialog
@@ -89,7 +105,7 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
             text={text}
             onCancel={onCancel}
             cancelButtonText={cancelButtonText}
-            onAccept={onSubmit}
+            onAccept={prepareData}
             acceptButtonText={acceptButtonText}
             show={show}
         >

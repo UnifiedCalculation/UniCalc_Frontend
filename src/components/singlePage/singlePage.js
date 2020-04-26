@@ -6,36 +6,33 @@ import './singlePage.css'
 import ProjectCard from '../projectCard/projectCard';
 import NewProjectDialog from '../newProjectDialog/newProjectDialog';
 import ProjectDisplay from '../projectDisplay/projectDisplay';
-import OfferDisplay from '../offerDisplay/offerDisplay';
+import Loading from '../loading/loading';
 import * as API from '../connectionHandler/connectionHandler';
 import UserOverview from "../layouts/userAdministration/userOverview";
 
 
 
+import SnackbarOverlay from '../snackbar/snackbar';
+
 const SinglePage = () => {
 
-  const [projects, setProjects] = useState([]);
-  const [showProject, setShowProjectViewState] = useState(false);
-  const [offerData, setOfferData] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [projects, setProjects] = useState(null);
+
   const [projectData, setProjectData] = useState(null);
   const [customerData, setCustomerData] = useState([]);
   const [showNewProjectDialog, setNewProjectDialogViewState] = useState(false);
 
   useEffect(() => {
-    API.getUserProjects(setProjects);
+    API.getUserProjects(setErrorMessage, setProjects);
   }, []);
 
-  const openProject = (projectId) => {
-    API.getProjectData(projectId, openProjetDetailsWithData);
-  };
-
-  const openProjetDetailsWithData = (projectData) => {
-    setProjectData(projectData);
-    setShowProjectViewState(true);
-  };
+  const emptyErrorMessage = () => {
+    setErrorMessage("");
+  }
 
   const openNewProjectDialog = () => {
-    API.getCustomers(setCustomerData);
+    API.getCustomers(setErrorMessage, setCustomerData);
     setNewProjectDialogViewState(true);
   }
 
@@ -46,16 +43,7 @@ const SinglePage = () => {
 
   const submitNewProject = (newProjectData) => {
     setNewProjectDialogViewState(false);
-    console.log(JSON.stringify(newProjectData));
-
-    API.submitNewProject(newProjectData, function(){ return API.getUserProjects(setProjects); });
-
-    ;
-  }
-
-  const onShowOffer = (offerId) => {
-    API.getOfferData(projectData.id, offerId, setOfferData);
-
+    API.submitNewProject(newProjectData, setErrorMessage, function () { return API.getUserProjects(setErrorMessage, setProjects); });
   }
 
   const addNewProjectDialog =
@@ -77,38 +65,44 @@ const SinglePage = () => {
     />
   );
 
-  const projectCards = showProject ?
+  const projectCards = projectData ?
     null :
-    addProjectCard.concat(
-      projects.map((entry, index) =>
-        <ProjectCard
-          key={(index + 1) + "-projectCard"}
-          onClick={() => openProject(entry.id)}
-          projectName={entry.name}
-          description={entry.description} />
-      )
-    );
+    <div className="flexCards">
+      {addProjectCard.concat(projects ?
+        projects.map((entry, index) =>
+          <ProjectCard
+            key={(index + 1) + "-projectCard"}
+            onClick={() => setProjectData(entry)}
+            projectName={entry.name}
+            description={entry.description} />
+        )
+        : <Loading key={"home-loading-key"} text={"Lade projekte..."} />
+      )}
+    </div>;
 
-  const projectDisplay = projectData && !offerData ?
-    <ProjectDisplay projectData={projectData} onShowOffer={onShowOffer} />
+  const projectDisplay = projectData ?
+    <ProjectDisplay projectData={projectData} onError={setErrorMessage} onClose={() => setProjectData(null)} />
     : null;
 
-  const offerDisplay = offerData ? 
-  <OfferDisplay offer={offerData} projectId={projectData.id} onClose={() => setOfferData(null)} />
-  : null;
+  const snackbar =
+    <SnackbarOverlay
+      show={errorMessage !== ""}
+      text={errorMessage}
+      severity="error"
+      onClose={emptyErrorMessage}
+    />
 
 
   return (
-    <div class="mainPage">
+    <div className="mainPage">
       <Header />
       {addNewProjectDialog}
-        <div className="flexCards">
-          {projectCards}
-        </div>
-        {projectDisplay}
-        {offerDisplay}
-        <UserOverview/>
+      {projectCards}
+      {projectDisplay}
       <Navigation />
+      <div className="content">
+        {snackbar}
+      </div>
     </div>
   );
 };

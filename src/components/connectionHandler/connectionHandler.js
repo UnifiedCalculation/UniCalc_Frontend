@@ -1,269 +1,186 @@
 import axios from 'axios';
 
-
-export async function loginUser(username, password, callback) {
-    axios.post('/user/login', { username, password })
-        .then(res => {
-            console.log(res);
-            console.log(res.data);
-        })
-        .catch(error => console.log(error));
+if (process.env.NODE_ENV === 'development') {
+    axios.defaults.baseURL = 'http://localhost:800';
 }
 
-export async function getUserProjects(callback) {
-    axios.get('companies/projects')
+function handleErrors(error, callback) {
+    if (error.response) {
+        callback("Konnte nicht verbinden HTTP" + error.response.status);
+    } else if (error.request) {
+        callback("Anweisung konnte nicht ausgeführt werden HTTP" + error.request.status);
+    } else {
+        callback("Kritischer Fehler: " + error.message);
+    }
+}
+
+export async function getEntriesFromOffer(projectId, offerId, onError, callback) {
+    axios.get('projects/' + projectId + '/offers/' + offerId + '/entries')
         .then(res => {
-            console.log(res);
-            console.log(res.data);
             if (callback) {
                 callback(res.data);
             }
-        });
-    /*
-    const testProjectData = [
-        {
-            project_id: 1272,
-            project_name: "Villa am See",
-            description: "Neubau in Zürich"
-        },
-        {
-            project_id: 1273,
-            project_name: "Villa am Berg",
-            description: "Neubau in Chur"
-        },
-        {
-            project_id: 1274,
-            project_name: "Villa am See",
-            description: "Neubau in Zürich"
-        },
-        {
-            project_id: 1275,
-            project_name: "Villa am Berg",
-            description: "Neubau in Chur"
-        }
-    ]
-    callback(testProjectData);
-    */
+        })
+        .catch(error => handleErrors(error, onError));
 }
 
-export async function postNewOfferToProject(projectId, offer, callback) {
-    axios.post('projects/' + projectId + "/offers", offer)
-    .then(()=> callback ? callback() : null);
+export async function getUserProjects(onError, callback) {
+    axios.get('projects')
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
 }
 
-export async function getProjectData(projectId, callback) {
+
+export async function updateEntryData(projectId, offerId, entryId, entry, onError, callback) {
+    axios.put('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId, entry)
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
+}
+
+export async function getEntryData(projectId, offerId, entryId, onError, callback) {
+    axios.get('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId)
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
+}
+
+export async function getProjectData(projectId, onError, callback) {
     axios.get('projects/' + projectId)
         .then(res => {
-            console.log(res);
-            console.log(res.data);
             if (callback) {
                 callback(res.data);
             }
-        });
-    /*
-    const projectData = {
-        "id": 1,
-        "customer_id": 1,
-        "company_id": 1,
-        "name": "Testproject",
-        "address": "Teststreet 123",
-        "zip": "8001",
-        "city": "Zurich",
-        "created_at": "2020-04-07T15:44:02.921Z",
-        "updated_at": "2020-04-07T15:44:02.921Z",
-        "description": "This is a test Project",
-        "payment_target": "30 Tage"
-    }
-
-    callback(projectData);
-    */
+        })
+        .catch(error => handleErrors(error, onError));
 }
 
-export async function getOffersFromProject(projectId, callback) {
+export async function getOffersFromProject(projectId, onError, callback) {
     axios.get('projects/' + projectId + '/offers')
         .then(res => {
-            console.log(res);
-            console.log(res.data);
             if (callback) {
                 callback(res.data);
             }
-        });
-    /*
-    const offerData = [
-        {
-          id: 2,
-          project_id: 1,
-          name: "Offer 1",
-          created_at: "2020-04-07T17:57:37.468Z",
-          updated_at: "2020-04-07T17:57:37.468Z",
-          discount: null,
-          employee_id: null
-        },
-        {
-          id: 3,
-          project_id: 1,
-          name: "Offer 2",
-          created_at: "2020-04-07T17:58:24.185Z",
-          updated_at: "2020-04-07T17:58:24.185Z",
-          discount: null,
-          employee_id: null
-        }
-      ]
-
-    callback(offerData);
-      */
+        })
+        .catch(error => handleErrors(error, onError));
 }
 
-export async function saveOfferToProject(projectId, offer, callback) {
-    offer.id ?
-        axios.put('projects/' + projectId + '/offers/' + offer.id, { offer })
-            .then(res => {
-                if (callback) {
-                    callback();
-                }
-            })
-        :
-        axios.post('projects/' + projectId + '/offers', { offer })
-            .then(res => {
-                if (callback) {
-                    callback();
-                }
-            });
+export async function turnOfferIntoContract(projectId, offerId, onError, callback) {
+    axios.post('projects/' + projectId + '/contracts', { offer_id: offerId })
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
 }
 
-export async function getOfferAsPDF(projectId, offer) {
-    if(offer.id){
-        axios.get('projects/' + projectId + '/offers/' + offer.id);
+export async function saveOfferToProject(projectId, offer, onError, callback) {
+    axios.post('projects/' + projectId + '/offers', offer)
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
+}
+
+export async function deleteEntryFromOffer(projectId, offerId, entryId, onError, callback) {
+    axios.delete('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId)
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
+}
+
+export async function addArticleToEntry(projectId, offerId, entryId, article, onError, callback) {
+    axios.post('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId + '/articles', article)
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
+}
+
+export async function addNewEntryToOffer(projectId, offerId, entry, onError, callback) {
+    axios.post('projects/' + projectId + '/offers/' + offerId + '/entries', entry)
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
+}
+
+export async function updateOffer(projectId, offer, onError, callback) {
+    axios.put('projects/' + projectId + '/offers/' + offer.id, offer)
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
+}
+
+export async function getOfferAsPDF(projectId, offer, onError, callback) {
+    if (offer.id) {
+        axios.get('projects/' + projectId + '/offers/' + offer.id)
+            .catch(error => handleErrors(error, onError));
+    } else {
+        onError("Can't get Offer as PDF as it has no ID!")
     }
 }
 
-export async function getArticles(callback) {
 
+export async function getArticles(onError, callback) {
     axios.get('articles')
         .then(res => {
-            console.log(res);
-            console.log(res.data);
             if (callback) {
                 callback(res.data);
             }
-        });
-
-
-    /*
-    const articles = [
-        {
-            name: "Steckdose T13 3-fach UP weiss",
-            article_id: 1234123,
-            unit: "Stk.",
-            price: 125.80,
-        },
-        {
-            name: "Steckdose T13 3-fach AP weiss",
-            article_id: 1234124,
-            unit: "Stk.",
-            price: 220.25,
-        }
-    ]
-
-    callback(articles);
-    */
+        })
+        .catch(error => handleErrors(error, onError));
 }
 
-export async function getOfferData(projectId, offerId, callback) {
+export async function getOfferData(projectId, offerId, onError, callback) {
     axios.get('projects/' + projectId + '/offers/' + offerId)
-    .then(res => {
-        console.log(res);
-        console.log(res.data);
-        if (callback) {
-            callback(res.data);
-        }
-    });
-
-    /*
-    const offer = {
-        name: "offer 1",
-        entries: [
-            {
-                name: "badezimmer",
-                discount: null,
-                articles: [
-                    {
-                        name: "Steckdose T13 3-fach UP weiss",
-                        article_id: 1234123,
-                        unit: "Stk.",
-                        price: 125.80,
-                        amount: 15,
-                        discount: null
-                    },
-                    {
-                        name: "Steckdose T13 3-fach AP weiss",
-                        article_id: 1234124,
-                        unit: "Stk.",
-                        price: 220.25,
-                        amount: 120,
-                        discount: 7.35
-                    }
-                ]
-            },
-            {
-                name: "wohnzimmer",
-                discount: 50,
-                articles: [
-                    {
-                        name: "Steckdose T13 3-fach UP weiss",
-                        article_id: 1234123,
-                        unit: "Stk.",
-                        price: 125.80,
-                        amount: 235,
-                        discount: 13.37
-                    },
-                    {
-                        name: "Steckdose T13 3-fach AP weiss",
-                        article_id: 1234124,
-                        unit: "Stk.",
-                        price: 220.25,
-                        amount: 120,
-                        discount: 7.35
-                    }
-                ]
+        .then(res => {
+            if (callback) {
+                callback(res.data);
             }
-        ]
-    }
-
-    callback(offer);
-    */
+        })
+        .catch(error => handleErrors(error, onError));
 }
 
-export async function submitNewProject(projectData, callback) {
+export async function submitNewProject(projectData, onError, callback) {
     axios.post('projects', projectData)
-        .then(callback);
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
 }
 
-export async function getCustomers(callback) {
-    axios.get('companies/customers')
-    .then(res => {
-        console.log(res);
-        console.log(res.data);
-        if(callback){
-            callback(res.data);
-        }
-    });
-
-    /*
-    const testCustomerData = [
-        {
-            name: "Name one",
-            customer_id: 1234
-        },
-        {
-            name: "Name two",
-            customer_id: 1235
-        },
-        {
-            name: "Name three",
-            customer_id: 1236
-        }
-    ]
-    callback(testCustomerData);
-    */
+export async function getCustomers(onError, callback) {
+    axios.get('customers')
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
 }

@@ -27,6 +27,7 @@ const NewOfferDialog = ({ onCancel, onSubmit, show, ...props }) => {
 
     const inputFields = textfields.map((entry, index) =>
         <TextField
+            inputProps={entry.inputProps}
             type={entry.type}
             id={entry.id}
             name={entry.id}
