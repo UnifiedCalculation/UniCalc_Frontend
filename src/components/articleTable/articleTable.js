@@ -10,12 +10,19 @@ import Paper from '@material-ui/core/Paper';
 
 
 const ArticleTable = ({ articles, ...props }) => {
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 300,
-  },
-});
+  const useStyles = makeStyles({
+    table: {
+      minWidth: 300,
+    },
+    title: {
+      fontWeight: 700,
+    },
+    singleRow: {
+      "&:hover":{
+        backgroundColor: '#fafafa',
+      }
+    }
+  });
 
   const classes = useStyles();
 
