@@ -30,6 +30,22 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
         }
     }, []);
 
+    const triggerUpdate = () => {
+        API.getOfferData(projectId, offer.id, onError, setOffer);
+        API.getEntriesFromOffer(projectId, offer.id, onError, setEntries);
+    }
+
+    const setNewOfferId = (data) => {
+        offerData.id = data.id;
+        triggerUpdate(offerData);
+    }
+
+
+    const addNewEntry = (entry) => {
+        API.addNewEntryToOffer(projectId, offer.id, entry, onError, triggerUpdate);
+        setNewEntryDialogViewState(false);
+    }
+
     const useStyles = makeStyles((theme) => ({
         root: {
             width: '100%',
