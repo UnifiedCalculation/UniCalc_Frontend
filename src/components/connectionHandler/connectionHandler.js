@@ -64,31 +64,6 @@ export async function getProjectData(projectId, onError, callback) {
             if (callback) {
                 callback(res.data);
             }
-        });
-
-}
-
-export async function saveOfferToProject(projectId, offer, callback) {
-    offer.id ?
-        axios.put('projects/' + projectId + '/offers/' + offer.id, { offer })
-            .then(res => {
-                if (callback) {
-                    callback();
-                }
-            })
-        :
-        axios.post('projects/' + projectId + '/offers', { offer })
-            .then(res => {
-                if (callback) {
-                    callback();
-                }
-            });
-}
-
-export async function getOfferAsPDF(projectId, offer) {
-    if(offer.id){
-        axios.get('projects/' + projectId + '/offers/' + offer.id);
-    }
         })
         .catch(error => handleErrors(error, onError));
 }
