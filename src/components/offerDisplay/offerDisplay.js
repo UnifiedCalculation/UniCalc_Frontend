@@ -14,7 +14,6 @@ import * as API from '../connectionHandler/connectionHandler';
 import BackButton from '../layouts/backButton/backButton';
 
 
-import '../singlePage/singlePage.css'
 
 
 const OfferDisplay = ({ offer, projectId, onClose, ...props }) => {
