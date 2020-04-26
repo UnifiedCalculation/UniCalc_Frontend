@@ -1,5 +1,22 @@
 import axios from 'axios';
 
+let instance;
+
+if(process.env.NODE_ENV === 'development') {
+    instance = axios.create({baseURL: 'http://localhost:800'});
+  }else if(process.env.NODE_ENV === 'production') {
+    instance = axios;
+  }
+
+function handleErrors(error, callback){
+    if(error.response){
+        callback("Konnte nicht verbinden HTTP" + error.response.status);
+    } else if (error.request) {
+        callback("Anweisung konnte nicht ausgeführt werden HTTP" + error.request.status);
+    } else {
+        callback("Kritischer Fehler: " +error.message);
+    }
+}
 
 export async function loginUser(username, password, callback) {
     axios.post('/user/login', { username, password })
