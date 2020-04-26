@@ -28,15 +28,14 @@ export async function getEntriesFromOffer(projectId, offerId, onError, callback)
         .catch(error => handleErrors(error, onError));
 }
 
-export async function getUserProjects(callback) {
-    axios.get('companies/projects')
+export async function getUserProjects(onError, callback) {
+    instance.get('projects')
         .then(res => {
-            console.log(res);
-            console.log(res.data);
             if (callback) {
                 callback(res.data);
             }
-        });
+        })
+        .catch(error => handleErrors(error, onError));
 }
 
 export async function postNewOfferToProject(projectId, offer, callback) {
