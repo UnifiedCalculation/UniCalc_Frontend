@@ -56,12 +56,6 @@ const ArticleTable = ({ articles, discount, ...props }) => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Artikel</TableCell>
-            <TableCell align="right">Anzahl</TableCell>
-            <TableCell align="right">Einheit</TableCell>
-            <TableCell align="right">Preis</TableCell>
-            <TableCell align="right">Rabatt</TableCell>
-            <TableCell align="right">Total</TableCell>
             <TableCell className={classes.title}>Artikel</TableCell>
             <TableCell className={classes.title} align="right">Anzahl</TableCell>
             <TableCell className={classes.title} align="right">Einheit</TableCell>
@@ -76,13 +70,12 @@ const ArticleTable = ({ articles, discount, ...props }) => {
             <TableCell component="th" scope="row" className={classes.title}>
               Total
               </TableCell>
-              <TableCell align="right">{entry.amount}</TableCell>
-              <TableCell align="right">{entry.unit}</TableCell>
-              <TableCell align="right">{entry.price}</TableCell>
-              <TableCell align="right">{entry.discount ? entry.discount : 0}</TableCell>
-              <TableCell align="right">{(entry.discount ? entry.amount*entry.price*(1-(entry.discount/100)) : entry.amount*entry.price).toFixed(2)}</TableCell>
-            </TableRow>
-          ))}
+            <TableCell align="right"></TableCell>
+            <TableCell align="right"></TableCell>
+            <TableCell align="right"></TableCell>
+            <TableCell align="right">{(discount ? discount : 0).toFixed(2).toString().concat("%") }</TableCell>
+            <TableCell align="right">{total.toFixed(2)}</TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </TableContainer>
