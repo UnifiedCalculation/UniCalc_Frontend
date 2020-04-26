@@ -8,7 +8,6 @@ import NewProjectDialog from '../newProjectDialog/newProjectDialog';
 import ProjectDisplay from '../projectDisplay/projectDisplay';
 import Loading from '../loading/loading';
 import * as API from '../connectionHandler/connectionHandler';
-import UserOverview from "../layouts/userAdministration/userOverview";
 
 
 import SnackbarOverlay from '../snackbar/snackbar';

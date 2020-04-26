@@ -28,7 +28,7 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
         } else {
             API.saveOfferToProject(projectId, offer.id, onError, setNewOfferId)
         }
-    }, []);
+    },[]);
 
     const triggerUpdate = () => {
         API.getOfferData(projectId, offer.id, onError, setOffer);

@@ -40,10 +40,6 @@ const NewOfferDialog = ({ onCancel, onSubmit, show, ...props }) => {
         />
     );
 
-    const parseNewOffer = (jsonObject) => {
-        onSubmit(jsonObject);
-    }
-
     return (
         <DynamicDialog
             title={title}
