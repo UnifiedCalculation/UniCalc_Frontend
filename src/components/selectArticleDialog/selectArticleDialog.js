@@ -30,6 +30,11 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
             id: 'discount',
             label: 'Rabatt in Prozent',
             type: 'number',
+            inputProps: { 
+                min: "0", 
+                max: "100", 
+                step: "0.01" 
+            },
             required: true
         },
         {
@@ -60,6 +65,7 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
 
     const inputFields = textfields.map((entry, index) =>
         <TextField
+            inputProps={entry.inputProps}
             type={entry.type}
             id={entry.id}
             name={entry.id}
