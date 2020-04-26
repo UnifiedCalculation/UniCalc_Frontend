@@ -1,25 +1,21 @@
 import axios from 'axios';
 
-let instance;
+if (process.env.NODE_ENV === 'development') {
+    axios.defaults.baseURL = 'http://localhost:800';
+}
 
-if(process.env.NODE_ENV === 'development') {
-    instance = axios.create({baseURL: 'http://localhost:800'});
-  }else if(process.env.NODE_ENV === 'production') {
-    instance = axios;
-  }
-
-function handleErrors(error, callback){
-    if(error.response){
+function handleErrors(error, callback) {
+    if (error.response) {
         callback("Konnte nicht verbinden HTTP" + error.response.status);
     } else if (error.request) {
         callback("Anweisung konnte nicht ausgeführt werden HTTP" + error.request.status);
     } else {
-        callback("Kritischer Fehler: " +error.message);
+        callback("Kritischer Fehler: " + error.message);
     }
 }
 
-export async function getEntriesFromOffer(projectId, offerId, onError, callback){
-    instance.get('projects/' + projectId + '/offers/' + offerId + '/entries')
+export async function getEntriesFromOffer(projectId, offerId, onError, callback) {
+    axios.get('projects/' + projectId + '/offers/' + offerId + '/entries')
         .then(res => {
             if (callback) {
                 callback(res.data);
@@ -29,7 +25,7 @@ export async function getEntriesFromOffer(projectId, offerId, onError, callback)
 }
 
 export async function getUserProjects(onError, callback) {
-    instance.get('projects')
+    axios.get('projects')
         .then(res => {
             if (callback) {
                 callback(res.data);
@@ -39,7 +35,7 @@ export async function getUserProjects(onError, callback) {
 }
 
 export async function updateEntryData(projectId, offerId, entryId, entry, onError, callback) {
-    instance.put('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId, entry)
+    axios.put('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId, entry)
         .then(res => {
             if (callback) {
                 callback(res.data);
@@ -49,7 +45,7 @@ export async function updateEntryData(projectId, offerId, entryId, entry, onErro
 }
 
 export async function getEntryData(projectId, offerId, entryId, onError, callback) {
-    instance.get('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId)
+    axios.get('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId)
         .then(res => {
             if (callback) {
                 callback(res.data);
@@ -59,7 +55,7 @@ export async function getEntryData(projectId, offerId, entryId, onError, callbac
 }
 
 export async function getProjectData(projectId, onError, callback) {
-    instance.get('projects/' + projectId)
+    axios.get('projects/' + projectId)
         .then(res => {
             if (callback) {
                 callback(res.data);
@@ -69,7 +65,7 @@ export async function getProjectData(projectId, onError, callback) {
 }
 
 export async function getOffersFromProject(projectId, onError, callback) {
-    instance.get('projects/' + projectId + '/offers')
+    axios.get('projects/' + projectId + '/offers')
         .then(res => {
             if (callback) {
                 callback(res.data);
@@ -79,17 +75,17 @@ export async function getOffersFromProject(projectId, onError, callback) {
 }
 
 export async function turnOfferIntoContract(projectId, offerId, onError, callback) {
-    instance.post('projects/' + projectId + '/contracts', { offer_id: offerId })
-    .then(res => {
-        if (callback) {
-            callback(res.data);
-        }
-    })
-    .catch(error => handleErrors(error, onError));
+    axios.post('projects/' + projectId + '/contracts', { offer_id: offerId })
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
 }
 
 export async function saveOfferToProject(projectId, offer, onError, callback) {
-    instance.post('projects/' + projectId + '/offers', offer)
+    axios.post('projects/' + projectId + '/offers', offer)
         .then(res => {
             if (callback) {
                 callback(res.data);
@@ -99,7 +95,7 @@ export async function saveOfferToProject(projectId, offer, onError, callback) {
 }
 
 export async function deleteEntryFromOffer(projectId, offerId, entryId, onError, callback) {
-    instance.delete('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId)
+    axios.delete('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId)
         .then(res => {
             if (callback) {
                 callback(res.data);
@@ -109,7 +105,7 @@ export async function deleteEntryFromOffer(projectId, offerId, entryId, onError,
 }
 
 export async function addArticleToEntry(projectId, offerId, entryId, article, onError, callback) {
-    instance.post('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId +'/articles', article)
+    axios.post('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId + '/articles', article)
         .then(res => {
             if (callback) {
                 callback(res.data);
@@ -119,7 +115,7 @@ export async function addArticleToEntry(projectId, offerId, entryId, article, on
 }
 
 export async function addNewEntryToOffer(projectId, offerId, entry, onError, callback) {
-    instance.post('projects/' + projectId + '/offers/' + offerId + '/entries', entry)
+    axios.post('projects/' + projectId + '/offers/' + offerId + '/entries', entry)
         .then(res => {
             if (callback) {
                 callback(res.data);
@@ -129,7 +125,7 @@ export async function addNewEntryToOffer(projectId, offerId, entry, onError, cal
 }
 
 export async function updateOffer(projectId, offer, onError, callback) {
-    instance.put('projects/' + projectId + '/offers/' + offer.id, offer)
+    axios.put('projects/' + projectId + '/offers/' + offer.id, offer)
         .then(res => {
             if (callback) {
                 callback(res.data);
@@ -140,8 +136,8 @@ export async function updateOffer(projectId, offer, onError, callback) {
 
 export async function getOfferAsPDF(projectId, offer, onError, callback) {
     if (offer.id) {
-        instance.get('projects/' + projectId + '/offers/' + offer.id)
-        .catch(error => handleErrors(error, onError));
+        axios.get('projects/' + projectId + '/offers/' + offer.id)
+            .catch(error => handleErrors(error, onError));
     } else {
         onError("Can't get Offer as PDF as it has no ID!")
     }
@@ -149,7 +145,7 @@ export async function getOfferAsPDF(projectId, offer, onError, callback) {
 
 export async function getArticles(onError, callback) {
 
-    instance.get('articles')
+    axios.get('articles')
         .then(res => {
             if (callback) {
                 callback(res.data);
@@ -159,7 +155,7 @@ export async function getArticles(onError, callback) {
 }
 
 export async function getOfferData(projectId, offerId, onError, callback) {
-    instance.get('projects/' + projectId + '/offers/' + offerId)
+    axios.get('projects/' + projectId + '/offers/' + offerId)
         .then(res => {
             if (callback) {
                 callback(res.data);
@@ -169,7 +165,7 @@ export async function getOfferData(projectId, offerId, onError, callback) {
 }
 
 export async function submitNewProject(projectData, onError, callback) {
-    instance.post('projects', projectData)
+    axios.post('projects', projectData)
         .then(res => {
             if (callback) {
                 callback(res.data);
@@ -179,7 +175,7 @@ export async function submitNewProject(projectData, onError, callback) {
 }
 
 export async function getCustomers(onError, callback) {
-    instance.get('customers')
+    axios.get('customers')
         .then(res => {
             if (callback) {
                 callback(res.data);
