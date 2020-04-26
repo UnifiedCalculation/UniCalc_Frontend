@@ -145,20 +145,18 @@ const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
                 onSubmit={addNewOffer}
                 show={showNewOfferDialog}
             />
-            <div className={classes.root}>
-                <ExpansionPanel expanded={true}>
-                    <ExpansionPanelSummary
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
+            <ExpansionPanel expanded={true}>
+                <ExpansionPanelSummary
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
 
-                    >
-                        <Typography gutterBottom variant="h5" component="h2">{projectData.name}</Typography>
-                    </ExpansionPanelSummary>
-                    <ExpansionPanelDetails>
-                        {projectDetails}
-                    </ExpansionPanelDetails>
-                </ExpansionPanel>
-            </div>
+                >
+                    <Typography gutterBottom variant="h5" component="h2">{projectData.name}</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                    {projectDetails}
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
             <div className='flexCards'>
                 {offerCards}
             </div>
