@@ -118,7 +118,24 @@ export async function turnOfferIntoContract(projectId, offerId, onError, callbac
     .catch(error => handleErrors(error, onError));
 }
 
+export async function saveOfferToProject(projectId, offer, onError, callback) {
+    instance.post('projects/' + projectId + '/offers', offer)
+        .then(res => {
+            if (callback) {
+                callback(res.data);
             }
+        })
+        .catch(error => handleErrors(error, onError));
+}
+
+export async function deleteEntryFromOffer(projectId, offerId, entryId, onError, callback) {
+    instance.delete('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId)
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
 }
 
 export async function addArticleToEntry(projectId, offerId, entryId, article, onError, callback) {
