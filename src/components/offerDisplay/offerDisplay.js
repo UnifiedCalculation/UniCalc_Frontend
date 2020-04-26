@@ -123,6 +123,8 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
             <ExpansionPanelDetails>
             </ExpansionPanelDetails>
         </ExpansionPanel>
+        : null;
+
 
     return (
         <>
