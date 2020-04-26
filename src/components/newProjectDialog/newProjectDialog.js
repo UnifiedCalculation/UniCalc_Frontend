@@ -47,6 +47,12 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
             label: 'Beschreibung',
             type: 'textarea',
             required: true
+        },
+        {
+            id: 'payment_target',
+            label: 'Tage, um Rechnungen zu zahlen',
+            type: 'text',
+            required: false
         }
     ];
 
