@@ -90,13 +90,22 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
     }
     );
 
+    const prepareData = (data) => {
+        data.customer_id = customers.find(element => 
+            (element.lastName + ' ' + element.firstName) === data.customer);
+            data.payment_target = data.payment_target || "30 Tage";
+        delete data.customer;
+
+        onSubmit(data);
+    }
+
     return (
         <DynamicDialog
             title={title}
             text={text}
             onCancel={onCancel}
             cancelButtonText={cancelButtonText}
-            onAccept={onSubmit}
+            onAccept={prepareData}
             acceptButtonText={acceptButtonText}
             show={show}
         >
