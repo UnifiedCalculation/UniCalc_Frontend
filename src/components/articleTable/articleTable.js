@@ -26,6 +26,31 @@ const ArticleTable = ({ articles, discount, ...props }) => {
 
   const classes = useStyles();
 
+  const entries = articles.map((entry, index) => (
+    <TableRow className={classes.singleRow} key={index + entry.name + entry.amount} onClick={() => alert('this works wow')}>
+      <TableCell component="th" scope="row">
+        {entry.name}
+      </TableCell>
+      <TableCell align="right">{entry.amount}</TableCell>
+      <TableCell align="right">{entry.unit}</TableCell>
+      <TableCell align="right">{entry.price}</TableCell>
+      <TableCell align="right">{(entry.discount ? entry.discount : 0).toFixed(2).toString().concat("%")}</TableCell>
+      <TableCell align="right">{(entry.discount ? entry.amount * entry.price * (1 - (entry.discount / 100)) : entry.amount * entry.price).toFixed(2)}</TableCell>
+    </TableRow>
+  ))
+
+  var total = 0;
+
+  articles.forEach(entry => {
+    if (entry.discount) {
+      total += entry.amount * entry.price * (1 - (entry.discount / 100));
+    } else {
+      total += entry.amount * entry.price;
+    }
+  });
+
+  total *= discount ? (1 - (discount / 100)) : 1;
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -40,10 +65,10 @@ const ArticleTable = ({ articles, discount, ...props }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {articles.map((entry, index) => (
-            <TableRow key={index + entry.name + entry.amount}>
-              <TableCell component="th" scope="row">
-                {entry.name}
+          {entries}
+          <TableRow>
+            <TableCell component="th" scope="row" className={classes.title}>
+              Total
               </TableCell>
               <TableCell align="right">{entry.amount}</TableCell>
               <TableCell align="right">{entry.unit}</TableCell>
