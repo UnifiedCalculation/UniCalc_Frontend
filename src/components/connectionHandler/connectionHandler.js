@@ -68,9 +68,6 @@ export async function getProjectData(projectId, onError, callback) {
         .catch(error => handleErrors(error, onError));
 }
 
-export async function getArticles(callback) {
-
-    axios.get('articles')
 export async function getOffersFromProject(projectId, onError, callback) {
     instance.get('projects/' + projectId + '/offers')
         .then(res => {
@@ -81,8 +78,6 @@ export async function getOffersFromProject(projectId, onError, callback) {
         .catch(error => handleErrors(error, onError));
 }
 
-export async function getOfferData(projectId, offerId, callback) {
-    axios.get('projects/' + projectId + '/offers/' + offerId)
 export async function turnOfferIntoContract(projectId, offerId, onError, callback) {
     instance.post('projects/' + projectId + '/contracts', { offer_id: offerId })
     .then(res => {
@@ -123,13 +118,4 @@ export async function addArticleToEntry(projectId, offerId, entryId, article, on
         .catch(error => handleErrors(error, onError));
 }
 
-export async function getCustomers(callback) {
-    axios.get('companies/customers')
-    .then(res => {
-        console.log(res);
-        console.log(res.data);
-        if(callback){
-            callback(res.data);
-        }
-    });
 
