@@ -1,0 +1,768 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "entryId": 1,
+      "name": "Steckdose T13 3-fach UP weiss",
+      "article_id": 1234123,
+      "unit": "Stk.",
+      "price": 125.8,
+      "amount": 15,
+      "discount": null
+    },
+    {
+      "id": 2,
+      "entryId": 1,
+      "name": "Steckdose T13 3-fach AP weiss",
+      "article_id": 1234124,
+      "unit": "Stk.",
+      "price": 220.25,
+      "amount": 120,
+      "discount": 7.35
+    },
+    {
+      "id": 3,
+      "entryId": 2,
+      "name": "Steckdose T13 3-fach UP weiss",
+      "article_id": 1234123,
+      "unit": "Stk.",
+      "price": 125.8,
+      "amount": 235,
+      "discount": 13.37
+    },
+    {
+      "id": 4,
+      "entryId": 2,
+      "name": "Steckdose T13 3-fach AP weiss",
+      "article_id": 1234124,
+      "unit": "Stk.",
+      "price": 220.25,
+      "amount": 120,
+      "discount": 7.35
+    }
+  ],
+  "entries": [
+    {
+      "name": "badezimmer",
+      "discount": 25,
+      "id": 1
+    },
+    {
+      "id": 2,
+      "offerId": 1,
+      "name": "wohnzimmer",
+      "discount": 50
+    }
+  ],
+  "offers": [
+    {
+      "id": 1,
+      "projectId": 1,
+      "name": "Offer 1",
+      "created_at": "2020-04-07T17:57:37.468Z",
+      "updated_at": "2020-04-07T17:57:37.468Z",
+      "discount": null,
+      "employee_id": null
+    },
+    {
+      "id": 2,
+      "projectId": 1,
+      "name": "Offer 2",
+      "created_at": "2020-04-07T17:58:24.185Z",
+      "updated_at": "2020-04-07T17:58:24.185Z",
+      "discount": null,
+      "employee_id": null
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "Villa am See",
+      "description": "Neubau in Zürich",
+      "customer_id": "5ea53603bec1d053dfa4041d",
+      "address": "Teststreet 123",
+      "zip": "8001",
+      "city": "Zurich",
+      "created_at": "2020-04-07T15:44:02.921Z",
+      "updated_at": "2020-04-07T15:44:02.921Z",
+      "payment_target": "30 Tage"
+    },
+    {
+      "id": 2,
+      "name": "Villa am Berg",
+      "description": "Neubau in Chur",
+      "customer_id": "5ea536031d895bcee92a9ab6",
+      "address": "Teststreet 123",
+      "zip": "8001",
+      "city": "Zurich",
+      "created_at": "2020-04-07T15:44:02.921Z",
+      "updated_at": "2020-04-07T15:44:02.921Z",
+      "payment_target": "5 Tage"
+    }
+  ],
+  "products": [
+    {
+      "manufacturer": "Feller",
+      "article_number": "334911000",
+      "price": 3.6574,
+      "name": "UP Abdeckrahmen 1x1 Feller EDIZIO",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "334912000",
+      "price": 3.95,
+      "name": "UP Abdeckrahmen 1x2 Feller EDIZIO",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "378411000",
+      "price": 6.4352,
+      "name": "Frontset Linse beleuchtet Feller EDIZIO",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "283900000",
+      "price": 6,
+      "name": "AP Gehäuse 39 mm Feller EDIZIO",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "283901000",
+      "price": 6,
+      "name": "AP Gehäuse 54 mm Feller EDIZIO",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "376156000",
+      "price": 2.7315,
+      "name": "UP Befestigungsplatte 70x70mm Feller",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "376155000",
+      "price": 2.7315,
+      "name": "UP Befestigungsplatte FH 77×77mm Feller",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "376163000",
+      "price": 2.7315,
+      "name": "Befestigungsplatte",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "376223000",
+      "price": 3.95,
+      "name": "UP Befestigungsplatte 2 x 1 Feller",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "376235000",
+      "price": 4.5833,
+      "name": "UP Befestigungsplatte 2 x 1 , 1x für T13 Feller",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "376301000",
+      "price": 6.4352,
+      "name": "UP Befestigungsplatte 3 x 1 Feller",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "376331000",
+      "price": 5.5556,
+      "name": "UP Befestigungsplatte 4 x 1 Feller",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "376223100",
+      "price": 3.6574,
+      "name": "UP Befestigungsplatte 1 x 2 Feller",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "376235100",
+      "price": 4.5833,
+      "name": "UP Befestigungsplatte 1 x 2, 1 x für 3 x T13 Feller",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "376301100",
+      "price": 6.4352,
+      "name": "UP Befestigungsplatte 1x3 Feller",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "376601000",
+      "price": 8.287,
+      "name": "UP Befestigungsplatte 2x2 Feller",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "374025000",
+      "price": 8.287,
+      "name": "FLF Blinddeckplatte 37x62",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "372449900",
+      "price": 4.5833,
+      "name": "UP Einlasskasten für FLF 35x60x38mm",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "372450000",
+      "price": 5.5093,
+      "name": "UP Einlasskasten für FLF 35x60x48mm",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "376308100",
+      "price": 5.5093,
+      "name": "UP Befestigungsplatte 1x3 horizontal für 3xT13 geeignet",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "376309000",
+      "price": 8.287,
+      "name": "UP Befestigungsplatte Feller 1 x 4 für 3xT13 geeignet",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "944317259",
+      "price": 4.5833,
+      "name": "Signal Glühlampe DURL E14 3-5W 220-260V",
+      "unit": "Stk."
+    },
+    {
+      "manufacturer": "Feller",
+      "article_number": "977831200",
+      "price": 8.287,
+      "name": "Anschlussmodul Feller EASYNET S-One RJ45 Kat.6 / U",
+      "unit": "Stk."
+    }
+  ],
+  "customers": [
+    {
+      "firstName": "Lillian",
+      "lastName": "Stephens",
+      "id": "5ea53603bec1d053dfa4041d"
+    },
+    {
+      "firstName": "Fannie",
+      "lastName": "Davenport",
+      "id": "5ea53603e025e6a409acc113"
+    },
+    {
+      "firstName": "Lamb",
+      "lastName": "Contreras",
+      "id": "5ea53603cbe2c3c69f054eb7"
+    },
+    {
+      "firstName": "Reba",
+      "lastName": "Newton",
+      "id": "5ea536031b986c9e07b5d6ec"
+    },
+    {
+      "firstName": "Corrine",
+      "lastName": "Joyce",
+      "id": "5ea536033cc1f4fbe2dcd13b"
+    },
+    {
+      "firstName": "Gloria",
+      "lastName": "Grimes",
+      "id": "5ea53603b3270ba95b36e49f"
+    },
+    {
+      "firstName": "Michelle",
+      "lastName": "Carroll",
+      "id": "5ea536036062bde19d7d044b"
+    },
+    {
+      "firstName": "Paula",
+      "lastName": "Swanson",
+      "id": "5ea5360363a9318eeea9ba12"
+    },
+    {
+      "firstName": "Carey",
+      "lastName": "Bates",
+      "id": "5ea536036049c782d25520c4"
+    },
+    {
+      "firstName": "Angelica",
+      "lastName": "Sykes",
+      "id": "5ea5360386e950c040f90fda"
+    },
+    {
+      "firstName": "Emilia",
+      "lastName": "Gaines",
+      "id": "5ea536034c1d7d122cec1a0a"
+    },
+    {
+      "firstName": "Forbes",
+      "lastName": "William",
+      "id": "5ea5360345d199dd7e96b351"
+    },
+    {
+      "firstName": "Essie",
+      "lastName": "Webb",
+      "id": "5ea536037d7fcf0f3a062c5e"
+    },
+    {
+      "firstName": "Lewis",
+      "lastName": "Acosta",
+      "id": "5ea536033696b68f7c481b8f"
+    },
+    {
+      "firstName": "Boyer",
+      "lastName": "Giles",
+      "id": "5ea53603bcd668aac61f23d8"
+    },
+    {
+      "firstName": "Latisha",
+      "lastName": "Weeks",
+      "id": "5ea53603fd0fa383b06d4283"
+    },
+    {
+      "firstName": "Stanton",
+      "lastName": "Peterson",
+      "id": "5ea536032fa16868ce80a262"
+    },
+    {
+      "firstName": "Roach",
+      "lastName": "Dennis",
+      "id": "5ea5360359e7113b9e66287e"
+    },
+    {
+      "firstName": "Shawn",
+      "lastName": "Mcleod",
+      "id": "5ea53603d86bca10684c663e"
+    },
+    {
+      "firstName": "Edwina",
+      "lastName": "Vazquez",
+      "id": "5ea5360328b9733f2d6f0ec1"
+    },
+    {
+      "firstName": "Miller",
+      "lastName": "Macdonald",
+      "id": "5ea53603cec3eb0eb2abe3c0"
+    },
+    {
+      "firstName": "Dorthy",
+      "lastName": "Jefferson",
+      "id": "5ea536031d895bcee92a9ab6"
+    },
+    {
+      "firstName": "Hart",
+      "lastName": "Rodriquez",
+      "id": "5ea5360320a4afe093b1043c"
+    },
+    {
+      "firstName": "Michael",
+      "lastName": "Logan",
+      "id": "5ea536033a18b47c98ed15a7"
+    },
+    {
+      "firstName": "Shelia",
+      "lastName": "Daniel",
+      "id": "5ea53603422a68edc7274a79"
+    },
+    {
+      "firstName": "Johnnie",
+      "lastName": "Bender",
+      "id": "5ea53603d239485bf751baf7"
+    },
+    {
+      "firstName": "Wise",
+      "lastName": "Salinas",
+      "id": "5ea53603a5beaa94cc9c88a4"
+    },
+    {
+      "firstName": "Oliver",
+      "lastName": "Velazquez",
+      "id": "5ea5360387e3f776174caf9d"
+    },
+    {
+      "firstName": "Kelly",
+      "lastName": "Stein",
+      "id": "5ea53603cf681491765757a0"
+    },
+    {
+      "firstName": "Rios",
+      "lastName": "Knox",
+      "id": "5ea536038f4d3883e937dcda"
+    },
+    {
+      "firstName": "Chasity",
+      "lastName": "Guy",
+      "id": "5ea53603f630ab1d2d9906ca"
+    },
+    {
+      "firstName": "Jill",
+      "lastName": "Sparks",
+      "id": "5ea536032a7b14c710c11d58"
+    },
+    {
+      "firstName": "Gonzales",
+      "lastName": "Sweet",
+      "id": "5ea536037f3de0a46ab84ece"
+    },
+    {
+      "firstName": "Patty",
+      "lastName": "Frye",
+      "id": "5ea53603238b71a9fc4b0d8d"
+    },
+    {
+      "firstName": "Felicia",
+      "lastName": "Palmer",
+      "id": "5ea536031ee1d6c2af5cf6d2"
+    },
+    {
+      "firstName": "Mcgowan",
+      "lastName": "Raymond",
+      "id": "5ea5360345fbb219191969fb"
+    },
+    {
+      "firstName": "Velma",
+      "lastName": "Padilla",
+      "id": "5ea53603c3f35a62c980a27b"
+    },
+    {
+      "firstName": "Key",
+      "lastName": "Kirk",
+      "id": "5ea536032669b63396c37778"
+    },
+    {
+      "firstName": "Kirsten",
+      "lastName": "Kelley",
+      "id": "5ea53603ed3efcfde446adb2"
+    },
+    {
+      "firstName": "Madelyn",
+      "lastName": "Watkins",
+      "id": "5ea53603ca4497604867f75e"
+    },
+    {
+      "firstName": "Savannah",
+      "lastName": "Reilly",
+      "id": "5ea53603aecbceb95a510b1e"
+    },
+    {
+      "firstName": "Beck",
+      "lastName": "Mckenzie",
+      "id": "5ea536035c560f1857f76725"
+    },
+    {
+      "firstName": "Harvey",
+      "lastName": "Turner",
+      "id": "5ea5360370b44d931fbc858e"
+    },
+    {
+      "firstName": "Cecelia",
+      "lastName": "Lynch",
+      "id": "5ea53603424556ef9f49c5f4"
+    },
+    {
+      "firstName": "Gould",
+      "lastName": "Downs",
+      "id": "5ea536035d18ce88583bd1c7"
+    },
+    {
+      "firstName": "Klein",
+      "lastName": "Case",
+      "id": "5ea536036b19ee0dc5c0979b"
+    },
+    {
+      "firstName": "Christi",
+      "lastName": "Day",
+      "id": "5ea5360319ae32458d2a037d"
+    },
+    {
+      "firstName": "Christina",
+      "lastName": "Lyons",
+      "id": "5ea536030ecd88f6c212efa6"
+    },
+    {
+      "firstName": "Morton",
+      "lastName": "Franklin",
+      "id": "5ea53603e96d474e130cf327"
+    },
+    {
+      "firstName": "Lula",
+      "lastName": "Monroe",
+      "id": "5ea536039275ca489044b9a9"
+    },
+    {
+      "firstName": "Audrey",
+      "lastName": "Trevino",
+      "id": "5ea53603550419f81c095f61"
+    },
+    {
+      "firstName": "Bernadine",
+      "lastName": "Ayers",
+      "id": "5ea536033b18df940f2ed72d"
+    },
+    {
+      "firstName": "Wooten",
+      "lastName": "Williams",
+      "id": "5ea53603e0940188a520cec2"
+    },
+    {
+      "firstName": "Katina",
+      "lastName": "Sherman",
+      "id": "5ea536039e4f4fc873f674ac"
+    },
+    {
+      "firstName": "Georgina",
+      "lastName": "Murphy",
+      "id": "5ea53603a7a27138dd49a9dc"
+    },
+    {
+      "firstName": "Candace",
+      "lastName": "Graham",
+      "id": "5ea536037f0427d9ba518e48"
+    },
+    {
+      "firstName": "Nita",
+      "lastName": "Holman",
+      "id": "5ea53603c6540c00744ace12"
+    },
+    {
+      "firstName": "Albert",
+      "lastName": "Calderon",
+      "id": "5ea53603d9cc3788a2a7ef2e"
+    },
+    {
+      "firstName": "Hill",
+      "lastName": "Hayden",
+      "id": "5ea5360329629dce86d1c30d"
+    },
+    {
+      "firstName": "Brandy",
+      "lastName": "Reyes",
+      "id": "5ea5360346bc89cfc354dd31"
+    },
+    {
+      "firstName": "George",
+      "lastName": "Parsons",
+      "id": "5ea536032bab36ac11caa180"
+    },
+    {
+      "firstName": "Pitts",
+      "lastName": "Rogers",
+      "id": "5ea536033df85407149857b3"
+    },
+    {
+      "firstName": "Henry",
+      "lastName": "Coffey",
+      "id": "5ea53603e501f452285dd1e8"
+    },
+    {
+      "firstName": "Rosario",
+      "lastName": "Sutton",
+      "id": "5ea5360327af15e72b4ad5f7"
+    },
+    {
+      "firstName": "Charlotte",
+      "lastName": "Johnston",
+      "id": "5ea5360350b5fb2fa6524124"
+    },
+    {
+      "firstName": "Kendra",
+      "lastName": "Potts",
+      "id": "5ea53603bfbad7b3737205c3"
+    },
+    {
+      "firstName": "Marta",
+      "lastName": "Romero",
+      "id": "5ea53603aef867c28d4bb1cc"
+    },
+    {
+      "firstName": "Gladys",
+      "lastName": "Park",
+      "id": "5ea5360363688ee267f61358"
+    },
+    {
+      "firstName": "Vera",
+      "lastName": "Taylor",
+      "id": "5ea53603b8fbba6eec2ca3a4"
+    },
+    {
+      "firstName": "Garner",
+      "lastName": "Simpson",
+      "id": "5ea53603b371a36be331524d"
+    },
+    {
+      "firstName": "Carter",
+      "lastName": "Rivas",
+      "id": "5ea536033b9ba69b6e3a2c74"
+    },
+    {
+      "firstName": "Guadalupe",
+      "lastName": "Glover",
+      "id": "5ea53603619aea56b8b57fb0"
+    },
+    {
+      "firstName": "Macias",
+      "lastName": "Merrill",
+      "id": "5ea536030707efa3f03a5c19"
+    },
+    {
+      "firstName": "Fuentes",
+      "lastName": "Hodge",
+      "id": "5ea536036c4637ff80236341"
+    },
+    {
+      "firstName": "Nikki",
+      "lastName": "Morgan",
+      "id": "5ea53603f57a815774b14509"
+    },
+    {
+      "firstName": "Herman",
+      "lastName": "Dudley",
+      "id": "5ea536035c520829272f1ed0"
+    },
+    {
+      "firstName": "Lynch",
+      "lastName": "Sexton",
+      "id": "5ea5360308189dff272dccc5"
+    },
+    {
+      "firstName": "Estelle",
+      "lastName": "Gibbs",
+      "id": "5ea53603f70b90005308b297"
+    },
+    {
+      "firstName": "Myers",
+      "lastName": "Warner",
+      "id": "5ea536036812d3e096222517"
+    },
+    {
+      "firstName": "Brooke",
+      "lastName": "Williamson",
+      "id": "5ea5360360916bb7a0281a65"
+    },
+    {
+      "firstName": "Chandler",
+      "lastName": "Rios",
+      "id": "5ea53603331a5a407df9874e"
+    },
+    {
+      "firstName": "Della",
+      "lastName": "Bush",
+      "id": "5ea53603328b808ba1418d28"
+    },
+    {
+      "firstName": "Nielsen",
+      "lastName": "Morton",
+      "id": "5ea536036a5e2477988701fb"
+    },
+    {
+      "firstName": "Stephenson",
+      "lastName": "Boyer",
+      "id": "5ea5360346db4759bb4c5094"
+    },
+    {
+      "firstName": "Sykes",
+      "lastName": "Burch",
+      "id": "5ea53603b372d502a4e1b4b2"
+    },
+    {
+      "firstName": "Stokes",
+      "lastName": "Carey",
+      "id": "5ea5360329b9918fb7852cdc"
+    },
+    {
+      "firstName": "Latoya",
+      "lastName": "Wynn",
+      "id": "5ea53603dd34090a3ce96512"
+    },
+    {
+      "firstName": "Shields",
+      "lastName": "Guerra",
+      "id": "5ea536030d934ed085fd22e2"
+    },
+    {
+      "firstName": "Dana",
+      "lastName": "Kinney",
+      "id": "5ea53603eacd5870db508e91"
+    },
+    {
+      "firstName": "Lakeisha",
+      "lastName": "Fuller",
+      "id": "5ea5360300ebdcfe893ce499"
+    },
+    {
+      "firstName": "Evans",
+      "lastName": "Beasley",
+      "id": "5ea536031a74d3d04804a780"
+    },
+    {
+      "firstName": "Dora",
+      "lastName": "Dale",
+      "id": "5ea53603e3a728727a374447"
+    },
+    {
+      "firstName": "Lidia",
+      "lastName": "Simmons",
+      "id": "5ea53603763ff0dbbee55fc4"
+    },
+    {
+      "firstName": "Vance",
+      "lastName": "Maldonado",
+      "id": "5ea536031b8c72650019f93a"
+    },
+    {
+      "firstName": "Hardin",
+      "lastName": "Beard",
+      "id": "5ea53603c6648a84252b3fab"
+    },
+    {
+      "firstName": "Elnora",
+      "lastName": "Terrell",
+      "id": "5ea53603428633ec0331adf8"
+    },
+    {
+      "firstName": "Leah",
+      "lastName": "Hebert",
+      "id": "5ea5360301c2dfd3c691e554"
+    },
+    {
+      "firstName": "Benjamin",
+      "lastName": "Crosby",
+      "id": "5ea536034dbaf0682ec3e2e2"
+    },
+    {
+      "firstName": "Curtis",
+      "lastName": "Munoz",
+      "id": "5ea5360387a4ee3dba42c311"
+    },
+    {
+      "firstName": "Lavonne",
+      "lastName": "Mcguire",
+      "id": "5ea5360362b530a32b8cd19b"
+    }
+  ]
+}
