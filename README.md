@@ -11,7 +11,7 @@ After installation navigate to the folder /src/backendMock and run the following
 `json-server --watch db.json --routes routes.json --port 800`
 
 The API class has a check to see if you're in development envoirement or build, and set's the REST target accordingly.
-
+Due to some limitations it can not emulate the whole backend, but should work for most use cases.
 
 ## Available Scripts
 
