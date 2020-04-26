@@ -18,11 +18,14 @@ function handleErrors(error, callback){
     }
 }
 
+export async function getEntriesFromOffer(projectId, offerId, onError, callback){
+    instance.get('projects/' + projectId + '/offers/' + offerId + '/entries')
         .then(res => {
-            console.log(res);
-            console.log(res.data);
+            if (callback) {
+                callback(res.data);
+            }
         })
-        .catch(error => console.log(error));
+        .catch(error => handleErrors(error, onError));
 }
 
 export async function getUserProjects(callback) {
