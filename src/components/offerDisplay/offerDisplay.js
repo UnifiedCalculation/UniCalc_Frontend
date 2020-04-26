@@ -40,6 +40,9 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
         triggerUpdate(offerData);
     }
 
+    const loadOfferAsPdf = () => {
+        API.getOfferAsPDF(projectId, offer.id, onError);
+    }
 
     const addNewEntry = (entry) => {
         API.addNewEntryToOffer(projectId, offer.id, entry, onError, triggerUpdate);
