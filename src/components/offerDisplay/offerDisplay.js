@@ -23,8 +23,12 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
     const [newEntryDialog, setNewEntryDialogViewState] = useState(false);
 
     useEffect(() => {
-        API.getArticles(setArticles);
-    },[]);
+        if (offer.id) {
+            triggerUpdate();
+        } else {
+            API.saveOfferToProject(projectId, offer.id, onError, setNewOfferId)
+        }
+    }, []);
 
     const useStyles = makeStyles((theme) => ({
         root: {
