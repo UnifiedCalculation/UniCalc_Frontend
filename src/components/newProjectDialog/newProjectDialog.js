@@ -54,8 +54,8 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
         <Autocomplete
             id="customer-autocomplete"
             options={customers}
-            getOptionLabel={(option) => option.lastName + ' ' + option.firstName}
-            renderInput={(params)=> 
+            getOptionLabel={option => option.lastName + ' ' + option.firstName}
+            renderInput={(params) =>
                 <TextField
                     {...params}
                     id="customer"
