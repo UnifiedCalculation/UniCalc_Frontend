@@ -118,4 +118,72 @@ export async function addArticleToEntry(projectId, offerId, entryId, article, on
         .catch(error => handleErrors(error, onError));
 }
 
+export async function addNewEntryToOffer(projectId, offerId, entry, onError, callback) {
+    instance.post('projects/' + projectId + '/offers/' + offerId + '/entries', entry)
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
+}
 
+export async function updateOffer(projectId, offer, onError, callback) {
+    instance.put('projects/' + projectId + '/offers/' + offer.id, offer)
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
+}
+
+export async function getOfferAsPDF(projectId, offer, onError, callback) {
+    if (offer.id) {
+        instance.get('projects/' + projectId + '/offers/' + offer.id)
+        .catch(error => handleErrors(error, onError));
+    } else {
+        onError("Can't get Offer as PDF as it has no ID!")
+    }
+}
+
+export async function getArticles(onError, callback) {
+
+    instance.get('articles')
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
+}
+
+export async function getOfferData(projectId, offerId, onError, callback) {
+    instance.get('projects/' + projectId + '/offers/' + offerId)
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
+}
+
+export async function submitNewProject(projectData, onError, callback) {
+    instance.post('projects', projectData)
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
+}
+
+export async function getCustomers(onError, callback) {
+    instance.get('customers')
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
+}
