@@ -69,19 +69,20 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
         />
 
     const inputFields = textfields.map((entry, index) => {
-            return <TextField
-                type={entry.type}
-                id={entry.id}
-                name={entry.id}
-                key={index + '-textField'}
-                label={entry.label}
-                required={entry.required}
-                fullWidth
-                multiline={entry.type !== "email" && entry.type !== "number"}
-                margin='dense'
-            />
-        }
-        );
+        return <TextField
+            inputProps={entry.inputProps}
+            type={entry.type}
+            id={entry.id}
+            name={entry.id}
+            key={index + '-textField'}
+            label={entry.label}
+            required={entry.required}
+            fullWidth
+            multiline={entry.type !== "email" && entry.type !== "number"}
+            margin='dense'
+        />
+    }
+    );
 
     return (
         <DynamicDialog
