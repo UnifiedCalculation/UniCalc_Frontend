@@ -21,9 +21,11 @@ import * as API from '../connectionHandler/connectionHandler';
 import '../singlePage/singlePage.css'
 
 
-const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
+const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, ...props }) => {
 
     const [offers, setOfferData] = useState(null);
+
+    const [offerDetails, setOfferDetails] = useState(null);
     const [showNewOfferDialog, setNewOfferDialogViewState] = useState(false);
 
     const dateOptions = {
@@ -32,12 +34,17 @@ const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
     };
 
     useEffect(() => {
-        API.getOffersFromProject(projectData.id, setOfferData);
+        getOffersFromProject();
     }, []);
+
+    const getOffersFromProject = () => {
+        API.getOffersFromProject(projectData.id, onError, setOfferData);
+    }
 
     const useStyles = makeStyles((theme) => ({
         root: {
-            width: '100%',
+            width: '90%',
+            margin: 'auto',
         },
         heading: {
             fontSize: theme.typography.pxToRem(15),
@@ -73,22 +80,20 @@ const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
         />
     );
 
-    const offerCards = offers ?
-        addOfferCard.concat(
+    const offerCards =
+        addOfferCard.concat(offers ?
             offers.map((entry, index) =>
                 <ProjectCard
                     key={(index + 1) + "-offerCard"}
-                    onClick={() => onShowOffer(entry.id)}
+                    onClick={() => setOfferDetails(offers[index])}
                     projectName={entry.name}
                     description={"Zuletz bearbeitet am: " +
                         new Date(entry.updated_at)
                             .toLocaleString("de-DE", dateOptions)
                             .replace(/(.*)\D\d+/, "$1")}
                 />
-            )
-        )
-        : <Loading text={'Lade Offerten...'} />;
-
+            ) : null
+        );
 
     const projectDetails = projectData ?
         <TableContainer >
