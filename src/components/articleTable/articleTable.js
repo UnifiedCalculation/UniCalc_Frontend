@@ -8,8 +8,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+const ArticleTable = ({ articles, discount, ...props }) => {
 
-const ArticleTable = ({ articles, ...props }) => {
   const useStyles = makeStyles({
     table: {
       minWidth: 300,
