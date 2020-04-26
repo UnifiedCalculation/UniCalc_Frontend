@@ -62,6 +62,12 @@ const ArticleTable = ({ articles, discount, ...props }) => {
             <TableCell align="right">Preis</TableCell>
             <TableCell align="right">Rabatt</TableCell>
             <TableCell align="right">Total</TableCell>
+            <TableCell className={classes.title}>Artikel</TableCell>
+            <TableCell className={classes.title} align="right">Anzahl</TableCell>
+            <TableCell className={classes.title} align="right">Einheit</TableCell>
+            <TableCell className={classes.title} align="right">Preis</TableCell>
+            <TableCell className={classes.title} align="right">Rabatt</TableCell>
+            <TableCell className={classes.title} align="right">Total</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
