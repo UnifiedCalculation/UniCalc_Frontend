@@ -125,6 +125,26 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
         </ExpansionPanel>
         : null;
 
+    const segments = entries?
+        entries.map((entry, index) =>
+            <OfferEntry
+                key={index + "-entry"}
+                projectId={projectId}
+                offerId={offer.id}
+                entryData={entry}
+                onChange={triggerUpdate}
+                onError={onError}
+            />)
+        : <Loading text={"Lade Daten..."} />;
+
+    const loading = offer ? null : <Loading text={"Lade Daten..."} />;
+
+    const newSegmentDialog =
+        <NewEntrySegmentDialog
+            show={newEntryDialog}
+            onCancel={() => setNewEntryDialogViewState(false)}
+            onSubmit={addNewEntry}
+        />
 
     return (
         <>
