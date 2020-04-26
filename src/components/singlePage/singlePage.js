@@ -16,9 +16,6 @@ import SnackbarOverlay from '../snackbar/snackbar';
 const SinglePage = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
-  const [projects, setProjects] = useState([]);
-  const [showProject, setShowProjectViewState] = useState(false);
-  const [offerData, setOfferData] = useState(null);
   const [projectData, setProjectData] = useState(null);
   const [customerData, setCustomerData] = useState([]);
   const [showNewProjectDialog, setNewProjectDialogViewState] = useState(false);
@@ -28,17 +25,9 @@ const SinglePage = () => {
     API.getUserProjects(setProjects, setErrorMessage);
   }, []);
 
-  const openProject = (projectId) => {
-    API.getProjectData(projectId, openProjetDetailsWithData, setErrorMessage);
-  };
   const emptyErrorMessage = () => {
     setErrorMessage("");
   }
-
-  const openProjetDetailsWithData = (projectData) => {
-    setProjectData(projectData);
-    setShowProjectViewState(true);
-  };
 
   const openNewProjectDialog = () => {
     API.getCustomers(setCustomerData, setErrorMessage);
@@ -52,16 +41,6 @@ const SinglePage = () => {
 
   const submitNewProject = (newProjectData) => {
     setNewProjectDialogViewState(false);
-    console.log(JSON.stringify(newProjectData));
-
-    API.submitNewProject(newProjectData, function(){ return API.getUserProjects(setProjects, setErrorMessage); }, setErrorMessage);
-
-    ;
-  }
-
-  const onShowOffer = (offerId) => {
-    API.getOfferData(projectData.id, offerId, setOfferData, setErrorMessage);
-
   }
 
   const addNewProjectDialog =
@@ -123,7 +102,7 @@ const SinglePage = () => {
         <UserOverview/>
       <Navigation />
       <div className="content">
-      {snackbar}
+        {snackbar}
       </div>
     </div>
   );
