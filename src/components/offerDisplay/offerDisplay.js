@@ -46,6 +46,10 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
         setNewEntryDialogViewState(false);
     }
 
+    const turnOfferIntoContract = () => {
+        API.turnOfferIntoContract(projectId, offer.id, onError, onClose);
+    }
+
     const useStyles = makeStyles((theme) => ({
         root: {
             width: '100%',
