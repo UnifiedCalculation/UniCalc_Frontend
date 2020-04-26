@@ -15,8 +15,8 @@ import BackButton from '../layouts/backButton/backButton';
 
 
 
+const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
 
-const OfferDisplay = ({ offer, projectId, onClose, ...props }) => {
 
     const [entries, setEntries] = useState(offer.entries);
     const [articles, setArticles] = useState([]);
