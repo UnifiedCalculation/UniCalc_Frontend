@@ -91,40 +91,8 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
         },
     }));
 
-    const openNewArticleDialog = () => {
-        setNewArticleDialogViewState(true);
-    }
-
     const classes = useStyles();
 
-    const addEntry = (entry) => {
-        setNewEntrySegmentDialogViewState(false);
-        setEntries([
-            ...entries,
-            {
-                name: entry.name,
-                discount: null,
-                articles: []
-            }
-        ]);
-        offer.entries = entries;
-    }
-
-    const saveOffer = () => {
-        API.saveOfferToProject(projectId, offer);
-    }
-
-    const getOfferAsPDF = () => {
-        API.getOfferAsPDF(projectId, offer);
-    }
-
-    const addArticle = (article) => {
-        setEntries(prev => prev.map((a, index) => index === showNewArticleDialog-1 ? ({
-        ...a,
-        articles: a.articles.concat(article)
-      }) : a));
-      setNewArticleDialogViewState(0);
-    };
 
     const entryPanel = entries.map((entry, index) =>
         <ExpansionPanel key={index + "entries-list"}>
