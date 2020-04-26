@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import { makeStyles } from '@material-ui/core/styles';
 
 import DynamicDialog from '../dynamicDialog/dynamicDialog';
 
@@ -43,20 +39,6 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
         }
     ];
 
-    const useStyles = makeStyles((theme) => ({
-        formControl: {
-            margin: theme.spacing(0),
-            minWidth: 120,
-        },
-        selectEmpty: {
-            marginTop: theme.spacing(5),
-        },
-    }));
-
-    const classes = useStyles();
-
-    let emptyArticlesList = [];
-    emptyArticlesList.push(<option id="emptyOption" key="0-option"></option>);
     const articlesSelection =
         <FormControl
             required
@@ -100,10 +82,8 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
     );
 
     const parseNewArticle = (jsonObject) => {
-        console.log(JSON.stringify(jsonObject));
         jsonObject.discount = parseInt(jsonObject.discount);
         jsonObject.amount = parseInt(jsonObject.amount);
-        console.log(JSON.stringify(jsonObject));
         onSubmit(jsonObject);
     };
 
