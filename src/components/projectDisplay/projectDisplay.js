@@ -13,7 +13,9 @@ import TableRow from '@material-ui/core/TableRow';
 
 import ProjectCard from '../projectCard/projectCard';
 import NewOfferDialog from '../newOfferDialog/newOfferDialog';
+import OfferDisplay from '../offerDisplay/offerDisplay';
 import Loading from '../loading/loading';
+import BackButton from '../layouts/backButton/backButton';
 import * as API from '../connectionHandler/connectionHandler';
 
 import '../singlePage/singlePage.css'
