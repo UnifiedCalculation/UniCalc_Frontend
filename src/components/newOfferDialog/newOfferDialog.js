@@ -27,6 +27,7 @@ const NewOfferDialog = ({ onCancel, onSubmit, show, ...props }) => {
 
     const inputFields = textfields.map((entry, index) =>
         <TextField
+            inputProps={entry.inputProps}
             type={entry.type}
             id={entry.id}
             name={entry.id}
@@ -38,6 +39,10 @@ const NewOfferDialog = ({ onCancel, onSubmit, show, ...props }) => {
             margin='dense'
         />
     );
+
+    const parseNewOffer = (jsonObject) => {
+        onSubmit(jsonObject);
+    }
 
     return (
         <DynamicDialog
