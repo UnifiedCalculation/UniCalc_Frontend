@@ -4,14 +4,15 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
-import NewEntrySegmentDialog from '../newEntrySegmentDialog/newEntrySegmentDialog';
-import SelectArticleDialog from '../selectArticleDialog/selectArticleDialog';
+import Loading from '../loading/loading';
+import OfferEntry from '../offerEntry/offerEntry';
 
-import ArticleTable from '../articleTable/articleTable';
+import NewEntrySegmentDialog from '../newEntrySegmentDialog/newEntrySegmentDialog';
 
 import * as API from '../connectionHandler/connectionHandler';
+import BackButton from '../layouts/backButton/backButton';
+
 
 import '../singlePage/singlePage.css'
 
