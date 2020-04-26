@@ -130,8 +130,9 @@ const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
         </TableContainer >
         : null;
 
-    return (
-        <>
+    const content = offerDetails ? <OfferDisplay projectId={projectData.id} offerData={offerDetails} onClose={() => setOfferDetails(null)} onError={onError} />
+        : <div className={classes.root}>
+            <BackButton onClick={onClose} />
             <NewOfferDialog
                 onCancel={() => setNewOfferDialogViewState(false)}
                 onSubmit={addNewOffer}
@@ -152,7 +153,10 @@ const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
             <div className='flexCards'>
                 {offerCards}
             </div>
-        </>
+        </div>;
+
+    return (
+        content
     );
 }
 
