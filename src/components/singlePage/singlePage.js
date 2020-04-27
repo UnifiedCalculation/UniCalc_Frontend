@@ -10,8 +10,6 @@ import Loading from '../loading/loading';
 import * as API from '../connectionHandler/connectionHandler';
 import UserOverview from "../layouts/userAdministration/userOverview";
 
-
-
 import SnackbarOverlay from '../snackbar/snackbar';
 
 const SinglePage = () => {
@@ -43,7 +41,11 @@ const SinglePage = () => {
 
   const submitNewProject = (newProjectData) => {
     setNewProjectDialogViewState(false);
-    API.submitNewProject(newProjectData, setErrorMessage, function () { return API.getUserProjects(setErrorMessage, setProjects); });
+    API.submitNewProject(
+      newProjectData, 
+      setErrorMessage, 
+      function () { return API.getUserProjects(setErrorMessage, setProjects); }
+      );
   }
 
   const addNewProjectDialog =
