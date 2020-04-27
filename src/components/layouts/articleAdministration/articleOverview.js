@@ -8,21 +8,27 @@ import NewProjectDialog from "../../newProjectDialog/newProjectDialog";
 import AddArticleDialog from "./addArticle";
 
 
-export default function ArticleOverview() {
+const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show, ...props }) =>  {
 
   const [showNewArticleDialog, setNewArticleDialogViewState] = useState(false);
   const [articleData, setArticleData] = useState([]);
+  const [articles, setArticles] = useState(null)
+  const buttonName = "Neuen Artikel hinzufügen";
 
   const closeNewArticleDialog = () => {
     setNewArticleDialogViewState(false);
     setArticleData([]);
   }
 
+  const openNewArticleDialog = () => {
+    //API.getCustomers(setErrorMessage, setCustomerData);
+    setNewArticleDialogViewState(true);
+  }
+
   const submitNewArticle = (newArticleData) => {
     setNewArticleDialogViewState(false);
-    console.log(JSON.stringify(newProjectData));
-    API.submitNewArticle(newArticleData, function(){ return API.getUserProjects(setProjects); });
-    ;
+    console.log(JSON.stringify(newArticleData));
+    API.submitNewArticle(newArticleData, function () { return API.getArticles(setErrorMessage, setArticles); });
   }
 
   const addNewArticleDialog =
@@ -36,11 +42,11 @@ export default function ArticleOverview() {
   return (
       <div>
         {addNewArticleDialog}
-        <Button variant="outlined" color="primary" disableElevation onClick={onClick}>{buttonName}>
-          Artikel erstellen
-        </Button>
+        <Button variant="outlined" color="primary" disableElevation onClick={openNewArticleDialog}>{buttonName}</Button>
         <AddArticle/>
         <ArticleTable/>
       </div>
   );
 }
+
+export default ArticleOverview;

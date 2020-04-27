@@ -144,7 +144,6 @@ export async function getOfferAsPDF(projectId, offer, onError, callback) {
     }
 }
 
-
 export async function getArticles(onError, callback) {
     axios.get('articles')
         .then(res => {
@@ -153,6 +152,26 @@ export async function getArticles(onError, callback) {
             }
         })
         .catch(error => handleErrors(error, onError));
+}
+
+export async function getNpks(onError, callback) {
+  axios.get('npks')
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function submitNewArticle(articleData, onError, callback) {
+  axios.post('projects', articleData)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
 }
 
 export async function getOfferData(projectId, offerId, onError, callback) {

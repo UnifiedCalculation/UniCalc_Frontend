@@ -10,7 +10,6 @@ const AddArticleDialog = ({ npks, onCancel, onSubmit, show, ...props }) => {
   const acceptButtonText = 'Bestätigen';
   const title = 'Neuen Artikel erstellen';
   const text = 'Füllen Sie alle Felder ab um einen neuen Artikel zu erstellen.';
-
   const textfields = [
     {
       id: 'articleNumber',
@@ -100,7 +99,7 @@ const AddArticleDialog = ({ npks, onCancel, onSubmit, show, ...props }) => {
 }
 
 AddArticleDialog.propTypes = {
-  customers: PropTypes.array.isRequired,
+  npks: PropTypes.array.isRequired,
   onCancel: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired

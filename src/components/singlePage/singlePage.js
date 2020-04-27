@@ -98,7 +98,7 @@ const SinglePage = () => {
       {addNewProjectDialog}
       {projectCards}
       {projectDisplay}
-      <ArticleOverview/>
+      <ArticleOverview setErrorMessage={setErrorMessage}/>
       <Navigation />
       <div className="content">
         {snackbar}
