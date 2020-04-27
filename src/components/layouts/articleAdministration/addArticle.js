@@ -1,8 +1,10 @@
 import React from 'react';
 import DynamicDialog from "../../dynamicDialog/dynamicDialog";
 import PropTypes from "prop-types";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
-const AddArticleDialog = ({ customers, onCancel, onSubmit, show, ...props }) => {
+const AddArticleDialog = ({ npks, onCancel, onSubmit, show, ...props }) => {
 
   const cancelButtonText = 'Abbrechen';
   const acceptButtonText = 'Bestätigen';
@@ -48,6 +50,25 @@ const AddArticleDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
     }
   ];
 
+  // todo hand over npkNumber and npkTitle
+  const npkSelector =
+      <Autocomplete
+          id="customer-autocomplete"
+          options={npks}
+          getOptionLabel={(option) => option.npkNumber + ' ' + option.npkTitle}
+          renderInput={(params)=>
+              <TextField
+                  {...params}
+                  id="customer"
+                  label="NPK Gruppe"
+                  type="textarea"
+                  name="customer"
+                  fullWidth
+                  required
+                  margin='dense'/>
+          }
+      />
+
   const inputFields = textfields.map((entry, index) => {
         return <TextField
             type={entry.type}
@@ -73,7 +94,6 @@ const AddArticleDialog = ({ customers, onCancel, onSubmit, show, ...props }) => 
           acceptButtonText={acceptButtonText}
           show={show}
       >
-        {customerSelector}
         {inputFields}
       </DynamicDialog>
   );
