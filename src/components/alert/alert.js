@@ -59,8 +59,8 @@ const Alert = ({ title, text, onAccept, acceptText, onCancel, cancelText, show, 
 }
 
 Alert.defaultProps = {
-    acceptText: 'Accept',
-    cancelText: 'Cancel'
+    acceptText: 'Annehmen',
+    cancelText: 'Ablehnen'
 }
 
 Alert.propTypes = {

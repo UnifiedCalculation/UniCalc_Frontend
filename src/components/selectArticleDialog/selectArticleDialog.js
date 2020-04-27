@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import { makeStyles } from '@material-ui/core/styles';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import DynamicDialog from '../dynamicDialog/dynamicDialog';
 
@@ -33,6 +30,11 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
             id: 'discount',
             label: 'Rabatt in Prozent',
             type: 'number',
+            inputProps: { 
+                min: "0", 
+                max: "100", 
+                step: "0.01" 
+            },
             required: true
         },
         {
@@ -43,50 +45,27 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
         }
     ];
 
-    const useStyles = makeStyles((theme) => ({
-        formControl: {
-            margin: theme.spacing(0),
-            minWidth: 120,
-        },
-        selectEmpty: {
-            marginTop: theme.spacing(5),
-        },
-    }));
-
-    const classes = useStyles();
-
-    let emptyArticlesList = [];
-    emptyArticlesList.push(<option id="emptyOption" key="0-option"></option>);
     const articlesSelection =
-        <FormControl
-            required
-            className={classes.formControl}
-            fullWidth
-        >
-            <InputLabel id="required-select-autowidth-label">Artikel</InputLabel>
-            <Select
-                native
-                labelId="required-select-autowidth-label"
-                id="article_id"
-                name="article_id"
-                fullWidth
-                margin='dense'
-            >
-                {articles ? emptyArticlesList.concat(
-                    articles.map((entry, index) =>
-                        <option
-                            value={entry.article_id}
-                            key={(index + 1) + '-option'}
-                        >
-                            {entry.name}
-                        </option >
-                    )
-                ) : emptyArticlesList}
-            </Select>
-        </FormControl>
+        <Autocomplete
+            id="customer-autocomplete"
+            options={articles}
+            getOptionLabel={(article) => article.name}
+            renderInput={(params)=> 
+                <TextField
+                    {...params}
+                    id="article_id"
+                    label="Artikel"
+                    type="textarea"
+                    name="article_id"
+                    fullWidth
+                    required 
+                    margin='dense'/>
+            }
+        />
 
     const inputFields = textfields.map((entry, index) =>
         <TextField
+            inputProps={entry.inputProps}
             type={entry.type}
             id={entry.id}
             name={entry.id}
@@ -100,10 +79,8 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
     );
 
     const parseNewArticle = (jsonObject) => {
-        console.log(JSON.stringify(jsonObject));
         jsonObject.discount = parseInt(jsonObject.discount);
         jsonObject.amount = parseInt(jsonObject.amount);
-        console.log(JSON.stringify(jsonObject));
         onSubmit(jsonObject);
     };
 

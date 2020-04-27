@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField';
  * @param {Function} onSubmit 
  * @param {Boolean} show
  */
-const NewEntrySegmentDialog = ({ onCancel, onSubmit, show, ...props }) => {
+const NewEntrySegmentDialog = ({ onCancel, onSubmit, show, segmentName, discount, entryId, ...props }) => {
 
     const acceptButtonText = 'Annehmen';
     const cancelButtonText = 'Abbrechen';
@@ -21,31 +21,51 @@ const NewEntrySegmentDialog = ({ onCancel, onSubmit, show, ...props }) => {
             id: 'name',
             label: 'Segmentname',
             type: 'text',
-            required: true
+            required: true,
+            value: segmentName,
+        },
+        {
+            id: 'discount',
+            label: 'Rabatt',
+            type: 'number',
+            inputProps: { 
+                min: "0", 
+                max: "100", 
+                step: "0.01" 
+            },
+            required: false,
+            value: discount? discount : 0,
         }
     ];
 
     const inputFields = textfields.map((entry, index) =>
         <TextField
+            data-testid={'newSegment-testing-' + entry.id}
+            inputProps={entry.inputProps}
             type={entry.type}
             id={entry.id}
             name={entry.id}
             key={index + '-textField'}
             label={entry.label}
             required={entry.required}
+            defaultValue= {entry.value ? entry.value : null}
             fullWidth
             multiline={entry.type !== "email" && entry.type !== "number"}
             margin='dense'
         />
     );
-
+  
+    const parseNewEntry = (entry) => {
+        entry.discount = Number(entry.discount);
+        onSubmit(entry);
+    };
     return (
         <DynamicFormDialog
             title={title}
             text={text}
             onCancel={onCancel}
             cancelButtonText={cancelButtonText}
-            onAccept={onSubmit}
+            onAccept={parseNewEntry}
             acceptButtonText={acceptButtonText}
             show={show}
         >

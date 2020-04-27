@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -10,21 +9,22 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 
 import ProjectCard from '../projectCard/projectCard';
 import NewOfferDialog from '../newOfferDialog/newOfferDialog';
-import Loading from '../loading/loading';
+import OfferDisplay from '../offerDisplay/offerDisplay';
+import BackButton from '../layouts/backButton/backButton';
 import * as API from '../connectionHandler/connectionHandler';
 
 import '../singlePage/singlePage.css'
 
 
-const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
+const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, ...props }) => {
 
     const [offers, setOfferData] = useState(null);
+
+    const [offerDetails, setOfferDetails] = useState(null);
     const [showNewOfferDialog, setNewOfferDialogViewState] = useState(false);
 
     const dateOptions = {
@@ -33,12 +33,17 @@ const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
     };
 
     useEffect(() => {
-        API.getOffersFromProject(projectData.id, setOfferData);
-    }, []);
+        getOffersFromProject();
+    },[]);
+
+    const getOffersFromProject = () => {
+        API.getOffersFromProject(projectData.id, onError, setOfferData);
+    }
 
     const useStyles = makeStyles((theme) => ({
         root: {
-            width: '100%',
+            width: '90%',
+            margin: 'auto',
         },
         heading: {
             fontSize: theme.typography.pxToRem(15),
@@ -51,17 +56,10 @@ const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
 
     const addNewOffer = (offer) => {
         setNewOfferDialogViewState(false);
-        setOfferData([
-            ...offers,
-            {
-                name: offer.offername,
-                updated_at: new Date()
-                .toLocaleString("de-DE", dateOptions)
-                .replace(/(.*)\D\d+/, "$1")
-            }
-        ]);
-        API.postNewOfferToProject(projectData.id, offer, function(){ 
-            API.getOffersFromProject(projectData.id, setOfferData); });
+        offer.payment_target += ' Tage';
+        offer.updated_at = new Date();
+        offer.projectId = projectData.id;
+        API.saveOfferToProject(projectData.id, offer, onError, getOffersFromProject);
     }
 
     const openNewOfferDialog = () => {
@@ -81,22 +79,20 @@ const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
         />
     );
 
-    const offerCards = offers ?
-        addOfferCard.concat(
+    const offerCards =
+        addOfferCard.concat(offers ?
             offers.map((entry, index) =>
                 <ProjectCard
                     key={(index + 1) + "-offerCard"}
-                    onClick={() => onShowOffer(entry.id)}
+                    onClick={() => setOfferDetails(offers[index])}
                     projectName={entry.name}
                     description={"Zuletz bearbeitet am: " +
                         new Date(entry.updated_at)
                             .toLocaleString("de-DE", dateOptions)
                             .replace(/(.*)\D\d+/, "$1")}
                 />
-            )
-        )
-        : <Loading text={'Lade Offerten...'} />;
-
+            ) : null
+        );
 
     const projectDetails = projectData ?
         <TableContainer >
@@ -138,31 +134,33 @@ const ProjectDisplay = ({ projectData, onShowOffer, ...props }) => {
         </TableContainer >
         : null;
 
-    return (
-        <>
+    const content = offerDetails ? <OfferDisplay projectId={projectData.id} offerData={offerDetails} onClose={() => setOfferDetails(null)} onError={onError} />
+        : <div className={classes.root}>
+            <BackButton onClick={onClose} />
             <NewOfferDialog
                 onCancel={() => setNewOfferDialogViewState(false)}
                 onSubmit={addNewOffer}
                 show={showNewOfferDialog}
             />
-            <div className={classes.root}>
-                <ExpansionPanel expanded={true}>
-                    <ExpansionPanelSummary
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
+            <ExpansionPanel expanded={true}>
+                <ExpansionPanelSummary
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
 
-                    >
-                        <Typography gutterBottom variant="h5" component="h2">{projectData.name}</Typography>
-                    </ExpansionPanelSummary>
-                    <ExpansionPanelDetails>
-                        {projectDetails}
-                    </ExpansionPanelDetails>
-                </ExpansionPanel>
-            </div>
+                >
+                    <Typography gutterBottom variant="h5" component="h2">{projectData.name}</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                    {projectDetails}
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
             <div className='flexCards'>
                 {offerCards}
             </div>
-        </>
+        </div>;
+
+    return (
+        content
     );
 }
 

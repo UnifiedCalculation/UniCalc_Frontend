@@ -1,6 +1,7 @@
 .mainPage {
   background-color: lightgray;
   height: 100vh;
+  overflow-y: auto;
 }
 
 .flexCards {
@@ -12,4 +13,8 @@
     align-self: auto;
     align-items: center;
     justify-content: center
+}
+
+.content {
+  padding-bottom: 75px;
 }
