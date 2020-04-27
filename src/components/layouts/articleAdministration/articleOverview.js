@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
 import AddArticle from "./addArticle";
 import ArticleTable from "./articleTable";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import * as API from "../../connectionHandler/connectionHandler";
-import NewProjectDialog from "../../newProjectDialog/newProjectDialog";
 import AddArticleDialog from "./addArticle";
 
 
@@ -43,7 +41,7 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
       <div>
         {addNewArticleDialog}
         <Button variant="outlined" color="primary" disableElevation onClick={openNewArticleDialog}>{buttonName}</Button>
-        <AddArticle/>
+        <AddArticle npks={npks} setErrorMessage={setErrorMessage} />
         <ArticleTable/>
       </div>
   );

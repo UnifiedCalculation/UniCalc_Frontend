@@ -145,7 +145,7 @@ export async function getOfferAsPDF(projectId, offer, onError, callback) {
 }
 
 export async function getArticles(onError, callback) {
-    axios.get('articles')
+    axios.get('company/articles')
         .then(res => {
             if (callback) {
                 callback(res.data);
