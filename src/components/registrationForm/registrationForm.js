@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from '../layouts/header/logo.png';
 import Typography from '@material-ui/core/Typography';
 import TextField from "@material-ui/core/TextField";
+import MenuItem from '@material-ui/core/MenuItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretSquareUp } from '@fortawesome/free-solid-svg-icons'
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
@@ -55,7 +56,7 @@ class RegistrationForm extends React.Component {
         id: 'company_name',
         label: 'Firmenname',
         type: 'text',
-        required: true
+        required: true,
       },
       {
         id: 'phone_number',
@@ -96,6 +97,19 @@ class RegistrationForm extends React.Component {
         label: 'Stadt',
         type: 'text',
         required: true
+      },
+      {
+        id: 'country',
+        label: 'Land',
+        type: 'text',
+        required: true,
+        select: true,
+        options: [
+            {
+              name: 'Switzerland',
+              value: 'CH'
+            }
+          ],
       },
       {
         id: 'owner_firstname',
@@ -164,8 +178,19 @@ class RegistrationForm extends React.Component {
           label={entry.label}
           required={entry.required}
           fullWidth
+          select={entry.select ? true : false}
+          native={entry.select ? true : false}
           margin='dense'
-        />
+          autoComplete={false}
+        >
+          {entry.select ? 
+          entry.options.map((entry, index) => 
+          <MenuItem key={entry.value} value={entry.value}>
+              {entry.name}
+            </MenuItem>
+          )
+          : null}
+        </TextField>
       </div>
     );
 
@@ -181,7 +206,7 @@ class RegistrationForm extends React.Component {
       <Button
         variant="contained"
         component="label"
-        startIcon={<FontAwesomeIcon icon={faCaretSquareUp}/>}
+        startIcon={<FontAwesomeIcon icon={faCaretSquareUp} />}
       >
         Firmenlogo laden*
       <input
