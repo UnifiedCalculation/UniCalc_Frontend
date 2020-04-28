@@ -103,9 +103,12 @@ class LoginForm extends React.Component {
             {textComponent}
             {errorComponent}
             {formFields}
+            <div className="cardStyle">
+            <Button type="button" variant="contained" color="secondary" href={"/registration"}>
+                Registrieren
                       </Button>
-            <Button type="button" variant="contained" color="secondary" disabled={true}>
-              Logout
+              <Button type="submit" variant="contained" color="primary" disabled={false}>
+                Login
                       </Button>
             </div>
           </ThemeProvider>
