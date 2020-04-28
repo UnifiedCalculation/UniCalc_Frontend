@@ -1,6 +1,7 @@
 import React from 'react';
 import TextField from "@material-ui/core/TextField";
 import Logo from '../layouts/header/logo.png';
+import Typography from '@material-ui/core/Typography';
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 
@@ -21,6 +22,7 @@ class LoginForm extends React.Component {
           root: {
             margin: 15,
           }
+        },
         MuiTypography: {
           h5: {
             margin: 15,
@@ -31,6 +33,14 @@ class LoginForm extends React.Component {
               fontSize: '1.5rem',
             },
           },
+          h6: {
+            margin: 15,
+            maxWidth: 400,
+            fontSize: '1rem',
+            '@media (min-width:600px)': {
+              fontSize: '1.5rem',
+            },
+          }
         }
       }
     });
@@ -49,6 +59,13 @@ class LoginForm extends React.Component {
             />
           </div>
     const uniCalcLogo = <img src={Logo} alt={'Logo uniCalc'} height={'100px'} />
+    const textComponent =
+      <div className="cardStyle">
+        <Typography variant="h6">
+          Bitte loggen Sie sich mit Ihrer E-Mail Adresse und Ihrem Passwort ein. Falls Sie noch kein Login haben, können Sie unten auf "Registrieren" drücken.
+        </Typography>
+      </div>
+      ;
 
           <div className="cardStyle">
           <TextField
@@ -74,6 +91,7 @@ class LoginForm extends React.Component {
             <Button type="submit" variant="contained" color="primary" disabled={false}>
               Login
             {uniCalcLogo}
+            {textComponent}
             {errorComponent}
                       </Button>
             <Button type="button" variant="contained" color="secondary" disabled={true}>
