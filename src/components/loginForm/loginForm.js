@@ -21,6 +21,7 @@ class LoginForm extends React.Component {
         MuiButton: {
           root: {
             margin: 15,
+            minWidth: 300,
           }
         },
         MuiTypography: {
