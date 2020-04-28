@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import './loginForm.css';
 
 class LoginForm extends React.Component {
-  render() {
+  render(errorMessage, ...props) {
     let theme = createMuiTheme({
       overrides: {
         MuiFormControlLabel: {
@@ -21,6 +21,16 @@ class LoginForm extends React.Component {
           root: {
             margin: 15,
           }
+        MuiTypography: {
+          h5: {
+            margin: 15,
+            color: "#db0000",
+            maxWidth: 400,
+            fontSize: '1rem',
+            '@media (min-width:600px)': {
+              fontSize: '1.5rem',
+            },
+          },
         }
       }
     });
@@ -50,6 +60,13 @@ class LoginForm extends React.Component {
             type="password"
           />
         </div>
+    const errorComponent = errorMessage ?
+      <div className="cardStyle">
+        <Typography variant="h5">
+          {errorMessage}
+        </Typography>
+      </div>
+      : null;
 
         <ThemeProvider theme={theme}>
 
@@ -57,6 +74,7 @@ class LoginForm extends React.Component {
             <Button type="submit" variant="contained" color="primary" disabled={false}>
               Login
             {uniCalcLogo}
+            {errorComponent}
                       </Button>
             <Button type="button" variant="contained" color="secondary" disabled={true}>
               Logout
