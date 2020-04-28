@@ -1,5 +1,6 @@
 import React from 'react';
 import TextField from "@material-ui/core/TextField";
+import Logo from '../layouts/header/logo.png';
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 
@@ -37,6 +38,7 @@ class LoginForm extends React.Component {
               label="E-Mail"
             />
           </div>
+    const uniCalcLogo = <img src={Logo} alt={'Logo uniCalc'} height={'100px'} />
 
           <div className="cardStyle">
           <TextField
@@ -54,6 +56,7 @@ class LoginForm extends React.Component {
           <div className="cardStyle">
             <Button type="submit" variant="contained" color="primary" disabled={false}>
               Login
+            {uniCalcLogo}
                       </Button>
             <Button type="button" variant="contained" color="secondary" disabled={true}>
               Logout
