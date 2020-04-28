@@ -1,18 +1,32 @@
 .LoginForm {
-    text-align: center;
-    background-color: lightgray;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
+  text-align: center;
+  background-color: lightgray;
+  height: 100vh;
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
 .cardStyle {
-    display: flex;
-    align-self: auto;
-    flex-wrap: wrap;
-    margin: 25px;
-    justify-content: center;
+  display: flex;
+  align-self: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-width: 300px;
 }
-  
+
+@media screen and (min-width:600px) {
+  .property img {
+    height: 100px;
+  }
+
+
+}
+
+@media screen and (max-width:600px) {
+  .property img {
+    height: 50px;
+  }
+}
