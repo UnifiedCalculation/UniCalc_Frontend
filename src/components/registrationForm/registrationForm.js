@@ -2,6 +2,8 @@ import React from 'react';
 import Logo from '../layouts/header/logo.png';
 import Typography from '@material-ui/core/Typography';
 import TextField from "@material-ui/core/TextField";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretSquareUp } from '@fortawesome/free-solid-svg-icons'
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 import Button from '@material-ui/core/Button';
@@ -126,6 +128,20 @@ class RegistrationForm extends React.Component {
       },
     ];
 
+    const checkFile = (event) => {
+      var ext = event.target.value.match(/\.([^\.]+)$/)[1];
+      switch (ext) {
+        case 'jpg':
+        case 'bmp':
+        case 'png':
+        case 'tif':
+          break;
+        default:
+          alert('Die Datei hat ein falsches Format. Nur *.jpg oder *.png Dateien hochladen!');
+          event.target.value = null;
+      };
+    }
+
     const uniCalcLogo = <img src={Logo} alt={'Logo uniCalc'} height={'100px'} />
     const textComponent =
       <div className="cardStyle">
@@ -160,6 +176,22 @@ class RegistrationForm extends React.Component {
       </div>
       : null;
 
+    const logoUploadComponent =
+      <Button
+        variant="contained"
+        component="label"
+        startIcon={<FontAwesomeIcon icon={faCaretSquareUp}/>}
+      >
+        Firmenlogo laden*
+      <input
+          type="file"
+          style={{ display: "none" }}
+          required={true}
+          accept={".jpg,.jpeg,.png,image/vnd.sealedmedia.softseal.jpg,image/png"}
+          onChange={checkFile}
+        />
+      </Button>
+
     return (
       <>
         <div className="RegistrationForm">
@@ -168,6 +200,7 @@ class RegistrationForm extends React.Component {
             {textComponent}
             {errorComponent}
             {formFields}
+            {logoUploadComponent}
             <div className="cardStyle">
               <Button type="submit" variant="contained" color="primary" disabled={false}>
                 Registrieren
