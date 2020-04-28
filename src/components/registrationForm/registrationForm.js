@@ -107,12 +107,6 @@ class RegistrationForm extends React.Component {
         required: true
       },
       {
-        id: 'logo',
-        label: 'Firmenlogo',
-        type: 'upload',
-        required: true
-      },
-      {
         id: 'iban',
         label: 'IBAN Firmenkonto',
         type: 'text',
