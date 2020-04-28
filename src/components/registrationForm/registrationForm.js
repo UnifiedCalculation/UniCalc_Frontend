@@ -25,6 +25,7 @@ class RegistrationForm extends React.Component {
         MuiButton: {
           root: {
             margin: 15,
+            minWidth: 300,
           }
         },
         MuiTypography: {
@@ -204,7 +205,7 @@ class RegistrationForm extends React.Component {
             <div className="cardStyle">
               <Button type="submit" variant="contained" color="primary" disabled={false}>
                 Registrieren
-                      </Button>
+              </Button>
             </div>
           </ThemeProvider>
 
