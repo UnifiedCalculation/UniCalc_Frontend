@@ -45,19 +45,38 @@ class LoginForm extends React.Component {
       }
     });
 
+    const formData = [
+      {
+        id: 'email',
+        label: 'E-Mail',
+        type: 'email',
+        required: true
+      },
+      {
+        id: 'password',
+        label: 'Passwort',
+        type: 'password',
+        required: true
+      },
+    ];
 
-    return (
-      <>
-        <div className="LoginForm">
-          <div className="cardStyle">
-            <TextField
-              required
-              InputLabelProps={{ required: true }}
-              name="email"
-              id="email"
-              label="E-Mail"
-            />
-          </div>
+    const formFields = formData.map((entry, index) =>
+      <div className="cardStyle">
+        <TextField
+          inputProps={entry.inputProps}
+          type={entry.type}
+          id={entry.id}
+          name={entry.id}
+          key={index + '-textField'}
+          label={entry.label}
+          required={entry.required}
+          fullWidth
+          margin='dense'
+        />
+      </div>
+    );
+
+
     const uniCalcLogo = <img src={Logo} alt={'Logo uniCalc'} height={'100px'} />
     const textComponent =
       <div className="cardStyle">
@@ -67,16 +86,6 @@ class LoginForm extends React.Component {
       </div>
       ;
 
-          <div className="cardStyle">
-          <TextField
-            required
-            InputLabelProps={{ required: true }}
-            id="password"
-            name="password"
-            label="Password"
-            type="password"
-          />
-        </div>
     const errorComponent = errorMessage ?
       <div className="cardStyle">
         <Typography variant="h5">
@@ -85,22 +94,23 @@ class LoginForm extends React.Component {
       </div>
       : null;
 
-        <ThemeProvider theme={theme}>
 
-          <div className="cardStyle">
-            <Button type="submit" variant="contained" color="primary" disabled={false}>
-              Login
+    return (
+      <>
+        <div className="LoginForm">
+          <ThemeProvider theme={theme}>
             {uniCalcLogo}
             {textComponent}
             {errorComponent}
+            {formFields}
                       </Button>
             <Button type="button" variant="contained" color="secondary" disabled={true}>
               Logout
                       </Button>
-          </div>
-        </ThemeProvider>
+            </div>
+          </ThemeProvider>
 
-      </div >
+        </div >
       </>
     );
   }
