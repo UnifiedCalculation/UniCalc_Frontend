@@ -1,0 +1,38 @@
+.RegistrationForm {
+  text-align: center;
+  background-color: lightgray;
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardStyle {
+  display: flex;
+  align-self: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-width: 300px;
+}
+
+@media screen and (min-width:600px) {
+  .property img {
+    height: 100px;
+  }
+
+  .RegistrationForm {
+    height: 100vh;
+  }
+
+}
+
+@media screen and (max-width:600px) {
+  .property img {
+    height: 50px;
+  }
+
+  .RegistrationForm {
+    height: auto;
+  }
+}
