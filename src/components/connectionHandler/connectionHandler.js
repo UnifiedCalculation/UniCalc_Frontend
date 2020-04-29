@@ -145,13 +145,13 @@ export async function getOfferAsPDF(projectId, offer, onError, callback) {
 }
 
 export async function getArticles(onError, callback) {
-    axios.get('company/articles')
-        .then(res => {
-            if (callback) {
-                callback(res.data);
-            }
-        })
-        .catch(error => handleErrors(error, onError));
+  axios.get('company/articles')
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
 }
 
 export async function getNpks(onError, callback) {
