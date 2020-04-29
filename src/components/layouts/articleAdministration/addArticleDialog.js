@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import DynamicDialog from "../../dynamicDialog/dynamicDialog";
-import PropTypes from "prop-types";
+import PropTypes, {func} from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import {getNpks, submitNewArticle} from "../../connectionHandler/connectionHandler";
+import MenuItem from "@material-ui/core/MenuItem";
 
-const AddArticleDialog = ({ npks, onCancel, onSubmit, show, ...props }) => {
+const AddArticleDialog = ({setErrorMessage, onCancel, onSubmit, show, ...props}) => {
+  const [npks, setNpks] = useState([]);
 
   const cancelButtonText = 'Abbrechen';
   const acceptButtonText = 'Bestätigen';
@@ -12,19 +15,13 @@ const AddArticleDialog = ({ npks, onCancel, onSubmit, show, ...props }) => {
   const text = 'Füllen Sie alle Felder ab um einen neuen Artikel zu erstellen.';
   const textfields = [
     {
-      id: 'articleNumber',
+      id: 'number',
       label: 'Artikelnummer',
       type: 'textarea',
       required: true
     },
     {
-      id: 'npk',
-      label: 'NPK',
-      type: 'number',
-      required: true
-    },
-    {
-      id: 'articleName',
+      id: 'name',
       label: 'Artikelbezeichnung',
       type: 'textarea',
       required: true
@@ -39,7 +36,15 @@ const AddArticleDialog = ({ npks, onCancel, onSubmit, show, ...props }) => {
       id: 'unit',
       label: 'Einheit',
       type: 'textarea',
-      required: true
+      required: true,
+      select: true,
+      options: [
+        {
+          //todo fill units
+          name: 'Tonnen',
+          value: 'tons'
+        }
+      ],
     },
     {
       id: 'description',
@@ -49,19 +54,31 @@ const AddArticleDialog = ({ npks, onCancel, onSubmit, show, ...props }) => {
     }
   ];
 
-  // todo hand over npkNumber and npkTitle
+  const saveNewArticle = (articleData) => {
+    submitNewArticle(articleData, setErrorMessage)
+  }
+
+  const parseArticleData = (articleData) => {
+    articleData.price = parseInt(articleData.price);
+    saveNewArticle(articleData);
+  }
+
+  useEffect(() => {
+    getNpks(setErrorMessage, setNpks)
+  }, []);
+
   const npkSelector =
       <Autocomplete
-          id="customer-autocomplete"
+          id="npk-autocomplete"
           options={npks}
-          getOptionLabel={(option) => option.npkNumber + ' ' + option.npkTitle}
-          renderInput={(params)=>
+          getOptionLabel={(option) => option.id + ' ' + option.name}
+          renderInput={(params) =>
               <TextField
                   {...params}
-                  id="customer"
+                  id="npk"
                   label="NPK Gruppe"
                   type="textarea"
-                  name="customer"
+                  name="npk"
                   fullWidth
                   required
                   margin='dense'/>
@@ -69,7 +86,8 @@ const AddArticleDialog = ({ npks, onCancel, onSubmit, show, ...props }) => {
       />
 
   const inputFields = textfields.map((entry, index) => {
-        return <TextField
+        return         <TextField
+            inputProps={entry.inputProps}
             type={entry.type}
             id={entry.id}
             name={entry.id}
@@ -77,9 +95,19 @@ const AddArticleDialog = ({ npks, onCancel, onSubmit, show, ...props }) => {
             label={entry.label}
             required={entry.required}
             fullWidth
-            multiline={entry.type !== "email" && entry.type !== "number"}
+            select={entry.select}
+            native={entry.select}
             margin='dense'
-        />
+            autoComplete={false}
+        >
+          {entry.select ?
+              entry.options.map((entry, index) =>
+                  <MenuItem key={entry.value} value={entry.value}>
+                    {entry.name}
+                  </MenuItem>
+              )
+              : null}
+        </TextField>
       }
   );
 
@@ -89,10 +117,11 @@ const AddArticleDialog = ({ npks, onCancel, onSubmit, show, ...props }) => {
           text={text}
           onCancel={onCancel}
           cancelButtonText={cancelButtonText}
-          onAccept={onSubmit}
+          onAccept={parseArticleData}
           acceptButtonText={acceptButtonText}
           show={show}
       >
+        {npkSelector}
         {inputFields}
       </DynamicDialog>
   );
