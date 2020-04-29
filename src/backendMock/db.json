@@ -114,6 +114,32 @@
       "id": 3
     }
   ],
+  "npks": [
+    {
+      "name": "Elektro und Telekommunikation",
+      "id": 500
+    },
+    {
+      "name": "Elektroanlagen: Anlagebeschreibung",
+      "id": 501
+    },
+    {
+      "name": "Elektroanlagen: Ausführungsbestimmungen Elektro",
+      "id": 502
+    },
+    {
+      "name": "Telekommunikationsgeräte, Aktivkomponenten und dgl. (T)",
+      "id": 557
+    },
+    {
+      "name": "Honorare: Elektroingenieur",
+      "id": 873
+    },
+    {
+      "name": "Arbeiten für Elektroanlagen und Informatik",
+      "id": 950
+    }
+  ],
   "products": [
     {
       "name": "testArticle",
