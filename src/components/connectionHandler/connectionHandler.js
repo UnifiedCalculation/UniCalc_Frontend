@@ -165,7 +165,7 @@ export async function getNpks(onError, callback) {
 }
 
 export async function submitNewArticle(articleData, onError, callback) {
-  axios.post('projects', articleData)
+  axios.post('company/articles', articleData)
       .then(res => {
         if (callback) {
           callback(res.data);
