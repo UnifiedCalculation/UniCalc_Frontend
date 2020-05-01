@@ -46,7 +46,7 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
         {addNewArticleDialog}
         <Button variant="outlined" color="primary" disableElevation onClick={openNewArticleDialog}>{buttonName}</Button>
         <AddArticle setErrorMessage={setErrorMessage} />
-        <ArticleTable/>
+        <ArticleTable setErrorMessage={setErrorMessage}/>
       </div>
   );
 }

@@ -164,6 +164,16 @@ export async function getNpks(onError, callback) {
       .catch(error => handleErrors(error, onError));
 }
 
+export async function getProducts(onError, callback) {
+  axios.get('products')
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
 export async function submitNewArticle(articleData, onError, callback) {
   axios.post('company/articles', articleData)
       .then(res => {
