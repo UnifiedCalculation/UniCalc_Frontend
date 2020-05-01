@@ -40,10 +40,33 @@ const AddArticleDialog = ({setErrorMessage, onCancel, onSubmit, show, ...props})
       select: true,
       options: [
         {
-          //todo fill units
-          name: 'Tonnen',
+          name: 't',
           value: 'tons'
-        }
+        },
+        {
+          name: 'Stk.',
+          value: 'pieces'
+        },
+        {
+          name: 'm',
+          value: 'meter'
+        },
+        {
+          name: 'kg',
+          value: 'kilo'
+        },
+        {
+          name: 'l',
+          value: 'liter'
+        },
+        {
+          name: 'qm',
+          value: 'squarem'
+        },
+        {
+          name: 'h',
+          value: 'hours'
+        },
       ],
     },
     {
