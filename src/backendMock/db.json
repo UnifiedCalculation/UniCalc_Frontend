@@ -149,6 +149,15 @@
       "unit": "Tonnen",
       "description": "Der erste Artikel",
       "id": 1
+    },
+    {
+      "npk": "501 Elektroanlagen: Anlagebeschreibung",
+      "number": "A31",
+      "name": "Grosse Steckdose",
+      "price": 21,
+      "unit": "kilo",
+      "description": "Der zweite Artikel",
+      "id": 2
     }
   ],
   "customers": [

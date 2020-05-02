@@ -151,7 +151,6 @@ const AddArticleDialog = ({setErrorMessage, onCancel, onSubmit, show, ...props})
 }
 
 AddArticleDialog.propTypes = {
-  npks: PropTypes.array.isRequired,
   onCancel: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired

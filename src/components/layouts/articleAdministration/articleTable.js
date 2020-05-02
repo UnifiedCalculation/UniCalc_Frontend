@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {lighten, makeStyles} from '@material-ui/core/styles';
@@ -23,27 +23,31 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import {getProducts} from "../../connectionHandler/connectionHandler";
 
 
-const ArticleTable = ({setErrorMessage}) => {
+const ArticleTable = ({setErrorMessage, }) => {
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    getProducts(setErrorMessage, setProducts)
+  }, []);
 
   function createData(npk, id, title, price, unit, description) {
     return {npk, id, title, price, unit, description};
   }
 
-  const [products, setProducts] = useState([]);
+  const rows = products.map(function (item, index, array) {
+    console.log(item);
+    return createData(item.npk, item.id, item.title, item.price, item.unit, item.description);
+  });
 
-  function fillArticles() {
-    getProducts(setErrorMessage, setProducts);
-    createData(products.npk, products.id, products.title, products.price, products.unit, products.description)
-  }
-
-  const rows = [
+      /*[
     createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
     createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
     createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
     createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
     createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
     createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
-  ];
+  ];*/
 
   function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
