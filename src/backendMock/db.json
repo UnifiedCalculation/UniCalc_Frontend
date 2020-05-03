@@ -626,5 +626,10 @@
       "lastName": "Mcguire",
       "id": "5ea5360362b530a32b8cd19b"
     }
-  ]
+  ],
+  "username": {
+    "firstName": "Alberto",
+    "lastName": "Rodriguez"
+  }
+  
 }
