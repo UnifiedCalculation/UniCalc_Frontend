@@ -3,7 +3,7 @@ import Navigation from '../layouts/navigation'
 import Header from "../header/header";
 import './singlePage.css'
 
-import ProjectCard from '../projectCard/projectCard';
+import DynamicCard from '../dynamicCard/dynamicCard';
 import NewProjectDialog from '../newProjectDialog/newProjectDialog';
 import ProjectDisplay from '../projectDisplay/projectDisplay';
 import Loading from '../loading/loading';
@@ -58,7 +58,7 @@ const SinglePage = () => {
 
   let addProjectCard = [];
   addProjectCard.push(
-    <ProjectCard
+    <DynamicCard
       key={'0-projectCard'}
       projectName={'Neues Projekt'}
       description={'Hier eine neues Projekt erstellen!'}
@@ -72,7 +72,7 @@ const SinglePage = () => {
     <div className="flexCards">
       {addProjectCard.concat(projects ?
         projects.map((entry, index) =>
-          <ProjectCard
+          <DynamicCard
             key={(index + 1) + "-projectCard"}
             onClick={() => setProjectData(entry)}
             projectName={entry.name}

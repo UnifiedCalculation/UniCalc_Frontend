@@ -11,7 +11,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 
-import ProjectCard from '../projectCard/projectCard';
+import DynamicCard from '../dynamicCard/dynamicCard';
 import NewOfferDialog from '../newOfferDialog/newOfferDialog';
 import OfferDisplay from '../offerDisplay/offerDisplay';
 import BackButton from '../layouts/backButton/backButton';
@@ -46,8 +46,14 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
             margin: 'auto',
         },
         heading: {
-            fontSize: theme.typography.pxToRem(15),
+            fontSize: theme.typography.pxToRem(35),
             fontWeight: theme.typography.fontWeightRegular,
+            flexBasis: '93.00%',
+            flexShrink: 0,
+        },
+        tertiaryHeadingButton: {
+            fontSize: theme.typography.pxToRem(15),
+            flexBasis: '7.00%',
         },
         table: {
             minWidth: 300,
@@ -70,7 +76,7 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
 
     let addOfferCard = [];
     addOfferCard.push(
-        <ProjectCard
+        <DynamicCard
             key={'0-offerCard'}
             projectName={'Neue Offerte'}
             description={'Hier eine neue Offerte erstellen!'}
@@ -82,7 +88,7 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
     const offerCards =
         addOfferCard.concat(offers ?
             offers.map((entry, index) =>
-                <ProjectCard
+                <DynamicCard
                     key={(index + 1) + "-offerCard"}
                     onClick={() => setOfferDetails(offers[index])}
                     projectName={entry.name}
@@ -134,7 +140,8 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
         </TableContainer >
         : null;
 
-    const content = offerDetails ? <OfferDisplay projectId={projectData.id} offerData={offerDetails} onClose={() => setOfferDetails(null)} onError={onError} />
+    const content = offerDetails ? 
+        <OfferDisplay projectId={projectData.id} offerData={offerDetails} onClose={() => setOfferDetails(null)} onError={onError} />
         : <div className={classes.root}>
             <BackButton onClick={onClose} />
             <NewOfferDialog
@@ -148,7 +155,6 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
                     id="panel1a-header"
 
                 >
-                    <Typography gutterBottom variant="h5" component="h2">{projectData.name}</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     {projectDetails}
