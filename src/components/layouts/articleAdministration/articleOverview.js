@@ -10,7 +10,6 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
 
   const [showNewArticleDialog, setNewArticleDialogViewState] = useState(false);
   const [articleData, setArticleData] = useState([]);
-  const [articles, setArticles] = useState(null)
   const buttonName = "Neuen Artikel hinzufügen";
   const [products, setProducts] = useState([]);
   const [npks, setNpks] = useState([]);
@@ -20,8 +19,13 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
     setArticleData([]);
   }
 
-  const getArticles = () => {
-    setArticles(API.getArticles(setErrorMessage, setArticles));
+  const getProducts = () => {
+    API.getArticles(setErrorMessage, setProducts);
+  }
+  
+  const loadNewProducts = () => {
+    closeNewArticleDialog();
+    getProducts();
   }
 
   const openNewArticleDialog = () => {
@@ -32,7 +36,7 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
   const submitNewArticle = (newArticleData) => {
     setNewArticleDialogViewState(false);
     console.log(JSON.stringify(newArticleData));
-    API.submitNewArticle(newArticleData, function () { return API.getArticles(setErrorMessage, setArticles); });
+    API.submitNewArticle(newArticleData, setErrorMessage, getProducts);
   }
 
   const addNewArticleDialog =
@@ -40,7 +44,7 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
           show={showNewArticleDialog}
           articles={articleData}
           onCancel={closeNewArticleDialog}
-          onSubmit={submitNewArticle}
+          onSubmit={loadNewProducts}
           products={products}
           npks={npks}
           setNpks={setNpks}
@@ -50,7 +54,6 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
       <div>
         {addNewArticleDialog}
         <Button variant="outlined" color="primary" disableElevation onClick={openNewArticleDialog}>{buttonName}</Button>
-        <AddArticle setErrorMessage={setErrorMessage} />
         <ArticleTable npks={npks} setErrorMessage={setErrorMessage} setProducts={setProducts} products={products}/>
       </div>
   );
