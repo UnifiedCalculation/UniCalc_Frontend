@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Navigation from '../layouts/navigation'
-import Header from "../layouts/header/header";
+import Header from "../header/header";
 import './singlePage.css'
 
 import ProjectCard from '../projectCard/projectCard';
