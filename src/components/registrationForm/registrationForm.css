@@ -1,7 +1,6 @@
-.LoginForm {
+.RegistrationForm {
   text-align: center;
   background-color: lightgray;
-  height: 100vh;
   display: flex;
   overflow: auto;
   flex-direction: column;
@@ -22,11 +21,18 @@
     height: 100px;
   }
 
+  .RegistrationForm {
+    height: 100vh;
+  }
 
 }
 
 @media screen and (max-width:600px) {
   .property img {
     height: 50px;
+  }
+
+  .RegistrationForm {
+    height: auto;
   }
 }

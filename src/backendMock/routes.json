@@ -5,5 +5,5 @@
     "/projects/*/offers/:id/entries": "/offers/:id/entries",
     "/projects/*/offers/*/entries/:id": "/entries/:id?_embed=articles",
     "/projects/*/offers/*/entries/:id/articles": "/entries/:id/articles",
-    "/articles": "/products"
+    "/company/articles": "/products"
 }
