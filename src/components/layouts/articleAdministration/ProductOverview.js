@@ -10,8 +10,10 @@ import AddNpkProductDialog from "./addNpkProductDialog";
 const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show, ...props }) =>  {
 
   const [showNewArticleDialog, setNewProductDialogViewState] = useState(false);
+  const [showNewNpkArticleDialog, setNewNpkProductDialogViewState] = useState(false);
   const [productData, setProductData] = useState([]);
   const buttonName = "Neuen Artikel hinzufügen";
+  const buttonNpkName = "Neuen NPK Artikel hinzufügen";
   const [products, setProducts] = useState([]);
   const [npks, setNpks] = useState([]);
 
@@ -30,7 +32,10 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
   }
 
   const openNewProductDialog = () => {
-    //API.getCustomers(setErrorMessage, setCustomerData);
+    setNewProductDialogViewState(true);
+  }
+
+  const openNewNpkProductDialog = () => {
     setNewProductDialogViewState(true);
   }
 
@@ -51,10 +56,22 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
           setNpks={setNpks}
       />
 
+  const addNewNpkProductDialog =
+      <AddNpkProductDialog
+          show={showNewArticleDialog}
+          articles={productData}
+          onCancel={closeNewProductDialog}
+          onSubmit={loadNewProducts}
+          products={products}
+          npks={npks}
+          setNpks={setNpks}
+      />
+
   return (
       <div>
         {addNewProductDialog}
         <Button variant="outlined" color="primary" disableElevation onClick={openNewProductDialog}>{buttonName}</Button>
+        <Button variant="outlined" color="primary" disableElevation onClick={openNewNpkProductDialog}>{buttonNpkName}</Button>
         <ProductTable npks={npks} setErrorMessage={setErrorMessage} setProducts={setProducts} products={products}/>
       </div>
   );
