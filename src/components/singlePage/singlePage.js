@@ -97,7 +97,7 @@ const SinglePage = () => {
 
   return (
     <div className="mainPage">
-      <Header />
+      <Header onError={setErrorMessage}/>
       {addNewProjectDialog}
       {projectCards}
       {projectDisplay}
