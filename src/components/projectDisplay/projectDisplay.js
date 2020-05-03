@@ -4,6 +4,9 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPen, faTrash, faTools, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -155,6 +158,10 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
                     id="panel1a-header"
 
                 >
+                    <Typography className={classes.heading} gutterBottom variant="h5" component="h2">{projectData.name}</Typography>
+                    <IconButton className={classes.tertiaryHeadingButton} >
+                        <FontAwesomeIcon icon={faPen} />
+                    </IconButton>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     {projectDetails}
