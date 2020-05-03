@@ -38,8 +38,12 @@ const Header = (onError) => {
   });
 
   useEffect(() => {
-    
+    API.getUserData(onError, parseUserName);
   },[]);
+
+  const parseUserName = (userData) => {
+    setUsername(userData.firstName + ' ' + userData.lastName);
+  }
 
   const classes = useStyles();
 
