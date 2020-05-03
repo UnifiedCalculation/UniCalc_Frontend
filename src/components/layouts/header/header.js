@@ -36,7 +36,9 @@ const Header = () => {
 
   return (
       <div className={classes.header}>
+        <a href='/'>
         <img className={classes.logo} src={Logo} alt={'Logo uniCalc'} height={'50px'}/>
+        </a>
         <div className={classes.headerRight}>
           <SettingsIcon className={classes.options} style={{fill: "white", fontSize: 40}}/>
           <div className={classes.username}>Username</div>
