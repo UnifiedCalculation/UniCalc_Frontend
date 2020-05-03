@@ -23,29 +23,48 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import {getProducts} from "../../connectionHandler/connectionHandler";
 
 
-const ArticleTable = ({setErrorMessage, products, setProducts}) => {
+const ArticleTable = ({setErrorMessage, products, setProducts, npks}) => {
 
   useEffect(() => {
     getProducts(setErrorMessage, setProducts)
   }, []);
 
-  function createData(npk, id, title, price, unit, description) {
-    return {npk, id, title, price, unit, description};
+  function createData(id, title, price, unit, description) {
+    return {id, title, price, unit, description};
+  }
+
+  function getNpkName(npkId) {
+    let found = npks.find(element => element.id == npkId);
+    console.log(found)
+    return found.name;
   }
 
   const rows = products.map(function (item) {
-    console.log(item);
-    return createData(item.npk, item.id, item.title, item.price, item.unit, item.description);
+    if (item.npk === "") {
+      return createData(
+          item.number,
+          item.name,
+          item.price.toFixed(2),
+          item.unit,
+          item.description);
+    } else {
+      return createData(
+          item.npk,
+          getNpkName(item.npk),
+          item.price.toFixed(2),
+          item.unit,
+          item.description);
+    }
   });
 
-      /*[
-    createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
-    createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
-    createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
-    createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
-    createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
-    createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
-  ];*/
+  /*[
+createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
+createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
+createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
+createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
+createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
+createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
+];*/
 
   function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -74,7 +93,6 @@ const ArticleTable = ({setErrorMessage, products, setProducts}) => {
   }
 
   const headCells = [
-    {id: 'npk', numeric: false, disablePadding: true, label: 'NPK Gruppe'},
     {id: 'id', numeric: false, disablePadding: false, label: 'Artikelnr.'},
     {id: 'title', numeric: false, disablePadding: false, label: 'Artikelbez.'},
     {id: 'price', numeric: true, disablePadding: false, label: 'Preis'},
@@ -323,10 +341,9 @@ const ArticleTable = ({setErrorMessage, products, setProducts}) => {
                                   inputProps={{'aria-labelledby': labelId}}
                               />
                             </TableCell>
-                            <TableCell component="th" id={labelId} scope="row" padding="none">
-                              {row.npk}
+                            <TableCell align="left" component="th" id={labelId} scope="row" padding="none">
+                              {row.id}
                             </TableCell>
-                            <TableCell align="left">{row.id}</TableCell>
                             <TableCell align="left">{row.title}</TableCell>
                             <TableCell align="right">{row.price}</TableCell>
                             <TableCell align="left">{row.unit}</TableCell>

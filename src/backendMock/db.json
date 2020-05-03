@@ -142,7 +142,7 @@
   ],
   "products": [
     {
-      "npk": "501 Elektroanlagen: Anlagebeschreibung",
+      "npk": "501",
       "number": "1234",
       "name": "Test",
       "price": 123,
@@ -151,7 +151,7 @@
       "id": 1
     },
     {
-      "npk": "501 Elektroanlagen: Anlagebeschreibung",
+      "npk": "501",
       "number": "A31",
       "name": "Grosse Steckdose",
       "price": 21,
@@ -167,6 +167,15 @@
       "unit": "meter",
       "description": "Kabelsalat",
       "id": 3
+    },
+    {
+      "npk": "",
+      "number": "12345",
+      "name": "Der dritte",
+      "price": 3,
+      "unit": "pieces",
+      "description": "3",
+      "id": 4
     }
   ],
   "customers": [
