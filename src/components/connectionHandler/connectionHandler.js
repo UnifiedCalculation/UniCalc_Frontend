@@ -105,6 +105,16 @@ export async function deleteEntryFromOffer(projectId, offerId, entryId, onError,
         .catch(error => handleErrors(error, onError));
 }
 
+export async function getUserData(onError, callback){
+    axios.get('username')
+        .then(res => {
+            if (callback) {
+                callback(res.data);
+            }
+        })
+        .catch(error => handleErrors(error, onError));
+}
+
 export async function addArticleToEntry(projectId, offerId, entryId, article, onError, callback) {
     axios.post('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId + '/articles', article)
         .then(res => {
