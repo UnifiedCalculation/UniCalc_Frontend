@@ -12,6 +12,8 @@ import ArticleOverview from "../layouts/articleAdministration/articleOverview";
 
 import SnackbarOverlay from '../snackbar/snackbar';
 
+import SnackbarOverlay from '../snackbar/snackbar';
+
 const SinglePage = () => {
 
   const [errorMessage, setErrorMessage] = useState("");

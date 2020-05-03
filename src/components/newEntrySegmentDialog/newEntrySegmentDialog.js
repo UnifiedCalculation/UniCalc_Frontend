@@ -18,8 +18,8 @@ const NewEntrySegmentDialog = ({ onCancel, onSubmit, show, segmentName, discount
 
     const textfields = [
         {
-            id: 'name',
-            label: 'Segmentname',
+            id: 'title',
+            label: 'Titel des Segments',
             type: 'text',
             required: true,
             value: segmentName,
