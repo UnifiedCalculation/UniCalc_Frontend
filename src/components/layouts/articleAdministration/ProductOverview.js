@@ -3,8 +3,8 @@ import ProductTable from "./productTable";
 import Button from "@material-ui/core/Button";
 import * as API from "../../connectionHandler/connectionHandler";
 import AddProductDialog from "./addProductDialog";
-import {getProducts} from "../../connectionHandler/connectionHandler";
 import AddNpkProductDialog from "./addNpkProductDialog";
+import {getProducts} from "../../connectionHandler/connectionHandler";
 
 
 const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show, ...props }) =>  {
@@ -22,12 +22,18 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
     setProductData([]);
   }
 
+  const closeNewNpkProductDialog = () => {
+    setNewProductDialogViewState(false);
+    setProductData([]);
+  }
+
   const getProducts = () => {
     API.getProducts(setErrorMessage, setProducts);
   }
 
   const loadNewProducts = () => {
     closeNewProductDialog();
+    closeNewNpkProductDialog();
     getProducts();
   }
 
@@ -36,7 +42,7 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
   }
 
   const openNewNpkProductDialog = () => {
-    setNewProductDialogViewState(true);
+    setNewNpkProductDialogViewState(true);
   }
 
   const submitNewArticle = (newArticleData) => {
@@ -46,7 +52,7 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
   }
 
   const addNewProductDialog =
-      <AddNpkProductDialog
+      <AddProductDialog
           show={showNewArticleDialog}
           articles={productData}
           onCancel={closeNewProductDialog}
@@ -58,9 +64,9 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
 
   const addNewNpkProductDialog =
       <AddNpkProductDialog
-          show={showNewArticleDialog}
+          show={showNewNpkArticleDialog}
           articles={productData}
-          onCancel={closeNewProductDialog}
+          onCancel={closeNewNpkProductDialog}
           onSubmit={loadNewProducts}
           products={products}
           npks={npks}
@@ -70,6 +76,8 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
   return (
       <div>
         {addNewProductDialog}
+        {addNewNpkProductDialog}
+
         <Button variant="outlined" color="primary" disableElevation onClick={openNewProductDialog}>{buttonName}</Button>
         <Button variant="outlined" color="primary" disableElevation onClick={openNewNpkProductDialog}>{buttonNpkName}</Button>
         <ProductTable npks={npks} setErrorMessage={setErrorMessage} setProducts={setProducts} products={products}/>
