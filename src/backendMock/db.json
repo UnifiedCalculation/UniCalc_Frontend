@@ -158,6 +158,15 @@
       "unit": "kilo",
       "description": "Der zweite Artikel",
       "id": 2
+    },
+    {
+      "npk": "",
+      "number": "111",
+      "name": "Artikel 3",
+      "price": 12,
+      "unit": "meter",
+      "description": "Kabelsalat",
+      "id": 3
     }
   ],
   "customers": [

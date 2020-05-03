@@ -12,6 +12,8 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
   const [articleData, setArticleData] = useState([]);
   const [articles, setArticles] = useState(null)
   const buttonName = "Neuen Artikel hinzufügen";
+  const [products, setProducts] = useState([]);
+  const [npks, setNpks] = useState([]);
 
   const closeNewArticleDialog = () => {
     setNewArticleDialogViewState(false);
@@ -39,6 +41,9 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
           articles={articleData}
           onCancel={closeNewArticleDialog}
           onSubmit={submitNewArticle}
+          products={products}
+          npks={npks}
+          setNpks={setNpks}
       />
 
   return (
@@ -46,7 +51,7 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
         {addNewArticleDialog}
         <Button variant="outlined" color="primary" disableElevation onClick={openNewArticleDialog}>{buttonName}</Button>
         <AddArticle setErrorMessage={setErrorMessage} />
-        <ArticleTable setErrorMessage={setErrorMessage}/>
+        <ArticleTable setErrorMessage={setErrorMessage} setProducts={setProducts} products={products}/>
       </div>
   );
 }

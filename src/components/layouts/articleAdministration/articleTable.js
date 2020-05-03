@@ -23,9 +23,7 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import {getProducts} from "../../connectionHandler/connectionHandler";
 
 
-const ArticleTable = ({setErrorMessage, }) => {
-
-  const [products, setProducts] = useState([]);
+const ArticleTable = ({setErrorMessage, products, setProducts}) => {
 
   useEffect(() => {
     getProducts(setErrorMessage, setProducts)
@@ -35,7 +33,7 @@ const ArticleTable = ({setErrorMessage, }) => {
     return {npk, id, title, price, unit, description};
   }
 
-  const rows = products.map(function (item, index, array) {
+  const rows = products.map(function (item) {
     console.log(item);
     return createData(item.npk, item.id, item.title, item.price, item.unit, item.description);
   });

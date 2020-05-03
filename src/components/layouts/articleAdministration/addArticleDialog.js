@@ -5,9 +5,9 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {getNpks, submitNewArticle} from "../../connectionHandler/connectionHandler";
 import MenuItem from "@material-ui/core/MenuItem";
+import {getProducts} from "../../connectionHandler/connectionHandler";
 
-const AddArticleDialog = ({setErrorMessage, onCancel, onSubmit, show, ...props}) => {
-  const [npks, setNpks] = useState([]);
+const AddArticleDialog = ({setErrorMessage, onCancel, onSubmit, show, setProducts, npks, setNpks, ...props}) => {
 
   const cancelButtonText = 'Abbrechen';
   const acceptButtonText = 'Bestätigen';
@@ -78,7 +78,8 @@ const AddArticleDialog = ({setErrorMessage, onCancel, onSubmit, show, ...props})
   ];
 
   const saveNewArticle = (articleData) => {
-    submitNewArticle(articleData, setErrorMessage)
+    submitNewArticle(articleData, setErrorMessage);
+    getProducts(setErrorMessage, setProducts);
   }
 
   const parseArticleData = (articleData) => {
@@ -103,13 +104,13 @@ const AddArticleDialog = ({setErrorMessage, onCancel, onSubmit, show, ...props})
                   type="textarea"
                   name="npk"
                   fullWidth
-                  required
+                  //required
                   margin='dense'/>
           }
       />
 
   const inputFields = textfields.map((entry, index) => {
-        return         <TextField
+        return <TextField
             inputProps={entry.inputProps}
             type={entry.type}
             id={entry.id}
