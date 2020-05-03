@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import * as API from '../connectionHandler/connectionHandler'
 
 
-const Header = () => {
+const Header = (onError) => {
 
   const [username,setUsername] = useState(null);
 
