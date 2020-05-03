@@ -23,7 +23,7 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import {getProducts} from "../../connectionHandler/connectionHandler";
 
 
-const ArticleTable = ({setErrorMessage, products, setProducts, npks}) => {
+const ProductTable = ({setErrorMessage, products, setProducts, npks}) => {
 
   useEffect(() => {
     getProducts(setErrorMessage, setProducts)
@@ -35,7 +35,6 @@ const ArticleTable = ({setErrorMessage, products, setProducts, npks}) => {
 
   function getNpkName(npkId) {
     let found = npks.find(element => element.id == npkId);
-    console.log(found)
     return found.name;
   }
 
@@ -56,15 +55,6 @@ const ArticleTable = ({setErrorMessage, products, setProducts, npks}) => {
           item.description);
     }
   });
-
-  /*[
-createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
-createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
-createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
-createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
-createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
-createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
-];*/
 
   function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -377,4 +367,4 @@ createData('Cupcake', "305", "3.7", 67, "4.3", "hoi"),
   );
 }
 
-export default ArticleTable;
+export default ProductTable;

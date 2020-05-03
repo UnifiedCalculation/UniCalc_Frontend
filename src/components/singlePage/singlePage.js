@@ -8,9 +8,7 @@ import NewProjectDialog from '../newProjectDialog/newProjectDialog';
 import ProjectDisplay from '../projectDisplay/projectDisplay';
 import Loading from '../loading/loading';
 import * as API from '../connectionHandler/connectionHandler';
-import ArticleOverview from "../layouts/articleAdministration/articleOverview";
-
-import SnackbarOverlay from '../snackbar/snackbar';
+import ProductOverview from "../layouts/articleAdministration/ProductOverview";
 
 import SnackbarOverlay from '../snackbar/snackbar';
 
@@ -99,7 +97,7 @@ const SinglePage = () => {
       {addNewProjectDialog}
       {projectCards}
       {projectDisplay}
-      <ArticleOverview setErrorMessage={setErrorMessage}/>
+      <ProductOverview setErrorMessage={setErrorMessage}/>
       <Navigation />
       <div className="content">
         {snackbar}

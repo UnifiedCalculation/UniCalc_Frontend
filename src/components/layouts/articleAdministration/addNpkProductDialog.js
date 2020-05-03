@@ -3,12 +3,13 @@ import DynamicDialog from "../../dynamicDialog/dynamicDialog";
 import PropTypes, {func} from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import {getNpks, submitNewArticle} from "../../connectionHandler/connectionHandler";
+import {getNpks, submitNewProduct} from "../../connectionHandler/connectionHandler";
 import MenuItem from "@material-ui/core/MenuItem";
 import {getProducts} from "../../connectionHandler/connectionHandler";
 
-const AddArticleDialog = ({setErrorMessage, onCancel, onSubmit, show, setProducts, npks, setNpks, ...props}) => {
+const AddNpkProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProducts, npks, setNpks, ...props}) => {
 
+  const [npkInput, setNpkInput] = useState('');
   const cancelButtonText = 'Abbrechen';
   const acceptButtonText = 'Bestätigen';
   const title = 'Neuen Artikel erstellen';
@@ -78,8 +79,7 @@ const AddArticleDialog = ({setErrorMessage, onCancel, onSubmit, show, setProduct
   ];
 
   const saveNewArticle = (articleData) => {
-    submitNewArticle(articleData, setErrorMessage);
-    getProducts(setErrorMessage, setProducts);
+    submitNewProduct(articleData, setErrorMessage, onSubmit);
   }
 
   const parseArticleData = (articleData) => {
@@ -92,7 +92,17 @@ const AddArticleDialog = ({setErrorMessage, onCancel, onSubmit, show, setProduct
     getNpks(setErrorMessage, setNpks)
   }, []);
 
+  useEffect(() => {
+    console.log("asdfasdf")
+  }, [npkInput]);
+
+  function handleNpkChange(element) {
+    console.log("asdfasdf");
+    console.log(element);
+  }
+
   const npkSelector =
+
       <Autocomplete
           id="npk-autocomplete"
           options={npks}
@@ -100,17 +110,19 @@ const AddArticleDialog = ({setErrorMessage, onCancel, onSubmit, show, setProduct
           renderInput={(params) =>
               <TextField
                   {...params}
+                  value={npkInput}
                   id="npk"
                   label="NPK Gruppe"
                   type="textarea"
                   name="npk"
                   fullWidth
-                  //required
+                  onChange={(e) => setNpkInput(e.target.value)}
                   margin='dense'/>
           }
       />
 
   const inputFields = textfields.map((entry, index) => {
+
         return <TextField
             inputProps={entry.inputProps}
             type={entry.type}
@@ -152,10 +164,10 @@ const AddArticleDialog = ({setErrorMessage, onCancel, onSubmit, show, setProduct
   );
 }
 
-AddArticleDialog.propTypes = {
+AddNpkProductDialog.propTypes = {
   onCancel: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired
 }
 
-export default AddArticleDialog;
+export default AddNpkProductDialog;

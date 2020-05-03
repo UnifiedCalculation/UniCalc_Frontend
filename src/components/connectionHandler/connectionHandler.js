@@ -174,8 +174,8 @@ export async function getProducts(onError, callback) {
       .catch(error => handleErrors(error, onError));
 }
 
-export async function submitNewArticle(articleData, onError, callback) {
-  axios.post('articles', articleData)
+export async function submitNewProduct(articleData, onError, callback) {
+  axios.post('products', articleData)
       .then(res => {
         if (callback) {
           callback(res.data);
