@@ -28,7 +28,8 @@ const Header = (onError) => {
     username:{
       color: '#FFF',
       float: 'right',
-      marginTop: '12px'
+      marginTop: '12px',
+      marginRight: '12px'
       //verticalAlign: 'top'
     },
     headerRight:{
