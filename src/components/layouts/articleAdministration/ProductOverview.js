@@ -9,8 +9,8 @@ import {getProducts} from "../../connectionHandler/connectionHandler";
 
 const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show, ...props }) =>  {
 
-  const [showNewArticleDialog, setNewProductDialogViewState] = useState(false);
-  const [showNewNpkArticleDialog, setNewNpkProductDialogViewState] = useState(false);
+  const [showNewProductDialog, setNewProductDialogViewState] = useState(false);
+  const [showNewNpProductDialog, setNewNpkProductDialogViewState] = useState(false);
   const [productData, setProductData] = useState([]);
   const buttonName = "Neuen Artikel hinzufügen";
   const buttonNpkName = "Neuen NPK Artikel hinzufügen";
@@ -23,7 +23,7 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
   }
 
   const closeNewNpkProductDialog = () => {
-    setNewProductDialogViewState(false);
+    setNewNpkProductDialogViewState(false);
     setProductData([]);
   }
 
@@ -53,7 +53,7 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
 
   const addNewProductDialog =
       <AddProductDialog
-          show={showNewArticleDialog}
+          show={showNewProductDialog}
           articles={productData}
           onCancel={closeNewProductDialog}
           onSubmit={loadNewProducts}
@@ -64,7 +64,7 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
 
   const addNewNpkProductDialog =
       <AddNpkProductDialog
-          show={showNewNpkArticleDialog}
+          show={showNewNpProductDialog}
           articles={productData}
           onCancel={closeNewNpkProductDialog}
           onSubmit={loadNewProducts}

@@ -48,8 +48,8 @@ const ProductTable = ({setErrorMessage, products, setProducts, npks}) => {
           item.description);
     } else {
       return createData(
-          item.npk,
-          getNpkName(item.npk),
+          (item.npk + "." + item.number),
+          item.name,
           item.price.toFixed(2),
           item.unit,
           item.description);

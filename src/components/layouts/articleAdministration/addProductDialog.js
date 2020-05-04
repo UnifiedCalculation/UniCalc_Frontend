@@ -83,6 +83,7 @@ const AddProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProduct
 
   const parseArticleData = (articleData) => {
     articleData.price = parseInt(articleData.price);
+    articleData.npk = "";
     saveNewArticle(articleData);
   }
 

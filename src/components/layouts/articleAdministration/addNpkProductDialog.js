@@ -9,7 +9,6 @@ import {getProducts} from "../../connectionHandler/connectionHandler";
 
 const AddNpkProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProducts, npks, setNpks, ...props}) => {
 
-  const [npkInput, setNpkInput] = useState('');
   const cancelButtonText = 'Abbrechen';
   const acceptButtonText = 'Bestätigen';
   const title = 'Neuen Artikel erstellen';
@@ -18,12 +17,6 @@ const AddNpkProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProd
     {
       id: 'number',
       label: 'Artikelnummer',
-      type: 'textarea',
-      required: true
-    },
-    {
-      id: 'name',
-      label: 'Artikelbezeichnung',
       type: 'textarea',
       required: true
     },
@@ -84,22 +77,15 @@ const AddNpkProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProd
 
   const parseArticleData = (articleData) => {
     articleData.price = parseInt(articleData.price);
-    articleData.npk = articleData.npk.substring(0, 3);
+    //articleData.npk = articleData.npk.substring(0, 3);
+    articleData.name = (articleData.npk.split(" "))[1]
+    articleData.npk = (articleData.npk.split(" "))[0]
     saveNewArticle(articleData);
   }
 
   useEffect(() => {
     getNpks(setErrorMessage, setNpks)
   }, []);
-
-  useEffect(() => {
-    console.log("asdfasdf")
-  }, [npkInput]);
-
-  function handleNpkChange(element) {
-    console.log("asdfasdf");
-    console.log(element);
-  }
 
   const npkSelector =
 
@@ -110,13 +96,11 @@ const AddNpkProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProd
           renderInput={(params) =>
               <TextField
                   {...params}
-                  value={npkInput}
                   id="npk"
                   label="NPK Gruppe"
                   type="textarea"
                   name="npk"
                   fullWidth
-                  onChange={(e) => setNpkInput(e.target.value)}
                   margin='dense'/>
           }
       />
