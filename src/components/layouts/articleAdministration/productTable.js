@@ -99,14 +99,6 @@ const ProductTable = ({setErrorMessage, products, setProducts, npks}) => {
     return (
         <TableHead>
           <TableRow>
-            <TableCell padding="checkbox">
-              <Checkbox
-                  indeterminate={numSelected > 0 && numSelected < rowCount}
-                  checked={rowCount > 0 && numSelected === rowCount}
-                  onChange={onSelectAllClick}
-                  inputProps={{'aria-label': 'select all desserts'}}
-              />
-            </TableCell>
             {headCells.map((headCell) => (
                 <TableCell
                     key={headCell.id}
@@ -325,13 +317,7 @@ const ProductTable = ({setErrorMessage, products, setProducts, npks}) => {
                               key={row.name}
                               selected={isItemSelected}
                           >
-                            <TableCell padding="checkbox">
-                              <Checkbox
-                                  checked={isItemSelected}
-                                  inputProps={{'aria-labelledby': labelId}}
-                              />
-                            </TableCell>
-                            <TableCell align="left" component="th" id={labelId} scope="row" padding="none">
+                            <TableCell align="left" component="th" id={labelId} scope="row" >
                               {row.id}
                             </TableCell>
                             <TableCell align="left">{row.title}</TableCell>
