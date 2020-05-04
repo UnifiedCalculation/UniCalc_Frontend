@@ -5,9 +5,10 @@ import * as API from "../../connectionHandler/connectionHandler";
 import AddProductDialog from "./addProductDialog";
 import AddNpkProductDialog from "./addNpkProductDialog";
 import {getProducts} from "../../connectionHandler/connectionHandler";
+import {makeStyles} from "@material-ui/core/styles";
 
 
-const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show, ...props }) =>  {
+const ProductOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show, ...props }) =>  {
 
   const [showNewProductDialog, setNewProductDialogViewState] = useState(false);
   const [showNewNpProductDialog, setNewNpkProductDialogViewState] = useState(false);
@@ -16,6 +17,22 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
   const buttonNpkName = "Neuen NPK Artikel hinzufügen";
   const [products, setProducts] = useState([]);
   const [npks, setNpks] = useState([]);
+
+  const useStyles = makeStyles({
+    overlay:{
+      top: '50px',
+      width: '100%',
+      backgroundColor: 'white',
+      position: "fixed",
+      height: "100%",
+      bottom: "50px",
+      zIndex: 999,
+      padding: "20px",
+      boxSizing: 'border-box'
+    },
+  });
+
+  const classes = useStyles();
 
   const closeNewProductDialog = () => {
     setNewProductDialogViewState(false);
@@ -74,7 +91,7 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
       />
 
   return (
-      <div>
+      <div className={classes.overlay}>
         {addNewProductDialog}
         {addNewNpkProductDialog}
 
@@ -85,4 +102,4 @@ const ArticleOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
   );
 }
 
-export default ArticleOverview;
+export default ProductOverview;
