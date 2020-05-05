@@ -114,15 +114,104 @@
       "id": 3
     }
   ],
+  "npks": [
+    {
+      "name": "Elektro und Telekommunikation",
+      "id": 500
+    },
+    {
+      "name": "Elektroanlagen: Anlagebeschreibung",
+      "id": 501
+    },
+    {
+      "name": "Elektroanlagen: Ausführungsbestimmungen Elektro",
+      "id": 502
+    },
+    {
+      "name": "Telekommunikationsgeräte, Aktivkomponenten und dgl. (T)",
+      "id": 557
+    },
+    {
+      "name": "Honorare: Elektroingenieur",
+      "id": 873
+    },
+    {
+      "name": "Arbeiten für Elektroanlagen und Informatik",
+      "id": 950
+    }
+  ],
   "products": [
     {
-      "name": "testArticle",
-      "price": 125.75,
-      "unit": "Stk.",
-      "npk": null,
-      "article_nr": null,
-      "description": "Some random text",
+      "npk": "501",
+      "number": "1234",
+      "name": "Test",
+      "price": 123,
+      "unit": "Tonnen",
+      "description": "Der erste Artikel",
       "id": 1
+    },
+    {
+      "npk": "501",
+      "number": "A31",
+      "name": "Grosse Steckdose",
+      "price": 21,
+      "unit": "kilo",
+      "description": "Der zweite Artikel",
+      "id": 2
+    },
+    {
+      "npk": "",
+      "number": "111",
+      "name": "Artikel 3",
+      "price": 12,
+      "unit": "meter",
+      "description": "Kabelsalat",
+      "id": 3
+    },
+    {
+      "npk": "",
+      "number": "12345",
+      "name": "Der dritte",
+      "price": 3,
+      "unit": "pieces",
+      "description": "3",
+      "id": 4
+    },
+    {
+      "npk": "",
+      "number": "1231",
+      "name": "Adsfef",
+      "price": 1231,
+      "unit": "meter",
+      "description": "Kabelsalat",
+      "id": 5
+    },
+    {
+      "npk": "501",
+      "number": "123123",
+      "name": "asdfasdf",
+      "price": 123,
+      "unit": "kilo",
+      "description": "Kabelsalat",
+      "id": 6
+    },
+    {
+      "npk": "501",
+      "number": "1234567",
+      "name": "test",
+      "price": 123,
+      "unit": "meter",
+      "description": "Kabelsalat",
+      "id": 7
+    },
+    {
+      "npk": "500",
+      "number": "12312312312312312",
+      "name": "asdf",
+      "price": 22,
+      "unit": "meter",
+      "description": "Kabelsalat",
+      "id": 8
     }
   ],
   "customers": [

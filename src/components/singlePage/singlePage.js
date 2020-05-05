@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Navigation from '../layouts/navigation'
 import Header from "../header/header";
 import './singlePage.css'
@@ -8,15 +8,14 @@ import NewProjectDialog from '../newProjectDialog/newProjectDialog';
 import ProjectDisplay from '../projectDisplay/projectDisplay';
 import Loading from '../loading/loading';
 import * as API from '../connectionHandler/connectionHandler';
-import UserOverview from "../layouts/userAdministration/userOverview";
-
+import ProductOverview from "../layouts/ProductAdministration/ProductOverview";
 import SnackbarOverlay from '../snackbar/snackbar';
 
 const SinglePage = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [projects, setProjects] = useState(null);
-
+  const [showAdminOptions, setShowAdminOptions] = useState(false)
   const [projectData, setProjectData] = useState(null);
   const [customerData, setCustomerData] = useState([]);
   const [showNewProjectDialog, setNewProjectDialogViewState] = useState(false);
@@ -24,6 +23,14 @@ const SinglePage = () => {
   useEffect(() => {
     API.getUserProjects(setErrorMessage, setProjects);
   }, []);
+
+  const triggerAdminOptions = () => {
+    setShowAdminOptions(!showAdminOptions);
+  }
+
+  const adminOptionsDisplay = showAdminOptions ?
+      <ProductOverview setErrorMessage={setErrorMessage}/>
+      : null;
 
   const emptyErrorMessage = () => {
     setErrorMessage("");
@@ -41,20 +48,18 @@ const SinglePage = () => {
 
   const submitNewProject = (newProjectData) => {
     setNewProjectDialogViewState(false);
-    API.submitNewProject(
-      newProjectData, 
-      setErrorMessage, 
-      function () { return API.getUserProjects(setErrorMessage, setProjects); }
-      );
+    API.submitNewProject(newProjectData, setErrorMessage, function () {
+      return API.getUserProjects(setErrorMessage, setProjects);
+    });
   }
 
   const addNewProjectDialog =
-    <NewProjectDialog
-      show={showNewProjectDialog}
-      customers={customerData}
-      onCancel={closeNewProjectDialog}
-      onSubmit={submitNewProject}
-    />
+      <NewProjectDialog
+          show={showNewProjectDialog}
+          customers={customerData}
+          onCancel={closeNewProjectDialog}
+          onSubmit={submitNewProject}
+      />
 
   let addProjectCard = [];
   addProjectCard.push(
@@ -83,16 +88,16 @@ const SinglePage = () => {
     </div>;
 
   const projectDisplay = projectData ?
-    <ProjectDisplay projectData={projectData} onError={setErrorMessage} onClose={() => setProjectData(null)} />
-    : null;
+      <ProjectDisplay projectData={projectData} onError={setErrorMessage} onClose={() => setProjectData(null)}/>
+      : null;
 
   const snackbar =
-    <SnackbarOverlay
-      show={errorMessage !== ""}
-      text={errorMessage}
-      severity="error"
-      onClose={emptyErrorMessage}
-    />
+      <SnackbarOverlay
+          show={errorMessage !== ""}
+          text={errorMessage}
+          severity="error"
+          onClose={emptyErrorMessage}
+      />
 
 
   return (
@@ -104,8 +109,8 @@ const SinglePage = () => {
       <Navigation />
       <div className="content">
         {snackbar}
+
       </div>
-    </div>
   );
 };
 export default SinglePage;
