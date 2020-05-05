@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {lighten, makeStyles} from '@material-ui/core/styles';
@@ -19,14 +19,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import {getProducts} from "../../connectionHandler/connectionHandler";
 
 
-const ProductTable = ({setErrorMessage, products, setProducts}) => {
-
-  useEffect(() => {
-    getProducts(setErrorMessage, setProducts)
-  }, []);
+const ProductTable = ({products}) => {
 
   function createData(id, title, price, unit, description) {
     return {id, title, price, unit, description};
@@ -85,7 +80,7 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
   ];
 
   function EnhancedTableHead(props) {
-    const {classes, order, orderBy, numSelected, rowCount, onRequestSort} = props;
+    const {classes, order, orderBy, onRequestSort} = props;
     const createSortHandler = (property) => (event) => {
       onRequestSort(event, property);
     };

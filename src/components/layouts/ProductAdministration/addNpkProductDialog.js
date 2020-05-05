@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {} from 'react';
 import DynamicDialog from "../../dynamicDialog/dynamicDialog";
-import PropTypes, {func} from "prop-types";
+import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import {getNpks, submitNewProduct} from "../../connectionHandler/connectionHandler";
+import {submitNewProduct} from "../../connectionHandler/connectionHandler";
 import MenuItem from "@material-ui/core/MenuItem";
 
 const AddNpkProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProducts, npks, setNpks, ...props}) => {
@@ -76,14 +76,10 @@ const AddNpkProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProd
 
   const parseArticleData = (articleData) => {
     articleData.price = parseInt(articleData.price);
-    articleData.name = (articleData.npk.split(" "))[1]
+    articleData.name = articleData.npk.substring(4, articleData.npk.size)
     articleData.npk = (articleData.npk.split(" "))[0]
     saveNewArticle(articleData);
   }
-
-  useEffect(() => {
-    getNpks(setErrorMessage, setNpks)
-  }, []);
 
   const npkSelector =
 

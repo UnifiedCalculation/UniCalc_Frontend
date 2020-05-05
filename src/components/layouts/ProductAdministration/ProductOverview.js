@@ -5,6 +5,7 @@ import * as API from "../../connectionHandler/connectionHandler";
 import AddProductDialog from "./addProductDialog";
 import AddNpkProductDialog from "./addNpkProductDialog";
 import {makeStyles} from "@material-ui/core/styles";
+import {getNpks} from "../../connectionHandler/connectionHandler";
 
 
 const ProductOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show, ...props }) =>  {
@@ -34,6 +35,11 @@ const ProductOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
       marginBottom: '10px'
     }
   });
+
+  useEffect(() => {
+    getNpks(setErrorMessage, setNpks)
+    getProducts(setErrorMessage, setProducts)
+  }, []);
 
   const classes = useStyles();
 
@@ -65,12 +71,6 @@ const ProductOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
     setNewNpkProductDialogViewState(true);
   }
 
-/*  const submitNewArticle = (newArticleData) => {
-    setNewProductDialogViewState(false);
-    console.log(JSON.stringify(newArticleData));
-    API.submitNewProduct(newArticleData, setErrorMessage, getProducts);
-  }*/
-
   const addNewProductDialog =
       <AddProductDialog
           show={showNewProductDialog}
@@ -78,8 +78,6 @@ const ProductOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
           onCancel={closeNewProductDialog}
           onSubmit={loadNewProducts}
           products={products}
-          npks={npks}
-          setNpks={setNpks}
       />
 
   const addNewNpkProductDialog =
