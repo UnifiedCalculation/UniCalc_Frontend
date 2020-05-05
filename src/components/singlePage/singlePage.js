@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import Navigation from '../layouts/navigation'
+import React, { useEffect, useState, createContext } from 'react';
 import Header from "../header/header";
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -10,6 +9,8 @@ import Loading from '../loading/loading';
 import * as API from '../connectionHandler/connectionHandler';
 import ProductOverview from "../layouts/ProductAdministration/ProductOverview";
 import SnackbarOverlay from '../snackbar/snackbar';
+
+export const UserContext = createContext();
 
 const useStyles = makeStyles((theme) => ({
   flexCards: {
@@ -38,31 +39,38 @@ const SinglePage = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [projects, setProjects] = useState(null);
+  const [contracts, setContracts] = useState(null);
   const [showAdminOptions, setShowAdminOptions] = useState(false)
   const [projectData, setProjectData] = useState(null);
   const [customerData, setCustomerData] = useState([]);
   const [showNewProjectDialog, setNewProjectDialogViewState] = useState(false);
-  const [username, setUsername] = useState("");
-  const [roles, setRoles] = useState([]);
+
+
+  const [user, setUser] = useState(null);
+
 
   useEffect(() => {
-    API.getUserData(setErrorMessage, parseUser);
+    API.getUserData(setErrorMessage, setUser);
   }, [])
 
   useEffect(() => {
-    if (roles.includes("Admin") || roles.includes("Verkäufer")) {
-      API.getProjects(setErrorMessage, setProjects);
-    } else if (roles.includes("Projektleiter")) {
-      API.getUserProjects(setErrorMessage, setProjects);
-    } else if (roles.includes("Mitarbeiter")) {
+    if (user) {
+      switch(true) {
+        case user.roles.includes("Admin"):
+          API.getContracts(setErrorMessage, setContracts);
+        case user.roles.includes("Verkäufer"):
+          API.getProjects(setErrorMessage, setProjects);
+          break;
+        case user.roles.includes("Projektleiter"):
+          API.getUserProjects(setErrorMessage, setProjects);
+          break;
+        case user.roles.includes("Mitarbeiter"):
+          API.getUserContracts(setErrorMessage, setContracts);
+        default:
+          setErrorMessage("User hat keine Rollen. Kontaktiere deinen Administrator!");
+      }
     }
-  }, [roles]);
-
-
-  const parseUser = (userData) => {
-    setUsername(userData.firstName + ' ' + userData.lastName);
-    setRoles(userData.roles);
-  }
+  }, [user]);
 
   const triggerAdminOptions = () => {
     setShowAdminOptions(!showAdminOptions);
@@ -101,13 +109,11 @@ const SinglePage = () => {
       onSubmit={submitNewProject}
     />
 
-
-
   let addProjectCard = [];
   addProjectCard.push(
     <DynamicCard
       hidden={
-        Array.isArray(roles) && !(roles.includes("Verkäufer") || roles.includes("Admin"))}
+        user && !(user.roles.includes("Verkäufer") || user.roles.includes("Admin"))}
       key={'0-projectCard'}
       projectName={'Neues Projekt'}
       description={'Hier eine neues Projekt erstellen!'}
@@ -142,7 +148,7 @@ const SinglePage = () => {
       onClose={emptyErrorMessage}
     />
 
-  const rolesLoaded = roles.length ?
+  const rolesLoaded = user && user.roles.length ?
     <>
       {addNewProjectDialog}
       {projectCards}
@@ -153,12 +159,13 @@ const SinglePage = () => {
 
   return (
     <div className={classes.mainPage}>
-      <Header username={username} roles={roles} onError={setErrorMessage} />
-      {rolesLoaded}
-      <Navigation />
-      <div className={classes.content}>
-        {snackbar}
-      </div>
+      <UserContext.Provider value={user}>
+        <Header onError={setErrorMessage} />
+        {rolesLoaded}
+        <div className={classes.content}>
+          {snackbar}
+        </div>
+      </UserContext.Provider>
     </div>
   );
 };
