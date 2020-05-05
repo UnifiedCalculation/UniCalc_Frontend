@@ -17,10 +17,11 @@ const useStyles = makeStyles({
     },
   });
 
-export default function DynamicCard({ projectName: carName, description, buttonName, onClick, ...props}) {
+export default function DynamicCard({ projectName: carName, description, buttonName, onClick, hidden, ...props}) {
   const classes = useStyles();
 
   return (
+    hidden ? null :
     <Card className={classes.root}>
       <CardContent>
       <Typography gutterBottom variant="h5" component="h2">
