@@ -105,6 +105,16 @@ export async function getOffersFromProject(projectId, onError, callback) {
       .catch(error => handleErrors(error, onError));
 }
 
+export async function getContractsFromProject(projectId, onError, callback) {
+  axios.get('projects/' + projectId + '/contracts')
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
 export async function turnOfferIntoContract(projectId, offerId, onError, callback) {
   axios.post('projects/' + projectId + '/contracts', {offer_id: offerId})
       .then(res => {
