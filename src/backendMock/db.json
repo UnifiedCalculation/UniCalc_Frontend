@@ -716,9 +716,12 @@
       "id": "5ea5360362b530a32b8cd19b"
     }
   ],
-  "username": {
+  "user": {
     "firstName": "Alberto",
-    "lastName": "Rodriguez"
+    "lastName": "Rodriguez",
+    "roles": [
+      "Admin"
+    ]
   }
   
 }
