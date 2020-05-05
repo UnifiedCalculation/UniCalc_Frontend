@@ -41,6 +41,36 @@
       "discount": 7.35
     }
   ],
+  "employees": [
+    {
+      "id": 1,
+      "role": "admin",
+      "email": "desao@students.zhaw.ch",
+      "firstname": "Adriana",
+      "lastname": "De-Sao-Jose"
+    },
+    {
+      "id": 2,
+      "role": "admin",
+      "email": "vieceadr@students.zhaw.ch",
+      "firstname": "Adrian",
+      "lastname": "Vieceli"
+    },
+    {
+      "id": 3,
+      "role": "admin",
+      "email": "vontifel@students.zhaw.ch",
+      "firstname": "Felix",
+      "lastname": "von Tiedemann"
+    },
+    {
+      "id":4,
+      "role": "admin",
+      "email": "monteric@students.zhaw.ch",
+      "firstname": "Ricardo",
+      "lastname": "Monteiro"
+    }
+  ],
   "entries": [
     {
       "name": "badezimmer",
@@ -212,6 +242,33 @@
       "unit": "meter",
       "description": "Kabelsalat",
       "id": 8
+    },
+    {
+      "number": "111",
+      "name": "refactor",
+      "price": 12345,
+      "unit": "pieces",
+      "description": "refactor",
+      "npk": "",
+      "id": 9
+    },
+    {
+      "npk": "500",
+      "number": "12345xxx",
+      "price": 11,
+      "unit": "meter",
+      "description": "refactor 2.0",
+      "name": "Elektro",
+      "id": 10
+    },
+    {
+      "npk": "501",
+      "number": "111",
+      "price": 3,
+      "unit": "liter",
+      "description": "name cut",
+      "name": "Elektroanlagen: Anlagebeschreibung",
+      "id": 11
     }
   ],
   "customers": [

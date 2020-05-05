@@ -1,15 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Navigation from '../layouts/navigation'
 import Header from "../layouts/header/header";
 import './singlePage.css'
+
 import ProjectCard from '../projectCard/projectCard';
 import NewProjectDialog from '../newProjectDialog/newProjectDialog';
 import ProjectDisplay from '../projectDisplay/projectDisplay';
 import Loading from '../loading/loading';
 import * as API from '../connectionHandler/connectionHandler';
-import ProductOverview from "../layouts/adminOptions/articleAdministration/ProductOverview";
 import SnackbarOverlay from '../snackbar/snackbar';
-import UserOverview from "../layouts/adminOptions/userAdministration/userOverview";
 import AdminOptions from "../layouts/adminOptions/adminOptions";
 
 const SinglePage = () => {
@@ -51,56 +50,58 @@ const SinglePage = () => {
 
   const submitNewProject = (newProjectData) => {
     setNewProjectDialogViewState(false);
-    API.submitNewProject(newProjectData, setErrorMessage, function () {
-      return API.getUserProjects(setErrorMessage, setProjects);
-    });
+    API.submitNewProject(
+      newProjectData, 
+      setErrorMessage, 
+      function () { return API.getUserProjects(setErrorMessage, setProjects); }
+      );
   }
 
   const addNewProjectDialog =
-      <NewProjectDialog
-          show={showNewProjectDialog}
-          customers={customerData}
-          onCancel={closeNewProjectDialog}
-          onSubmit={submitNewProject}
-      />
+    <NewProjectDialog
+      show={showNewProjectDialog}
+      customers={customerData}
+      onCancel={closeNewProjectDialog}
+      onSubmit={submitNewProject}
+    />
 
   let addProjectCard = [];
   addProjectCard.push(
-      <ProjectCard
-          key={'0-projectCard'}
-          projectName={'Neues Projekt'}
-          description={'Hier eine neues Projekt erstellen!'}
-          buttonName={'Neues Projekt hinzufügen...'}
-          onClick={openNewProjectDialog}
-      />
+    <ProjectCard
+      key={'0-projectCard'}
+      projectName={'Neues Projekt'}
+      description={'Hier eine neues Projekt erstellen!'}
+      buttonName={'Neues Projekt hinzufügen...'}
+      onClick={openNewProjectDialog}
+    />
   );
 
   const projectCards = projectData ?
-      null :
-      <div className="flexCards">
-        {addProjectCard.concat(projects ?
-            projects.map((entry, index) =>
-                <ProjectCard
-                    key={(index + 1) + "-projectCard"}
-                    onClick={() => setProjectData(entry)}
-                    projectName={entry.name}
-                    description={entry.description}/>
-            )
-            : <Loading key={"home-loading-key"} text={"Lade projekte..."}/>
-        )}
-      </div>;
+    null :
+    <div className="flexCards">
+      {addProjectCard.concat(projects ?
+        projects.map((entry, index) =>
+          <ProjectCard
+            key={(index + 1) + "-projectCard"}
+            onClick={() => setProjectData(entry)}
+            projectName={entry.name}
+            description={entry.description} />
+        )
+        : <Loading key={"home-loading-key"} text={"Lade projekte..."} />
+      )}
+    </div>;
 
   const projectDisplay = projectData ?
-      <ProjectDisplay projectData={projectData} onError={setErrorMessage} onClose={() => setProjectData(null)}/>
-      : null;
+    <ProjectDisplay projectData={projectData} onError={setErrorMessage} onClose={() => setProjectData(null)} />
+    : null;
 
   const snackbar =
-      <SnackbarOverlay
-          show={errorMessage !== ""}
-          text={errorMessage}
-          severity="error"
-          onClose={emptyErrorMessage}
-      />
+    <SnackbarOverlay
+      show={errorMessage !== ""}
+      text={errorMessage}
+      severity="error"
+      onClose={emptyErrorMessage}
+    />
 
 
   return (
