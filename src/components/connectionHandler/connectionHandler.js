@@ -213,3 +213,13 @@ export async function getCustomers(onError, callback) {
       })
       .catch(error => handleErrors(error, onError));
 }
+
+export async function getEmployees(onError, callback) {
+  axios.get('employees')
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
