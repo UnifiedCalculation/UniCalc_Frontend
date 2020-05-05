@@ -1,11 +1,14 @@
 {
     "/projects/:id": "/projects/id=:id",
     "/projects/:id/offers": "/offers?projectId=:id",
+    "/projects/:id/contracts": "/contracts?projectId=:id",
     "/projects/*/offers/:id": "/offers/:id",
     "/projects/*/offers/:id/entries": "/offers/:id/entries",
     "/projects/*/offers/*/entries/:id": "/entries/:id?_embed=articles",
-    "/projects/*/offers/*/entries/:id/articles": "/entries/:id/articles",
+    "/projects/*/offers/*/entries/:id/products": "/entries/:id/articles",
     "/articles": "/products",
     "/employees": "/employees",
-    "/npks/:id": "/npks/id=:id"
+    "/npks/:id": "/npks/id=:id",
+    "/user/projects": "/projects?employee_id=1",
+    "/user/contracts": "/contracts?employee_id=1"
 }
