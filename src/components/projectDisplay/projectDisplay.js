@@ -6,15 +6,12 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faTrash, faTools, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPen } from '@fortawesome/free-solid-svg-icons'
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableRow from '@material-ui/core/TableRow';
+import ProjectDetails from '../projectDetails/projectDetails';
 
-import DynamicCard from '../dynamicCard/dynamicCard';
+import OfferCards from '../offerCards/offerCards';
+import ContractCards from '../contractCards/contractCards';
 import NewOfferDialog from '../newOfferDialog/newOfferDialog';
 import OfferDisplay from '../offerDisplay/offerDisplay';
 import BackButton from '../layouts/backButton/backButton';
@@ -24,22 +21,23 @@ import * as API from '../connectionHandler/connectionHandler';
 
 const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, ...props }) => {
 
-    const [offers, setOfferData] = useState(null);
+    const [offers, setOffers] = useState(null);
+    const [contracts, setContracts] = useState(null);
 
     const [offerDetails, setOfferDetails] = useState(null);
     const [showNewOfferDialog, setNewOfferDialogViewState] = useState(false);
 
-    const dateOptions = {
-        timeZone: "Europe/Zurich",
-        hour12: false
-    };
-
     useEffect(() => {
         getOffersFromProject();
+        getContractsFromProject();
     },[]);
 
     const getOffersFromProject = () => {
-        API.getOffersFromProject(projectData.id, onError, setOfferData);
+        API.getOffersFromProject(projectData.id, onError, setOffers);
+    }
+
+    const getContractsFromProject = () => {
+        API.getContractsFromProject(projectData.id, onError, setContracts);
     }
 
     const useStyles = makeStyles((theme) => ({
@@ -56,20 +54,7 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
         tertiaryHeadingButton: {
             fontSize: theme.typography.pxToRem(15),
             flexBasis: '7.00%',
-        },
-        table: {
-            minWidth: 300,
-        },
-        flexCards: {
-          display: 'flex',
-          flexDirection: 'row',
-          padding: '25px',
-          margin: 'auto',
-          flexWrap: 'wrap',
-          alignSelf: 'auto',
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
+        }
     }));
 
     const addNewOffer = (offer) => {
@@ -85,17 +70,6 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
     }
 
     const classes = useStyles();
-
-    let addOfferCard = [];
-    addOfferCard.push(
-        <DynamicCard
-            key={'0-offerCard'}
-            projectName={'Neue Offerte'}
-            description={'Hier eine neue Offerte erstellen!'}
-            buttonName={'Neue Offerte hinzufügen...'}
-            onClick={openNewOfferDialog}
-        />
-    );
 
     const offerCards =
         addOfferCard.concat(offers ?
