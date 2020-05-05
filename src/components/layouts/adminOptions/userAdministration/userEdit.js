@@ -30,7 +30,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-export default function UserEdit() {
+export default function UserEdit({employeeData}) {
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -44,7 +44,7 @@ export default function UserEdit() {
   });
 
   const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+    setState({...state, [event.target.name]: event.target.checked});
   };
 
   const handleClickOpen = () => {
@@ -71,35 +71,35 @@ export default function UserEdit() {
             <DialogContentText>
             </DialogContentText>
 
-            <FormControl style = {{width: '80%'}} className={classes.userDetails}>
+            <FormControl style={{width: '80%'}} className={classes.userDetails}>
               <InputLabel htmlFor="input-with-icon-adornment">Email</InputLabel>
               <Input
-                     id="input-with-icon-adornment"
-                     startAdornment={
-                       <InputAdornment position="start">
-                         <MailIcon />
-                       </InputAdornment>
-                     }
+                  id="input-with-icon-adornment"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <MailIcon/>
+                    </InputAdornment>
+                  }
               />
             </FormControl>
-            <FormControl style = {{width: '80%'}} className={classes.userDetails}>
+            <FormControl style={{width: '80%'}} className={classes.userDetails}>
               <InputLabel htmlFor="input-with-icon-adornment">Vorname</InputLabel>
               <Input
                   id="input-with-icon-adornment"
                   startAdornment={
                     <InputAdornment position="start">
-                      <AccountCircle />
+                      <AccountCircle/>
                     </InputAdornment>
                   }
               />
             </FormControl>
-            <FormControl style = {{width: '80%'}} className={classes.userDetails}>
+            <FormControl style={{width: '80%'}} className={classes.userDetails}>
               <InputLabel htmlFor="input-with-icon-adornment">Nachname</InputLabel>
               <Input
                   id="input-with-icon-adornment"
                   startAdornment={
                     <InputAdornment position="start">
-                      <AccountCircle />
+                      <AccountCircle/>
                     </InputAdornment>
                   }
               />
@@ -109,19 +109,19 @@ export default function UserEdit() {
               <FormLabel component="legend">Rollen zuweisen</FormLabel>
               <FormGroup>
                 <FormControlLabel
-                    control={<Switch checked={state.admin} onChange={handleChange} name="admin" />}
+                    control={<Switch checked={state.admin} onChange={handleChange} name="admin"/>}
                     label="Administrator"
                 />
                 <FormControlLabel
-                    control={<Switch checked={state.pl} onChange={handleChange} name="pl" />}
+                    control={<Switch checked={state.pl} onChange={handleChange} name="pl"/>}
                     label="Verkauf"
                 />
                 <FormControlLabel
-                    control={<Switch checked={state.sales} onChange={handleChange} name="sales" />}
+                    control={<Switch checked={state.sales} onChange={handleChange} name="sales"/>}
                     label="Projektleitung"
                 />
                 <FormControlLabel
-                    control={<Switch checked={state.employee} onChange={handleChange} name="employee" />}
+                    control={<Switch checked={state.employee} onChange={handleChange} name="employee"/>}
                     label="Handwerker"
                 />
               </FormGroup>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import UserEdit from "./userEdit";
 import ArchiveIcon from '@material-ui/icons/Archive';
 import Button from "@material-ui/core/Button";
-
+import {func} from "prop-types";
 
 
 const useStyles = makeStyles({
@@ -19,18 +19,24 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(surname, name) {
-  return { surname, name};
+function createData(firstname, lastname, id) {
+  return {firstname, lastname, id};
 }
 
-const rows = [
-  createData('Adrian', 'Vieceli'),
-  createData('Riccardo', 'Monteiro'),
-  createData('Felix', 'von Tiedemann'),
-];
-
-export default function UserTable() {
+export default function UserTable({employees}) {
   const classes = useStyles();
+
+  function getEmployeeById(employeeId) {
+    return employees.find(element => element.id === employeeId);
+  }
+
+  const rows = employees.map(function (item) {
+    return createData(
+        item.firstname,
+        item.lastname,
+        item.id
+    )
+  });
 
   return (
       <TableContainer component={Paper}>
@@ -47,12 +53,12 @@ export default function UserTable() {
             {rows.map((row) => (
                 <TableRow key={row.name}>
                   <TableCell component="th" scope="row">
-                    {row.surname}
+                    {row.firstname}
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    {row.name}
+                    {row.lastname}
                   </TableCell>
-                  <TableCell><UserEdit/></TableCell>
+                  <TableCell><UserEdit employeeData={getEmployeeById(row.id)}/></TableCell>
                   <TableCell><Button variant="outlined" color="primary"><ArchiveIcon/></Button></TableCell>
                 </TableRow>
             ))}

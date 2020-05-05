@@ -7,7 +7,7 @@ import AddNpkProductDialog from "./addNpkProductDialog";
 import {makeStyles} from "@material-ui/core/styles";
 
 
-const ProductOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show, ...props }) =>  {
+const ProductOverview = ({ setErrorMessage, onCancel, onSubmit, show, ...props }) =>  {
 
   const [showNewProductDialog, setNewProductDialogViewState] = useState(false);
   const [showNewNpProductDialog, setNewNpkProductDialogViewState] = useState(false);
@@ -18,17 +18,6 @@ const ProductOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
   const [npks, setNpks] = useState([]);
 
   const useStyles = makeStyles({
-    overlay:{
-      top: '50px',
-      width: '100%',
-      backgroundColor: 'white',
-      position: "fixed",
-      height: "100%",
-      bottom: "50px",
-      zIndex: 999,
-      padding: "20px",
-      boxSizing: 'border-box'
-    },
     button:{
       marginRight: '10px',
       marginBottom: '10px'

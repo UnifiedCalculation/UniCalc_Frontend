@@ -1,14 +1,25 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import UserAdd from "./userAdd";
 import UserTable from "./userTable";
+import * as API from "../../../connectionHandler/connectionHandler";
 
 
-export default function UserOverview() {
+export default function UserOverview({setErrorMessage}) {
+
+  const [employees, setEmployees] = useState([])
+
+  const getEmployees = () => {
+    API.getEmployees(setErrorMessage, setEmployees);
+  }
+
+  useEffect(() => {
+    getEmployees(setErrorMessage, setEmployees);
+  })
 
   return (
       <div>
         <UserAdd/>
-        <UserTable/>
+        <UserTable employees={employees}/>
       </div>
   );
 }
