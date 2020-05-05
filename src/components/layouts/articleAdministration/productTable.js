@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {lighten, makeStyles} from '@material-ui/core/styles';
@@ -13,7 +13,6 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -23,7 +22,7 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import {getProducts} from "../../connectionHandler/connectionHandler";
 
 
-const ProductTable = ({setErrorMessage, products, setProducts, npks}) => {
+const ProductTable = ({setErrorMessage, products, setProducts}) => {
 
   useEffect(() => {
     getProducts(setErrorMessage, setProducts)
@@ -31,11 +30,6 @@ const ProductTable = ({setErrorMessage, products, setProducts, npks}) => {
 
   function createData(id, title, price, unit, description) {
     return {id, title, price, unit, description};
-  }
-
-  function getNpkName(npkId) {
-    let found = npks.find(element => element.id == npkId);
-    return found.name;
   }
 
   const rows = products.map(function (item) {
@@ -91,7 +85,7 @@ const ProductTable = ({setErrorMessage, products, setProducts, npks}) => {
   ];
 
   function EnhancedTableHead(props) {
-    const {classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort} = props;
+    const {classes, order, orderBy, numSelected, rowCount, onRequestSort} = props;
     const createSortHandler = (property) => (event) => {
       onRequestSort(event, property);
     };

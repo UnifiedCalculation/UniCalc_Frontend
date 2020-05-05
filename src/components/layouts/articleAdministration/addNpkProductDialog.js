@@ -5,7 +5,6 @@ import TextField from "@material-ui/core/TextField";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {getNpks, submitNewProduct} from "../../connectionHandler/connectionHandler";
 import MenuItem from "@material-ui/core/MenuItem";
-import {getProducts} from "../../connectionHandler/connectionHandler";
 
 const AddNpkProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProducts, npks, setNpks, ...props}) => {
 
@@ -77,7 +76,6 @@ const AddNpkProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProd
 
   const parseArticleData = (articleData) => {
     articleData.price = parseInt(articleData.price);
-    //articleData.npk = articleData.npk.substring(0, 3);
     articleData.name = (articleData.npk.split(" "))[1]
     articleData.npk = (articleData.npk.split(" "))[0]
     saveNewArticle(articleData);

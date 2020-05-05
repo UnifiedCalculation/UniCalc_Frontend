@@ -4,7 +4,6 @@ import Button from "@material-ui/core/Button";
 import * as API from "../../connectionHandler/connectionHandler";
 import AddProductDialog from "./addProductDialog";
 import AddNpkProductDialog from "./addNpkProductDialog";
-import {getProducts} from "../../connectionHandler/connectionHandler";
 import {makeStyles} from "@material-ui/core/styles";
 
 
@@ -66,11 +65,11 @@ const ProductOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
     setNewNpkProductDialogViewState(true);
   }
 
-  const submitNewArticle = (newArticleData) => {
+/*  const submitNewArticle = (newArticleData) => {
     setNewProductDialogViewState(false);
     console.log(JSON.stringify(newArticleData));
     API.submitNewProduct(newArticleData, setErrorMessage, getProducts);
-  }
+  }*/
 
   const addNewProductDialog =
       <AddProductDialog

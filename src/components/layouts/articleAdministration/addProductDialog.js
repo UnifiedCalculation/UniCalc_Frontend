@@ -1,11 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {} from 'react';
 import DynamicDialog from "../../dynamicDialog/dynamicDialog";
 import PropTypes, {func} from "prop-types";
 import TextField from "@material-ui/core/TextField";
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import {submitNewProduct} from "../../connectionHandler/connectionHandler";
 import MenuItem from "@material-ui/core/MenuItem";
-import {getProducts} from "../../connectionHandler/connectionHandler";
 
 const AddProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProducts, ...props}) => {
 
