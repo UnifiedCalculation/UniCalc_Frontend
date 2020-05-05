@@ -11,8 +11,8 @@ const AddNpkProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProd
 
   const cancelButtonText = 'Abbrechen';
   const acceptButtonText = 'Bestätigen';
-  const title = 'Neuen Artikel erstellen';
-  const text = 'Füllen Sie alle Felder ab um einen neuen Artikel zu erstellen.';
+  const title = 'Neuen NPK Artikel erstellen';
+  const text = 'Füllen Sie alle Felder ab um einen neuen NPK Artikel zu erstellen.';
   const textfields = [
     {
       id: 'number',

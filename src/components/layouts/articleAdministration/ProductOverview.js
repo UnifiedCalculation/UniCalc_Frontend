@@ -30,6 +30,10 @@ const ProductOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
       padding: "20px",
       boxSizing: 'border-box'
     },
+    button:{
+      marginRight: '10px',
+      marginBottom: '10px'
+    }
   });
 
   const classes = useStyles();
@@ -95,8 +99,8 @@ const ProductOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
         {addNewProductDialog}
         {addNewNpkProductDialog}
 
-        <Button variant="outlined" color="primary" disableElevation onClick={openNewProductDialog}>{buttonName}</Button>
-        <Button variant="outlined" color="primary" disableElevation onClick={openNewNpkProductDialog}>{buttonNpkName}</Button>
+        <Button className={classes.button} variant="outlined" color="primary" disableElevation onClick={openNewProductDialog}>{buttonName}</Button>
+        <Button className={classes.button} variant="outlined" color="primary" disableElevation onClick={openNewNpkProductDialog}>{buttonNpkName}</Button>
         <ProductTable npks={npks} setErrorMessage={setErrorMessage} setProducts={setProducts} products={products}/>
       </div>
   );
