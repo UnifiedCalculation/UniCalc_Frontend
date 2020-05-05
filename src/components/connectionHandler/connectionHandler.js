@@ -156,7 +156,6 @@ export async function getUserData(onError, callback){
 }
 
 export async function addArticleToEntry(projectId, offerId, entryId, article, onError, callback) {
-  axios.post('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId + '/articles', article)
   axios.post('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId + '/products', article)
       .then(res => {
         if (callback) {
