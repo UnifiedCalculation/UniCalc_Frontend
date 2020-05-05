@@ -71,60 +71,7 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
 
     const classes = useStyles();
 
-    const offerCards =
-        addOfferCard.concat(offers ?
-            offers.map((entry, index) =>
-                <DynamicCard
-                    key={(index + 1) + "-offerCard"}
-                    onClick={() => setOfferDetails(offers[index])}
-                    projectName={entry.name}
-                    description={"Zuletz bearbeitet am: " +
-                        new Date(entry.updated_at)
-                            .toLocaleString("de-DE", dateOptions)
-                            .replace(/(.*)\D\d+/, "$1")}
-                />
-            ) : null
-        );
-
-    const projectDetails = projectData ?
-        <TableContainer >
-            <Table className={classes.table} aria-label="simple table">
-                <TableBody>
-                    <TableRow key={0 + "-projectDetails"}>
-                        <TableCell component="th" scope="row">
-                            Adresse
-                            </TableCell>
-                        <TableCell align="right">{projectData.address}</TableCell>
-                    </TableRow>
-                    <TableRow key={1 + "-projectDetails"}>
-                        <TableCell component="th" scope="row">
-                            Postleitzahl
-                            </TableCell>
-                        <TableCell align="right">{projectData.zip}</TableCell>
-                    </TableRow>
-                    <TableRow key={2 + "-projectDetails"}>
-                        <TableCell component="th" scope="row">
-                            Stadt
-                            </TableCell>
-                        <TableCell align="right">{projectData.city}</TableCell>
-                    </TableRow>
-                    <TableRow key={3 + "-projectDetails"}>
-                        <TableCell component="th" scope="row">
-                            Beschreibung
-                            </TableCell>
-                        <TableCell align="right">{projectData.description}</TableCell>
-                    </TableRow>
-
-                    <TableRow key={4 + "-projectDetails"}>
-                        <TableCell component="th" scope="row">
-                            Festgelegte Zeit zu zahlen
-                            </TableCell>
-                        <TableCell align="right">{projectData.payment_target}</TableCell>
-                    </TableRow>
-                </TableBody>
-            </Table >
-        </TableContainer >
-        : null;
+    const projectDetails = <ProjectDetails projectData={projectData} />
 
     const content = offerDetails ? 
         <OfferDisplay projectId={projectData.id} offerData={offerDetails} onClose={() => setOfferDetails(null)} onError={onError} />
@@ -150,9 +97,8 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
                     {projectDetails}
                 </ExpansionPanelDetails>
             </ExpansionPanel>
-            <div className={classes.flexCards}>
-                {offerCards}
-            </div>
+            <OfferCards offers={offers} setOfferDetails={setOfferDetails} onNewOffer={openNewOfferDialog} />
+            <ContractCards contracts={contracts} />
         </div>;
 
     return (
