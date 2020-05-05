@@ -39,6 +39,14 @@
       "price": 220.25,
       "amount": 120,
       "discount": 7.35
+    },
+    {
+      "article_id": 2,
+      "amount": 123,
+      "discount": 12,
+      "description": "1231231",
+      "entryId": "3",
+      "id": 6
     }
   ],
   "entries": [
@@ -52,6 +60,12 @@
       "offerId": 1,
       "name": "wohnzimmer",
       "discount": 50
+    },
+    {
+      "title": "Neues Segment der Offerte 123",
+      "discount": 12,
+      "offerId": "3",
+      "id": 3
     }
   ],
   "offers": [
@@ -72,6 +86,20 @@
       "updated_at": "2020-04-07T17:58:24.185Z",
       "discount": null,
       "employee_id": null
+    },
+    {
+      "name": "Neue Offerte 123",
+      "payment_target": "undefined Tage",
+      "updated_at": "2020-05-05T19:36:02.701Z",
+      "projectId": 1,
+      "id": 3
+    },
+    {
+      "name": "Neue Offerte",
+      "payment_target": "undefined Tage",
+      "updated_at": "2020-05-05T20:06:36.261Z",
+      "projectId": 1,
+      "id": 4
     }
   ],
   "projects": [
@@ -85,33 +113,32 @@
       "city": "Zurich",
       "created_at": "2020-04-07T15:44:02.921Z",
       "updated_at": "2020-04-07T15:44:02.921Z",
+      "employee_id": 1,
       "payment_target": "30 Tage"
     },
     {
       "id": 2,
       "name": "Villa am Berg",
-      "description": "Neubau in Chur",
-      "customer_id": "5ea536031d895bcee92a9ab6",
-      "address": "Teststreet 123",
-      "zip": "8001",
+      "description": "Neubau in Zürich",
+      "customer_id": "5ea53603e025e6a409acc113",
+      "address": "Teststreet 124",
+      "zip": "8002",
       "city": "Zurich",
       "created_at": "2020-04-07T15:44:02.921Z",
       "updated_at": "2020-04-07T15:44:02.921Z",
-      "payment_target": "5 Tage"
-    },
+      "employee_id": 2,
+      "payment_target": "17 Tage"
+    }
+  ],
+  "contracts": [
     {
-      "name": "Setphens new house",
-      "address": "new adress",
-      "zip": "12",
-      "city": "12jsa",
-      "description": "asioasio",
-      "payment_target": "12",
-      "customer_id": {
-        "firstName": "Lillian",
-        "lastName": "Stephens",
-        "id": "5ea53603bec1d053dfa4041d"
-      },
-      "id": 3
+      "id": 1,
+      "projectId": 1,
+      "name": "Auftrag 1",
+      "created_at": "2020-04-07T17:57:37.468Z",
+      "updated_at": "2020-04-07T17:57:37.468Z",
+      "discount": null,
+      "employee_id": 1
     }
   ],
   "npks": [
@@ -719,9 +746,9 @@
   "user": {
     "firstName": "Alberto",
     "lastName": "Rodriguez",
+    "id": 1,
     "roles": [
       "Admin"
     ]
   }
-  
 }
