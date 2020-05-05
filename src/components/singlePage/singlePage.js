@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Navigation from '../layouts/navigation'
 import Header from "../header/header";
 import './singlePage.css'
@@ -29,8 +29,8 @@ const SinglePage = () => {
   }
 
   const adminOptionsDisplay = showAdminOptions ?
-      <ProductOverview setErrorMessage={setErrorMessage}/>
-      : null;
+    <ProductOverview setErrorMessage={setErrorMessage} />
+    : null;
 
   const emptyErrorMessage = () => {
     setErrorMessage("");
@@ -54,12 +54,12 @@ const SinglePage = () => {
   }
 
   const addNewProjectDialog =
-      <NewProjectDialog
-          show={showNewProjectDialog}
-          customers={customerData}
-          onCancel={closeNewProjectDialog}
-          onSubmit={submitNewProject}
-      />
+    <NewProjectDialog
+      show={showNewProjectDialog}
+      customers={customerData}
+      onCancel={closeNewProjectDialog}
+      onSubmit={submitNewProject}
+    />
 
   let addProjectCard = [];
   addProjectCard.push(
@@ -88,29 +88,29 @@ const SinglePage = () => {
     </div>;
 
   const projectDisplay = projectData ?
-      <ProjectDisplay projectData={projectData} onError={setErrorMessage} onClose={() => setProjectData(null)}/>
-      : null;
+    <ProjectDisplay projectData={projectData} onError={setErrorMessage} onClose={() => setProjectData(null)} />
+    : null;
 
   const snackbar =
-      <SnackbarOverlay
-          show={errorMessage !== ""}
-          text={errorMessage}
-          severity="error"
-          onClose={emptyErrorMessage}
-      />
+    <SnackbarOverlay
+      show={errorMessage !== ""}
+      text={errorMessage}
+      severity="error"
+      onClose={emptyErrorMessage}
+    />
 
 
   return (
     <div className="mainPage">
-      <Header onError={setErrorMessage}/>
+      <Header onError={setErrorMessage} />
       {addNewProjectDialog}
       {projectCards}
       {projectDisplay}
       <Navigation />
       <div className="content">
         {snackbar}
-
       </div>
+    </div>
   );
 };
 export default SinglePage;
