@@ -121,7 +121,7 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
     const classes = useStyles();
 
     const body = entry ?
-        <ArticleTable projectId={projectId} offerId={offerId} entryId={entry.id} articles={entry.articles} discount={entry.discount} />
+        entry.articles? <ArticleTable projectId={projectId} offerId={offerId} entryId={entry.id} articles={entry.articles} discount={entry.discount} />  : null
         : <Loading text={"Lade Einträge..."} />
 
     const content = entry ?
