@@ -28,8 +28,9 @@ const useStyles = makeStyles(() => ({
   userDetails: {
     marginTop: '20px'
   },
-  addEmployee: {
-    marginBottom: '20px'
+  button: {
+    marginRight: '10px',
+    marginBottom: '10px'
   },
   userRoles: {
     marginTop: '40px'
@@ -50,7 +51,7 @@ export default function UserAdd() {
   });
 
   const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+    setState({...state, [event.target.name]: event.target.checked});
   };
 
   const handleClickOpen = () => {
@@ -63,7 +64,7 @@ export default function UserAdd() {
 
   return (
       <div>
-        <Button className={classes.addEmployee} variant="outlined" color="primary" onClick={handleClickOpen}>
+        <Button className={classes.button} variant="outlined" color="primary" onClick={handleClickOpen}>
           <PersonAddIcon/> Mitarbeiter erstellen
         </Button>
         <Dialog
@@ -77,57 +78,57 @@ export default function UserAdd() {
             <DialogContentText>
             </DialogContentText>
 
-            <FormControl style = {{width: '80%'}} className={classes.userDetails}>
+            <FormControl style={{width: '80%'}} className={classes.userDetails}>
               <InputLabel htmlFor="input-with-icon-adornment">Email</InputLabel>
               <Input
-                     id="input-with-icon-adornment"
-                     startAdornment={
-                       <InputAdornment position="start">
-                         <MailIcon />
-                       </InputAdornment>
-                     }
+                  id="input-with-icon-adornment"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <MailIcon/>
+                    </InputAdornment>
+                  }
               />
             </FormControl>
-            <FormControl style = {{width: '80%'}} className={classes.userDetails}>
+            <FormControl style={{width: '80%'}} className={classes.userDetails}>
               <InputLabel htmlFor="input-with-icon-adornment">Vorname</InputLabel>
               <Input
                   id="input-with-icon-adornment"
                   startAdornment={
                     <InputAdornment position="start">
-                      <AccountCircle />
+                      <AccountCircle/>
                     </InputAdornment>
                   }
               />
             </FormControl>
-            <FormControl style = {{width: '80%'}} className={classes.userDetails}>
+            <FormControl style={{width: '80%'}} className={classes.userDetails}>
               <InputLabel htmlFor="input-with-icon-adornment">Nachname</InputLabel>
               <Input
                   id="input-with-icon-adornment"
                   startAdornment={
                     <InputAdornment position="start">
-                      <AccountCircle />
+                      <AccountCircle/>
                     </InputAdornment>
                   }
               />
             </FormControl>
 
             <FormControl className={classes.userRoles} component="fieldset">
-              <FormLabel style = {{marginBottom: '10px'}} component="legend">Rollen zuweisen</FormLabel>
+              <FormLabel style={{marginBottom: '10px'}} component="legend">Rollen zuweisen</FormLabel>
               <FormGroup>
                 <FormControlLabel
-                    control={<Switch checked={state.admin} onChange={handleChange} name="admin" />}
+                    control={<Switch checked={state.admin} onChange={handleChange} name="admin"/>}
                     label="Administrator"
                 />
                 <FormControlLabel
-                    control={<Switch checked={state.pl} onChange={handleChange} name="pl" />}
+                    control={<Switch checked={state.pl} onChange={handleChange} name="pl"/>}
                     label="Verkauf"
                 />
                 <FormControlLabel
-                    control={<Switch checked={state.sales} onChange={handleChange} name="sales" />}
+                    control={<Switch checked={state.sales} onChange={handleChange} name="sales"/>}
                     label="Projektleitung"
                 />
                 <FormControlLabel
-                    control={<Switch checked={state.employee} onChange={handleChange} name="employee" />}
+                    control={<Switch checked={state.employee} onChange={handleChange} name="employee"/>}
                     label="Handwerker"
                 />
               </FormGroup>

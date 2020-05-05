@@ -7,8 +7,10 @@ import NewProjectDialog from '../newProjectDialog/newProjectDialog';
 import ProjectDisplay from '../projectDisplay/projectDisplay';
 import Loading from '../loading/loading';
 import * as API from '../connectionHandler/connectionHandler';
-import ProductOverview from "../layouts/articleAdministration/ProductOverview";
+import ProductOverview from "../layouts/adminOptions/articleAdministration/ProductOverview";
 import SnackbarOverlay from '../snackbar/snackbar';
+import UserOverview from "../layouts/adminOptions/userAdministration/userOverview";
+import AdminOptions from "../layouts/adminOptions/adminOptions";
 
 const SinglePage = () => {
 
@@ -27,8 +29,10 @@ const SinglePage = () => {
     setShowAdminOptions(!showAdminOptions);
   }
 
-  const adminOptionsDisplay = showAdminOptions ?
-      <ProductOverview setErrorMessage={setErrorMessage}/>
+  const adminOptionsContainer = showAdminOptions ?
+      <div className={"adminOptions"}>
+        <AdminOptions setErrorMessage={setErrorMessage}/>
+      </div>
       : null;
 
   const emptyErrorMessage = () => {
@@ -101,11 +105,11 @@ const SinglePage = () => {
 
   return (
       <div className="mainPage">
-        <Header clickHandler={triggerAdminOptions} />
+        <Header clickHandler={triggerAdminOptions}/>
+        {adminOptionsContainer}
         {addNewProjectDialog}
         {projectCards}
         {projectDisplay}
-        {adminOptionsDisplay}
         <Navigation/>
         <div className="content">
           {snackbar}

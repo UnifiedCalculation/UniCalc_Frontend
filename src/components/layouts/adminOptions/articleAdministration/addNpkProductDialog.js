@@ -1,26 +1,21 @@
-import React, {} from 'react';
-import DynamicDialog from "../../dynamicDialog/dynamicDialog";
+import React, {useEffect, useState} from 'react';
+import DynamicDialog from "../../../dynamicDialog/dynamicDialog";
 import PropTypes, {func} from "prop-types";
 import TextField from "@material-ui/core/TextField";
-import {submitNewProduct} from "../../connectionHandler/connectionHandler";
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import {getNpks, submitNewProduct} from "../../../connectionHandler/connectionHandler";
 import MenuItem from "@material-ui/core/MenuItem";
 
-const AddProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProducts, ...props}) => {
+const AddNpkProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProducts, npks, setNpks, ...props}) => {
 
   const cancelButtonText = 'Abbrechen';
   const acceptButtonText = 'Bestätigen';
-  const title = 'Neuen Artikel erstellen';
-  const text = 'Füllen Sie alle Felder ab um einen neuen Artikel zu erstellen.';
+  const title = 'Neuen NPK Artikel erstellen';
+  const text = 'Füllen Sie alle Felder ab um einen neuen NPK Artikel zu erstellen.';
   const textfields = [
     {
       id: 'number',
       label: 'Artikelnummer',
-      type: 'textarea',
-      required: true
-    },
-    {
-      id: 'name',
-      label: 'Artikelbezeichnung',
       type: 'textarea',
       required: true
     },
@@ -81,9 +76,32 @@ const AddProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProduct
 
   const parseArticleData = (articleData) => {
     articleData.price = parseInt(articleData.price);
-    articleData.npk = "";
+    articleData.name = (articleData.npk.split(" "))[1]
+    articleData.npk = (articleData.npk.split(" "))[0]
     saveNewArticle(articleData);
   }
+
+  useEffect(() => {
+    getNpks(setErrorMessage, setNpks)
+  }, []);
+
+  const npkSelector =
+
+      <Autocomplete
+          id="npk-autocomplete"
+          options={npks}
+          getOptionLabel={(option) => option.id + ' ' + option.name}
+          renderInput={(params) =>
+              <TextField
+                  {...params}
+                  id="npk"
+                  label="NPK Gruppe"
+                  type="textarea"
+                  name="npk"
+                  fullWidth
+                  margin='dense'/>
+          }
+      />
 
   const inputFields = textfields.map((entry, index) => {
 
@@ -122,15 +140,16 @@ const AddProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProduct
           acceptButtonText={acceptButtonText}
           show={show}
       >
+        {npkSelector}
         {inputFields}
       </DynamicDialog>
   );
 }
 
-AddProductDialog.propTypes = {
+AddNpkProductDialog.propTypes = {
   onCancel: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired
 }
 
-export default AddProductDialog;
+export default AddNpkProductDialog;

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import ProductTable from "./productTable";
 import Button from "@material-ui/core/Button";
-import * as API from "../../connectionHandler/connectionHandler";
+import * as API from "../../../connectionHandler/connectionHandler";
 import AddProductDialog from "./addProductDialog";
 import AddNpkProductDialog from "./addNpkProductDialog";
 import {makeStyles} from "@material-ui/core/styles";
@@ -94,7 +94,7 @@ const ProductOverview = ({ setErrorMessage, customers, onCancel, onSubmit, show,
       />
 
   return (
-      <div className={classes.overlay}>
+      <div >
         {addNewProductDialog}
         {addNewNpkProductDialog}
 
