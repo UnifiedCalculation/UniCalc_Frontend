@@ -8,7 +8,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import Loading from '../loading/loading';
-import SelectArticleDialog from '../selectArticleDialog/selectArticleDialog';
+import SelectProductDialog from '../selectProductDialog/selectProductDialog';
 import NewEntrySegmentDialog from '../newEntrySegmentDialog/newEntrySegmentDialog';
 import Alert from '../alert/alert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -21,7 +21,7 @@ import * as API from '../connectionHandler/connectionHandler';
 const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props }) => {
 
     const [entry, setEntryData] = useState(null);
-    const [articles, setArticles] = useState([]);
+    const [products, setArticles] = useState([]);
     const [deleteEntryAlert, setDeleteEntryAlertShowState] = useState(false);
     const [editEntryDialog, setEditEntryDialogShowState] = useState(false);
     const [addArticleDialog, setAddArticleDialogShowState] = useState(false);
@@ -169,9 +169,9 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
                 onAccept={deleteEntryConfirmed}
                 onCancel={closeDeleteEntryAlert}
             />
-            <SelectArticleDialog
+            <SelectProductDialog
                 show={addArticleDialog}
-                articles={articles}
+                products={products}
                 onCancel={() => setAddArticleDialogShowState(false)}
                 onSubmit={addNewArticle}
             />
