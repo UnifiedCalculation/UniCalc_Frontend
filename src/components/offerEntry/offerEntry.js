@@ -18,8 +18,6 @@ import ArticleTable from '../articleTable/articleTable';
 
 import * as API from '../connectionHandler/connectionHandler';
 
-import '../singlePage/singlePage.css'
-
 const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props }) => {
 
     const [entry, setEntryData] = useState(null);

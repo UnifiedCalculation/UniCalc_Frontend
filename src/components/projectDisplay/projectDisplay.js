@@ -20,7 +20,6 @@ import OfferDisplay from '../offerDisplay/offerDisplay';
 import BackButton from '../layouts/backButton/backButton';
 import * as API from '../connectionHandler/connectionHandler';
 
-import '../singlePage/singlePage.css'
 
 
 const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, ...props }) => {
@@ -60,6 +59,16 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
         },
         table: {
             minWidth: 300,
+        },
+        flexCards: {
+          display: 'flex',
+          flexDirection: 'row',
+          padding: '25px',
+          margin: 'auto',
+          flexWrap: 'wrap',
+          alignSelf: 'auto',
+          alignItems: 'center',
+          justifyContent: 'center',
         },
     }));
 
@@ -167,7 +176,7 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
                     {projectDetails}
                 </ExpansionPanelDetails>
             </ExpansionPanel>
-            <div className='flexCards'>
+            <div className={classes.flexCards}>
                 {offerCards}
             </div>
         </div>;
