@@ -44,6 +44,26 @@ export async function getUserProjects(onError, callback) {
       .catch(error => handleErrors(error, onError));
 }
 
+export async function getContracts(onError, callback) {
+  axios.get('contracts')
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function getUserContracts(onError, callback) {
+  axios.get('user/contracts')
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
 
 export async function updateEntryData(projectId, offerId, entryId, entry, onError, callback) {
   axios.put('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId, entry)
