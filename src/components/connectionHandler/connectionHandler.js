@@ -24,8 +24,18 @@ export async function getEntriesFromOffer(projectId, offerId, onError, callback)
       .catch(error => handleErrors(error, onError));
 }
 
-export async function getUserProjects(onError, callback) {
+export async function getProjects(onError, callback) {
   axios.get('projects')
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function getUserProjects(onError, callback) {
+  axios.get('user/projects')
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -106,7 +116,7 @@ export async function deleteEntryFromOffer(projectId, offerId, entryId, onError,
 }
 
 export async function getUserData(onError, callback){
-    axios.get('username')
+    axios.get('user')
         .then(res => {
             if (callback) {
                 callback(res.data);
