@@ -24,6 +24,26 @@ export async function getEntriesFromOffer(projectId, offerId, onError, callback)
       .catch(error => handleErrors(error, onError));
 }
 
+export async function getEntriesFromContract(projectId, contractId, onError, callback) {
+  axios.get('projects/' + projectId + '/contracts/' + contractId + '/entries')
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function getEntriesFromInvoice(projectId, invoiceId, onError, callback) {
+  axios.get('projects/' + projectId + '/invoices/' + invoiceId + '/entries')
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
 export async function getProjects(onError, callback) {
   axios.get('projects')
       .then(res => {
@@ -135,8 +155,28 @@ export async function deleteOfferFromProject(projectId, offerId, onError, callba
       .catch(error => handleErrors(error, onError));
 }
 
+export async function deleteInvoiceFromProject(projectId, invoiceId, onError, callback){
+  axios.delete('projects/' + projectId + '/invoices/' + invoiceId)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
 export async function turnOfferIntoContract(projectId, offerId, onError, callback) {
   axios.post('projects/' + projectId + '/contracts', {offer_id: offerId})
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function turnContractIntoInvoice(projectId, contractId, onError, callback) {
+  axios.post('projects/' + projectId + '/invoices', {contract_id: contractId})
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -155,8 +195,28 @@ export async function saveOfferToProject(projectId, offer, onError, callback) {
       .catch(error => handleErrors(error, onError));
 }
 
+export async function saveContractToProject(projectId, contract, onError, callback) {
+  axios.post('projects/' + projectId + '/contracts', contract)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
 export async function deleteEntryFromOffer(projectId, offerId, entryId, onError, callback) {
   axios.delete('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function deleteContractFromProject(projectId, contractId, onError, callback) {
+  axios.delete('projects/' + projectId + '/contracts/' + contractId)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -205,9 +265,27 @@ export async function updateOffer(projectId, offer, onError, callback) {
       .catch(error => handleErrors(error, onError));
 }
 
-export async function getOfferAsPDF(projectId, offer, onError, callback) {
-  if (offer.id) {
-    axios.get('projects/' + projectId + '/offers/' + offer.id)
+export async function getOfferAsPDF(projectId, offerId, onError, callback) {
+  if (offerId) {
+    axios.get('projects/' + projectId + '/offers/' + offerId + '/pdf')
+        .catch(error => handleErrors(error, onError));
+  } else {
+    onError("Can't get Offer as PDF as it has no ID!")
+  }
+}
+
+export async function getContractAsPDF(projectId, contracId, onError, callback) {
+  if (contracId) {
+    axios.get('projects/' + projectId + '/contracts/' + contracId + '/pdf')
+        .catch(error => handleErrors(error, onError));
+  } else {
+    onError("Can't get Offer as PDF as it has no ID!")
+  }
+}
+
+export async function getInvoiceAsPDF(projectId, invoiceId, onError, callback) {
+  if (invoiceId) {
+    axios.get('projects/' + projectId + '/invoices/' + invoiceId + '/pdf')
         .catch(error => handleErrors(error, onError));
   } else {
     onError("Can't get Offer as PDF as it has no ID!")
@@ -256,6 +334,26 @@ export async function submitNewProduct(articleData, onError, callback) {
 
 export async function getOfferData(projectId, offerId, onError, callback) {
   axios.get('projects/' + projectId + '/offers/' + offerId)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function getContractData(projectId, contractId, onError, callback) {
+  axios.get('projects/' + projectId + '/contracts/' + contractId)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function getInvoiceData(projectId, invoiceId, onError, callback) {
+  axios.get('projects/' + projectId + '/invoices/' + invoiceId)
       .then(res => {
         if (callback) {
           callback(res.data);
