@@ -7,7 +7,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DynamicCard from '../dynamicCard/dynamicCard';
 import Typography from '@material-ui/core/Typography';
 
-const ContractCards = ({ contracts }) => {
+const ContractCards = ({ contracts, setContractDetails }) => {
 
     const useStyles = makeStyles((theme) => ({
         panel: {
@@ -43,7 +43,7 @@ const ContractCards = ({ contracts }) => {
         contracts.map((entry, index) =>
             <DynamicCard
                 key={(index + 1) + "-offerCard"}
-                //onClick={() => setOfferDetails(offers[index])}
+                onClick={() => setContractDetails(contracts[index])}
                 projectName={entry.name}
                 description={"Zuletz bearbeitet am: " +
                     new Date(entry.updated_at)
