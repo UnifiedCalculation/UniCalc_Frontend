@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -10,6 +10,7 @@ import OfferEntry from '../offerEntry/offerEntry';
 
 import NewEntrySegmentDialog from '../newEntrySegmentDialog/newEntrySegmentDialog';
 import Alert from '../alert/alert';
+import { UserContext } from '../singlePage/singlePage';
 
 import * as API from '../connectionHandler/connectionHandler';
 import BackButton from '../layouts/backButton/backButton';
@@ -30,7 +31,7 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
         } else {
             API.saveOfferToProject(projectId, offer.id, onError, setNewOfferId)
         }
-    },[]);
+    }, []);
 
     const triggerUpdate = () => {
         API.getOfferData(projectId, offer.id, onError, setOffer);
@@ -95,6 +96,10 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
 
     const classes = useStyles();
 
+    const user = useContext(UserContext);
+
+    const functionsDisabled = !(user && ((user.roles.includes("Admin") || user.roles.includes("Verkäufer"))));
+
     const warnBeforeDeletion = () => {
         setAlertViewState(true);
     }
@@ -121,17 +126,18 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
                 <Button
                     onClick={() => setNewEntryDialogViewState(true)}
                     data-testid="offerDisplay-button-newSegment"
+                    disabled={functionsDisabled}
                 >
                     Neuen Segment hinzufügen
                 </Button>
                 <Button
-                    disabled={offer.id ? false : true}
+                    disabled={(offer.id ? false : true) || functionsDisabled}
                     onClick={loadOfferAsPdf}
                 >
                     Offerte als PDF laden
                 </Button>
                 <Button
-                    disabled={offer.id ? false : true}
+                    disabled={(offer.id ? false : true) || functionsDisabled}
                     onClick={turnOfferIntoContract}
                 >
                     Offerte zu Auftrag umwandeln
@@ -149,7 +155,7 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
         </ExpansionPanel>
         : null;
 
-    const segments = entries?
+    const segments = entries ?
         entries.map((entry, index) =>
             <OfferEntry
                 key={index + "-entry"}
@@ -172,7 +178,6 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
 
     return (
         <div className={classes.root} data-testid={"offerDisplay-container"}>
-            <BackButton onClick={onClose}/>
             <Alert
                 title={"Offerte Löschen"}
                 text={"Wollen Sie die Offerte Löschen? Dies kann nicht rückgängig gemacht werden!"}
@@ -180,6 +185,7 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
                 onCancel={() => setAlertViewState(false)}
                 show={showAlert}
             />
+            <BackButton onClick={onClose} />
             {newSegmentDialog}
             {header}
             {segments}
