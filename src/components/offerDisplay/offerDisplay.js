@@ -9,6 +9,7 @@ import Loading from '../loading/loading';
 import OfferEntry from '../offerEntry/offerEntry';
 
 import NewEntrySegmentDialog from '../newEntrySegmentDialog/newEntrySegmentDialog';
+import Alert from '../alert/alert';
 
 import * as API from '../connectionHandler/connectionHandler';
 import BackButton from '../layouts/backButton/backButton';
