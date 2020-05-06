@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -8,22 +8,21 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import Loading from '../loading/loading';
-import SelectArticleDialog from '../selectArticleDialog/selectArticleDialog';
+import SelectProductDialog from '../selectProductDialog/selectProductDialog';
 import NewEntrySegmentDialog from '../newEntrySegmentDialog/newEntrySegmentDialog';
 import Alert from '../alert/alert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrash, faTools, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 import ArticleTable from '../articleTable/articleTable';
+import { UserContext } from '../singlePage/singlePage';
 
 import * as API from '../connectionHandler/connectionHandler';
-
-import '../singlePage/singlePage.css'
 
 const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props }) => {
 
     const [entry, setEntryData] = useState(null);
-    const [articles, setArticles] = useState([]);
+    const [products, setArticles] = useState([]);
     const [deleteEntryAlert, setDeleteEntryAlertShowState] = useState(false);
     const [editEntryDialog, setEditEntryDialogShowState] = useState(false);
     const [addArticleDialog, setAddArticleDialogShowState] = useState(false);
@@ -83,6 +82,10 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
         },
     }));
 
+    const user = useContext(UserContext);
+
+    const functionsDisabled = !(user && ((user.roles.includes("Admin") || user.roles.includes("Verkäufer")))); 
+
     const editEntry = (event) => {
         event.stopPropagation();
         setEditEntryDialogShowState(true);
@@ -121,7 +124,7 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
     const classes = useStyles();
 
     const body = entry ?
-        <ArticleTable projectId={projectId} offerId={offerId} entryId={entry.id} articles={entry.articles} discount={entry.discount} />
+        entry.articles? <ArticleTable projectId={projectId} offerId={offerId} entryId={entry.id} articles={entry.articles} discount={entry.discount} />  : null
         : <Loading text={"Lade Einträge..."} />
 
     const content = entry ?
@@ -134,17 +137,17 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
                 <Typography className={classes.heading}>{entry.name}</Typography>
                 <Typography className={classes.secondaryHeading}>{"Rabatt: ".concat(entry.discount ? Number(entry.discount).toFixed(2) : "0.00").concat("%")}</Typography>
                 <Tooltip title={"Segmentdetails bearbeiten"} disableFocusListener >
-                    <IconButton onClick={editEntry} className={classes.tertiaryHeadingButton} >
+                    <IconButton onClick={editEntry} className={classes.tertiaryHeadingButton} disabled={functionsDisabled}>
                         <FontAwesomeIcon icon={faPen} />
                     </IconButton>
                 </Tooltip>
                 <Tooltip title={"Segment löschen"} disableFocusListener >
-                    <IconButton onClick={deleteEntry} className={classes.tertiaryHeadingButton} >
+                    <IconButton onClick={deleteEntry} className={classes.tertiaryHeadingButton} disabled={functionsDisabled}>
                         <FontAwesomeIcon icon={faTrash} />
                     </IconButton>
                 </Tooltip>
                 <Tooltip title={"Neuen Artikel hinzufügen"} disableFocusListener >
-                    <IconButton onClick={addArticle} className={classes.tertiaryHeadingButton} tooltip={"Neuen Artikel hinzufügen"}>
+                    <IconButton onClick={addArticle} className={classes.tertiaryHeadingButton} disabled={functionsDisabled}>
                         <FontAwesomeIcon icon={faTools} />
                         <FontAwesomeIcon icon={faPlus} />
                     </IconButton>
@@ -171,9 +174,9 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
                 onAccept={deleteEntryConfirmed}
                 onCancel={closeDeleteEntryAlert}
             />
-            <SelectArticleDialog
+            <SelectProductDialog
                 show={addArticleDialog}
-                articles={articles}
+                products={products}
                 onCancel={() => setAddArticleDialogShowState(false)}
                 onSubmit={addNewArticle}
             />

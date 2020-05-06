@@ -1,77 +1,47 @@
 {
-  "articles": [
-    {
-      "id": 1,
-      "entryId": 1,
-      "name": "Steckdose T13 3-fach UP weiss",
-      "article_id": 1234123,
-      "unit": "Stk.",
-      "price": 125.8,
-      "amount": 15,
-      "discount": null
-    },
-    {
-      "id": 2,
-      "entryId": 1,
-      "name": "Steckdose T13 3-fach AP weiss",
-      "article_id": 1234124,
-      "unit": "Stk.",
-      "price": 220.25,
-      "amount": 120,
-      "discount": 7.35
-    },
-    {
-      "id": 3,
-      "entryId": 2,
-      "name": "Steckdose T13 3-fach UP weiss",
-      "article_id": 1234123,
-      "unit": "Stk.",
-      "price": 125.8,
-      "amount": 235,
-      "discount": 13.37
-    },
-    {
-      "id": 4,
-      "entryId": 2,
-      "name": "Steckdose T13 3-fach AP weiss",
-      "article_id": 1234124,
-      "unit": "Stk.",
-      "price": 220.25,
-      "amount": 120,
-      "discount": 7.35
-    }
-  ],
-  "entries": [
-    {
-      "name": "badezimmer",
-      "discount": 25,
-      "id": 1
-    },
-    {
-      "id": 2,
-      "offerId": 1,
-      "name": "wohnzimmer",
-      "discount": 50
-    }
-  ],
+  "entries": [],
   "offers": [
     {
-      "id": 1,
+      "name": "Neue Offerte",
+      "payment_target": "undefined Tage",
+      "updated_at": "2020-05-06T12:28:06.767Z",
       "projectId": 1,
-      "name": "Offer 1",
-      "created_at": "2020-04-07T17:57:37.468Z",
-      "updated_at": "2020-04-07T17:57:37.468Z",
-      "discount": null,
-      "employee_id": null
+      "id": 3
     },
     {
-      "id": 2,
+      "name": "new offer like this?",
+      "payment_target": "undefined Tage",
+      "updated_at": "2020-05-06T15:27:49.675Z",
       "projectId": 1,
-      "name": "Offer 2",
-      "created_at": "2020-04-07T17:58:24.185Z",
-      "updated_at": "2020-04-07T17:58:24.185Z",
-      "discount": null,
-      "employee_id": null
+      "id": 4
+    },
+    {
+      "name": "this is one hell of a goddamn long ass text man how is anyone supposed to display shit like this?",
+      "payment_target": "undefined Tage",
+      "updated_at": "2020-05-06T15:28:04.082Z",
+      "projectId": 1,
+      "id": 5
+    },
+    {
+      "name": "new dingeling",
+      "payment_target": "undefined Tage",
+      "updated_at": "2020-05-06T15:53:58.353Z",
+      "projectId": 2,
+      "id": 6
+    },
+    {
+      "name": "neandas",
+      "payment_target": "undefined Tage",
+      "updated_at": "2020-05-06T15:54:03.234Z",
+      "projectId": 2,
+      "id": 7
+    },
+    {
+      "name": "wow",
+      "payment_target": "undefined Tage",
+      "updated_at": "2020-05-06T15:54:07.166Z",
+      "projectId": 2,
+      "id": 8
     }
   ],
   "projects": [
@@ -85,33 +55,73 @@
       "city": "Zurich",
       "created_at": "2020-04-07T15:44:02.921Z",
       "updated_at": "2020-04-07T15:44:02.921Z",
+      "employee_id": 1,
       "payment_target": "30 Tage"
     },
     {
       "id": 2,
       "name": "Villa am Berg",
-      "description": "Neubau in Chur",
-      "customer_id": "5ea536031d895bcee92a9ab6",
-      "address": "Teststreet 123",
-      "zip": "8001",
+      "description": "Neubau in Zürich",
+      "customer_id": "5ea53603e025e6a409acc113",
+      "address": "Teststreet 124",
+      "zip": "8002",
       "city": "Zurich",
       "created_at": "2020-04-07T15:44:02.921Z",
       "updated_at": "2020-04-07T15:44:02.921Z",
-      "payment_target": "5 Tage"
+      "employee_id": 2,
+      "payment_target": "17 Tage"
     },
     {
-      "name": "Setphens new house",
-      "address": "new adress",
-      "zip": "12",
-      "city": "12jsa",
-      "description": "asioasio",
-      "payment_target": "12",
+      "name": "Neues Projekt",
+      "address": "Die Gibt es schon 2a",
+      "zip": "8123",
+      "city": "Bern",
+      "description": "ASdisd",
+      "payment_target": "30 Tage",
       "customer_id": {
-        "firstName": "Lillian",
-        "lastName": "Stephens",
-        "id": "5ea53603bec1d053dfa4041d"
+        "firstName": "Fannie",
+        "lastName": "Davenport",
+        "id": "5ea53603e025e6a409acc113"
       },
       "id": 3
+    }
+  ],
+  "contracts": [
+    {
+      "id": 1,
+      "projectId": 1,
+      "name": "Auftrag 1",
+      "created_at": "2020-04-07T17:57:37.468Z",
+      "updated_at": "2020-04-07T17:57:37.468Z",
+      "discount": null,
+      "employee_id": 1
+    },
+    {
+      "id": 2,
+      "projectId": 1,
+      "name": "Auftrag 2",
+      "created_at": "2020-04-07T17:57:37.468Z",
+      "updated_at": "2020-04-07T17:57:37.468Z",
+      "discount": null,
+      "employee_id": 2
+    },
+    {
+      "offer_id": 2,
+      "id": 3
+    },
+    {
+      "name": "neue offerte",
+      "payment_target": "undefined Tage",
+      "updated_at": "2020-05-06T15:26:40.032Z",
+      "projectId": 1,
+      "id": 4
+    },
+    {
+      "name": "test123",
+      "payment_target": "undefined Tage",
+      "updated_at": "2020-05-06T15:26:46.657Z",
+      "projectId": 1,
+      "id": 5
     }
   ],
   "npks": [
@@ -714,6 +724,29 @@
       "firstName": "Lavonne",
       "lastName": "Mcguire",
       "id": "5ea5360362b530a32b8cd19b"
+    }
+  ],
+  "user": {
+    "firstName": "Alberto",
+    "lastName": "Rodriguez",
+    "id": 1,
+    "roles": [
+      "Admin"
+    ]
+  },
+  "invoices": [
+    {
+      "id": 1,
+      "projectId": 1,
+      "name": "Auftrag 1",
+      "created_at": "2020-04-07T17:57:37.468Z",
+      "updated_at": "2020-04-07T17:57:37.468Z",
+      "discount": null,
+      "employee_id": 1
+    },
+    {
+      "contract_id": 1,
+      "id": 2
     }
   ]
 }

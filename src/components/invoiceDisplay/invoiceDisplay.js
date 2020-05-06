@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import Loading from '../loading/loading';
 import OfferEntry from '../offerEntry/offerEntry';
 
-import NewEntrySegmentDialog from '../newEntrySegmentDialog/newEntrySegmentDialog';
 import Alert from '../alert/alert';
 import { UserContext } from '../singlePage/singlePage';
 
@@ -17,44 +16,33 @@ import BackButton from '../layouts/backButton/backButton';
 
 
 
-const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
+const InvoiceDisplay = ({ invoiceData, projectId, onClose, onError, ...props }) => {
 
-    const [offer, setOffer] = useState(offerData);
+    const [invoice, setInvoice] = useState(invoiceData);
     const [entries, setEntries] = useState(null);
     const [showAlert, setAlertViewState] = useState(false);
 
-    const [newEntryDialog, setNewEntryDialogViewState] = useState(false);
-
     useEffect(() => {
-        if (offer.id) {
+        if (invoice.id) {
             triggerUpdate();
         } else {
-            API.saveOfferToProject(projectId, offer.id, onError, setNewOfferId)
         }
     }, []);
 
     const triggerUpdate = () => {
-        API.getOfferData(projectId, offer.id, onError, setOffer);
-        API.getEntriesFromOffer(projectId, offer.id, onError, setEntries);
+        API.getInvoiceData(projectId, invoice.id, onError, setInvoice);
+        API.getEntriesFromInvoice(projectId, invoice.id, onError, setEntries);
     }
 
-    const setNewOfferId = (data) => {
-        offerData.id = data.id;
-        triggerUpdate(offerData);
+    const setNewContractId = (data) => {
+        invoiceData.id = data.id;
+        triggerUpdate(invoiceData);
     }
 
-    const loadOfferAsPdf = () => {
-        API.getOfferAsPDF(projectId, offer.id, onError);
+    const loadInvoiceAsPDF = () => {
+        API.getInvoiceAsPDF(projectId, invoice.id, onError);
     }
 
-    const addNewEntry = (entry) => {
-        API.addNewEntryToOffer(projectId, offer.id, entry, onError, triggerUpdate);
-        setNewEntryDialogViewState(false);
-    }
-
-    const turnOfferIntoContract = () => {
-        API.turnOfferIntoContract(projectId, offer.id, onError, onClose);
-    }
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -104,9 +92,8 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
         setAlertViewState(true);
     }
 
-    const deleteOffer = () => {
-        API.deleteOfferFromProject(projectId, offer.id, onError, afterDelete);
-        
+    const deleteInvoice = () => {
+        API.deleteInvoiceFromProject(projectId, invoice.id, onError, afterDelete);
     }
 
     const afterDelete = () => {
@@ -114,40 +101,27 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
         onClose();
     }
 
-    const header = offer ?
+    const header = invoice ?
         <ExpansionPanel expanded={true} data-testid="offerDisplay-header">
             <ExpansionPanelSummary
                 aria-controls="panel1a-content"
                 id="panel1a-header"
             >
-                <Typography className={classes.offerTitle} >{offer.name}</Typography>
+                <Typography className={classes.offerTitle} >{invoice.name}</Typography>
             </ExpansionPanelSummary>
             <div className={classes.buttonsAlign}>
                 <Button
-                    onClick={() => setNewEntryDialogViewState(true)}
-                    data-testid="offerDisplay-button-newSegment"
-                    disabled={functionsDisabled}
+                    disabled={(invoice.id ? false : true) || functionsDisabled}
+                    onClick={loadInvoiceAsPDF}
                 >
-                    Neuen Segment hinzufügen
+                    Schlussrechnung als PDF laden
                 </Button>
                 <Button
-                    disabled={(offer.id ? false : true) || functionsDisabled}
-                    onClick={loadOfferAsPdf}
-                >
-                    Offerte als PDF laden
-                </Button>
-                <Button
-                    disabled={(offer.id ? false : true) || functionsDisabled}
-                    onClick={turnOfferIntoContract}
-                >
-                    Offerte zu Auftrag umwandeln
-                </Button>
-                <Button
-                    disabled={(offer.id ? false : true) || functionsDisabled}
+                    disabled={(invoice.id ? false : true) || functionsDisabled}
                     onClick={warnBeforeDeletion}
                     color="secondary"
                 >
-                    Offerte Löschen
+                    Schlussrechnung Löschen
                 </Button>
             </div>
             <ExpansionPanelDetails>
@@ -160,33 +134,25 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
             <OfferEntry
                 key={index + "-entry"}
                 projectId={projectId}
-                offerId={offer.id}
+                offerId={invoice.id}
                 entryData={entry}
                 onChange={triggerUpdate}
                 onError={onError}
             />)
         : <Loading text={"Lade Daten..."} />;
 
-    const loading = offer ? null : <Loading text={"Lade Daten..."} />;
-
-    const newSegmentDialog =
-        <NewEntrySegmentDialog
-            show={newEntryDialog}
-            onCancel={() => setNewEntryDialogViewState(false)}
-            onSubmit={addNewEntry}
-        />
+    const loading = invoice ? null : <Loading text={"Lade Daten..."} />;
 
     return (
         <div className={classes.root} data-testid={"offerDisplay-container"}>
             <Alert
-                title={"Offerte Löschen"}
-                text={"Wollen Sie die Offerte Löschen? Dies kann nicht rückgängig gemacht werden!"}
-                onAccept={deleteOffer}
+                title={"Schlussrechnung Löschen"}
+                text={"Wollen Sie diese Schlussrechnung Löschen? Dies kann nicht rückgängig gemacht werden!"}
+                onAccept={deleteInvoice}
                 onCancel={() => setAlertViewState(false)}
                 show={showAlert}
             />
             <BackButton onClick={onClose} />
-            {newSegmentDialog}
             {header}
             {segments}
             {loading}
@@ -195,5 +161,5 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
 }
 
 
-export default OfferDisplay;
+export default InvoiceDisplay;
 
