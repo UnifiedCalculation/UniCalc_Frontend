@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,24 +7,34 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import UserEdit from "./userEdit";
+import EditEmployeeDialog from "./editEmployeeDialog";
 import ArchiveIcon from '@material-ui/icons/Archive';
 import Button from "@material-ui/core/Button";
-import {func} from "prop-types";
 
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
 
 function createData(firstname, lastname, id) {
   return {firstname, lastname, id};
 }
 
-export default function UserTable({employees}) {
+export default function UserTable({employees, getEmployees, setErrorMessage}) {
+
+  const useStyles = makeStyles({
+    table: {
+      minWidth: 650,
+    },
+    button: {
+      marginRight: '10px',
+      marginBottom: '10px'
+    },
+    dialog: {
+      zIndex: 1000
+    }
+  });
+
   const classes = useStyles();
+  const [showEditEmployeeDialog, setShowEditEmployeeDialog] = useState(false);
+  const [employeeData, setEmployeeData] = useState([]);
+
 
   function getEmployeeById(employeeId) {
     return employees.find(element => element.id === employeeId);
@@ -38,32 +48,70 @@ export default function UserTable({employees}) {
     )
   });
 
+  const openEditEmployeeDialog = (employeeId) => {
+    console.log("clicked on button");
+    setEmployeeData(getEmployeeById(employeeId))
+    setShowEditEmployeeDialog(true)
+    console.log(employeeData);
+  }
+
+  const closeEditEmployeeDialog = () => {
+    setShowEditEmployeeDialog(false)
+    setEmployeeData([])
+  }
+
+  const loadNewEmployees = () => {
+    setShowEditEmployeeDialog(false)
+    setEmployeeData([])
+    getEmployees()
+  }
+
+  const editEmployeeDialog =
+      <EditEmployeeDialog
+          className={classes.dialog}
+          show={showEditEmployeeDialog}
+          employeeData={employeeData}
+          onCancel={closeEditEmployeeDialog}
+          onAccept={loadNewEmployees}
+      />
+
   return (
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Vorname</TableCell>
-              <TableCell>Nachname</TableCell>
-              <TableCell>Einstellungen</TableCell>
-              <TableCell>Archivieren</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-                <TableRow key={row.name}>
-                  <TableCell component="th" scope="row">
-                    {row.firstname}
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    {row.lastname}
-                  </TableCell>
-                  <TableCell><UserEdit employeeData={getEmployeeById(row.id)}/></TableCell>
-                  <TableCell><Button variant="outlined" color="primary"><ArchiveIcon/></Button></TableCell>
-                </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <div>
+        {editEmployeeDialog}
+        <TableContainer component={Paper}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Vorname</TableCell>
+                <TableCell>Nachname</TableCell>
+                <TableCell>Einstellungen</TableCell>
+                <TableCell>Archivieren</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                  <TableRow key={row.name}>
+                    <TableCell component="th" scope="row">
+                      {row.firstname}
+                    </TableCell>
+                    <TableCell component="th" scope="row">
+                      {row.lastname}
+                    </TableCell>
+                    <TableCell><Button variant="outlined" color="primary" disableElevation
+                                       onClick={() => {
+                                         openEditEmployeeDialog(row.id)
+                                       }}><ArchiveIcon/></Button></TableCell>
+                    <TableCell><Button disabled variant="outlined" color="primary"><ArchiveIcon/></Button></TableCell>
+                  </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
   );
 }
+
+
+/*
+<TableCell><Button variant="outlined" color="primary" onClick={openEditEmployeeDialog(row.id)}><ArchiveIcon/></Button></TableCell>
+*/
