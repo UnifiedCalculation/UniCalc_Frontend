@@ -30,6 +30,7 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
     useEffect(() => {
         getOffersFromProject();
         getContractsFromProject();
+        getInvoicesFromProject();
     },[]);
 
     const getOffersFromProject = () => {
@@ -38,6 +39,10 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
 
     const getContractsFromProject = () => {
         API.getContractsFromProject(projectData.id, onError, setContracts);
+    }
+
+    const getInvoicesFromProject = () => {
+        API.getInvoicesFromProject(projectData.id, onError, setInvoices);
     }
 
     const closeOfferDetails = () => {
@@ -80,7 +85,7 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
     const projectDetails = <ProjectDetails projectData={projectData} />
 
     const content = offerDetails ? 
-        <OfferDisplay projectId={projectData.id} offerData={offerDetails} onClose={() => setOfferDetails(null)} onError={onError} />
+        <OfferDisplay projectId={projectData.id} offerData={offerDetails} onClose={closeOfferDetails} onError={onError} />
         : <div className={classes.root}>
             <BackButton onClick={onClose} />
             <NewOfferDialog
@@ -105,6 +110,7 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
             </ExpansionPanel>
             <OfferCards offers={offers} setOfferDetails={setOfferDetails} onNewOffer={openNewOfferDialog} />
             <ContractCards contracts={contracts} />
+            <InvoiceCards invoices={invoices} />
         </div>;
 
     return (
