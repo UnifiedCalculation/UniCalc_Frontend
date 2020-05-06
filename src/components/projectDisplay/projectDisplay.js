@@ -12,6 +12,7 @@ import ProjectDetails from '../projectDetails/projectDetails';
 
 import OfferCards from '../offerCards/offerCards';
 import ContractCards from '../contractCards/contractCards';
+import InvoiceCards from '../invoiceCards/invoiceCards';
 import NewOfferDialog from '../newOfferDialog/newOfferDialog';
 import OfferDisplay from '../offerDisplay/offerDisplay';
 import BackButton from '../layouts/backButton/backButton';
@@ -23,6 +24,7 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
 
     const [offers, setOffers] = useState(null);
     const [contracts, setContracts] = useState(null);
+    const [invoices, setInvoices] = useState(null);
 
     const [offerDetails, setOfferDetails] = useState(null);
     const [showNewOfferDialog, setNewOfferDialogViewState] = useState(false);
