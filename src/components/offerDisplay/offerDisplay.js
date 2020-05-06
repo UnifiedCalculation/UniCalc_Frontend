@@ -19,6 +19,7 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
 
     const [offer, setOffer] = useState(offerData);
     const [entries, setEntries] = useState(null);
+    const [showAlert, setAlertViewState] = useState(false);
 
     const [newEntryDialog, setNewEntryDialogViewState] = useState(false);
 
@@ -93,6 +94,20 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
 
     const classes = useStyles();
 
+    const warnBeforeDeletion = () => {
+        setAlertViewState(true);
+    }
+
+    const deleteOffer = () => {
+        API.deleteOfferFromProject(projectId, offer.id, onError, afterDelete);
+        
+    }
+
+    const afterDelete = () => {
+        setAlertViewState(false);
+        onClose();
+    }
+
     const header = offer ?
         <ExpansionPanel expanded={true} data-testid="offerDisplay-header">
             <ExpansionPanelSummary
@@ -119,6 +134,13 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
                     onClick={turnOfferIntoContract}
                 >
                     Offerte zu Auftrag umwandeln
+                </Button>
+                <Button
+                    disabled={(offer.id ? false : true) || functionsDisabled}
+                    onClick={warnBeforeDeletion}
+                    color="secondary"
+                >
+                    Offerte Löschen
                 </Button>
             </div>
             <ExpansionPanelDetails>
@@ -150,6 +172,13 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
     return (
         <div className={classes.root} data-testid={"offerDisplay-container"}>
             <BackButton onClick={onClose}/>
+            <Alert
+                title={"Offerte Löschen"}
+                text={"Wollen Sie die Offerte Löschen? Dies kann nicht rückgängig gemacht werden!"}
+                onAccept={deleteOffer}
+                onCancel={() => setAlertViewState(false)}
+                show={showAlert}
+            />
             {newSegmentDialog}
             {header}
             {segments}
