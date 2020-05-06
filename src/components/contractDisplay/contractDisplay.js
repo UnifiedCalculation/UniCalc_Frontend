@@ -43,10 +43,6 @@ const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }
         triggerUpdate(contractData);
     }
 
-    const loadContractAsPdf = () => {
-        API.getContractAsPDF(projectId, contract.id, onError);
-    }
-
     const addNewEntry = (entry) => {
         API.addNewEntryToOffer(projectId, contract.id, entry, onError, triggerUpdate);
         setNewEntryDialogViewState(false);
@@ -129,12 +125,6 @@ const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }
                     disabled={functionsDisabled}
                 >
                     Neuen Segment hinzufügen
-                </Button>
-                <Button
-                    disabled={(contract.id ? false : true) || functionsDisabled}
-                    onClick={loadContractAsPdf}
-                >
-                    Auftrag als PDF laden
                 </Button>
                 <Button
                     disabled={(contract.id ? false : true) || functionsDisabled}
