@@ -40,6 +40,12 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
         API.getContractsFromProject(projectData.id, onError, setContracts);
     }
 
+    const closeOfferDetails = () => {
+        setOffers(null);
+        getOffersFromProject();
+        setOfferDetails(null);
+    }
+
     const useStyles = makeStyles((theme) => ({
         root: {
             width: '90%',
