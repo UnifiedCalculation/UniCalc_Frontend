@@ -14,9 +14,13 @@ export default function AdminOptions({setErrorMessage}) {
       position: "fixed",
       height: "100%",
       bottom: "50px",
-      zIndex: 999,
+      zIndex: 100,
       padding: "20px",
       boxSizing: 'border-box'
+    },
+    button:{
+      marginRight: '10px',
+      marginBottom: '10px'
     },
   });
 
