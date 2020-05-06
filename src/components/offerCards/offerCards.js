@@ -14,7 +14,7 @@ const OfferCards = ({ offers, setOfferDetails, onNewOffer }) => {
 
     const useStyles = makeStyles((theme) => ({
         panel: {
-            width: '95%',
+            maxWidth: '95%',
             padding: 25
         },
         flexCards: {
