@@ -76,7 +76,8 @@
       "created_at": "2020-04-07T17:57:37.468Z",
       "updated_at": "2020-04-07T17:57:37.468Z",
       "discount": null,
-      "employee_id": null
+      "employee_id": null,
+      "status": "offen"
     },
     {
       "id": 2,
@@ -85,21 +86,32 @@
       "created_at": "2020-04-07T17:58:24.185Z",
       "updated_at": "2020-04-07T17:58:24.185Z",
       "discount": null,
-      "employee_id": null
+      "employee_id": null,
+      "status": "offen"
     },
     {
       "name": "Neue Offerte 123",
       "payment_target": "undefined Tage",
       "updated_at": "2020-05-05T19:36:02.701Z",
       "projectId": 1,
-      "id": 3
+      "id": 3,
+      "status": "offen"
     },
     {
       "name": "Neue Offerte",
       "payment_target": "undefined Tage",
       "updated_at": "2020-05-05T20:06:36.261Z",
       "projectId": 1,
-      "id": 4
+      "id": 4,
+      "status": "offen"
+    },
+    {
+      "name": "Nochmals eine Offerte",
+      "payment_target": "undefined Tage",
+      "updated_at": "2020-05-06T08:04:19.368Z",
+      "projectId": 1,
+      "id": 5,
+      "status": "offen"
     }
   ],
   "projects": [
@@ -128,6 +140,20 @@
       "updated_at": "2020-04-07T15:44:02.921Z",
       "employee_id": 2,
       "payment_target": "17 Tage"
+    },
+    {
+      "name": "Neues Projekt",
+      "address": "Die Gibt es schon 2a",
+      "zip": "8123",
+      "city": "Bern",
+      "description": "ASdisd",
+      "payment_target": "30 Tage",
+      "customer_id": {
+        "firstName": "Fannie",
+        "lastName": "Davenport",
+        "id": "5ea53603e025e6a409acc113"
+      },
+      "id": 3
     }
   ],
   "contracts": [
@@ -139,6 +165,15 @@
       "updated_at": "2020-04-07T17:57:37.468Z",
       "discount": null,
       "employee_id": 1
+    },
+    {
+      "id": 2,
+      "projectId": 1,
+      "name": "Auftrag 2",
+      "created_at": "2020-04-07T17:57:37.468Z",
+      "updated_at": "2020-04-07T17:57:37.468Z",
+      "discount": null,
+      "employee_id": 2
     }
   ],
   "npks": [
@@ -748,7 +783,18 @@
     "lastName": "Rodriguez",
     "id": 1,
     "roles": [
-      "Admin"
+      "Projektleiter"
+    ],
+    "invoices": [
+      {
+        "id": 1,
+        "projectId": 1,
+        "name": "Auftrag 1",
+        "created_at": "2020-04-07T17:57:37.468Z",
+        "updated_at": "2020-04-07T17:57:37.468Z",
+        "discount": null,
+        "employee_id": 1
+      }
     ]
   }
 }
