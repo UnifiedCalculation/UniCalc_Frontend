@@ -18,6 +18,9 @@ function createData(firstname, lastname, id) {
 
 export default function UserTable({employees, getEmployees, setErrorMessage}) {
 
+  const [showEditEmployeeDialog, setShowEditEmployeeDialog] = useState(false);
+  const [employeeData, setEmployeeData] = useState(null);
+
   const useStyles = makeStyles({
     table: {
       minWidth: 650,
@@ -32,9 +35,11 @@ export default function UserTable({employees, getEmployees, setErrorMessage}) {
   });
 
   const classes = useStyles();
-  const [showEditEmployeeDialog, setShowEditEmployeeDialog] = useState(false);
-  const [employeeData, setEmployeeData] = useState([]);
 
+
+  const getEmployeeData = () => {
+    return employeeData
+  }
 
   function getEmployeeById(employeeId) {
     return employees.find(element => element.id === employeeId);
@@ -49,7 +54,8 @@ export default function UserTable({employees, getEmployees, setErrorMessage}) {
   });
 
   const openEditEmployeeDialog = (employeeId) => {
-    setEmployeeData(getEmployeeById(employeeId))
+    const employee = getEmployeeById(employeeId)
+    setEmployeeData(employee)
     setShowEditEmployeeDialog(true)
   }
 

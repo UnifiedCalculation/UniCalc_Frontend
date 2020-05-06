@@ -11,18 +11,26 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 
 const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMessage}) => {
-  const [userState, setUserState] = useState({
-    id: employeeData.id
-  })
+
+  /*  useEffect(() => {
+      if (employeeData.role != null && employeeData.role.size > 0) {
+        SetEmployeeRoles({
+          admin: employeeData.roles.contains("admin"),
+          pl: employeeData.roles.contains("pl"),
+          sales: employeeData.roles.contains("sales"),
+          employee: employeeData.roles.contains("employee"),
+        })
+      }
+    }, [employeeData])*/
+
+  const [userState, setUserState] = useState([])
   const [employeeRoles, SetEmployeeRoles] = useState({
-    admin: true,
-    pl: true,
-    sales: true,
-    employee: true
+    admin: null,
+    pl: null,
+    sales: null,
+    employee: null
   });
 
-  const roles = employeeData.role
-  console.log(roles)
 
   const cancelButtonText = 'Abbrechen';
   const acceptButtonText = 'Bestätigen';
@@ -35,28 +43,28 @@ const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMes
       type: 'textarea',
       required: true,
       disabled: true,
-      value: employeeData.id
+      value: employeeData ? employeeData.id : null
     },
     {
       id: 'email',
       label: 'Email',
       type: 'textarea',
       required: true,
-      value: employeeData.email
+      value: employeeData ? employeeData.email : null
     },
     {
       id: 'firstname',
       label: 'Vorname',
       type: 'textarea',
       required: true,
-      value: employeeData.firstname
+      value: employeeData ? employeeData.firstname : null
     },
     {
       id: 'lastname',
       label: 'Nachname',
       type: 'textarea',
       required: true,
-      value: employeeData.lastname
+      value: employeeData ? employeeData.lastname : null
     }
   ];
 
@@ -83,6 +91,7 @@ const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMes
 
   const inputFields = textfields.map((entry, index) => {
         return <TextField
+            key={(index + 1) + "-textField"}
             inputProps={entry.inputProps}
             type={entry.type}
             id={entry.id}
@@ -106,7 +115,6 @@ const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMes
               )
               : null}
         </TextField>
-        console.log(roles)
       }
   );
 
@@ -126,7 +134,7 @@ const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMes
           show={show}
       >
         {inputFields}
-        {/*<FormControl className={classes.userRoles} component="fieldset">
+        <FormControl className={classes.userRoles} component="fieldset">
           <FormLabel style={{marginBottom: '10px'}} component="legend">Rollen zuweisen</FormLabel>
           <FormGroup>
             <FormControlLabel
@@ -146,7 +154,7 @@ const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMes
                 label="Handwerker"
             />
           </FormGroup>
-        </FormControl>*/}
+        </FormControl>
       </DynamicDialog>
 
   );
