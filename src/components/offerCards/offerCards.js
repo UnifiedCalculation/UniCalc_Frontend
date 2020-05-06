@@ -10,6 +10,9 @@ import IconButton from '@material-ui/core/IconButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen } from '@fortawesome/free-solid-svg-icons'
 
+
+import { UserContext } from '../singlePage/singlePage';
+
 const OfferCards = ({ offers, setOfferDetails, onNewOffer }) => {
 
     const useStyles = makeStyles((theme) => ({
@@ -40,6 +43,8 @@ const OfferCards = ({ offers, setOfferDetails, onNewOffer }) => {
     }));
 
     const classes = useStyles();
+
+    const user = useContext(UserContext);
 
     const dateOptions = {
         timeZone: "Europe/Zurich",
@@ -72,9 +77,9 @@ const OfferCards = ({ offers, setOfferDetails, onNewOffer }) => {
                 id="panel2a-header"
             >
                 <Typography className={classes.heading} gutterBottom variant="h5" component="h2">Offerten</Typography>
-                    <IconButton className={classes.tertiaryHeadingButton} onClick={triggerNewOfferDialog}>
-                        <FontAwesomeIcon icon={faPen} />
-                    </IconButton>
+                <IconButton className={classes.tertiaryHeadingButton} onClick={triggerNewOfferDialog} disabled={!(user && ((user.roles.includes("Admin") || user.roles.includes("Verkäufer")))) }>
+                    <FontAwesomeIcon icon={faPen} />
+                </IconButton>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails className={classes.flexCards}>
                 {offerCards}
