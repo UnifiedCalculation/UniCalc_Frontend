@@ -15,6 +15,9 @@ import ContractCards from '../contractCards/contractCards';
 import InvoiceCards from '../invoiceCards/invoiceCards';
 import NewOfferDialog from '../newOfferDialog/newOfferDialog';
 import OfferDisplay from '../offerDisplay/offerDisplay';
+import ContractDisplay from '../contractDisplay/contractDisplay';
+import InvoiceDisplay from '../invoiceDisplay/invoiceDisplay';
+
 import BackButton from '../layouts/backButton/backButton';
 import * as API from '../connectionHandler/connectionHandler';
 
@@ -26,6 +29,8 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
     const [contracts, setContracts] = useState(null);
     const [invoices, setInvoices] = useState(null);
 
+    const [contractDetails, setContractDetails] = useState(null);
+    const [invoiceDetails, setInvoiceDetails] = useState(null);
     const [offerDetails, setOfferDetails] = useState(null);
     const [showNewOfferDialog, setNewOfferDialogViewState] = useState(false);
 
@@ -51,6 +56,18 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
         setOffers(null);
         getOffersFromProject();
         setOfferDetails(null);
+    }
+
+    const closeContractDetails = () => {
+        setContracts(null);
+        getContractsFromProject();
+        setContractDetails(null);
+    }
+
+    const closeInvoiceDetails = () => {
+        setInvoices(null);
+        getInvoicesFromProject();
+        setInvoiceDetails(null);
     }
 
     const useStyles = makeStyles((theme) => ({
@@ -86,7 +103,7 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
 
     const projectDetails = <ProjectDetails projectData={projectData} />
 
-    const content = offerDetails ? 
+    const header = offerDetails ? 
         <OfferDisplay projectId={projectData.id} offerData={offerDetails} onClose={closeOfferDetails} onError={onError} />
         : <div className={classes.root}>
             <BackButton onClick={onClose} />
@@ -111,9 +128,15 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
                 </ExpansionPanelDetails>
             </ExpansionPanel>
             <OfferCards offers={offers} setOfferDetails={setOfferDetails} onNewOffer={openNewOfferDialog} />
-            <ContractCards contracts={contracts} />
-            <InvoiceCards invoices={invoices} />
+            <ContractCards contracts={contracts} setContractDetails={setContractDetails}/>
+            <InvoiceCards invoices={invoices} setInvoiceDetails={setInvoiceDetails}/>
         </div>;
+
+    const content = contractDetails? 
+    <ContractDisplay projectId={projectData.id} contractData={contractDetails} onClose={closeContractDetails} onError={onError} />
+    : invoiceDetails? 
+    <InvoiceDisplay projectId={projectData.id} invoiceData={invoiceDetails} onClose={closeInvoiceDetails} onError={onError} />
+    : header;
 
     return (
         content
