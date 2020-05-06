@@ -10,7 +10,7 @@ import TextField from '@material-ui/core/TextField';
  * @param {Function} onSubmit 
  * @param {Boolean} show
  */
-const NewProjectDialog = ({ customers, onCancel, onSubmit, show, ...props }) => {
+const NewProjectDialog = ({ customers, onCancel, onSubmit, show, projectId, ...props }) => {
 
     const cancelButtonText = 'Abbrechen';
     const acceptButtonText = 'Bestätigen';

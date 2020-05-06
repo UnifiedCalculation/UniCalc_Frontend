@@ -1,6 +1,6 @@
 import React from 'react';
 import TextField from "@material-ui/core/TextField";
-import Logo from '../layouts/header/logo.png';
+import Logo from '../header/logo.png';
 import Typography from '@material-ui/core/Typography';
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';

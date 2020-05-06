@@ -31,14 +31,14 @@ const useStyles = makeStyles({
 });
 
 
-const Header = () => {
+const Header = ({clickHandler, ...props}) => {
   const classes = useStyles();
 
   return (
       <div className={classes.header}>
         <img className={classes.logo} src={Logo} alt={'Logo uniCalc'} height={'50px'}/>
         <div className={classes.headerRight}>
-          <SettingsIcon className={classes.options} style={{fill: "white", fontSize: 40}}/>
+          <SettingsIcon className={classes.options} onClick={clickHandler} style={{fill: "white", fontSize: 40}}/>
           <div className={classes.username}>Username</div>
         </div>
 

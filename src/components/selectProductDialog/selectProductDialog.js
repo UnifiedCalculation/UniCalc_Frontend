@@ -6,12 +6,12 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import DynamicDialog from '../dynamicDialog/dynamicDialog';
 
 /**
- * @param {Array} articles array with articles
+ * @param {Array} products array with products
  * @param {Function} onCancel
  * @param {Function} onSubmit 
  * @param {Boolean} show
  */
-const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) => {
+const SelectProductDialog = ({ products, onCancel, onSubmit, show, ...props }) => {
 
 
     const cancelButtonText = 'Abbrechen';
@@ -45,11 +45,11 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
         }
     ];
 
-    const articlesSelection =
+    const productsSelection =
         <Autocomplete
             id="customer-autocomplete"
-            options={articles}
-            getOptionLabel={(article) => article.name}
+            options={products}
+            getOptionLabel={(product) => product.name}
             renderInput={(params)=> 
                 <TextField
                     {...params}
@@ -78,9 +78,10 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
         />
     );
 
-    const parseNewArticle = (jsonObject) => {
+    const parseNewProduct = (jsonObject) => {
         jsonObject.discount = parseInt(jsonObject.discount);
         jsonObject.amount = parseInt(jsonObject.amount);
+        jsonObject.article_id = products.find(product => product.name == jsonObject.article_id).id;
         onSubmit(jsonObject);
     };
 
@@ -90,21 +91,21 @@ const SelectArticleDialog = ({ articles, onCancel, onSubmit, show, ...props }) =
             text={text}
             onCancel={onCancel}
             cancelButtonText={cancelButtonText}
-            onAccept={parseNewArticle}
+            onAccept={parseNewProduct}
             acceptButtonText={acceptButtonText}
             show={show}
         >
-            {articlesSelection}
+            {productsSelection}
             {inputFields}
         </DynamicDialog>
     );
 }
 
-SelectArticleDialog.propTypes = {
-    articles: PropTypes.array.isRequired,
+SelectProductDialog.propTypes = {
+    products: PropTypes.array.isRequired,
     onCancel: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     show: PropTypes.bool.isRequired
 }
 
-export default SelectArticleDialog;
+export default SelectProductDialog;
