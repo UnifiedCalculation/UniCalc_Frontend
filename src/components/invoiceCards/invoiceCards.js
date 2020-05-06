@@ -7,7 +7,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DynamicCard from '../dynamicCard/dynamicCard';
 import Typography from '@material-ui/core/Typography';
 
-const InvoiceCards = ({ invoices }) => {
+const InvoiceCards = ({ invoices, setInvoiceDetails }) => {
 
     const useStyles = makeStyles((theme) => ({
         panel: {
@@ -43,7 +43,7 @@ const InvoiceCards = ({ invoices }) => {
         invoices.map((entry, index) =>
             <DynamicCard
                 key={(index + 1) + "-offerCard"}
-                //onClick={() => setOfferDetails(offers[index])}
+                onClick={() => setInvoiceDetails(invoices[index])}
                 projectName={entry.name}
                 description={"Zuletz bearbeitet am: " +
                     new Date(entry.updated_at)
