@@ -72,7 +72,7 @@ const SinglePage = () => {
     }
   }, [user]);
 
-  const triggerAdminOptions = () => {
+  const toggleAdmingOptions = () => {
     setShowAdminOptions(!showAdminOptions);
   }
 
@@ -160,7 +160,8 @@ const SinglePage = () => {
   return (
     <div className={classes.mainPage}>
       <UserContext.Provider value={user}>
-        <Header onError={setErrorMessage} />
+        <Header onError={setErrorMessage} onSettingsClick={toggleAdmingOptions}/>
+        {adminOptionsDisplay}
         {rolesLoaded}
         <div className={classes.content}>
           {snackbar}
