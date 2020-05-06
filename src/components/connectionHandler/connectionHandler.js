@@ -224,8 +224,8 @@ export async function getEmployees(onError, callback) {
       .catch(error => handleErrors(error, onError));
 }
 
-export async function submitEditedEmployee(employeeData, onError, callback) {
-  axios.post('editEmployee', employeeData)
+export async function updateEmployee(employeeData, onError, callback) {
+  axios.put('employees' + '/' + employeeData.id, employeeData)
       .then(res => {
         if (callback) {
           callback(res.data);
