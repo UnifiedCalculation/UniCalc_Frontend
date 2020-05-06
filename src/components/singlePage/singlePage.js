@@ -7,6 +7,7 @@ import NewProjectDialog from '../newProjectDialog/newProjectDialog';
 import ProjectDisplay from '../projectDisplay/projectDisplay';
 import Loading from '../loading/loading';
 import * as API from '../connectionHandler/connectionHandler';
+import ProductOverview from "../layouts/ProductAdministration/ProductOverview";
 import SnackbarOverlay from '../snackbar/snackbar';
 
 export const UserContext = createContext();
@@ -38,6 +39,8 @@ const SinglePage = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [projects, setProjects] = useState(null);
+  const [contracts, setContracts] = useState(null);
+  const [showAdminOptions, setShowAdminOptions] = useState(false)
   const [projectData, setProjectData] = useState(null);
   const [customerData, setCustomerData] = useState([]);
   const [showNewProjectDialog, setNewProjectDialogViewState] = useState(false);
@@ -54,6 +57,7 @@ const SinglePage = () => {
     if (user) {
       switch(true) {
         case user.roles.includes("Admin"):
+          API.getContracts(setErrorMessage, setContracts);
         case user.roles.includes("Verkäufer"):
           API.getProjects(setErrorMessage, setProjects);
           break;
@@ -61,11 +65,20 @@ const SinglePage = () => {
           API.getUserProjects(setErrorMessage, setProjects);
           break;
         case user.roles.includes("Mitarbeiter"):
+          API.getUserContracts(setErrorMessage, setContracts);
         default:
-          setErrorMessage("User hat keine Rollen, oder nichts zum darstellen. Kontaktiere deinen Administrator!");
+          setErrorMessage("User hat keine Rollen. Kontaktiere deinen Administrator!");
       }
     }
   }, [user]);
+
+  const triggerAdminOptions = () => {
+    setShowAdminOptions(!showAdminOptions);
+  }
+
+  const adminOptionsDisplay = showAdminOptions ?
+    <ProductOverview setErrorMessage={setErrorMessage} />
+    : null;
 
   const emptyErrorMessage = () => {
     setErrorMessage("");
