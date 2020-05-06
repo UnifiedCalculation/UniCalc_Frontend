@@ -223,3 +223,13 @@ export async function getEmployees(onError, callback) {
       })
       .catch(error => handleErrors(error, onError));
 }
+
+export async function submitEditedEmployee(employeeData, onError, callback) {
+  axios.post('editEmployee', employeeData)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
