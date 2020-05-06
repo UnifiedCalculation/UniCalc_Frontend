@@ -26,17 +26,17 @@ const OfferCards = ({ offers, setOfferDetails, onNewOffer }) => {
             alignSelf: 'auto',
             alignItems: 'center',
             justifyContent: 'center',
-          },
-          heading: {
-              fontSize: theme.typography.pxToRem(35),
-              fontWeight: theme.typography.fontWeightRegular,
-              flexBasis: '93.00%',
-              flexShrink: 0,
-          },
-          tertiaryHeadingButton: {
-              fontSize: theme.typography.pxToRem(15),
-              flexBasis: '7.00%',
-          }
+        },
+        heading: {
+            fontSize: theme.typography.pxToRem(35),
+            fontWeight: theme.typography.fontWeightRegular,
+            flexBasis: '93.00%',
+            flexShrink: 0,
+        },
+        tertiaryHeadingButton: {
+            fontSize: theme.typography.pxToRem(15),
+            flexBasis: '7.00%',
+        }
     }));
 
     const classes = useStyles();
