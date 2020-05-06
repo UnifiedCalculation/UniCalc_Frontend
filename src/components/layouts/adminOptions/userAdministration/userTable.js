@@ -49,10 +49,8 @@ export default function UserTable({employees, getEmployees, setErrorMessage}) {
   });
 
   const openEditEmployeeDialog = (employeeId) => {
-    console.log("clicked on button");
     setEmployeeData(getEmployeeById(employeeId))
     setShowEditEmployeeDialog(true)
-    console.log(employeeData);
   }
 
   const closeEditEmployeeDialog = () => {

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
 import DynamicDialog from "../../../dynamicDialog/dynamicDialog"
@@ -9,9 +9,20 @@ import FormLabel from "@material-ui/core/FormLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
-import DialogContent from "@material-ui/core/DialogContent";
 
 const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMessage}) => {
+  const [userState, setUserState] = useState({
+    id: employeeData.id
+  })
+  const [employeeRoles, SetEmployeeRoles] = useState({
+    admin: true,
+    pl: true,
+    sales: true,
+    employee: true
+  });
+
+  const roles = employeeData.role
+  console.log(roles)
 
   const cancelButtonText = 'Abbrechen';
   const acceptButtonText = 'Bestätigen';
@@ -71,7 +82,6 @@ const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMes
   });
 
   const inputFields = textfields.map((entry, index) => {
-
         return <TextField
             inputProps={entry.inputProps}
             type={entry.type}
@@ -96,6 +106,7 @@ const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMes
               )
               : null}
         </TextField>
+        console.log(roles)
       }
   );
 
@@ -115,28 +126,29 @@ const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMes
           show={show}
       >
         {inputFields}
-        <FormControl className={classes.userRoles} component="fieldset">
+        {/*<FormControl className={classes.userRoles} component="fieldset">
           <FormLabel style={{marginBottom: '10px'}} component="legend">Rollen zuweisen</FormLabel>
           <FormGroup>
             <FormControlLabel
-                control={<Switch checked={state.admin} onChange={handleChange} name="admin"/>}
+                control={<Switch checked={employeeRoles.admin} onChange={handleChange} name="admin"/>}
                 label="Administrator"
             />
             <FormControlLabel
-                control={<Switch checked={state.pl} onChange={handleChange} name="pl"/>}
+                control={<Switch checked={employeeRoles.pl} onChange={handleChange} name="pl"/>}
                 label="Verkauf"
             />
             <FormControlLabel
-                control={<Switch checked={state.sales} onChange={handleChange} name="sales"/>}
+                control={<Switch checked={employeeRoles.sales} onChange={handleChange} name="sales"/>}
                 label="Projektleitung"
             />
             <FormControlLabel
-                control={<Switch checked={state.employee} onChange={handleChange} name="employee"/>}
+                control={<Switch checked={employeeRoles.employee} onChange={handleChange} name="employee"/>}
                 label="Handwerker"
             />
           </FormGroup>
-        </FormControl>
+        </FormControl>*/}
       </DynamicDialog>
+
   );
 }
 
