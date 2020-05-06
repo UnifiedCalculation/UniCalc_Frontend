@@ -125,6 +125,16 @@ export async function getInvoicesFromProject(projectId, onError, callback) {
       .catch(error => handleErrors(error, onError));
 }
 
+export async function deleteOfferFromProject(projectId, offerId, onError, callback){
+  axios.delete('projects/' + projectId + '/offers/' + offerId)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
 export async function turnOfferIntoContract(projectId, offerId, onError, callback) {
   axios.post('projects/' + projectId + '/contracts', {offer_id: offerId})
       .then(res => {
