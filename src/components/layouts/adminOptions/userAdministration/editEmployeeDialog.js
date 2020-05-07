@@ -14,7 +14,7 @@ const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMes
 
   /*  useEffect(() => {
       if (employeeData.role != null && employeeData.role.size > 0) {
-        SetEmployeeRoles({
+        setEmployeeRoles({
           admin: employeeData.roles.contains("admin"),
           pl: employeeData.roles.contains("pl"),
           sales: employeeData.roles.contains("sales"),
@@ -24,13 +24,29 @@ const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMes
     }, [employeeData])*/
 
   const [userState, setUserState] = useState([])
-  const [employeeRoles, SetEmployeeRoles] = useState({
-    admin: null,
-    pl: null,
-    sales: null,
-    employee: null
-  });
+  const [employeeRoles, setEmployeeRoles] = useState({});
 
+  useEffect(() => {
+    setEmployeeRoles([
+      {
+        name: "admin",
+        value: employeeData ? employeeData.role.includes('admin') : null
+      },
+      {
+        name: "pl",
+        value: employeeData ? employeeData.role.includes('pl') : null
+      },
+      {
+        name: "sales",
+        value: employeeData ? employeeData.role.includes('sales') : null
+      },
+      {
+        name: "employee",
+        value: employeeData ? employeeData.role.includes('employee') : null,
+      }
+    ])
+    console.log(employeeRoles);
+  }, [employeeData])
 
   const cancelButtonText = 'Abbrechen';
   const acceptButtonText = 'Bestätigen';
@@ -118,8 +134,18 @@ const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMes
       }
   );
 
-  function handleChange() {
-    console.log("change swipe button")
+  function handleChange(role) {
+    let employeeRolesCopy = Array.from(employeeRoles)
+    let index = employeeRolesCopy.findIndex(element => element.name === role)
+    let found = employeeRolesCopy.find(element => element.name === role)
+    found.value = !(found.value)
+    //employeeRolesCopy[index] = found
+    setEmployeeRoles(employeeRolesCopy)
+  }
+
+  function getRoleValue(role) {
+    let found = employeeRoles.find(element => element.name === role)
+    return found.value
   }
 
   return (
@@ -135,22 +161,35 @@ const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMes
       >
         {inputFields}
         <FormControl className={classes.userRoles} component="fieldset">
-          <FormLabel style={{marginBottom: '10px'}} component="legend">Rollen zuweisen</FormLabel>
+          <FormLabel style={{marginBottom: '10px'}} component="legend">Rollen</FormLabel>
           <FormGroup>
             <FormControlLabel
-                control={<Switch checked={employeeRoles.admin} onChange={handleChange} name="admin"/>}
+                control={<Switch defaultChecked={() => {
+                  //getRoleValue('admin')
+                  employeeRoles.find(employee => employee.name === 'admin')
+                }
+                } onChange={() => {
+                  handleChange('admin')
+                }
+                } name="admin"/>}
                 label="Administrator"
             />
             <FormControlLabel
-                control={<Switch checked={employeeRoles.pl} onChange={handleChange} name="pl"/>}
+                control={<Switch checked={false} onChange={() => {
+                  handleChange('pl')
+                }} name="pl"/>}
                 label="Verkauf"
             />
             <FormControlLabel
-                control={<Switch checked={employeeRoles.sales} onChange={handleChange} name="sales"/>}
+                control={<Switch checked={false} onChange={() => {
+                  handleChange('sales')
+                }} name="sales"/>}
                 label="Projektleitung"
             />
             <FormControlLabel
-                control={<Switch checked={employeeRoles.employee} onChange={handleChange} name="employee"/>}
+                control={<Switch checked={false} onChange={() => {
+                  handleChange('employee')
+                }} name="employee"/>}
                 label="Handwerker"
             />
           </FormGroup>
