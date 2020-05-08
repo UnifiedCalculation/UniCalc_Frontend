@@ -309,7 +309,7 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
                               role="checkbox"
                               aria-checked={isItemSelected}
                               tabIndex={-1}
-                              key={row.name}
+                              key={row.id + 'tableRow'}
                               selected={isItemSelected}
                           >
                             <TableCell align="left" component="th" id={labelId} scope="row" >

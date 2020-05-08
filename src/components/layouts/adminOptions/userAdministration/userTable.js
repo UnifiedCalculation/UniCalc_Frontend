@@ -95,7 +95,7 @@ export default function UserTable({employees, getEmployees, setErrorMessage}) {
             </TableHead>
             <TableBody>
               {rows.map((row) => (
-                  <TableRow key={row.name}>
+                  <TableRow key={row.id + 'tableRow'}>
                     <TableCell component="th" scope="row">
                       {row.firstname}
                     </TableCell>
