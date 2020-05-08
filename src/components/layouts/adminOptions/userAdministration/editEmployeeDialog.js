@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import {makeStyles, useTheme} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import DynamicDialog from "../../../dynamicDialog/dynamicDialog"
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -9,9 +8,8 @@ import FormLabel from "@material-ui/core/FormLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
-import {func} from "prop-types";
 
-const EditEmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, show, setErrorMessage}) => {
+const EditEmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, show}) => {
 
   const [employeeRoles, setEmployeeRoles] = useState({});
 
@@ -96,7 +94,7 @@ const EditEmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, 
             onChange={e => handleInputChange(e.target.value, e.target.name)}
         >
           {entry.select ?
-              entry.options.map((entry, index) =>
+              entry.options.map((entry) =>
                   <MenuItem key={entry.value} value={entry.value}>
                     {entry.name}
                   </MenuItem>
