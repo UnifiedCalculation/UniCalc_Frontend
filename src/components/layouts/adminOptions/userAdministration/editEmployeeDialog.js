@@ -93,7 +93,7 @@ const EditEmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, 
             autoComplete={false}
             defaultValue={entry.value ? entry.value : null}
             disabled={entry.disabled}
-            onChange={handleInputChange}
+            onChange={e => handleInputChange(e.target.value, e.target.name)}
         >
           {entry.select ?
               entry.options.map((entry, index) =>
@@ -107,10 +107,13 @@ const EditEmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, 
   );
 
   function handleInputChange(value, name) {
-
+    let copy = JSON.parse(JSON.stringify(employeeData))
+    copy[name] = value
+    setEmployeeData(copy)
+    console.log(employeeData);
   }
 
-  function switchRole(value, name) {
+  function handleRoleSwitch(value, name) {
     let copy = JSON.parse(JSON.stringify(employeeData))
     copy.roles[name] = value
     setEmployeeData(copy)
@@ -133,7 +136,7 @@ const EditEmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, 
           <FormGroup>
             <FormControlLabel
                 control={<Switch defaultChecked={employeeData ? employeeData.roles.admin : null}
-                                 onChange={e => switchRole(e.target.checked, e.target.name)}
+                                 onChange={e => handleRoleSwitch(e.target.checked, e.target.name)}
                                  name="admin"/>}
                 label="Administrator"
             />
