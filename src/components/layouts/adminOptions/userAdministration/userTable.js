@@ -75,6 +75,7 @@ export default function UserTable({employees, getEmployees, setErrorMessage}) {
           className={classes.dialog}
           show={showEditEmployeeDialog}
           employeeData={employeeData}
+          setEmployeeData={setEmployeeData}
           onCancel={closeEditEmployeeDialog}
           onAccept={loadNewEmployees}
       />

@@ -9,44 +9,23 @@ import FormLabel from "@material-ui/core/FormLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
+import {func} from "prop-types";
 
-const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMessage}) => {
+const EditEmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, show, setErrorMessage}) => {
 
-  /*  useEffect(() => {
-      if (employeeData.role != null && employeeData.role.size > 0) {
-        setEmployeeRoles({
-          admin: employeeData.roles.contains("admin"),
-          pl: employeeData.roles.contains("pl"),
-          sales: employeeData.roles.contains("sales"),
-          employee: employeeData.roles.contains("employee"),
-        })
-      }
-    }, [employeeData])*/
-
-  const [userState, setUserState] = useState([])
   const [employeeRoles, setEmployeeRoles] = useState({});
 
+  const roles = {
+    admin: employeeData ? employeeData.roles.admin : null,
+    pl: employeeData ? employeeData.roles.admin : null,
+    sales: employeeData ? employeeData.roles.admin : null,
+    employee: employeeData ? employeeData.roles.admin : null
+  }
+
   useEffect(() => {
-    setEmployeeRoles([
-      {
-        name: "admin",
-        value: employeeData ? employeeData.role.includes('admin') : null
-      },
-      {
-        name: "pl",
-        value: employeeData ? employeeData.role.includes('pl') : null
-      },
-      {
-        name: "sales",
-        value: employeeData ? employeeData.role.includes('sales') : null
-      },
-      {
-        name: "employee",
-        value: employeeData ? employeeData.role.includes('employee') : null,
-      }
-    ])
+    setEmployeeRoles(roles)
     console.log(employeeRoles);
-  }, [employeeData])
+  }, [])
 
   const cancelButtonText = 'Abbrechen';
   const acceptButtonText = 'Bestätigen';
@@ -59,7 +38,8 @@ const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMes
       type: 'textarea',
       required: true,
       disabled: true,
-      value: employeeData ? employeeData.id : null
+      value: roles.admin
+      //value: employeeData ? employeeData.id : null
     },
     {
       id: 'email',
@@ -94,16 +74,7 @@ const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMes
     },
   }));
 
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const classes = useStyles();
-
-  const [state, setState] = React.useState({
-    admin: false,
-    pl: false,
-    sales: false,
-    employee: false,
-  });
 
   const inputFields = textfields.map((entry, index) => {
         return <TextField
@@ -122,6 +93,7 @@ const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMes
             autoComplete={false}
             defaultValue={entry.value ? entry.value : null}
             disabled={entry.disabled}
+            onChange={handleInputChange}
         >
           {entry.select ?
               entry.options.map((entry, index) =>
@@ -134,18 +106,14 @@ const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMes
       }
   );
 
-  function handleChange(role) {
-    let employeeRolesCopy = Array.from(employeeRoles)
-    let index = employeeRolesCopy.findIndex(element => element.name === role)
-    let found = employeeRolesCopy.find(element => element.name === role)
-    found.value = !(found.value)
-    //employeeRolesCopy[index] = found
-    setEmployeeRoles(employeeRolesCopy)
+  function handleInputChange(value, name) {
+
   }
 
-  function getRoleValue(role) {
-    let found = employeeRoles.find(element => element.name === role)
-    return found.value
+  function switchRole(value, name) {
+    let copy = JSON.parse(JSON.stringify(employeeData))
+    copy.roles[name] = value
+    setEmployeeData(copy)
   }
 
   return (
@@ -164,32 +132,27 @@ const EditEmployeeDialog = ({employeeData, onCancel, onAccept, show, setErrorMes
           <FormLabel style={{marginBottom: '10px'}} component="legend">Rollen</FormLabel>
           <FormGroup>
             <FormControlLabel
-                control={<Switch defaultChecked={() => {
-                  //getRoleValue('admin')
-                  employeeRoles.find(employee => employee.name === 'admin')
-                }
-                } onChange={() => {
-                  handleChange('admin')
-                }
-                } name="admin"/>}
+                control={<Switch defaultChecked={employeeData ? employeeData.roles.admin : null}
+                                 onChange={e => switchRole(e.target.checked, e.target.name)}
+                                 name="admin"/>}
                 label="Administrator"
             />
             <FormControlLabel
-                control={<Switch checked={false} onChange={() => {
-                  handleChange('pl')
-                }} name="pl"/>}
-                label="Verkauf"
-            />
-            <FormControlLabel
-                control={<Switch checked={false} onChange={() => {
-                  handleChange('sales')
-                }} name="sales"/>}
+                control={<Switch defaultChecked={employeeData ? employeeData.roles.pl : null}
+                                 onChange={() => console.log("clicked")}
+                                 name="pl"/>}
                 label="Projektleitung"
             />
             <FormControlLabel
-                control={<Switch checked={false} onChange={() => {
-                  handleChange('employee')
-                }} name="employee"/>}
+                control={<Switch defaultChecked={employeeData ? employeeData.roles.sales : null}
+                                 onChange={() => console.log("clicked")}
+                                 name="sales"/>}
+                label="Verkauf"
+            />
+            <FormControlLabel
+                control={<Switch defaultChecked={employeeData ? employeeData.roles.employee : null}
+                                 onChange={() => console.log("clicked")}
+                                 name="employee"/>}
                 label="Handwerker"
             />
           </FormGroup>

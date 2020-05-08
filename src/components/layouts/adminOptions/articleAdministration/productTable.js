@@ -95,12 +95,13 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
           <TableRow>
             {headCells.map((headCell) => (
                 <TableCell
-                    key={headCell.id}
+                    key={headCell.id + 'tableCell'}
                     align={headCell.numeric ? 'right' : 'left'}
                     padding={headCell.disablePadding ? 'none' : 'default'}
                     sortDirection={orderBy === headCell.id ? order : false}
                 >
                   <TableSortLabel
+                      key={headCell.id + 'tableSortLabel'}
                       active={orderBy === headCell.id}
                       direction={orderBy === headCell.id ? order : 'asc'}
                       onClick={createSortHandler(headCell.id)}

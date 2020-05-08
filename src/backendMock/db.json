@@ -44,40 +44,48 @@
   "employees": [
     {
       "id": 1,
-      "role": [
-        "admin",
-        "sales"
-      ],
+      "roles": {
+        "admin": true,
+        "sales": true,
+        "pl":  true,
+        "employee": false
+      },
       "email": "desao@students.zhaw.ch",
       "firstname": "Adriana",
       "lastname": "De-Sao-Jose"
     },
     {
       "id": 2,
-      "role": [
-        "admin",
-        "sales"
-      ],
+      "roles": {
+        "admin": true,
+        "sales": false,
+        "pl":  false,
+        "employee": false
+      },
       "email": "vieceadr@students.zhaw.ch",
       "firstname": "Adrian",
       "lastname": "Vieceli"
     },
     {
       "id": 3,
-      "role": [
-        "admin",
-        "sales"
-      ],
+      "roles": {
+        "admin": true,
+        "sales": false,
+        "pl":  false,
+        "employee": false
+      },
       "email": "vontifel@students.zhaw.ch",
       "firstname": "Felix",
       "lastname": "von Tiedemann"
     },
     {
       "id": 4,
-      "role": [
-        "admin",
-        "sales"
-      ],
+      "roles": {
+        "admin": true,
+        "sales": false,
+        "pl":  false,
+        "employee": false
+      },
       "email": "monteric@students.zhaw.ch",
       "firstname": "Ricardo",
       "lastname": "Monteiro"
