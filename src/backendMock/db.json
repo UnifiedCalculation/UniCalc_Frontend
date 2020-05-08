@@ -47,10 +47,10 @@
       "roles": {
         "admin": true,
         "sales": true,
-        "pl":  true,
-        "employee": false
+        "pl": true,
+        "employee": true
       },
-      "email": "desao@students.zhaw.ch",
+      "email": "desaos@students.zhaw.ch",
       "firstname": "Adriana",
       "lastname": "De-Sao-Jose"
     },
@@ -58,9 +58,9 @@
       "id": 2,
       "roles": {
         "admin": true,
-        "sales": false,
-        "pl":  false,
-        "employee": false
+        "sales": true,
+        "pl": true,
+        "employee": true
       },
       "email": "vieceadr@students.zhaw.ch",
       "firstname": "Adrian",
@@ -71,7 +71,7 @@
       "roles": {
         "admin": true,
         "sales": false,
-        "pl":  false,
+        "pl": false,
         "employee": false
       },
       "email": "vontifel@students.zhaw.ch",
@@ -83,7 +83,7 @@
       "roles": {
         "admin": true,
         "sales": false,
-        "pl":  false,
+        "pl": false,
         "employee": false
       },
       "email": "monteric@students.zhaw.ch",

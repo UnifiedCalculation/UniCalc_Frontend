@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import EditEmployeeDialog from "./editEmployeeDialog";
 import ArchiveIcon from '@material-ui/icons/Archive';
 import Button from "@material-ui/core/Button";
+import {updateEmployee} from "../../../connectionHandler/connectionHandler";
 
 
 function createData(firstname, lastname, id) {
@@ -61,12 +62,11 @@ export default function UserTable({employees, getEmployees, setErrorMessage}) {
 
   const closeEditEmployeeDialog = () => {
     setShowEditEmployeeDialog(false)
-    setEmployeeData([])
   }
 
   const loadNewEmployees = () => {
+    updateEmployee(employeeData, setErrorMessage)
     setShowEditEmployeeDialog(false)
-    setEmployeeData([])
     getEmployees()
   }
 

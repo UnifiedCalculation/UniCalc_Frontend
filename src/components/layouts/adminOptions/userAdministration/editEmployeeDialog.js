@@ -11,19 +11,6 @@ import Switch from "@material-ui/core/Switch";
 
 const EditEmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, show}) => {
 
-  const [employeeRoles, setEmployeeRoles] = useState({});
-
-  const roles = {
-    admin: employeeData ? employeeData.roles.admin : null,
-    pl: employeeData ? employeeData.roles.admin : null,
-    sales: employeeData ? employeeData.roles.admin : null,
-    employee: employeeData ? employeeData.roles.admin : null
-  }
-
-  useEffect(() => {
-    setEmployeeRoles(roles)
-    console.log(employeeRoles);
-  }, [])
 
   const cancelButtonText = 'Abbrechen';
   const acceptButtonText = 'Bestätigen';
@@ -36,7 +23,7 @@ const EditEmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, 
       type: 'textarea',
       required: true,
       disabled: true,
-      value: roles.admin
+      value: employeeData ? employeeData.id : null
       //value: employeeData ? employeeData.id : null
     },
     {
@@ -140,19 +127,19 @@ const EditEmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, 
             />
             <FormControlLabel
                 control={<Switch defaultChecked={employeeData ? employeeData.roles.pl : null}
-                                 onChange={() => console.log("clicked")}
+                                 onChange={e => handleRoleSwitch(e.target.checked, e.target.name)}
                                  name="pl"/>}
                 label="Projektleitung"
             />
             <FormControlLabel
                 control={<Switch defaultChecked={employeeData ? employeeData.roles.sales : null}
-                                 onChange={() => console.log("clicked")}
+                                 onChange={e => handleRoleSwitch(e.target.checked, e.target.name)}
                                  name="sales"/>}
                 label="Verkauf"
             />
             <FormControlLabel
                 control={<Switch defaultChecked={employeeData ? employeeData.roles.employee : null}
-                                 onChange={() => console.log("clicked")}
+                                 onChange={e => handleRoleSwitch(e.target.checked, e.target.name)}
                                  name="employee"/>}
                 label="Handwerker"
             />
