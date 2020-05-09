@@ -134,7 +134,7 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
                 aria-controls="panel2a-content"
                 id="panel2a-header"
             >
-                <Typography className={classes.heading}>{entry.name}</Typography>
+                <Typography className={classes.heading}>{entry.title}</Typography>
                 <Typography className={classes.secondaryHeading}>{"Rabatt: ".concat(entry.discount ? Number(entry.discount).toFixed(2) : "0.00").concat("%")}</Typography>
                 <Tooltip title={"Segmentdetails bearbeiten"} disableFocusListener >
                     <IconButton onClick={editEntry} className={classes.tertiaryHeadingButton} disabled={functionsDisabled}>
