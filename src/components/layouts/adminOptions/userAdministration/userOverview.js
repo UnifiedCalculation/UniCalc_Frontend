@@ -12,7 +12,7 @@ export default function UserOverview({setErrorMessage}) {
   }
 
   useEffect(() => {
-    getEmployees(setErrorMessage, setEmployees);
+    getEmployees();
   },[])
 
   return (

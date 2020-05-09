@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import EmployeeDialog from "./editEmployeeDialog";
+import EmployeeDialog from "./employeeDialog";
 import ArchiveIcon from '@material-ui/icons/Archive';
 import Button from "@material-ui/core/Button";
 import {updateEmployee, submitNewEmployee} from "../../../connectionHandler/connectionHandler";
@@ -146,7 +146,9 @@ export default function UserTable({employees, getEmployees, setErrorMessage}) {
                     <TableCell component="th" scope="row">
                       {row.lastname}
                     </TableCell>
-                    <TableCell><Button variant="outlined" color="primary" disableElevation
+                    <TableCell><Button variant="outlined"
+                                       color="primary"
+                                       disableElevation
                                        onClick={() => {
                                          openEditEmployeeDialog(row.id)
                                        }}><ArchiveIcon/></Button></TableCell>
