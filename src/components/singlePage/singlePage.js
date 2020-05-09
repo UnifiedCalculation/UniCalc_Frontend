@@ -128,7 +128,7 @@ const SinglePage = () => {
           <DynamicCard
             key={(index + 1) + "-projectCard"}
             onClick={() => setProjectData(entry)}
-            projectName={entry.name}
+            projectName={'Projekt ' + entry.name}
             description={entry.description} />
         ))
     } else {
