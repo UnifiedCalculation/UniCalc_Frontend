@@ -98,19 +98,22 @@ const SinglePage = () => {
 
 
   let addProjectCard = [];
-  addProjectCard.push(
-    <DynamicCard
-      hidden={
-        user && !(user.roles.includes("Verkäufer") || user.roles.includes("Admin"))}
-      key={'0-projectCard'}
-      projectName={'Neues Projekt'}
-      description={'Hier eine neues Projekt erstellen!'}
-      buttonName={'Neues Projekt hinzufügen...'}
-      onClick={openNewProjectDialog}
-    />
-  );
+  
 
   const createContent = () => {
+    addProjectCard = [];
+    addProjectCard.push(
+      <DynamicCard
+        hidden={
+          user && !(user.roles.includes("Verkäufer") || user.roles.includes("Admin"))}
+        key={'0-projectCard'}
+        projectName={'Neues Projekt'}
+        description={'Hier eine neues Projekt erstellen!'}
+        buttonName={'Neues Projekt hinzufügen...'}
+        onClick={openNewProjectDialog}
+      />
+    );
+    
     if (showAdminOptions) {
       return <AdminOptions
         setErrorMessage={setErrorMessage}
@@ -140,7 +143,7 @@ const SinglePage = () => {
         addProjectCard = addProjectCard.concat(
           projects.map((entry, index) =>
             <DynamicCard
-              key={(index + 1) + "-projectCard"}
+              key={(index + 1) + "-projectCard-front"}
               onClick={() => setProjectData(entry)}
               projectName={'Projekt ' + entry.name}
               description={entry.description} />
@@ -150,7 +153,7 @@ const SinglePage = () => {
         addProjectCard = addProjectCard.concat(
           contracts.map((entry, index) =>
             <DynamicCard
-              key={(index + 1) + "-projectCard"}
+              key={(index + 1) + "-contractCard-front"}
               onClick={() => setContractData(entry)}
               projectName={'Auftrag ' + entry.name}
               description={entry.description} />
