@@ -72,7 +72,7 @@ const SinglePage = () => {
     }
   }, [user]);
 
-  const triggerAdminOptions = () => {
+  const toggleAdminOption = () => {
     setShowAdminOptions(!showAdminOptions);
   }
 
