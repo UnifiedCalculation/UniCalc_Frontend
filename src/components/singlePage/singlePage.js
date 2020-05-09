@@ -55,7 +55,7 @@ const SinglePage = () => {
 
   useEffect(() => {
     if (user) {
-      switch(true) {
+      switch (true) {
         case user.roles.includes("Admin"):
           API.getContracts(setErrorMessage, setContracts);
         case user.roles.includes("Verkäufer"):
@@ -131,6 +131,14 @@ const SinglePage = () => {
 
   const content = createContent();
 
+  const addNewProjectDialog =
+    <NewProjectDialog
+      show={showNewProjectDialog}
+      customers={customerData}
+      onCancel={closeNewProjectDialog}
+      onSubmit={submitNewProject}
+    />
+
   const snackbar =
     <SnackbarOverlay
       show={errorMessage !== ""}
@@ -139,25 +147,16 @@ const SinglePage = () => {
       onClose={emptyErrorMessage}
     />
 
-  const rolesLoaded = user && user.roles.length ?
-    <>
-      {addNewProjectDialog}
-      {projectCards}
-      {projectDisplay}
-    </>
-    : <Loading text={"Lade Userdata..."} />;
-
-
   return (
     <div className={classes.mainPage}>
       <UserContext.Provider value={user}>
-        <Header onError={setErrorMessage} onSettingsClick={triggerAdminOptions}/>
-        {adminOptionsContainer}
-        {rolesLoaded}
+        <Header onError={setErrorMessage} onSettingsClick={toggleAdminOption} />
         <div className={classes.content}>
-          {snackbar}
+          <div className={classes.flexCards}>
             {content}
+          </div>
         </div>
+        {snackbar}
       </UserContext.Provider>
     </div>
   );
