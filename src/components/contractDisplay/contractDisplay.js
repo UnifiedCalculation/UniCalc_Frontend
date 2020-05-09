@@ -17,43 +17,39 @@ import BackButton from '../layouts/backButton/backButton';
 
 
 
-const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
+const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }) => {
 
-    const [offer, setOffer] = useState(offerData);
+    const [contract, setContract] = useState(contractData);
     const [entries, setEntries] = useState(null);
     const [showAlert, setAlertViewState] = useState(false);
 
     const [newEntryDialog, setNewEntryDialogViewState] = useState(false);
 
     useEffect(() => {
-        if (offer.id) {
+        if (contract.id) {
             triggerUpdate();
         } else {
-            API.saveOfferToProject(projectId, offer.id, onError, setNewOfferId)
+            API.saveContractToProject(projectId, contract.id, onError, setNewContractId)
         }
     }, []);
 
     const triggerUpdate = () => {
-        API.getOfferData(projectId, offer.id, onError, setOffer);
-        API.getEntriesFromOffer(projectId, offer.id, onError, setEntries);
+        API.getContractData(projectId, contract.id, onError, setContract);
+        API.getEntriesFromContract(projectId, contract.id, onError, setEntries);
     }
 
-    const setNewOfferId = (data) => {
-        offerData.id = data.id;
-        triggerUpdate(offerData);
-    }
-
-    const loadOfferAsPdf = () => {
-        API.getOfferAsPDF(projectId, offer.id, onError);
+    const setNewContractId = (data) => {
+        contractData.id = data.id;
+        triggerUpdate(contractData);
     }
 
     const addNewEntry = (entry) => {
-        API.addNewEntryToOffer(projectId, offer.id, entry, onError, triggerUpdate);
+        API.addNewEntryToOffer(projectId, contract.id, entry, onError, triggerUpdate);
         setNewEntryDialogViewState(false);
     }
 
-    const turnOfferIntoContract = () => {
-        API.turnOfferIntoContract(projectId, offer.id, onError, onClose);
+    const turnContractIntoInvoice = () => {
+        API.turnContractIntoInvoice(projectId, contract.id, onError, onClose);
     }
 
     const useStyles = makeStyles((theme) => ({
@@ -104,8 +100,8 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
         setAlertViewState(true);
     }
 
-    const deleteOffer = () => {
-        API.deleteOfferFromProject(projectId, offer.id, onError, afterDelete);
+    const deleteContract = () => {
+        API.deleteContractFromProject(projectId, contract.id, onError, afterDelete);
         
     }
 
@@ -114,13 +110,13 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
         onClose();
     }
 
-    const header = offer ?
+    const header = contract ?
         <ExpansionPanel expanded={true} data-testid="offerDisplay-header">
             <ExpansionPanelSummary
                 aria-controls="panel1a-content"
                 id="panel1a-header"
             >
-                <Typography className={classes.offerTitle} >{offer.name}</Typography>
+                <Typography className={classes.offerTitle} >{contract.name}</Typography>
             </ExpansionPanelSummary>
             <div className={classes.buttonsAlign}>
                 <Button
@@ -131,23 +127,17 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
                     Neuen Segment hinzufügen
                 </Button>
                 <Button
-                    disabled={(offer.id ? false : true) || functionsDisabled}
-                    onClick={loadOfferAsPdf}
+                    disabled={(contract.id ? false : true) || functionsDisabled}
+                    onClick={turnContractIntoInvoice}
                 >
-                    Offerte als PDF laden
+                    Auftrag zu Schlussrechnung umwandeln
                 </Button>
                 <Button
-                    disabled={(offer.id ? false : true) || functionsDisabled}
-                    onClick={turnOfferIntoContract}
-                >
-                    Offerte zu Auftrag umwandeln
-                </Button>
-                <Button
-                    disabled={(offer.id ? false : true) || functionsDisabled}
+                    disabled={(contract.id ? false : true) || functionsDisabled}
                     onClick={warnBeforeDeletion}
                     color="secondary"
                 >
-                    Offerte Löschen
+                    Auftrag Löschen
                 </Button>
             </div>
             <ExpansionPanelDetails>
@@ -160,14 +150,14 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
             <OfferEntry
                 key={index + "-entry"}
                 projectId={projectId}
-                offerId={offer.id}
+                offerId={contract.id}
                 entryData={entry}
                 onChange={triggerUpdate}
                 onError={onError}
             />)
         : <Loading text={"Lade Daten..."} />;
 
-    const loading = offer ? null : <Loading text={"Lade Daten..."} />;
+    const loading = contract ? null : <Loading text={"Lade Daten..."} />;
 
     const newSegmentDialog =
         <NewEntrySegmentDialog
@@ -179,9 +169,9 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
     return (
         <div className={classes.root} data-testid={"offerDisplay-container"}>
             <Alert
-                title={"Offerte Löschen"}
-                text={"Wollen Sie die Offerte Löschen? Dies kann nicht rückgängig gemacht werden!"}
-                onAccept={deleteOffer}
+                title={"Auftrag Löschen"}
+                text={"Wollen Sie diesen Auftrag Löschen? Dies kann nicht rückgängig gemacht werden!"}
+                onAccept={deleteContract}
                 onCancel={() => setAlertViewState(false)}
                 show={showAlert}
             />
@@ -195,5 +185,5 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
 }
 
 
-export default OfferDisplay;
+export default ContractDisplay;
 
