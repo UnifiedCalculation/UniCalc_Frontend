@@ -12,6 +12,7 @@ import ArchiveIcon from '@material-ui/icons/Archive';
 import Button from "@material-ui/core/Button";
 import {updateEmployee, submitNewEmployee} from "../../../connectionHandler/connectionHandler";
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import EditIcon from '@material-ui/icons/Edit';
 
 
 function createData(firstname, lastname, id) {
@@ -151,7 +152,7 @@ export default function UserTable({employees, getEmployees, setErrorMessage}) {
                                        disableElevation
                                        onClick={() => {
                                          openEditEmployeeDialog(row.id)
-                                       }}><ArchiveIcon/></Button></TableCell>
+                                       }}><EditIcon/></Button></TableCell>
                     <TableCell><Button disabled variant="outlined" color="primary"><ArchiveIcon/></Button></TableCell>
                   </TableRow>
               ))}
@@ -161,8 +162,3 @@ export default function UserTable({employees, getEmployees, setErrorMessage}) {
       </div>
   );
 }
-
-
-/*
-<TableCell><Button variant="outlined" color="primary" onClick={openEditEmployeeDialog(row.id)}><ArchiveIcon/></Button></TableCell>
-*/
