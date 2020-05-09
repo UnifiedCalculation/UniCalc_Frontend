@@ -5,6 +5,7 @@ import * as API from "../../../connectionHandler/connectionHandler";
 import AddProductDialog from "./addProductDialog";
 import AddNpkProductDialog from "./addNpkProductDialog";
 import {makeStyles} from "@material-ui/core/styles";
+import AddIcon from '@material-ui/icons/Add';
 
 
 const ProductOverview = ({ setErrorMessage, onCancel, onSubmit, show, ...props }) =>  {
@@ -12,15 +13,18 @@ const ProductOverview = ({ setErrorMessage, onCancel, onSubmit, show, ...props }
   const [showNewProductDialog, setNewProductDialogViewState] = useState(false);
   const [showNewNpProductDialog, setNewNpkProductDialogViewState] = useState(false);
   const [productData, setProductData] = useState([]);
-  const buttonName = "Neuen Artikel hinzufügen";
-  const buttonNpkName = "Neuen NPK Artikel hinzufügen";
+  const buttonName = "Artikel";
+  const buttonNpkName = "NPK Artikel";
   const [products, setProducts] = useState([]);
   const [npks, setNpks] = useState([]);
 
   const useStyles = makeStyles({
     button:{
       marginRight: '10px',
-      marginBottom: '10px'
+      marginBottom: '10px',
+    },
+    icon: {
+      marginRight: '10px'
     }
   });
 
@@ -54,12 +58,6 @@ const ProductOverview = ({ setErrorMessage, onCancel, onSubmit, show, ...props }
     setNewNpkProductDialogViewState(true);
   }
 
-/*  const submitNewArticle = (newArticleData) => {
-    setNewProductDialogViewState(false);
-    console.log(JSON.stringify(newArticleData));
-    API.submitNewProduct(newArticleData, setErrorMessage, getProducts);
-  }*/
-
   const addNewProductDialog =
       <AddProductDialog
           show={showNewProductDialog}
@@ -87,8 +85,8 @@ const ProductOverview = ({ setErrorMessage, onCancel, onSubmit, show, ...props }
         {addNewProductDialog}
         {addNewNpkProductDialog}
 
-        <Button className={classes.button} variant="outlined" color="primary" disableElevation onClick={openNewProductDialog}>{buttonName}</Button>
-        <Button className={classes.button} variant="outlined" color="primary" disableElevation onClick={openNewNpkProductDialog}>{buttonNpkName}</Button>
+        <Button className={classes.button} variant="outlined" color="primary" disableElevation onClick={openNewProductDialog}><AddIcon className={classes.icon}/>{buttonName}</Button>
+        <Button className={classes.button} variant="outlined" color="primary" disableElevation onClick={openNewNpkProductDialog}><AddIcon className={classes.icon}/>{buttonNpkName}</Button>
         <ProductTable npks={npks} setErrorMessage={setErrorMessage} setProducts={setProducts} products={products}/>
       </div>
   );
