@@ -85,7 +85,7 @@ const ArticleTable = ({ articles, discount, changeArticle, deleteArticle, ...pro
             <TableCell align="right"></TableCell>
             <TableCell align="right"></TableCell>
             <TableCell align="right">{(discount ? discount : 0).toFixed(2).toString().concat("%")}</TableCell>
-            <TableCell align="right">{total.toFixed(2)}</TableCell>
+            <TableCell align="right">{calculateTotal().toFixed(2)}</TableCell>
           </TableRow>
         </TableBody>
       </Table>
