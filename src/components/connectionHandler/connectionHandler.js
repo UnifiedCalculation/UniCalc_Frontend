@@ -312,16 +312,6 @@ export async function getInvoiceAsPDF(projectId, invoiceId, onError, callback) {
   }
 }
 
-export async function getArticles(onError, callback) {
-  axios.get('articles')
-      .then(res => {
-        if (callback) {
-          callback(res.data);
-        }
-      })
-      .catch(error => handleErrors(error, onError));
-}
-
 export async function getNpks(onError, callback) {
   axios.get('npks')
       .then(res => {
