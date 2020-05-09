@@ -63,21 +63,22 @@
   ],
   "entries": [
     {
-      "title": "Leuchten",
-      "discount": 15,
-      "id": 2
-    },
-    {
-      "title": "Elektroanlage",
-      "discount": 12,
-      "offerId": "9",
-      "id": 3
-    },
-    {
       "title": "Arbeit",
       "discount": 5,
-      "offerId": "9",
+      "offerId": 9,
       "id": 4
+    },
+    {
+      "title": "Mal schauen",
+      "discount": 12.21,
+      "offerId": "9",
+      "id": 5
+    },
+    {
+      "title": "encore une foi",
+      "discount": 1,
+      "offerId": "9",
+      "id": 6
     }
   ],
   "offers": [
@@ -293,13 +294,18 @@
       "unit": "meter",
       "description": "Kabelsalat",
       "id": 8
-    },
+    }
+  ],
+  "entryProducts": [
     {
-      "amount": 123,
-      "discount": 12,
-      "description": " asdd ",
-      "entryId": "3",
-      "id": 9
+      "amount": 12,
+      "discount": 0,
+      "description": "Kassensystem",
+      "name": "Grosse Steckdose",
+      "unit": "kilo",
+      "price": 21,
+      "entryId": "4",
+      "id": 1
     }
   ],
   "customers": [
