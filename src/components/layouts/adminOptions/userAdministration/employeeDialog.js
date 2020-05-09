@@ -14,8 +14,8 @@ const EmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, show
 
   const cancelButtonText = 'Abbrechen';
   const acceptButtonText = 'Bestätigen';
-  const title = 'Änderungen speichern';
-  const text = 'Ändern Sie die gewünschten Angaben des Mitarbeiters.';
+  const title = 'Mitarbeiteradministration';
+  const text = 'Füllen Sie alle Angaben des Mitarbeiters ab.';
   const textfields = [
 /*    {
       id: 'employeeId',
