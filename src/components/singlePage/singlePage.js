@@ -76,12 +76,6 @@ const SinglePage = () => {
     setShowAdminOptions(!showAdminOptions);
   }
 
-  const adminOptionsContainer = showAdminOptions ?
-      <div className={"adminOptions"}>
-        <AdminOptions setErrorMessage={setErrorMessage}/>
-      </div>
-      : null;
-
   const emptyErrorMessage = () => {
     setErrorMessage("");
   }
@@ -103,14 +97,6 @@ const SinglePage = () => {
     });
   }
 
-  const addNewProjectDialog =
-    <NewProjectDialog
-      show={showNewProjectDialog}
-      customers={customerData}
-      onCancel={closeNewProjectDialog}
-      onSubmit={submitNewProject}
-    />
-
   let addProjectCard = [];
   addProjectCard.push(
     <DynamicCard
@@ -124,23 +110,26 @@ const SinglePage = () => {
     />
   );
 
-  const projectCards = projectData ? null :
-    <div className={classes.flexCards}>
-      {addProjectCard.concat(projects ?
+  const createContent = () => {
+    if (showAdminOptions) {
+      return <AdminOptions setErrorMessage={setErrorMessage} />
+    } else if (projectData) {
+      return <ProjectDisplay projectData={projectData} onError={setErrorMessage} onClose={() => setProjectData(null)} />
+    } else if (projects) {
+      return addProjectCard.concat(
         projects.map((entry, index) =>
           <DynamicCard
             key={(index + 1) + "-projectCard"}
             onClick={() => setProjectData(entry)}
             projectName={entry.name}
             description={entry.description} />
-        )
-        : <Loading key={"home-loading-key"} text={"Lade projekte..."} />
-      )}
-    </div>;
+        ))
+    } else {
+      return <Loading key={"home-loading-key"} text={"Lade Daten..."} />
+    }
+  }
 
-  const projectDisplay = projectData ?
-    <ProjectDisplay projectData={projectData} onError={setErrorMessage} onClose={() => setProjectData(null)} />
-    : null;
+  const content = createContent();
 
   const snackbar =
     <SnackbarOverlay
@@ -167,6 +156,7 @@ const SinglePage = () => {
         {rolesLoaded}
         <div className={classes.content}>
           {snackbar}
+            {content}
         </div>
       </UserContext.Provider>
     </div>
