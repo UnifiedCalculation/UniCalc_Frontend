@@ -233,3 +233,13 @@ export async function updateEmployee(employeeData, onError, callback) {
       })
       .catch(error => handleErrors(error, onError));
 }
+
+export async function submitNewEmployee(employeeData, onError, callback) {
+  axios.post('employees')
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
