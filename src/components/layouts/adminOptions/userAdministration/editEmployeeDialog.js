@@ -9,7 +9,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 
-const EditEmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, show}) => {
+const EmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, show}) => {
 
 
   const cancelButtonText = 'Abbrechen';
@@ -17,14 +17,13 @@ const EditEmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, 
   const title = 'Änderungen speichern';
   const text = 'Ändern Sie die gewünschten Angaben des Mitarbeiters.';
   const textfields = [
-    {
+/*    {
       id: 'employeeId',
       label: 'Mitarbeiternummer',
       type: 'textarea',
-      required: true,
       disabled: true,
-      value: employeeData ? employeeData.id : null
-    },
+      value: employeeData ? employeeData.id : null,
+    },*/
     {
       id: 'email',
       label: 'Email',
@@ -94,7 +93,6 @@ const EditEmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, 
     let copy = JSON.parse(JSON.stringify(employeeData))
     copy[name] = value
     setEmployeeData(copy)
-    console.log(employeeData);
   }
 
   function handleRoleSwitch(value, name) {
@@ -149,4 +147,4 @@ const EditEmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, 
   );
 }
 
-export default EditEmployeeDialog;
+export default EmployeeDialog;
