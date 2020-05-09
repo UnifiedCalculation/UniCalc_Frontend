@@ -24,8 +24,8 @@ const ArticleTable = ({ articles, discount, changeArticle, deleteArticle, ...pro
 
   const classes = useStyles();
 
-  const entries = articles ? articles.map((entry, index) => (
-    <TableRow className={classes.singleRow} key={index + entry.name + entry.amount} onClick={() => alert('this works wow')}>
+  const entries = articles.length ? articles.map((entry, index) => (
+    <TableRow className={classes.singleRow} key={index + entry.name + entry.amount} >
       <TableCell component="th" scope="row">
         {entry.name}
       </TableCell>
@@ -43,7 +43,7 @@ const ArticleTable = ({ articles, discount, changeArticle, deleteArticle, ...pro
         </IconButton>
       </TableCell>
     </TableRow>
-  )) : <p>Keine Artikel!</p>
+  )) : null;
 
   var total = 0;
 
@@ -80,7 +80,7 @@ const ArticleTable = ({ articles, discount, changeArticle, deleteArticle, ...pro
             <TableCell align="right"></TableCell>
             <TableCell align="right"></TableCell>
             <TableCell align="right"></TableCell>
-            <TableCell align="right">{(discount ? discount : 0).toFixed(2).toString().concat("%") }</TableCell>
+            <TableCell align="right">{(discount ? discount : 0).toFixed(2).toString().concat("%")}</TableCell>
             <TableCell align="right">{total.toFixed(2)}</TableCell>
           </TableRow>
         </TableBody>
