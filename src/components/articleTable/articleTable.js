@@ -7,6 +7,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
+import IconButton from '@material-ui/core/IconButton';
 
 import Loading from '../loading/loading'
 
