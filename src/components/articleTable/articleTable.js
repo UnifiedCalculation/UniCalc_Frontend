@@ -38,6 +38,14 @@ const ArticleTable = ({ articles, discount, ...props }) => {
       <TableCell align="right">{entry.price}</TableCell>
       <TableCell align="right">{(entry.discount ? entry.discount : 0).toFixed(2).toString().concat("%")}</TableCell>
       <TableCell align="right">{(entry.discount ? entry.amount * entry.price * (1 - (entry.discount / 100)) : entry.amount * entry.price).toFixed(2)}</TableCell>
+      <TableCell align="right">
+        <IconButton onClick={() => deleteArticle(entry.id)} >
+          <FontAwesomeIcon icon={faTrash} />
+        </IconButton>
+        <IconButton onClick={() => changeArticle(entry.id)}>
+          <FontAwesomeIcon icon={faPen} />
+        </IconButton>
+      </TableCell>
     </TableRow>
   )) : <p>Keine Artikel!</p>
 
@@ -64,6 +72,7 @@ const ArticleTable = ({ articles, discount, ...props }) => {
             <TableCell className={classes.title} align="right">Preis</TableCell>
             <TableCell className={classes.title} align="right">Rabatt</TableCell>
             <TableCell className={classes.title} align="right">Total</TableCell>
+            <TableCell className={classes.title} align="right">Funktionen</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
