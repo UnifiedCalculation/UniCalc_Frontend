@@ -105,6 +105,16 @@ export async function getEntryData(projectId, offerId, entryId, onError, callbac
       .catch(error => handleErrors(error, onError));
 }
 
+export async function getEntryProducts(projectId, offerId, entryId, onError, callback) {
+  axios.get('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId +'/products')
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
 export async function getProjectData(projectId, onError, callback) {
   axios.get('projects/' + projectId)
       .then(res => {
