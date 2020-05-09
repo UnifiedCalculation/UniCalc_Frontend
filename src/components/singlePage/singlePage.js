@@ -97,6 +97,7 @@ const SinglePage = () => {
     });
   }
 
+  
   let addProjectCard = [];
   addProjectCard.push(
     <DynamicCard
@@ -122,15 +123,28 @@ const SinglePage = () => {
       />
     } else if (projectData) {
       return <ProjectDisplay projectData={projectData} onError={setErrorMessage} onClose={() => setProjectData(null)} />
-    } else if (projects) {
-      return addProjectCard.concat(
-        projects.map((entry, index) =>
-          <DynamicCard
-            key={(index + 1) + "-projectCard"}
-            onClick={() => setProjectData(entry)}
-            projectName={'Projekt ' + entry.name}
-            description={entry.description} />
-        ))
+    } else if (projects || contracts) {
+      if (projects) {
+        addProjectCard = addProjectCard.concat(
+          projects.map((entry, index) =>
+            <DynamicCard
+              key={(index + 1) + "-projectCard"}
+              onClick={() => setProjectData(entry)}
+              projectName={'Projekt ' + entry.name}
+              description={entry.description} />
+          ))
+      }
+      if (contracts) {
+        addProjectCard = addProjectCard.concat(
+          contracts.map((entry, index) =>
+            <DynamicCard
+              key={(index + 1) + "-projectCard"}
+              onClick={() => setProjectData(entry)}
+              projectName={'Auftrag ' + entry.name}
+              description={entry.description} />
+          ))
+      }
+      return addProjectCard;
     } else {
       return <Loading key={"home-loading-key"} text={"Lade Daten..."} />
     }
