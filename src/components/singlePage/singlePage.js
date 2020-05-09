@@ -7,8 +7,8 @@ import NewProjectDialog from '../newProjectDialog/newProjectDialog';
 import ProjectDisplay from '../projectDisplay/projectDisplay';
 import Loading from '../loading/loading';
 import * as API from '../connectionHandler/connectionHandler';
-import ProductOverview from "../layouts/ProductAdministration/ProductOverview";
 import SnackbarOverlay from '../snackbar/snackbar';
+import AdminOptions from "../layouts/adminOptions/adminOptions";
 
 export const UserContext = createContext();
 
@@ -72,13 +72,15 @@ const SinglePage = () => {
     }
   }, [user]);
 
-  const toggleAdmingOptions = () => {
+  const triggerAdminOptions = () => {
     setShowAdminOptions(!showAdminOptions);
   }
 
-  const adminOptionsDisplay = showAdminOptions ?
-    <ProductOverview setErrorMessage={setErrorMessage} />
-    : null;
+  const adminOptionsContainer = showAdminOptions ?
+      <div className={"adminOptions"}>
+        <AdminOptions setErrorMessage={setErrorMessage}/>
+      </div>
+      : null;
 
   const emptyErrorMessage = () => {
     setErrorMessage("");
@@ -160,8 +162,8 @@ const SinglePage = () => {
   return (
     <div className={classes.mainPage}>
       <UserContext.Provider value={user}>
-        <Header onError={setErrorMessage} onSettingsClick={toggleAdmingOptions}/>
-        {adminOptionsDisplay}
+        <Header onError={setErrorMessage} onSettingsClick={triggerAdminOptions}/>
+        {adminOptionsContainer}
         {rolesLoaded}
         <div className={classes.content}>
           {snackbar}

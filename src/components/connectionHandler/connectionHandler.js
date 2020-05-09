@@ -381,3 +381,33 @@ export async function getCustomers(onError, callback) {
       })
       .catch(error => handleErrors(error, onError));
 }
+
+export async function getEmployees(onError, callback) {
+  axios.get('employees')
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function updateEmployee(employeeData, onError, callback) {
+  axios.put('employees' + '/' + employeeData.id, employeeData)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function submitNewEmployee(employeeData, onError, callback) {
+  axios.post('employees', employeeData)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}

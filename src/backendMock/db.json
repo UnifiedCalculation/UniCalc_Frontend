@@ -1,4 +1,121 @@
 {
+  "articles": [
+    {
+      "id": 1,
+      "entryId": 1,
+      "name": "Steckdose T13 3-fach UP weiss",
+      "article_id": 1234123,
+      "unit": "Stk.",
+      "price": 125.8,
+      "amount": 15,
+      "discount": null
+    },
+    {
+      "id": 2,
+      "entryId": 1,
+      "name": "Steckdose T13 3-fach AP weiss",
+      "article_id": 1234124,
+      "unit": "Stk.",
+      "price": 220.25,
+      "amount": 120,
+      "discount": 7.35
+    },
+    {
+      "id": 3,
+      "entryId": 2,
+      "name": "Steckdose T13 3-fach UP weiss",
+      "article_id": 1234123,
+      "unit": "Stk.",
+      "price": 125.8,
+      "amount": 235,
+      "discount": 13.37
+    },
+    {
+      "id": 4,
+      "entryId": 2,
+      "name": "Steckdose T13 3-fach AP weiss",
+      "article_id": 1234124,
+      "unit": "Stk.",
+      "price": 220.25,
+      "amount": 120,
+      "discount": 7.35
+    }
+  ],
+  "employees": [
+    {
+      "id": 1,
+      "roles": {
+        "admin": true,
+        "sales": true,
+        "pl": true,
+        "employee": true
+      },
+      "email": "desaos@students.zhaw.ch",
+      "firstname": "Adriana",
+      "lastname": "De-Sao-Jose"
+    },
+    {
+      "id": 2,
+      "roles": {
+        "admin": true,
+        "sales": true,
+        "pl": true,
+        "employee": true
+      },
+      "email": "vieceadr@students.zhaw.ch",
+      "firstname": "Adrian",
+      "lastname": "Vieceli"
+    },
+    {
+      "id": 3,
+      "roles": {
+        "admin": true,
+        "sales": false,
+        "pl": false,
+        "employee": false
+      },
+      "email": "vontifel@students.zhaw.ch",
+      "firstname": "Felix",
+      "lastname": "von Tiedemann"
+    },
+    {
+      "id": 4,
+      "roles": {
+        "admin": true,
+        "sales": false,
+        "pl": false,
+        "employee": false
+      },
+      "email": "monteric@students.zhaw.ch",
+      "firstname": "Ricardo",
+      "lastname": "Monteiro"
+    },
+    {
+      "roles": {
+        "admin": true,
+        "pl": false,
+        "sales": false,
+        "employee": true
+      },
+      "email": "adrian.vieceli@gmail.com",
+      "firstname": "Adrian",
+      "lastname": "Vieceli",
+      "id": 6
+    }
+  ],
+  "entries": [
+    {
+      "name": "badezimmer",
+      "discount": 25,
+      "id": 1
+    },
+    {
+      "id": 2,
+      "offerId": 1,
+      "name": "wohnzimmer",
+      "discount": 50
+    }
+  ],
   "entries": [],
   "offers": [
     {
@@ -72,12 +189,12 @@
       "payment_target": "17 Tage"
     },
     {
-      "name": "Neues Projekt",
-      "address": "Die Gibt es schon 2a",
-      "zip": "8123",
-      "city": "Bern",
-      "description": "ASdisd",
-      "payment_target": "30 Tage",
+      "name": "Setphens new house",
+      "address": "new adress",
+      "zip": "12",
+      "city": "12jsa",
+      "description": "asioasio",
+      "payment_target": "12",
       "customer_id": {
         "firstName": "Fannie",
         "lastName": "Davenport",

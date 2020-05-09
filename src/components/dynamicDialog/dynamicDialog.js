@@ -17,7 +17,7 @@ import { useTheme } from '@material-ui/core/styles';
  * @param {Function} onAccept 
  * @param {Boolean} show
  */
-const DynamicDialog = ({ title, text, onCancel, cancelButtonText, onAccept, acceptButtonText, show, children, ...props }) => {
+const DynamicDialog = ({ title, text, onCancel, cancelButtonText, onAccept, acceptButtonText, show, children }) => {
 
     const useStyles = makeStyles((theme) => ({
         formControl: {
