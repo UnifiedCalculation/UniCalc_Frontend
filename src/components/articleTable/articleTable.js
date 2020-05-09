@@ -24,7 +24,7 @@ const ArticleTable = ({ articles, discount, changeArticle, deleteArticle, ...pro
 
   const classes = useStyles();
 
-  const entries = articles.length ? articles.map((entry, index) => (
+  const entries = articles && articles.length ? articles.map((entry, index) => (
     <TableRow className={classes.singleRow} key={index + entry.name + entry.amount} >
       <TableCell component="th" scope="row">
         {entry.name}
