@@ -24,7 +24,6 @@ const EditEmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, 
       required: true,
       disabled: true,
       value: employeeData ? employeeData.id : null
-      //value: employeeData ? employeeData.id : null
     },
     {
       id: 'email',
@@ -54,7 +53,7 @@ const EditEmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, 
       marginTop: '10px',
       marginBottom: '10px'
     },
-    userDetails: {
+    userRoles: {
       marginTop: '20px'
     },
   }));
@@ -75,7 +74,7 @@ const EditEmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, 
             select={entry.select}
             native={entry.select}
             margin='dense'
-            autoComplete={false}
+            autoComplete={'false'}
             defaultValue={entry.value ? entry.value : null}
             disabled={entry.disabled}
             onChange={e => handleInputChange(e.target.value, e.target.name)}
