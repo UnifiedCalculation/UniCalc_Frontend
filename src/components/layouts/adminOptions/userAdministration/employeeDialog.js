@@ -17,13 +17,6 @@ const EmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, show
   const title = 'Mitarbeiteradministration';
   const text = 'Füllen Sie alle Angaben des Mitarbeiters ab.';
   const textfields = [
-/*    {
-      id: 'employeeId',
-      label: 'Mitarbeiternummer',
-      type: 'textarea',
-      disabled: true,
-      value: employeeData ? employeeData.id : null,
-    },*/
     {
       id: 'email',
       label: 'Email',

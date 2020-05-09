@@ -166,7 +166,7 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
               </Typography>
           ) : (
               <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-                Nutrition
+                Artikelübersicht
               </Typography>
           )}
 
@@ -178,7 +178,7 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
               </Tooltip>
           ) : (
               <Tooltip title="Filter list">
-                <IconButton aria-label="filter list">
+                <IconButton disabled={true} aria-label="filter list">
                   <FilterListIcon/>
                 </IconButton>
               </Tooltip>
@@ -291,7 +291,6 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
                   numSelected={selected.length}
                   order={order}
                   orderBy={orderBy}
-                  onSelectAllClick={handleSelectAllClick}
                   onRequestSort={handleRequestSort}
                   rowCount={rows.length}
               />
@@ -340,10 +339,6 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
               onChangeRowsPerPage={handleChangeRowsPerPage}
           />
         </Paper>
-        <FormControlLabel
-            control={<Switch checked={dense} onChange={handleChangeDense}/>}
-            label="Dense padding"
-        />
       </div>
   );
 }
