@@ -53,10 +53,10 @@ const SelectProductDialog = ({ products, onCancel, onSubmit, show, ...props }) =
             renderInput={(params)=> 
                 <TextField
                     {...params}
-                    id="article_id"
+                    id="article"
                     label="Artikel"
                     type="textarea"
-                    name="article_id"
+                    name="article"
                     fullWidth
                     required 
                     margin='dense'/>
