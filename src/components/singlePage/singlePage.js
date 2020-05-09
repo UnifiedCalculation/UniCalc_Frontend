@@ -9,6 +9,7 @@ import Loading from '../loading/loading';
 import * as API from '../connectionHandler/connectionHandler';
 import SnackbarOverlay from '../snackbar/snackbar';
 import AdminOptions from "../layouts/adminOptions/adminOptions";
+import ContractDisplay from '../contractDisplay/contractDisplay';
 
 export const UserContext = createContext();
 
@@ -42,6 +43,7 @@ const SinglePage = () => {
   const [contracts, setContracts] = useState(null);
   const [showAdminOptions, setShowAdminOptions] = useState(false)
   const [projectData, setProjectData] = useState(null);
+  const [contractData, setContractData] = useState(null);
   const [customerData, setCustomerData] = useState([]);
   const [showNewProjectDialog, setNewProjectDialogViewState] = useState(false);
 
@@ -97,7 +99,7 @@ const SinglePage = () => {
     });
   }
 
-  
+
   let addProjectCard = [];
   addProjectCard.push(
     <DynamicCard
@@ -113,7 +115,9 @@ const SinglePage = () => {
 
   const createContent = () => {
     if (showAdminOptions) {
-      return <AdminOptions setErrorMessage={setErrorMessage} />
+      return <AdminOptions
+        setErrorMessage={setErrorMessage}
+      />
     } else if (showNewProjectDialog) {
       return <NewProjectDialog
         show={showNewProjectDialog}
@@ -122,7 +126,18 @@ const SinglePage = () => {
         onSubmit={submitNewProject}
       />
     } else if (projectData) {
-      return <ProjectDisplay projectData={projectData} onError={setErrorMessage} onClose={() => setProjectData(null)} />
+      return <ProjectDisplay
+        projectData={projectData}
+        onError={setErrorMessage}
+        onClose={() => setProjectData(null)}
+      />
+    } else if (contractData) {
+      return <ContractDisplay
+        contractData={contractData}
+        projectId={contractData.projectId}
+        onError={setErrorMessage}
+        onClose={() => setContractData(null)}
+      />
     } else if (projects || contracts) {
       if (projects) {
         addProjectCard = addProjectCard.concat(
@@ -139,7 +154,7 @@ const SinglePage = () => {
           contracts.map((entry, index) =>
             <DynamicCard
               key={(index + 1) + "-projectCard"}
-              onClick={() => setProjectData(entry)}
+              onClick={() => setContractData(entry)}
               projectName={'Auftrag ' + entry.name}
               description={entry.description} />
           ))
