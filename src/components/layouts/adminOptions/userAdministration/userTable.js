@@ -20,7 +20,6 @@ import clsx from "clsx";
 import Typography from "@material-ui/core/Typography";
 import TablePagination from "@material-ui/core/TablePagination";
 
-
 function createData(firstname, lastname, id) {
   return {firstname, lastname, id};
 }
@@ -287,50 +286,6 @@ export default function UserTable({employees, getEmployees, setErrorMessage}) {
           onAccept={submitEmployee}
       />
 
-  /*return (
-      <div>
-        {editEmployeeDialog}
-        {addEmployeeDialog}
-        <Button variant="outlined"
-                color="primary"
-                disableElevation
-                name='addEmployeeButton'
-                onClick={openAddEmployeeDialog}>
-          <PersonAddIcon/>
-        </Button>
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Vorname</TableCell>
-                <TableCell>Nachname</TableCell>
-                <TableCell>Einstellungen</TableCell>
-                <TableCell>Archivieren</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                  <TableRow key={row.id + 'tableRow'}>
-                    <TableCell component="th" scope="row">
-                      {row.firstname}
-                    </TableCell>
-                    <TableCell component="th" scope="row">
-                      {row.lastname}
-                    </TableCell>
-                    <TableCell><Button variant="outlined"
-                                       color="primary"
-                                       disableElevation
-                                       onClick={() => {
-                                         openEditEmployeeDialog(row.id)
-                                       }}><EditIcon/></Button></TableCell>
-                    <TableCell><Button disabled variant="outlined" color="primary"><ArchiveIcon/></Button></TableCell>
-                  </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </div>
-  );*/
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
