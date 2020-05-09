@@ -13,12 +13,6 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
 import {getProducts} from "../../../connectionHandler/connectionHandler";
 
 
@@ -203,10 +197,9 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
 
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
-  const [selected, setSelected] = React.useState([]);
+  const [orderBy, setOrderBy] = React.useState('id');
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
+  const dense = false
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleRequestSort = (event, property) => {
@@ -224,14 +217,12 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
     setPage(0);
   };
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
-
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   return (
       <div className={classes.root}>
         <Paper className={classes.paper}>
-          <EnhancedTableToolbar numSelected={selected.length}/>
+          <EnhancedTableToolbar/>
           <TableContainer>
             <Table
                 className={classes.table}
@@ -241,7 +232,6 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
             >
               <EnhancedTableHead
                   classes={classes}
-                  numSelected={selected.length}
                   order={order}
                   orderBy={orderBy}
                   onRequestSort={handleRequestSort}
@@ -260,7 +250,7 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
                               tabIndex={-1}
                               key={row.id + 'tableRow'}
                           >
-                            <TableCell align="left" component="th" id={labelId} scope="row" >
+                            <TableCell align="left" component="th" id={labelId} scope="row">
                               {row.id}
                             </TableCell>
                             <TableCell align="left">{row.title}</TableCell>
