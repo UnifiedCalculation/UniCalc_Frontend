@@ -11,8 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
 import IconButton from '@material-ui/core/IconButton';
 
-
-const ArticleTable = ({ articles, discount, ...props }) => {
+const ArticleTable = ({ articles, discount, changeArticle, deleteArticle, ...props }) => {
 
   const useStyles = makeStyles({
     table: {
