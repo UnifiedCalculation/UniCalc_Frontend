@@ -85,7 +85,7 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
   ];
 
   function EnhancedTableHead(props) {
-    const {classes, order, orderBy, numSelected, rowCount, onRequestSort} = props;
+    const {classes, order, orderBy, onRequestSort} = props;
     const createSortHandler = (property) => (event) => {
       onRequestSort(event, property);
     };
@@ -124,7 +124,6 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
     classes: PropTypes.object.isRequired,
     numSelected: PropTypes.number.isRequired,
     onRequestSort: PropTypes.func.isRequired,
-    onSelectAllClick: PropTypes.func.isRequired,
     order: PropTypes.oneOf(['asc', 'desc']).isRequired,
     orderBy: PropTypes.string.isRequired,
     rowCount: PropTypes.number.isRequired,
@@ -169,20 +168,6 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
                 Artikelübersicht
               </Typography>
           )}
-
-          {numSelected > 0 ? (
-              <Tooltip title="Delete">
-                <IconButton aria-label="delete">
-                  <DeleteIcon/>
-                </IconButton>
-              </Tooltip>
-          ) : (
-              <Tooltip title="Filter list">
-                <IconButton disabled={true} aria-label="filter list">
-                  <FilterListIcon/>
-                </IconButton>
-              </Tooltip>
-          )}
         </Toolbar>
     );
   };
@@ -191,13 +176,14 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
     numSelected: PropTypes.number.isRequired,
   };
 
-  const useStyles = makeStyles((theme) => ({
+  const useStyles = makeStyles(() => ({
     root: {
       width: '100%',
     },
     paper: {
       width: '100%',
-      marginBottom: theme.spacing(2),
+      marginBottom: '20px'
+
     },
     table: {
       minWidth: 750,
@@ -229,35 +215,6 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
     setOrderBy(property);
   };
 
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
-  };
-
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-          selected.slice(0, selectedIndex),
-          selected.slice(selectedIndex + 1),
-      );
-    }
-
-    setSelected(newSelected);
-  };
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -265,10 +222,6 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-  };
-
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
   };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
@@ -298,18 +251,14 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
                 {stableSort(rows, getComparator(order, orderBy))
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row, index) => {
-                      const isItemSelected = isSelected(row.name);
                       const labelId = `enhanced-table-checkbox-${index}`;
 
                       return (
                           <TableRow
                               hover
-                              onClick={(event) => handleClick(event, row.name)}
                               role="checkbox"
-                              aria-checked={isItemSelected}
                               tabIndex={-1}
                               key={row.id + 'tableRow'}
-                              selected={isItemSelected}
                           >
                             <TableCell align="left" component="th" id={labelId} scope="row" >
                               {row.id}
