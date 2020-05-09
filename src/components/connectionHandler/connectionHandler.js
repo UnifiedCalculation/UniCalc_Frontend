@@ -235,7 +235,7 @@ export async function updateEmployee(employeeData, onError, callback) {
 }
 
 export async function submitNewEmployee(employeeData, onError, callback) {
-  axios.post('employees')
+  axios.post('employees', employeeData)
       .then(res => {
         if (callback) {
           callback(res.data);

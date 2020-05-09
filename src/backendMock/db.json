@@ -51,7 +51,7 @@
         "employee": true
       },
       "email": "desaos@students.zhaw.ch",
-      "firstname": "Adriana",
+      "firstname": "Adrianaaaaaa",
       "lastname": "De-Sao-Jose"
     },
     {
@@ -89,6 +89,18 @@
       "email": "monteric@students.zhaw.ch",
       "firstname": "Ricardo",
       "lastname": "Monteiro"
+    },
+    {
+      "roles": {
+        "admin": true,
+        "pl": false,
+        "sales": false,
+        "employee": true
+      },
+      "email": "adrian.vieceli@gmail.com",
+      "firstname": "Adrian",
+      "lastname": "Vieceli",
+      "id": 6
     }
   ],
   "entries": [
