@@ -11,5 +11,6 @@
     "/npks/:id": "/npks/id=:id",
     "/user/projects": "/projects?employee_id=1",
     "/user/contracts": "/contracts?employee_id=1",
-    "/projects/:id/invoices": "/invoices?projectId=:id"
+    "/projects/:id/invoices": "/invoices?projectId=:id",
+    "/contracts/:id/assignedEmployee":"/contracts/:id"
 }

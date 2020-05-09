@@ -165,6 +165,26 @@ export async function deleteInvoiceFromProject(projectId, invoiceId, onError, ca
       .catch(error => handleErrors(error, onError));
 }
 
+export async function changeEmployeeAssigneToContract(contractId, employeeId, onError, callback){
+  axios.put('contracts/' + contractId + '/assignedEmployee', { employee_id: employeeId })
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function getEmployeeData(employeeId, onError, callback) {
+  axios.get('employees/' + employeeId)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
 export async function turnOfferIntoContract(projectId, offerId, onError, callback) {
   axios.post('projects/' + projectId + '/contracts', {offer_id: offerId})
       .then(res => {
