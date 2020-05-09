@@ -24,9 +24,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  content: {
-    paddingBottom: '75px',
-  },
   mainPage: {
     backgroundColor: 'lightgray',
     height: '100vh',
@@ -179,11 +176,9 @@ const SinglePage = () => {
     <div className={classes.mainPage}>
       <UserContext.Provider value={user}>
         <Header onError={setErrorMessage} onSettingsClick={toggleAdminOption} />
-        <div className={classes.content}>
           <div className={classes.flexCards}>
             {content}
           </div>
-        </div>
         {snackbar}
       </UserContext.Provider>
     </div>
