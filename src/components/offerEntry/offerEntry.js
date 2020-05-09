@@ -22,18 +22,20 @@ import * as API from '../connectionHandler/connectionHandler';
 const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props }) => {
 
     const [entry, setEntryData] = useState(null);
-    const [products, setArticles] = useState([]);
+    const [entryProducts, setEntryProducts] = useState(null);
+    const [products, setProducts] = useState([]);
     const [deleteEntryAlert, setDeleteEntryAlertShowState] = useState(false);
     const [editEntryDialog, setEditEntryDialogShowState] = useState(false);
     const [addArticleDialog, setAddArticleDialogShowState] = useState(false);
 
     useEffect(() => {
         updateEntryData();
-        API.getArticles(onError, setArticles);
+        API.getProducts(onError, setProducts);
     }, [])
 
     const updateEntryData = () => {
         API.getEntryData(projectId, offerId, entryData.id, onError, setEntryData);
+        API.getEntryProducts(projectId, offerId, entryData.id, onError, setEntryProducts);
     }
 
     const useStyles = makeStyles((theme) => ({
@@ -123,8 +125,8 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
 
     const classes = useStyles();
 
-    const body = entry ?
-        entry.articles? <ArticleTable projectId={projectId} offerId={offerId} entryId={entry.id} articles={entry.articles} discount={entry.discount} />  : null
+    const body = entryProducts && entry ?
+        <ArticleTable projectId={projectId} offerId={offerId} entryId={entry.id} articles={entry.articles} discount={entry.discount} />
         : <Loading text={"Lade Einträge..."} />
 
     const content = entry ?
