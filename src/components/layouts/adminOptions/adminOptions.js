@@ -10,7 +10,6 @@ export default function AdminOptions({setErrorMessage}) {
     overlay:{
       top: '50px',
       width: '100%',
-      backgroundColor: 'white',
       position: "fixed",
       height: "100%",
       bottom: "50px",
