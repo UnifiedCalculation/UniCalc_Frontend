@@ -40,7 +40,7 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
 
     const setNewOfferId = (data) => {
         offerData.id = data.id;
-        triggerUpdate(offerData);
+        triggerUpdate();
     }
 
     const loadOfferAsPdf = () => {
