@@ -45,17 +45,21 @@ const ArticleTable = ({ articles, discount, changeArticle, deleteArticle, ...pro
     </TableRow>
   )) : null;
 
-  var total = 0;
 
-  articles.forEach(entry => {
-    if (entry.discount) {
-      total += entry.amount * entry.price * (1 - (entry.discount / 100));
-    } else {
-      total += entry.amount * entry.price;
+  const calculateTotal = () => {
+    var total = 0;
+    if (articles) {
+      articles.forEach(entry => {
+        if (entry.discount) {
+          total += entry.amount * entry.price * (1 - (entry.discount / 100));
+        } else {
+          total += entry.amount * entry.price;
+        }
+      });
     }
-  });
-
-  total *= discount ? (1 - (discount / 100)) : 1;
+    total *= discount ? (1 - (discount / 100)) : 1;
+    return total;
+  }
 
   return (
     <TableContainer component={Paper}>
