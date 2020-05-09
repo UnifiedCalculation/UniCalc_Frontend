@@ -39,7 +39,7 @@ const ArticleTable = ({ articles, discount, ...props }) => {
       <TableCell align="right">{(entry.discount ? entry.discount : 0).toFixed(2).toString().concat("%")}</TableCell>
       <TableCell align="right">{(entry.discount ? entry.amount * entry.price * (1 - (entry.discount / 100)) : entry.amount * entry.price).toFixed(2)}</TableCell>
     </TableRow>
-  )) : <Loading text={"Lade Artikel..."} />
+  )) : <p>Keine Artikel!</p>
 
   var total = 0;
 
