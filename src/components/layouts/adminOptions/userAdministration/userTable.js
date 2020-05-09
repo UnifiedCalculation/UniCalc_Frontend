@@ -37,11 +37,6 @@ export default function UserTable({employees, getEmployees, setErrorMessage}) {
 
   const classes = useStyles();
 
-
-  const getEmployeeData = () => {
-    return employeeData
-  }
-
   function getEmployeeById(employeeId) {
     return employees.find(element => element.id === employeeId);
   }
