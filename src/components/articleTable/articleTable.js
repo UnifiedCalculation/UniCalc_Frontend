@@ -18,11 +18,6 @@ const ArticleTable = ({ articles, discount, ...props }) => {
     },
     title: {
       fontWeight: 700,
-    },
-    singleRow: {
-      "&:hover":{
-        backgroundColor: '#fafafa',
-      }
     }
   });
 
