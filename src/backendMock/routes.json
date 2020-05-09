@@ -5,7 +5,7 @@
     "/projects/*/offers/:id": "/offers/:id",
     "/projects/*/offers/:id/entries": "/offers/:id/entries",
     "/projects/*/offers/*/entries/:id": "/entries/:id?_embed=articles",
-    "/projects/*/offers/*/entries/:id/products": "/entries/:id/articles",
+    "/projects/*/offers/*/entries/:id/products": "/entries/:id/products",
     "/articles": "/products",
     "/employees": "/employees",
     "/npks/:id": "/npks/id=:id",

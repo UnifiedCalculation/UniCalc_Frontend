@@ -1,46 +1,4 @@
 {
-  "articles": [
-    {
-      "id": 1,
-      "entryId": 1,
-      "name": "Steckdose T13 3-fach UP weiss",
-      "article_id": 1234123,
-      "unit": "Stk.",
-      "price": 125.8,
-      "amount": 15,
-      "discount": null
-    },
-    {
-      "id": 2,
-      "entryId": 1,
-      "name": "Steckdose T13 3-fach AP weiss",
-      "article_id": 1234124,
-      "unit": "Stk.",
-      "price": 220.25,
-      "amount": 120,
-      "discount": 7.35
-    },
-    {
-      "id": 3,
-      "entryId": 2,
-      "name": "Steckdose T13 3-fach UP weiss",
-      "article_id": 1234123,
-      "unit": "Stk.",
-      "price": 125.8,
-      "amount": 235,
-      "discount": 13.37
-    },
-    {
-      "id": 4,
-      "entryId": 2,
-      "name": "Steckdose T13 3-fach AP weiss",
-      "article_id": 1234124,
-      "unit": "Stk.",
-      "price": 220.25,
-      "amount": 120,
-      "discount": 7.35
-    }
-  ],
   "employees": [
     {
       "id": 1,
@@ -103,29 +61,26 @@
       "id": 6
     }
   ],
-  "entries": [],
-  "offers": [
+  "entries": [
     {
-      "name": "Neue Offerte",
-      "payment_target": "undefined Tage",
-      "updated_at": "2020-05-06T12:28:06.767Z",
-      "projectId": 1,
+      "title": "Leuchten",
+      "discount": 15,
+      "id": 2
+    },
+    {
+      "title": "Elektroanlage",
+      "discount": 12,
+      "offerId": "9",
       "id": 3
     },
     {
-      "name": "new offer like this?",
-      "payment_target": "undefined Tage",
-      "updated_at": "2020-05-06T15:27:49.675Z",
-      "projectId": 1,
+      "title": "Arbeit",
+      "discount": 5,
+      "offerId": "9",
       "id": 4
-    },
-    {
-      "name": "this is one hell of a goddamn long ass text man how is anyone supposed to display shit like this?",
-      "payment_target": "undefined Tage",
-      "updated_at": "2020-05-06T15:28:04.082Z",
-      "projectId": 1,
-      "id": 5
-    },
+    }
+  ],
+  "offers": [
     {
       "name": "new dingeling",
       "payment_target": "undefined Tage",
@@ -146,6 +101,13 @@
       "updated_at": "2020-05-06T15:54:07.166Z",
       "projectId": 2,
       "id": 8
+    },
+    {
+      "name": "Pooltechnik",
+      "payment_target": "undefined Tage",
+      "updated_at": "2020-05-09T17:35:16.694Z",
+      "projectId": 1,
+      "id": 9
     }
   ],
   "projects": [
@@ -331,6 +293,13 @@
       "unit": "meter",
       "description": "Kabelsalat",
       "id": 8
+    },
+    {
+      "amount": 123,
+      "discount": 12,
+      "description": " asdd ",
+      "entryId": "3",
+      "id": 9
     }
   ],
   "customers": [
@@ -840,7 +809,7 @@
     "lastName": "Rodriguez",
     "id": 1,
     "roles": [
-      "Mitarbeiter"
+      "Admin"
     ]
   },
   "invoices": [
