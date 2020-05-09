@@ -113,6 +113,13 @@ const SinglePage = () => {
   const createContent = () => {
     if (showAdminOptions) {
       return <AdminOptions setErrorMessage={setErrorMessage} />
+    } else if (showNewProjectDialog) {
+      return <NewProjectDialog
+        show={showNewProjectDialog}
+        customers={customerData}
+        onCancel={closeNewProjectDialog}
+        onSubmit={submitNewProject}
+      />
     } else if (projectData) {
       return <ProjectDisplay projectData={projectData} onError={setErrorMessage} onClose={() => setProjectData(null)} />
     } else if (projects) {
@@ -130,14 +137,6 @@ const SinglePage = () => {
   }
 
   const content = createContent();
-
-  const addNewProjectDialog =
-    <NewProjectDialog
-      show={showNewProjectDialog}
-      customers={customerData}
-      onCancel={closeNewProjectDialog}
-      onSubmit={submitNewProject}
-    />
 
   const snackbar =
     <SnackbarOverlay
