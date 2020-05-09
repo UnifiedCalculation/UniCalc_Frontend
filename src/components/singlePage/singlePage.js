@@ -63,9 +63,9 @@ const SinglePage = () => {
           break;
         case user.roles.includes("Projektleiter"):
           API.getUserProjects(setErrorMessage, setProjects);
-          break;
         case user.roles.includes("Mitarbeiter"):
           API.getUserContracts(setErrorMessage, setContracts);
+          break;
         default:
           setErrorMessage("User hat keine Rollen. Kontaktiere deinen Administrator!");
       }
