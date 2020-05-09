@@ -47,7 +47,7 @@ const SelectProductDialog = ({ products, onCancel, onSubmit, show, ...props }) =
 
     const productsSelection =
         <Autocomplete
-            id="customer-autocomplete"
+            id="product-autocomplete"
             options={products}
             getOptionLabel={(product) => product.name}
             renderInput={(params)=> 
