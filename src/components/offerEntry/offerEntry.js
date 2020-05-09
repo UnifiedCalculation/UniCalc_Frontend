@@ -84,7 +84,7 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
 
     const user = useContext(UserContext);
 
-    const functionsDisabled = !(user && ((user.roles.includes("Admin") || user.roles.includes("Verkäufer")))); 
+    const functionsDisabled = !(user && ((user.roles.includes("Admin") || user.roles.includes("Verkäufer"))));
 
     const editEntry = (event) => {
         event.stopPropagation();
@@ -188,7 +188,7 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
                     onCancel={() => setEditEntryDialogShowState(false)}
                     onSubmit={editEntryData}
                 />
-            : null}
+                : null}
         </>
 
     return (
