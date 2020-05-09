@@ -103,19 +103,6 @@
       "id": 6
     }
   ],
-  "entries": [
-    {
-      "name": "badezimmer",
-      "discount": 25,
-      "id": 1
-    },
-    {
-      "id": 2,
-      "offerId": 1,
-      "name": "wohnzimmer",
-      "discount": 50
-    }
-  ],
   "entries": [],
   "offers": [
     {
@@ -194,13 +181,27 @@
       "zip": "12",
       "city": "12jsa",
       "description": "asioasio",
-      "payment_target": "12",
+      "payment_target": "12 Tage",
       "customer_id": {
         "firstName": "Fannie",
         "lastName": "Davenport",
         "id": "5ea53603e025e6a409acc113"
       },
       "id": 3
+    },
+    {
+      "name": "Tankstelle Bienz",
+      "address": "Beinzerweg 212a",
+      "zip": "7251",
+      "city": "Luzern",
+      "description": "Neue Tankstelle in Bienz, war früher eine Kapelle",
+      "payment_target": "15 Tage",
+      "customer_id": {
+        "firstName": "Fannie",
+        "lastName": "Davenport",
+        "id": "5ea53603e025e6a409acc113"
+      },
+      "id": 4
     }
   ],
   "contracts": [
@@ -860,10 +861,6 @@
       "updated_at": "2020-04-07T17:57:37.468Z",
       "discount": null,
       "employee_id": 1
-    },
-    {
-      "contract_id": 1,
-      "id": 2
     }
   ]
 }
