@@ -241,6 +241,7 @@ const DynamicEntry = ({ projectId, offerId, contractId, entryData, onChange, onE
             >
                 <Typography className={classes.heading}>{entry.title}</Typography>
                 <Typography className={classes.secondaryHeading}>{"Rabatt: ".concat(entry.discount ? Number(entry.discount).toFixed(2) : "0.00").concat("%")}</Typography>
+                {buttons}
 
             </ExpansionPanelSummary>
             <div className={classes.buttonsAlign}>
