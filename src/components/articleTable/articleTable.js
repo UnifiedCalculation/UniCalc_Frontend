@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,8 +10,14 @@ import Paper from '@material-ui/core/Paper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
 import IconButton from '@material-ui/core/IconButton';
+import Alert from '../alert/alert';
 
-const ArticleTable = ({ articles, discount, changeArticle, deleteArticle, ...props }) => {
+import * as API from '../connectionHandler/connectionHandler';
+
+const ArticleTable = ({ products, discount, changeArticle, projectId, offerId, entryId, onError, onChange, ...props }) => {
+
+  const [productToDelete, setProductToDelete] = useState(null);
+  const [productToEdit, setArticleToEdit] = useState(null);
 
   const useStyles = makeStyles({
     table: {
@@ -24,7 +30,35 @@ const ArticleTable = ({ articles, discount, changeArticle, deleteArticle, ...pro
 
   const classes = useStyles();
 
-  const entries = articles && articles.length ? articles.map((entry, index) => (
+  const confirmDeleteProduct = (articleId) => {
+    setProductToDelete(articleId)
+  }
+
+  const cancelProductDelete = () => {
+    setProductToDelete(null);
+  }
+
+  const deleteProductConfirmed = () => {
+    API.deleteProductFromEntry(projectId, offerId, entryId, productToDelete, onError, hideAlertAndReload)
+  }
+
+  const hideAlertAndReload = () => {
+    setProductToDelete(null);
+    onChange();
+  }
+
+  const dialogs =
+    <Alert
+      show={productToDelete? true : false}
+      title={"Artikel löschen"}
+      text={"Sind Sie sicher, dass Sie diesen Artikel löschen möchten?"}
+      onAccept={deleteProductConfirmed}
+      onCancel={cancelProductDelete}
+    />
+
+    console.log(products);
+
+  const entries = products && products.length ? products.map((entry, index) => (
     <TableRow className={classes.singleRow} key={index + entry.name + entry.amount} >
       <TableCell component="th" scope="row">
         {entry.name}
@@ -35,10 +69,10 @@ const ArticleTable = ({ articles, discount, changeArticle, deleteArticle, ...pro
       <TableCell align="right">{(entry.discount ? entry.discount : 0).toFixed(2).toString().concat("%")}</TableCell>
       <TableCell align="right">{(entry.discount ? entry.amount * entry.price * (1 - (entry.discount / 100)) : entry.amount * entry.price).toFixed(2)}</TableCell>
       <TableCell align="right">
-        <IconButton onClick={() => deleteArticle(entry.id)} >
+        <IconButton onClick={() => confirmDeleteProduct(entry.product_id)} >
           <FontAwesomeIcon icon={faTrash} />
         </IconButton>
-        <IconButton onClick={() => changeArticle(entry.id)}>
+        <IconButton onClick={() => changeArticle(entry.product_id)}>
           <FontAwesomeIcon icon={faPen} />
         </IconButton>
       </TableCell>
