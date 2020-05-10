@@ -38,10 +38,12 @@ const DynamicEntry = ({ projectId, offerId, contractId, invoiceId, entryData, on
     }, [])
 
     const updateData = () => {
-        if (offerId !== null) {
+        if (offerId != null) {
             updateOfferEntryData();
-        } else {
+        } else if (contractId != null) {
             updateContractEntryData();
+        } else {
+            updateInvoiceEntryData();
         }
     }
     const updateOfferEntryData = () => {
@@ -116,10 +118,12 @@ const DynamicEntry = ({ projectId, offerId, contractId, invoiceId, entryData, on
 
     const addNewArticle = (article) => {
         setAddArticleDialogShowState(false);
-        if(offerId !== null){
+        if (offerId != null) {
+            console.log("B funktioniert nicht")
             API.addArticleToOfferEntry(projectId, offerId, entry.id, article, onError, updateData);
-        } else {
-            API.addArticleToContractEntry(projectId, offerId, entry.id, article, onError, updateData);
+        } else if (contractId != null) {
+            console.log("B funktioniert")
+            API.addArticleToContractEntry(projectId, contractId, entry.id, article, onError, updateData);
         }
     }
 
@@ -129,9 +133,11 @@ const DynamicEntry = ({ projectId, offerId, contractId, invoiceId, entryData, on
     }
 
     const deleteEntryConfirmed = () => {
-        if (offerId !== null) {
+        if (offerId != null) {
+            console.log("C funktioniert nicht")
             API.deleteEntryFromOffer(projectId, offerId, entry.id, onError, onChange);
-        } else {
+        } else if (contractId != null) {
+            console.log("C funktioniert")
             API.deleteEntryFromContract(projectId, contractId, entry.id, onError, onChange);
         }
         setDeleteEntryAlertShowState(false);
@@ -144,9 +150,9 @@ const DynamicEntry = ({ projectId, offerId, contractId, invoiceId, entryData, on
     const editEntryData = (entryData) => {
         entryData.offerId = offerId;
         delete entryData.articles;
-        if (offerId !== null) {
+        if (offerId != null) {
             API.updateOfferEntryData(projectId, offerId, entry.id, entryData, onError, onChange);
-        } else {
+        } else if (contractId != null) {
             API.updateContractEntryData(projectId, contractId, entry.id, entryData, onError, onChange);
         }
         setEditEntryDialogShowState(false);
@@ -161,9 +167,9 @@ const DynamicEntry = ({ projectId, offerId, contractId, invoiceId, entryData, on
     }
 
     const deleteProductConfirmed = () => {
-        if (offerId !== null) {
+        if (offerId != null) {
             API.deleteProductFromEntryInOffer(projectId, offerId, entry.id, productToDelete, onError, hideAlertAndReload)
-        } else {
+        } else if (contractId != null) {
             API.deleteProductFromEntryInContract(projectId, offerId, entry.id, productToDelete, onError, hideAlertAndReload)
         }
     }
@@ -181,9 +187,9 @@ const DynamicEntry = ({ projectId, offerId, contractId, invoiceId, entryData, on
         productToEdit.amount = changedProduct.amount;
         productToEdit.discount = changedProduct.discount;
         productToEdit.description = changedProduct.discount;
-        if (offerId !== null) {
+        if (offerId != null) {
             API.submitEditedEntryProductInOffer(projectId, offerId, entry.id, productToEdit.product_id, productToEdit, onError, updateData);
-        } else {
+        } else if (contractId != null) {
             API.submitEditedEntryProductInContract(projectId, contractId, entry.id, productToEdit.product_id, productToEdit, onError, updateData);
         }
 
