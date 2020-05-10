@@ -6,7 +6,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Loading from '../loading/loading';
-import OfferEntry from '../offerEntry/offerEntry';
+import DynamicEntry from '../dynamicEntry/dynamicEntry';
 
 import NewEntrySegmentDialog from '../newEntrySegmentDialog/newEntrySegmentDialog';
 import EmployeeSelectDialog from '../employeeSelectDialog/employeeSelectDialog';
@@ -167,7 +167,7 @@ const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }
 
     const segments = entries ?
         entries.map((entry, index) =>
-            <OfferEntry
+            <DynamicEntry
                 key={index + "-entry"}
                 projectId={projectId}
                 offerId={contract.id}
