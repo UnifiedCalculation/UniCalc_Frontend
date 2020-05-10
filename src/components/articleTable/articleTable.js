@@ -95,35 +95,44 @@ const ArticleTable = ({ products, discount, changeArticle, projectId, offerId, e
     return total;
   }
 
+  const tableHeader =
+    <TableHead>
+      <TableRow>
+        <TableCell className={classes.title}>Artikel</TableCell>
+        <TableCell className={classes.title} align="right">Anzahl</TableCell>
+        <TableCell className={classes.title} align="right">Einheit</TableCell>
+        <TableCell className={classes.title} align="right">Preis</TableCell>
+        <TableCell className={classes.title} align="right">Rabatt</TableCell>
+        <TableCell className={classes.title} align="right">Total</TableCell>
+        <TableCell className={classes.title} align="right">Funktionen</TableCell>
+      </TableRow>
+    </TableHead>;
+
+  const totalRow =
+    <TableRow>
+      <TableCell component="th" scope="row" className={classes.title}>
+        Total
+      </TableCell>
+      <TableCell align="right"></TableCell>
+      <TableCell align="right"></TableCell>
+      <TableCell align="right"></TableCell>
+      <TableCell align="right">{(discount ? discount : 0).toFixed(2).toString().concat("%")}</TableCell>
+      <TableCell align="right">{calculateTotal().toFixed(2)}</TableCell>
+    </TableRow>;
+
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell className={classes.title}>Artikel</TableCell>
-            <TableCell className={classes.title} align="right">Anzahl</TableCell>
-            <TableCell className={classes.title} align="right">Einheit</TableCell>
-            <TableCell className={classes.title} align="right">Preis</TableCell>
-            <TableCell className={classes.title} align="right">Rabatt</TableCell>
-            <TableCell className={classes.title} align="right">Total</TableCell>
-            <TableCell className={classes.title} align="right">Funktionen</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {entries}
-          <TableRow>
-            <TableCell component="th" scope="row" className={classes.title}>
-              Total
-              </TableCell>
-            <TableCell align="right"></TableCell>
-            <TableCell align="right"></TableCell>
-            <TableCell align="right"></TableCell>
-            <TableCell align="right">{(discount ? discount : 0).toFixed(2).toString().concat("%")}</TableCell>
-            <TableCell align="right">{calculateTotal().toFixed(2)}</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      {dialogs}
+      <TableContainer component={Paper}>
+        <Table className={classes.table} aria-label="simple table">
+          {tableHeader}
+          <TableBody>
+            {entries}
+            {totalRow}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 }
 
