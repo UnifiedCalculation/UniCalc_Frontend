@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import React, { useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import DynamicDialog from "../../../dynamicDialog/dynamicDialog"
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -9,7 +9,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 
-const EmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, show}) => {
+const EmployeeDialog = ({ employeeData, onCancel, onAccept, show }) => {
 
 
   const cancelButtonText = 'Abbrechen';
@@ -53,89 +53,99 @@ const EmployeeDialog = ({employeeData, setEmployeeData, onCancel, onAccept, show
   const classes = useStyles();
 
   const inputFields = textfields.map((entry, index) => {
-        return <TextField
-            key={(index + 1) + "-textField"}
-            inputProps={entry.inputProps}
-            type={entry.type}
-            id={entry.id}
-            name={entry.id}
-            key={index + '-textField'}
-            label={entry.label}
-            required={entry.required}
-            fullWidth
-            select={entry.select}
-            native={entry.select}
-            margin='dense'
-            autoComplete={'false'}
-            defaultValue={entry.value ? entry.value : null}
-            disabled={entry.disabled}
-            onChange={e => handleInputChange(e.target.value, e.target.name)}
-        >
-          {entry.select ?
-              entry.options.map((entry) =>
-                  <MenuItem key={entry.value} value={entry.value}>
-                    {entry.name}
-                  </MenuItem>
-              )
-              : null}
-        </TextField>
-      }
+    return <TextField
+      key={(index + 1) + "-textField"}
+      inputProps={entry.inputProps}
+      type={entry.type}
+      id={entry.id}
+      name={entry.id}
+      key={index + '-textField'}
+      label={entry.label}
+      required={entry.required}
+      fullWidth
+      select={entry.select}
+      native={entry.select}
+      margin='dense'
+      autoComplete={'false'}
+      defaultValue={entry.value ? entry.value : null}
+      disabled={entry.disabled}
+    >
+      {entry.select ?
+        entry.options.map((entry) =>
+          <MenuItem key={entry.value} value={entry.value}>
+            {entry.name}
+          </MenuItem>
+        )
+        : null}
+    </TextField>
+  }
   );
 
-  function handleInputChange(value, name) {
-    let copy = JSON.parse(JSON.stringify(employeeData))
-    copy[name] = value
-    setEmployeeData(copy)
-  }
+  const buttons = <FormControl className={classes.userRoles} component="fieldset">
+    <FormLabel style={{ marginBottom: '10px' }} component="legend">Rollen</FormLabel>
+    <FormGroup>
+      <FormControlLabel
+        control={<Switch defaultChecked={employeeData && Array.isArray(employeeData.roles) ? employeeData.roles.includes("Admin") : false}
+          name="Admin" />}
+        label="Administrator"
+      />
+      <FormControlLabel
+        control={<Switch defaultChecked={employeeData && Array.isArray(employeeData.roles) ? employeeData.roles.includes("Projektleiter") : false}
+          name="Projektleiter" />}
+        label="Projektleiter"
+      />
+      <FormControlLabel
+        control={<Switch defaultChecked={employeeData && Array.isArray(employeeData.roles) ? employeeData.roles.includes("Verkäufer") : false}
+          name="Verkäufer" />}
+        label="Verkäufer"
+      />
+      <FormControlLabel
+        control={<Switch defaultChecked={employeeData && Array.isArray(employeeData.roles) ? employeeData.roles.includes("Mitarbeiter") : false}
+          name="Mitarbeiter" />}
+        label="Mitarbeiter"
+      />
+    </FormGroup>
+  </FormControl>
 
-  function handleRoleSwitch(value, name) {
-    let copy = JSON.parse(JSON.stringify(employeeData))
-    copy.roles[name] = value
-    setEmployeeData(copy)
+  const parseEmployeeData = (jsonObject) => {
+    console.log('fresh from form: ' + JSON.stringify(jsonObject));
+    jsonObject.roles = [];
+    if (jsonObject.hasOwnProperty("Admin")) {
+      jsonObject.roles.push("Admin")
+      delete jsonObject.Admin
+    }
+    if (jsonObject.hasOwnProperty("Mitarbeiter")) {
+      jsonObject.roles.push("Mitarbeiter")
+      delete jsonObject.Mitarbeiter
+    }
+    if (jsonObject.hasOwnProperty("Verkäufer")) {
+      jsonObject.roles.push("Verkäufer")
+      delete jsonObject.Verkäufer
+    }
+    if (jsonObject.hasOwnProperty("Projektleiter")) {
+      jsonObject.roles.push("Projektleiter")
+      delete jsonObject.Projektleiter
+    }
+    if (employeeData && employeeData.id) {
+      jsonObject.id = employeeData.id;
+    }
+    onAccept(jsonObject);
   }
 
   return (
 
-      <DynamicDialog
-          title={title}
-          text={text}
-          onCancel={onCancel}
-          cancelButtonText={cancelButtonText}
-          onAccept={onAccept}
-          acceptButtonText={acceptButtonText}
-          show={show}
-      >
-        {inputFields}
-        <FormControl className={classes.userRoles} component="fieldset">
-          <FormLabel style={{marginBottom: '10px'}} component="legend">Rollen</FormLabel>
-          <FormGroup>
-            <FormControlLabel
-                control={<Switch defaultChecked={employeeData ? employeeData.roles.admin : null}
-                                 onChange={e => handleRoleSwitch(e.target.checked, e.target.name)}
-                                 name="admin"/>}
-                label="Administrator"
-            />
-            <FormControlLabel
-                control={<Switch defaultChecked={employeeData ? employeeData.roles.pl : null}
-                                 onChange={e => handleRoleSwitch(e.target.checked, e.target.name)}
-                                 name="pl"/>}
-                label="Projektleitung"
-            />
-            <FormControlLabel
-                control={<Switch defaultChecked={employeeData ? employeeData.roles.sales : null}
-                                 onChange={e => handleRoleSwitch(e.target.checked, e.target.name)}
-                                 name="sales"/>}
-                label="Verkauf"
-            />
-            <FormControlLabel
-                control={<Switch defaultChecked={employeeData ? employeeData.roles.employee : null}
-                                 onChange={e => handleRoleSwitch(e.target.checked, e.target.name)}
-                                 name="employee"/>}
-                label="Handwerker"
-            />
-          </FormGroup>
-        </FormControl>
-      </DynamicDialog>
+    <DynamicDialog
+      title={title}
+      text={text}
+      onCancel={onCancel}
+      cancelButtonText={cancelButtonText}
+      onAccept={parseEmployeeData}
+      acceptButtonText={acceptButtonText}
+      show={show}
+    >
+      {inputFields}
+      {buttons}
+    </DynamicDialog>
 
   );
 }
