@@ -170,7 +170,7 @@ const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }
             <DynamicEntry
                 key={index + "-entry"}
                 projectId={projectId}
-                offerId={contract.id}
+                contractId={contract.id}
                 entryData={entry}
                 onChange={triggerUpdate}
                 onError={onError}
