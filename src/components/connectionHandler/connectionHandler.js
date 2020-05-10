@@ -155,6 +155,16 @@ export async function getEntryDataForOffer(projectId, offerId, entryId, onError,
       .catch(error => handleErrors(error, onError));
 }
 
+export async function getEntryDataForInvoice(projectId, invoiceId, entryId, onError, callback) {
+  axios.get('projects/' + projectId + '/invoices/' + invoiceId + '/entries/' + entryId)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
 export async function getEntryProductsForOffer(projectId, offerId, entryId, onError, callback) {
   axios.get('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId +'/products')
       .then(res => {
@@ -177,6 +187,16 @@ export async function getEntryDataForContract(projectId, contractId, entryId, on
 
 export async function getEntryProductsForContract(projectId, contractId, entryId, onError, callback) {
   axios.get('projects/' + projectId + '/contracts/' + contractId + '/entries/' + entryId +'/products')
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function getEntryProductsForInvoice(projectId, invoiceId, entryId, onError, callback) {
+  axios.get('projects/' + projectId + '/invoices/' + invoiceId + '/entries/' + entryId +'/products')
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -367,6 +387,16 @@ export async function addArticleToContractEntry(projectId, contractId, entryId, 
 
 export async function addNewEntryToOffer(projectId, offerId, entry, onError, callback) {
   axios.post('projects/' + projectId + '/offers/' + offerId + '/entries', entry)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function addNewEntryToContract(projectId, contractId, entry, onError, callback) {
+  axios.post('projects/' + projectId + '/contracts/' + contractId + '/entries', entry)
       .then(res => {
         if (callback) {
           callback(res.data);
