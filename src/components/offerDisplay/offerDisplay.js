@@ -34,6 +34,7 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
     }, []);
 
     const triggerUpdate = () => {
+        setEntries(null);
         API.getOfferData(projectId, offer.id, onError, setOffer);
         API.getEntriesFromOffer(projectId, offer.id, onError, setEntries);
     }
