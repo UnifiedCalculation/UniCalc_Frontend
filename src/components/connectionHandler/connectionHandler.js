@@ -24,7 +24,7 @@ export async function getEntriesFromOffer(projectId, offerId, onError, callback)
       .catch(error => handleErrors(error, onError));
 }
 
-export async function deleteProductFromEntry(projectId, offerId, entryId, productId, onError, callback){
+export async function deleteProductFromEntryInOffer(projectId, offerId, entryId, productId, onError, callback){
   axios.delete('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId  + '/products/' + productId)
       .then(res => {
         if (callback) {
@@ -34,8 +34,28 @@ export async function deleteProductFromEntry(projectId, offerId, entryId, produc
       .catch(error => handleErrors(error, onError));
 }
 
-export async function submitEditedEntryProduct(projectId, offerId, entryId, productId, product, onError, callback){
+export async function deleteProductFromEntryInContract(projectId, contractId, entryId, productId, onError, callback){
+  axios.delete('projects/' + projectId + '/contracts/' + contractId + '/entries/' + entryId  + '/products/' + productId)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function submitEditedEntryProductInOffer(projectId, offerId, entryId, productId, product, onError, callback){
   axios.put('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId  + '/products/' + productId, product)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function submitEditedEntryProductInContract(projectId, contractId, entryId, productId, product, onError, callback){
+  axios.put('projects/' + projectId + '/contracts/' + contractId + '/entries/' + entryId  + '/products/' + productId, product)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -105,7 +125,7 @@ export async function getUserContracts(onError, callback) {
 }
 
 
-export async function updateEntryData(projectId, offerId, entryId, entry, onError, callback) {
+export async function updateOfferEntryData(projectId, offerId, entryId, entry, onError, callback) {
   axios.put('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId, entry)
       .then(res => {
         if (callback) {
@@ -115,7 +135,17 @@ export async function updateEntryData(projectId, offerId, entryId, entry, onErro
       .catch(error => handleErrors(error, onError));
 }
 
-export async function getEntryData(projectId, offerId, entryId, onError, callback) {
+export async function updateContractEntryData(projectId, contractId, entryId, entry, onError, callback) {
+  axios.put('projects/' + projectId + '/contracts/' + contractId + '/entries/' + entryId, entry)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function getEntryDataForOffer(projectId, offerId, entryId, onError, callback) {
   axios.get('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId)
       .then(res => {
         if (callback) {
@@ -125,8 +155,28 @@ export async function getEntryData(projectId, offerId, entryId, onError, callbac
       .catch(error => handleErrors(error, onError));
 }
 
-export async function getEntryProducts(projectId, offerId, entryId, onError, callback) {
+export async function getEntryProductsForOffer(projectId, offerId, entryId, onError, callback) {
   axios.get('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId +'/products')
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function getEntryDataForContract(projectId, contractId, entryId, onError, callback) {
+  axios.get('projects/' + projectId + '/contracts/' + contractId + '/entries/' + entryId)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function getEntryProductsForContract(projectId, contractId, entryId, onError, callback) {
+  axios.get('projects/' + projectId + '/contracts/' + contractId + '/entries/' + entryId +'/products')
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -265,6 +315,16 @@ export async function deleteEntryFromOffer(projectId, offerId, entryId, onError,
       .catch(error => handleErrors(error, onError));
 }
 
+export async function deleteEntryFromContract(projectId, contractId, entryId, onError, callback) {
+  axios.delete('projects/' + projectId + '/contracts/' + contractId + '/entries/' + entryId)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
 export async function deleteContractFromProject(projectId, contractId, onError, callback) {
   axios.delete('projects/' + projectId + '/contracts/' + contractId)
       .then(res => {
@@ -285,8 +345,18 @@ export async function getUserData(onError, callback){
         .catch(error => handleErrors(error, onError));
 }
 
-export async function addArticleToEntry(projectId, offerId, entryId, article, onError, callback) {
+export async function addArticleToOfferEntry(projectId, offerId, entryId, article, onError, callback) {
   axios.post('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId + '/products', article)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function addArticleToContractEntry(projectId, contractId, entryId, article, onError, callback) {
+  axios.post('projects/' + projectId + '/contracts/' + contractId + '/entries/' + entryId + '/products', article)
       .then(res => {
         if (callback) {
           callback(res.data);
