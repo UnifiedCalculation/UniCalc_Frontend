@@ -56,6 +56,11 @@ const DynamicEntry = ({ projectId, offerId, contractId, invoiceId, entryData, on
         API.getEntryProductsForContract(projectId, contractId, entryData.id, onError, setEntryProducts);
     }
 
+    const updateInvoiceEntryData = () => {
+        API.getEntryDataForInvoice(projectId, invoiceId, entryData.id, onError, setEntryData);
+        API.getEntryProductsForInvoice(projectId, invoiceId, entryData.id, onError, setEntryProducts);
+    }
+
     const useStyles = makeStyles((theme) => ({
         root: {
             width: '90%',
