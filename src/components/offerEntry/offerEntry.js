@@ -100,7 +100,7 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
 
     const addNewArticle = (article) => {
         setAddArticleDialogShowState(false);
-        API.addArticleToEntry(projectId, offerId, entry.id, article, onError, onChange);
+        API.addArticleToEntry(projectId, offerId, entry.id, article, onError, updateEntryData);
     }
 
     const deleteEntry = (event) => {
