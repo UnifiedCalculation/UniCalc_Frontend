@@ -211,6 +211,27 @@ const DynamicEntry = ({ projectId, offerId, contractId, entryData, onChange, onE
         />
         : <Loading text={"Lade Einträge..."} />
 
+    const buttons = deactivateFunctions ?
+        null :
+        <>
+            <Tooltip title={"Segmentdetails bearbeiten"} disableFocusListener >
+                <IconButton onClick={editEntry} className={classes.tertiaryHeadingButton} disabled={functionsDisabled}>
+                    <FontAwesomeIcon icon={faPen} />
+                </IconButton>
+            </Tooltip>
+            <Tooltip title={"Segment löschen"} disableFocusListener >
+                <IconButton onClick={deleteEntry} className={classes.tertiaryHeadingButton} disabled={functionsDisabled}>
+                    <FontAwesomeIcon icon={faTrash} />
+                </IconButton>
+            </Tooltip>
+            <Tooltip title={"Neuen Artikel hinzufügen"} disableFocusListener >
+                <IconButton onClick={addArticle} className={classes.tertiaryHeadingButton} disabled={functionsDisabled}>
+                    <FontAwesomeIcon icon={faTools} />
+                    <FontAwesomeIcon icon={faPlus} />
+                </IconButton>
+            </Tooltip>
+        </>;
+
     const content = entry ?
         <ExpansionPanel key={entry.name + "-entries-list"}>
             <ExpansionPanelSummary
@@ -220,22 +241,6 @@ const DynamicEntry = ({ projectId, offerId, contractId, entryData, onChange, onE
             >
                 <Typography className={classes.heading}>{entry.title}</Typography>
                 <Typography className={classes.secondaryHeading}>{"Rabatt: ".concat(entry.discount ? Number(entry.discount).toFixed(2) : "0.00").concat("%")}</Typography>
-                <Tooltip title={"Segmentdetails bearbeiten"} disableFocusListener >
-                    <IconButton onClick={editEntry} className={classes.tertiaryHeadingButton} disabled={functionsDisabled}>
-                        <FontAwesomeIcon icon={faPen} />
-                    </IconButton>
-                </Tooltip>
-                <Tooltip title={"Segment löschen"} disableFocusListener >
-                    <IconButton onClick={deleteEntry} className={classes.tertiaryHeadingButton} disabled={functionsDisabled}>
-                        <FontAwesomeIcon icon={faTrash} />
-                    </IconButton>
-                </Tooltip>
-                <Tooltip title={"Neuen Artikel hinzufügen"} disableFocusListener >
-                    <IconButton onClick={addArticle} className={classes.tertiaryHeadingButton} disabled={functionsDisabled}>
-                        <FontAwesomeIcon icon={faTools} />
-                        <FontAwesomeIcon icon={faPlus} />
-                    </IconButton>
-                </Tooltip>
 
             </ExpansionPanelSummary>
             <div className={classes.buttonsAlign}>
