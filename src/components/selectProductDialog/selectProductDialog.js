@@ -83,9 +83,9 @@ const SelectProductDialog = ({ products, onCancel, onSubmit, show, ...props }) =
         jsonObject.amount = parseInt(jsonObject.amount);
         let actualProduct = products.find(product => product.name == jsonObject.article);
         jsonObject.name = jsonObject.article;
-        jsonObject.article = actualProduct.id;
         jsonObject.unit = actualProduct.unit;
         jsonObject.price = actualProduct.price;
+        jsonObject.product_id = actualProduct.id;
         delete jsonObject.article;
         onSubmit(jsonObject);
     };
