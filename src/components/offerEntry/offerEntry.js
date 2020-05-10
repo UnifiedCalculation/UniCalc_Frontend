@@ -16,6 +16,7 @@ import { faPen, faTrash, faTools, faPlus } from '@fortawesome/free-solid-svg-ico
 
 import ArticleTable from '../articleTable/articleTable';
 import { UserContext } from '../singlePage/singlePage';
+import EditProductDialog from '../editProductDialog/editProductDialog';
 
 import * as API from '../connectionHandler/connectionHandler';
 
@@ -27,6 +28,9 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
     const [deleteEntryAlert, setDeleteEntryAlertShowState] = useState(false);
     const [editEntryDialog, setEditEntryDialogShowState] = useState(false);
     const [addArticleDialog, setAddArticleDialogShowState] = useState(false);
+
+    const [productToDelete, setProductToDelete] = useState(null);
+    const [productToEdit, setProductToEdit] = useState(null);
 
     useEffect(() => {
         updateEntryData();
@@ -124,6 +128,40 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
         setEditEntryDialogShowState(false);
     }
 
+    const confirmDeleteProduct = (productId) => {
+        setProductToDelete(productId)
+    }
+
+    const cancelProductDelete = () => {
+        setProductToDelete(null);
+    }
+
+    const deleteProductConfirmed = () => {
+        API.deleteProductFromEntry(projectId, offerId, entry.id, productToDelete, onError, hideAlertAndReload)
+    }
+
+    const hideAlertAndReload = () => {
+        setProductToDelete(null);
+        updateEntryData();
+    }
+
+    const editProduct = (product) => {
+        setProductToEdit(product);
+    }
+
+    const submitEditedProduct = (changedProduct) => {
+        productToEdit.amount = changedProduct.amount;
+        productToEdit.discount = changedProduct.discount;
+        productToEdit.description = changedProduct.discount;
+
+        API.submitEditedEntryProduct(projectId, offerId, entry.id, productToEdit.product_id, productToEdit, onError, updateEntryData);
+
+    }
+
+    const closeEditProductDialog = () => {
+        setProductToEdit(null)
+    }
+
     const classes = useStyles();
 
     const body = entryProducts && entry ?
@@ -134,7 +172,8 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
             products={entryProducts}
             discount={entry.discount}
             onError={onError}
-            onChange={updateEntryData}
+            confirmDeleteProduct={confirmDeleteProduct}
+            editProduct={editProduct}
             projectId={projectId}
             offerId={offerId}
             entryId={entryData.id}
@@ -193,6 +232,21 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
                 products={products}
                 onCancel={() => setAddArticleDialogShowState(false)}
                 onSubmit={addNewArticle}
+            />
+            <Alert
+                show={productToDelete ? true : false}
+                title={"Artikel löschen"}
+                text={"Sind Sie sicher, dass Sie diesen Artikel löschen möchten?"}
+                onAccept={deleteProductConfirmed}
+                onCancel={cancelProductDelete}
+            />
+            <EditProductDialog
+                show={productToEdit ? true : false}
+                amount={productToEdit ? productToEdit.amount : null}
+                discount={productToEdit ? productToEdit.discount : null}
+                description={productToEdit ? productToEdit.description : null}
+                onSubmit={submitEditedProduct}
+                onCancel={closeEditProductDialog}
             />
             {entry ?
                 <NewEntrySegmentDialog
