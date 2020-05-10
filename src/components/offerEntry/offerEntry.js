@@ -118,6 +118,7 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
     }
 
     const editEntryData = (entryData) => {
+        entryData.offerId = offerId;
         delete entryData.articles;
         API.updateEntryData(projectId, offerId, entry.id, entryData, onError, onChange);
         setEditEntryDialogShowState(false);
