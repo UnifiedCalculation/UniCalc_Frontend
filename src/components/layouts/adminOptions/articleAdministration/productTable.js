@@ -222,7 +222,7 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
   return (
       <div className={classes.root}>
         <Paper className={classes.paper}>
-          <EnhancedTableToolbar/>
+          <EnhancedTableToolbar numSelected={0}/>
           <TableContainer>
             <Table
                 className={classes.table}
@@ -236,6 +236,7 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
                   orderBy={orderBy}
                   onRequestSort={handleRequestSort}
                   rowCount={rows.length}
+                  numSelected={0}
               />
               <TableBody>
                 {stableSort(rows, getComparator(order, orderBy))
