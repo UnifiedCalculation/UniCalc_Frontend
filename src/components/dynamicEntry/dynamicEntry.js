@@ -20,7 +20,7 @@ import EditProductDialog from '../editProductDialog/editProductDialog';
 
 import * as API from '../connectionHandler/connectionHandler';
 
-const DynamicEntry = ({ projectId, offerId, contractId, entryData, onChange, onError, ...props }) => {
+const DynamicEntry = ({ projectId, offerId, contractId, invoiceId, entryData, onChange, onError, deactivateFunctions = false, ...props }) => {
 
     const [entry, setEntryData] = useState(null);
     const [entryProducts, setEntryProducts] = useState(null);
@@ -208,6 +208,7 @@ const DynamicEntry = ({ projectId, offerId, contractId, entryData, onChange, onE
             projectId={projectId}
             offerId={offerId}
             entryId={entryData.id}
+            deactivateFunctions={deactivateFunctions}
         />
         : <Loading text={"Lade Einträge..."} />
 
