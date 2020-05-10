@@ -20,7 +20,7 @@ import EditProductDialog from '../editProductDialog/editProductDialog';
 
 import * as API from '../connectionHandler/connectionHandler';
 
-const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props }) => {
+const DynamicEntry = ({ projectId, offerId, contractId, entryData, onChange, onError, ...props }) => {
 
     const [entry, setEntryData] = useState(null);
     const [entryProducts, setEntryProducts] = useState(null);
@@ -33,13 +33,25 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
     const [productToEdit, setProductToEdit] = useState(null);
 
     useEffect(() => {
-        updateEntryData();
+        updateData();
         API.getProducts(onError, setProducts);
     }, [])
 
-    const updateEntryData = () => {
-        API.getEntryData(projectId, offerId, entryData.id, onError, setEntryData);
-        API.getEntryProducts(projectId, offerId, entryData.id, onError, setEntryProducts);
+    const updateData = () => {
+        if (offerId !== null) {
+            updateOfferEntryData();
+        } else {
+            updateContractEntryData();
+        }
+    }
+    const updateOfferEntryData = () => {
+        API.getEntryDataForOffer(projectId, offerId, entryData.id, onError, setEntryData);
+        API.getEntryProductsForOffer(projectId, offerId, entryData.id, onError, setEntryProducts);
+    }
+
+    const updateContractEntryData = () => {
+        API.getEntryDataForContract(projectId, contractId, entryData.id, onError, setEntryData);
+        API.getEntryProductsForContract(projectId, contractId, entryData.id, onError, setEntryProducts);
     }
 
     const useStyles = makeStyles((theme) => ({
@@ -104,7 +116,11 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
 
     const addNewArticle = (article) => {
         setAddArticleDialogShowState(false);
-        API.addArticleToEntry(projectId, offerId, entry.id, article, onError, updateEntryData);
+        if(offerId !== null){
+            API.addArticleToOfferEntry(projectId, offerId, entry.id, article, onError, updateData);
+        } else {
+            API.addArticleToContractEntry(projectId, offerId, entry.id, article, onError, updateData);
+        }
     }
 
     const deleteEntry = (event) => {
@@ -113,7 +129,11 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
     }
 
     const deleteEntryConfirmed = () => {
-        API.deleteEntryFromOffer(projectId, offerId, entry.id, onError, onChange);
+        if (offerId !== null) {
+            API.deleteEntryFromOffer(projectId, offerId, entry.id, onError, onChange);
+        } else {
+            API.deleteEntryFromContract(projectId, contractId, entry.id, onError, onChange);
+        }
         setDeleteEntryAlertShowState(false);
     }
 
@@ -124,7 +144,11 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
     const editEntryData = (entryData) => {
         entryData.offerId = offerId;
         delete entryData.articles;
-        API.updateEntryData(projectId, offerId, entry.id, entryData, onError, onChange);
+        if (offerId !== null) {
+            API.updateOfferEntryData(projectId, offerId, entry.id, entryData, onError, onChange);
+        } else {
+            API.updateContractEntryData(projectId, contractId, entry.id, entryData, onError, onChange);
+        }
         setEditEntryDialogShowState(false);
     }
 
@@ -137,12 +161,16 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
     }
 
     const deleteProductConfirmed = () => {
-        API.deleteProductFromEntry(projectId, offerId, entry.id, productToDelete, onError, hideAlertAndReload)
+        if (offerId !== null) {
+            API.deleteProductFromEntryInOffer(projectId, offerId, entry.id, productToDelete, onError, hideAlertAndReload)
+        } else {
+            API.deleteProductFromEntryInContract(projectId, offerId, entry.id, productToDelete, onError, hideAlertAndReload)
+        }
     }
 
     const hideAlertAndReload = () => {
         setProductToDelete(null);
-        updateEntryData();
+        updateData();
     }
 
     const editProduct = (product) => {
@@ -153,8 +181,11 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
         productToEdit.amount = changedProduct.amount;
         productToEdit.discount = changedProduct.discount;
         productToEdit.description = changedProduct.discount;
-
-        API.submitEditedEntryProduct(projectId, offerId, entry.id, productToEdit.product_id, productToEdit, onError, updateEntryData);
+        if (offerId !== null) {
+            API.submitEditedEntryProductInOffer(projectId, offerId, entry.id, productToEdit.product_id, productToEdit, onError, updateData);
+        } else {
+            API.submitEditedEntryProductInContract(projectId, contractId, entry.id, productToEdit.product_id, productToEdit, onError, updateData);
+        }
 
     }
 
@@ -267,4 +298,4 @@ const OfferEntry = ({ projectId, offerId, entryData, onChange, onError, ...props
     );
 };
 
-export default OfferEntry;
+export default DynamicEntry;
