@@ -6,7 +6,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Loading from '../loading/loading';
-import OfferEntry from '../offerEntry/offerEntry';
+import DynamicEntry from '../dynamicEntry/dynamicEntry';
 
 import NewEntrySegmentDialog from '../newEntrySegmentDialog/newEntrySegmentDialog';
 import Alert from '../alert/alert';
@@ -34,13 +34,14 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
     }, []);
 
     const triggerUpdate = () => {
+        setEntries(null);
         API.getOfferData(projectId, offer.id, onError, setOffer);
         API.getEntriesFromOffer(projectId, offer.id, onError, setEntries);
     }
 
     const setNewOfferId = (data) => {
         offerData.id = data.id;
-        triggerUpdate(offerData);
+        triggerUpdate();
     }
 
     const loadOfferAsPdf = () => {
@@ -157,7 +158,7 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
 
     const segments = entries ?
         entries.map((entry, index) =>
-            <OfferEntry
+            <DynamicEntry
                 key={index + "-entry"}
                 projectId={projectId}
                 offerId={offer.id}

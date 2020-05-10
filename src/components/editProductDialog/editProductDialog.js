@@ -11,20 +11,21 @@ import DynamicDialog from '../dynamicDialog/dynamicDialog';
  * @param {Function} onSubmit 
  * @param {Boolean} show
  */
-const SelectProductDialog = ({ products, onCancel, onSubmit, show, ...props }) => {
+const EditProductDialog = ({ amount, discount, description, onCancel, onSubmit, show, ...props }) => {
 
 
     const cancelButtonText = 'Abbrechen';
     const acceptButtonText = 'Bestätigen';
-    const title = 'Artikel hinzufügen';
-    const text = 'Alle Felder eintragen, um einen Artikel hinzuzufügen.';
+    const title = 'Artikel bearbeiten';
+    const text = 'Einträge für den Artikel anpassen';
 
     const textfields = [
         {
             id: 'amount',
             label: 'Anzahl',
             type: 'number',
-            required: true
+            required: true,
+            value: Number(amount)
         },
         {
             id: 'discount',
@@ -35,33 +36,17 @@ const SelectProductDialog = ({ products, onCancel, onSubmit, show, ...props }) =
                 max: "100", 
                 step: "0.01" 
             },
-            required: true
+            required: true,
+            value: discount? Number(discount) : 0.00
         },
         {
             id: 'description',
             label: 'Beschreibung',
             type: 'text',
-            required: true
+            required: true,
+            value: description
         }
     ];
-
-    const productsSelection =
-        <Autocomplete
-            id="product-autocomplete"
-            options={products}
-            getOptionLabel={(product) => product.name}
-            renderInput={(params)=> 
-                <TextField
-                    {...params}
-                    id="article"
-                    label="Artikel"
-                    type="textarea"
-                    name="article"
-                    fullWidth
-                    required 
-                    margin='dense'/>
-            }
-        />
 
     const inputFields = textfields.map((entry, index) =>
         <TextField
@@ -73,20 +58,15 @@ const SelectProductDialog = ({ products, onCancel, onSubmit, show, ...props }) =
             label={entry.label}
             required={entry.required}
             fullWidth
-            multiline={entry.type !== "email" && entry.type !== "number"}
+            multiline={entry.id === "description"}
             margin='dense'
+            defaultValue={entry.value? entry.value : null}
         />
     );
 
-    const parseNewProduct = (jsonObject) => {
-        jsonObject.discount = parseInt(jsonObject.discount);
-        jsonObject.amount = parseInt(jsonObject.amount);
-        let actualProduct = products.find(product => product.name == jsonObject.article);
-        jsonObject.name = jsonObject.article;
-        jsonObject.unit = actualProduct.unit;
-        jsonObject.price = actualProduct.price;
-        jsonObject.product_id = actualProduct.id;
-        delete jsonObject.article;
+    const parseEditedProduct = (jsonObject) => {
+        jsonObject.discount = Number(jsonObject.discount);
+        jsonObject.amount = Number(jsonObject.amount);
         onSubmit(jsonObject);
     };
 
@@ -96,21 +76,13 @@ const SelectProductDialog = ({ products, onCancel, onSubmit, show, ...props }) =
             text={text}
             onCancel={onCancel}
             cancelButtonText={cancelButtonText}
-            onAccept={parseNewProduct}
+            onAccept={parseEditedProduct}
             acceptButtonText={acceptButtonText}
             show={show}
         >
-            {productsSelection}
             {inputFields}
         </DynamicDialog>
     );
 }
 
-SelectProductDialog.propTypes = {
-    products: PropTypes.array.isRequired,
-    onCancel: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    show: PropTypes.bool.isRequired
-}
-
-export default SelectProductDialog;
+export default EditProductDialog;

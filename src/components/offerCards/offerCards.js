@@ -59,7 +59,7 @@ const OfferCards = ({ offers, setOfferDetails, onNewOffer }) => {
     const offerCards = offers ?
         offers.map((entry, index) =>
             <DynamicCard
-                key={(index + 1) + "-offerCard"}
+                key={(index + 1) + "-offerCard-detail"}
                 onClick={() => setOfferDetails(offers[index])}
                 projectName={entry.name}
                 description={"Zuletz bearbeitet am: " +

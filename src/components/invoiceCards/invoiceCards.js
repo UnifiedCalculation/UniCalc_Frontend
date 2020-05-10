@@ -42,7 +42,7 @@ const InvoiceCards = ({ invoices, setInvoiceDetails }) => {
     const invoicesCards = invoices ?
         invoices.map((entry, index) =>
             <DynamicCard
-                key={(index + 1) + "-offerCard"}
+                key={(index + 1) + "-invoiceCard-detail"}
                 onClick={() => setInvoiceDetails(invoices[index])}
                 projectName={entry.name}
                 description={"Zuletz bearbeitet am: " +

@@ -7,8 +7,9 @@ import NewProjectDialog from '../newProjectDialog/newProjectDialog';
 import ProjectDisplay from '../projectDisplay/projectDisplay';
 import Loading from '../loading/loading';
 import * as API from '../connectionHandler/connectionHandler';
-import ProductOverview from "../layouts/ProductAdministration/ProductOverview";
 import SnackbarOverlay from '../snackbar/snackbar';
+import AdminOptions from "../layouts/adminOptions/adminOptions";
+import ContractDisplay from '../contractDisplay/contractDisplay';
 
 export const UserContext = createContext();
 
@@ -22,9 +23,6 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: 'auto',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  content: {
-    paddingBottom: '75px',
   },
   mainPage: {
     backgroundColor: 'lightgray',
@@ -42,6 +40,7 @@ const SinglePage = () => {
   const [contracts, setContracts] = useState(null);
   const [showAdminOptions, setShowAdminOptions] = useState(false)
   const [projectData, setProjectData] = useState(null);
+  const [contractData, setContractData] = useState(null);
   const [customerData, setCustomerData] = useState([]);
   const [showNewProjectDialog, setNewProjectDialogViewState] = useState(false);
 
@@ -55,7 +54,7 @@ const SinglePage = () => {
 
   useEffect(() => {
     if (user) {
-      switch(true) {
+      switch (true) {
         case user.roles.includes("Admin"):
           API.getContracts(setErrorMessage, setContracts);
         case user.roles.includes("Verkäufer"):
@@ -63,22 +62,18 @@ const SinglePage = () => {
           break;
         case user.roles.includes("Projektleiter"):
           API.getUserProjects(setErrorMessage, setProjects);
-          break;
         case user.roles.includes("Mitarbeiter"):
           API.getUserContracts(setErrorMessage, setContracts);
+          break;
         default:
           setErrorMessage("User hat keine Rollen. Kontaktiere deinen Administrator!");
       }
     }
   }, [user]);
 
-  const toggleAdmingOptions = () => {
+  const toggleAdminOption = () => {
     setShowAdminOptions(!showAdminOptions);
   }
-
-  const adminOptionsDisplay = showAdminOptions ?
-    <ProductOverview setErrorMessage={setErrorMessage} />
-    : null;
 
   const emptyErrorMessage = () => {
     setErrorMessage("");
@@ -101,44 +96,81 @@ const SinglePage = () => {
     });
   }
 
-  const addNewProjectDialog =
-    <NewProjectDialog
-      show={showNewProjectDialog}
-      customers={customerData}
-      onCancel={closeNewProjectDialog}
-      onSubmit={submitNewProject}
-    />
+  const updateContracts = () => {
+    setContractData(null);
+    API.getContracts(setErrorMessage, setContracts);
+  }
+
 
   let addProjectCard = [];
-  addProjectCard.push(
-    <DynamicCard
-      hidden={
-        user && !(user.roles.includes("Verkäufer") || user.roles.includes("Admin"))}
-      key={'0-projectCard'}
-      projectName={'Neues Projekt'}
-      description={'Hier eine neues Projekt erstellen!'}
-      buttonName={'Neues Projekt hinzufügen...'}
-      onClick={openNewProjectDialog}
-    />
-  );
+  
 
-  const projectCards = projectData ? null :
-    <div className={classes.flexCards}>
-      {addProjectCard.concat(projects ?
-        projects.map((entry, index) =>
-          <DynamicCard
-            key={(index + 1) + "-projectCard"}
-            onClick={() => setProjectData(entry)}
-            projectName={entry.name}
-            description={entry.description} />
-        )
-        : <Loading key={"home-loading-key"} text={"Lade projekte..."} />
-      )}
-    </div>;
+  const createContent = () => {
+    addProjectCard = [];
+    addProjectCard.push(
+      <DynamicCard
+        hidden={
+          user && !(user.roles.includes("Verkäufer") || user.roles.includes("Admin"))}
+        key={'0-projectCard'}
+        projectName={'Neues Projekt'}
+        description={'Hier eine neues Projekt erstellen!'}
+        buttonName={'Neues Projekt hinzufügen...'}
+        onClick={openNewProjectDialog}
+      />
+    );
+    
+    if (showAdminOptions) {
+      return <AdminOptions
+        setErrorMessage={setErrorMessage}
+      />
+    } else if (showNewProjectDialog) {
+      return <NewProjectDialog
+        show={showNewProjectDialog}
+        customers={customerData}
+        onCancel={closeNewProjectDialog}
+        onSubmit={submitNewProject}
+      />
+    } else if (projectData) {
+      return <ProjectDisplay
+        projectData={projectData}
+        onError={setErrorMessage}
+        onClose={() => setProjectData(null)}
+      />
+    } else if (contractData) {
+      return <ContractDisplay
+        contractData={contractData}
+        projectId={contractData.projectId}
+        onError={setErrorMessage}
+        onClose={updateContracts}
+      />
+    } else if (projects || contracts) {
+      if (projects) {
+        addProjectCard = addProjectCard.concat(
+          projects.map((entry, index) =>
+            <DynamicCard
+              key={(index + 1) + "-projectCard-front"}
+              onClick={() => setProjectData(entry)}
+              projectName={'Projekt ' + entry.name}
+              description={entry.description} />
+          ))
+      }
+      if (contracts) {
+        addProjectCard = addProjectCard.concat(
+          contracts.map((entry, index) =>
+            <DynamicCard
+              key={(index + 1) + "-contractCard-front"}
+              onClick={() => setContractData(entry)}
+              projectName={'Auftrag ' + entry.name}
+              description={entry.description} />
+          ))
+      }
+      return addProjectCard;
+    } else {
+      return <Loading key={"home-loading-key"} text={"Lade Daten..."} />
+    }
+  }
 
-  const projectDisplay = projectData ?
-    <ProjectDisplay projectData={projectData} onError={setErrorMessage} onClose={() => setProjectData(null)} />
-    : null;
+  const content = createContent();
 
   const snackbar =
     <SnackbarOverlay
@@ -148,24 +180,14 @@ const SinglePage = () => {
       onClose={emptyErrorMessage}
     />
 
-  const rolesLoaded = user && user.roles.length ?
-    <>
-      {addNewProjectDialog}
-      {projectCards}
-      {projectDisplay}
-    </>
-    : <Loading text={"Lade Userdata..."} />;
-
-
   return (
     <div className={classes.mainPage}>
       <UserContext.Provider value={user}>
-        <Header onError={setErrorMessage} onSettingsClick={toggleAdmingOptions}/>
-        {adminOptionsDisplay}
-        {rolesLoaded}
-        <div className={classes.content}>
-          {snackbar}
-        </div>
+        <Header onError={setErrorMessage} onSettingsClick={toggleAdminOption} />
+          <div className={classes.flexCards}>
+            {content}
+          </div>
+        {snackbar}
       </UserContext.Provider>
     </div>
   );

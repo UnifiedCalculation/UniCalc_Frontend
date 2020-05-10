@@ -1,27 +1,34 @@
 {
-  "entries": [],
+  "employees": [
+    {
+      "email": "Hans.Ferdinand@first.ch",
+      "firstname": "okay",
+      "lastname": "google",
+      "roles": [
+        "Verkäufer",
+        "Projektleiter"
+      ],
+      "id": 1
+    },
+    {
+      "email": "admin@firma.com",
+      "firstname": "admin",
+      "lastname": "gogogol",
+      "roles": [
+        "Admin"
+      ],
+      "id": 2
+    }
+  ],
+  "entries": [
+    {
+      "title": "Technikraum",
+      "discount": 0,
+      "offerId": "9",
+      "id": 1
+    }
+  ],
   "offers": [
-    {
-      "name": "Neue Offerte",
-      "payment_target": "undefined Tage",
-      "updated_at": "2020-05-06T12:28:06.767Z",
-      "projectId": 1,
-      "id": 3
-    },
-    {
-      "name": "new offer like this?",
-      "payment_target": "undefined Tage",
-      "updated_at": "2020-05-06T15:27:49.675Z",
-      "projectId": 1,
-      "id": 4
-    },
-    {
-      "name": "this is one hell of a goddamn long ass text man how is anyone supposed to display shit like this?",
-      "payment_target": "undefined Tage",
-      "updated_at": "2020-05-06T15:28:04.082Z",
-      "projectId": 1,
-      "id": 5
-    },
     {
       "name": "new dingeling",
       "payment_target": "undefined Tage",
@@ -42,6 +49,13 @@
       "updated_at": "2020-05-06T15:54:07.166Z",
       "projectId": 2,
       "id": 8
+    },
+    {
+      "name": "Pooltechnik",
+      "payment_target": "undefined Tage",
+      "updated_at": "2020-05-09T17:35:16.694Z",
+      "projectId": 1,
+      "id": 9
     }
   ],
   "projects": [
@@ -72,18 +86,32 @@
       "payment_target": "17 Tage"
     },
     {
-      "name": "Neues Projekt",
-      "address": "Die Gibt es schon 2a",
-      "zip": "8123",
-      "city": "Bern",
-      "description": "ASdisd",
-      "payment_target": "30 Tage",
+      "name": "Setphens new house",
+      "address": "new adress",
+      "zip": "12",
+      "city": "12jsa",
+      "description": "asioasio",
+      "payment_target": "12 Tage",
       "customer_id": {
         "firstName": "Fannie",
         "lastName": "Davenport",
         "id": "5ea53603e025e6a409acc113"
       },
       "id": 3
+    },
+    {
+      "name": "Tankstelle Bienz",
+      "address": "Beinzerweg 212a",
+      "zip": "7251",
+      "city": "Luzern",
+      "description": "Neue Tankstelle in Bienz, war früher eine Kapelle",
+      "payment_target": "15 Tage",
+      "customer_id": {
+        "firstName": "Fannie",
+        "lastName": "Davenport",
+        "id": "5ea53603e025e6a409acc113"
+      },
+      "id": 4
     }
   ],
   "contracts": [
@@ -104,24 +132,6 @@
       "updated_at": "2020-04-07T17:57:37.468Z",
       "discount": null,
       "employee_id": 2
-    },
-    {
-      "offer_id": 2,
-      "id": 3
-    },
-    {
-      "name": "neue offerte",
-      "payment_target": "undefined Tage",
-      "updated_at": "2020-05-06T15:26:40.032Z",
-      "projectId": 1,
-      "id": 4
-    },
-    {
-      "name": "test123",
-      "payment_target": "undefined Tage",
-      "updated_at": "2020-05-06T15:26:46.657Z",
-      "projectId": 1,
-      "id": 5
     }
   ],
   "npks": [
@@ -222,6 +232,96 @@
       "unit": "meter",
       "description": "Kabelsalat",
       "id": 8
+    }
+  ],
+  "entryProducts": [
+    {
+      "amount": 5,
+      "discount": 0,
+      "description": "Steckdosen für Geräte",
+      "name": "Grosse Steckdose",
+      "unit": "kilo",
+      "price": 21,
+      "product_id": 2,
+      "entryId": "1",
+      "id": 1
+    },
+    {
+      "amount": 12,
+      "discount": 0,
+      "description": "Tiefkühler",
+      "name": "Grosse Steckdose",
+      "unit": "kilo",
+      "price": 21,
+      "product_id": 2,
+      "entryId": "1",
+      "id": 2
+    },
+    {
+      "amount": 5,
+      "discount": 0,
+      "description": "Steckdosen für Geräte",
+      "name": "Grosse Steckdose",
+      "unit": "kilo",
+      "price": 21,
+      "product_id": 2,
+      "invoiceId": "1",
+      "id": 3
+    },
+    {
+      "amount": 5,
+      "discount": 0,
+      "description": "Steckdosen für Geräte",
+      "name": "Grosse Steckdose",
+      "unit": "kilo",
+      "price": 21,
+      "product_id": 2,
+      "contractId": "1",
+      "id": 3
+    },
+    {
+      "amount": 12,
+      "discount": 1,
+      "description": "asd",
+      "name": "Grosse Steckdose",
+      "unit": "kilo",
+      "price": 21,
+      "product_id": 2,
+      "contractId": "1",
+      "id": 4
+    },
+    {
+      "amount": 42,
+      "discount": 12,
+      "description": "Testinvoice",
+      "name": "Grosse Steckdose",
+      "unit": "kilo",
+      "price": 21,
+      "product_id": 2,
+      "invoiceId": "1",
+      "id": 5
+    },
+    {
+      "amount": 120,
+      "discount": 1,
+      "description": "assaddas",
+      "name": "Grosse Steckdose",
+      "unit": "kilo",
+      "price": 21,
+      "product_id": 2,
+      "contractId": "1",
+      "id": 6
+    },
+    {
+      "amount": 121212,
+      "discount": 15,
+      "description": "asd",
+      "name": "test",
+      "unit": "meter",
+      "price": 123,
+      "product_id": 7,
+      "contractId": "1",
+      "id": 7
     }
   ],
   "customers": [
@@ -743,10 +843,6 @@
       "updated_at": "2020-04-07T17:57:37.468Z",
       "discount": null,
       "employee_id": 1
-    },
-    {
-      "contract_id": 1,
-      "id": 2
     }
   ]
 }

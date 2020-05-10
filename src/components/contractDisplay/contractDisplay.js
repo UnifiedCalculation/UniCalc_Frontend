@@ -6,9 +6,10 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Loading from '../loading/loading';
-import OfferEntry from '../offerEntry/offerEntry';
+import DynamicEntry from '../dynamicEntry/dynamicEntry';
 
 import NewEntrySegmentDialog from '../newEntrySegmentDialog/newEntrySegmentDialog';
+import EmployeeSelectDialog from '../employeeSelectDialog/employeeSelectDialog';
 import Alert from '../alert/alert';
 import { UserContext } from '../singlePage/singlePage';
 
@@ -22,34 +23,38 @@ const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }
     const [contract, setContract] = useState(contractData);
     const [entries, setEntries] = useState(null);
     const [showAlert, setAlertViewState] = useState(false);
+    const [employee, setEmployee] = useState(null);
+    const [selectEmployeeViewState, setSelectEmployeeDialogViewState] = useState(false);
 
     const [newEntryDialog, setNewEntryDialogViewState] = useState(false);
 
     useEffect(() => {
-        if (contract.id) {
-            triggerUpdate();
-        } else {
-            API.saveContractToProject(projectId, contract.id, onError, setNewContractId)
-        }
+        triggerUpdate();
+        API.getEmployeeData(contractData.employee_id, onError, filterEmployeeData);
     }, []);
+
+    const filterEmployeeData = (employeeData) => {
+        delete employeeData.roles;
+        delete employeeData.email;
+        setEmployee(employeeData);
+    }
 
     const triggerUpdate = () => {
         API.getContractData(projectId, contract.id, onError, setContract);
         API.getEntriesFromContract(projectId, contract.id, onError, setEntries);
     }
 
-    const setNewContractId = (data) => {
-        contractData.id = data.id;
-        triggerUpdate(contractData);
-    }
-
     const addNewEntry = (entry) => {
-        API.addNewEntryToOffer(projectId, contract.id, entry, onError, triggerUpdate);
+        API.addNewEntryToContract(projectId, contract.id, entry, onError, triggerUpdate);
         setNewEntryDialogViewState(false);
     }
 
     const turnContractIntoInvoice = () => {
         API.turnContractIntoInvoice(projectId, contract.id, onError, onClose);
+    }
+
+    const changeAssignedEmployee = (newEmployee) => {
+        API.changeEmployeeAssigneToContract(contract.id, newEmployee.id, onError, onClose)
     }
 
     const useStyles = makeStyles((theme) => ({
@@ -88,13 +93,18 @@ const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }
         buttonsAlign: {
             textAlign: "center",
         },
+        assignedEmployee: {
+            fontSize: theme.typography.pxToRem(15),
+            fontWeight: theme.typography.fontWeightRegular,
+            margin: "auto"
+        }
     }));
 
     const classes = useStyles();
 
     const user = useContext(UserContext);
 
-    const functionsDisabled = !(user && ((user.roles.includes("Admin") || user.roles.includes("Verkäufer"))));
+    const functionsDisabled = !(user.roles.includes("Admin") || user.roles.includes("Verkäufer") || user.roles.includes("Projektleiter"));
 
     const warnBeforeDeletion = () => {
         setAlertViewState(true);
@@ -102,13 +112,18 @@ const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }
 
     const deleteContract = () => {
         API.deleteContractFromProject(projectId, contract.id, onError, afterDelete);
-        
     }
 
     const afterDelete = () => {
         setAlertViewState(false);
         onClose();
     }
+
+    const assignedEmployee = employee ?
+        <Typography className={classes.assignedEmployee} >
+            {"Zuständiger Mitarbeiter: " + employee.firstname + ' ' + employee.lastname}
+        </Typography>
+        : null;
 
     const header = contract ?
         <ExpansionPanel expanded={true} data-testid="offerDisplay-header">
@@ -117,23 +132,28 @@ const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }
                 id="panel1a-header"
             >
                 <Typography className={classes.offerTitle} >{contract.name}</Typography>
+                {assignedEmployee}
             </ExpansionPanelSummary>
             <div className={classes.buttonsAlign}>
                 <Button
                     onClick={() => setNewEntryDialogViewState(true)}
                     data-testid="offerDisplay-button-newSegment"
-                    disabled={functionsDisabled}
                 >
                     Neuen Segment hinzufügen
                 </Button>
                 <Button
-                    disabled={(contract.id ? false : true) || functionsDisabled}
+                    disabled={functionsDisabled}
                     onClick={turnContractIntoInvoice}
                 >
                     Auftrag zu Schlussrechnung umwandeln
                 </Button>
                 <Button
-                    disabled={(contract.id ? false : true) || functionsDisabled}
+                    onClick={() => setSelectEmployeeDialogViewState(true)}
+                >
+                    Zuständiger Mitarbeiter ändern
+                </Button>
+                <Button
+                    disabled={functionsDisabled}
                     onClick={warnBeforeDeletion}
                     color="secondary"
                 >
@@ -147,10 +167,10 @@ const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }
 
     const segments = entries ?
         entries.map((entry, index) =>
-            <OfferEntry
+            <DynamicEntry
                 key={index + "-entry"}
                 projectId={projectId}
-                offerId={contract.id}
+                contractId={contract.id}
                 entryData={entry}
                 onChange={triggerUpdate}
                 onError={onError}
@@ -159,15 +179,13 @@ const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }
 
     const loading = contract ? null : <Loading text={"Lade Daten..."} />;
 
-    const newSegmentDialog =
-        <NewEntrySegmentDialog
-            show={newEntryDialog}
-            onCancel={() => setNewEntryDialogViewState(false)}
-            onSubmit={addNewEntry}
-        />
-
-    return (
-        <div className={classes.root} data-testid={"offerDisplay-container"}>
+    const dialogs =
+        <>
+            <NewEntrySegmentDialog
+                show={newEntryDialog}
+                onCancel={() => setNewEntryDialogViewState(false)}
+                onSubmit={addNewEntry}
+            />
             <Alert
                 title={"Auftrag Löschen"}
                 text={"Wollen Sie diesen Auftrag Löschen? Dies kann nicht rückgängig gemacht werden!"}
@@ -175,8 +193,18 @@ const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }
                 onCancel={() => setAlertViewState(false)}
                 show={showAlert}
             />
+            <EmployeeSelectDialog
+                onCancel={() => setSelectEmployeeDialogViewState(false)}
+                onSubmit={changeAssignedEmployee}
+                onError={onError} 
+                show={selectEmployeeViewState}
+                />
+        </>
+
+    return (
+        <div className={classes.root} data-testid={"offerDisplay-container"}>
             <BackButton onClick={onClose} />
-            {newSegmentDialog}
+            {dialogs}
             {header}
             {segments}
             {loading}
