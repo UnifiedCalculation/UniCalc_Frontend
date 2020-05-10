@@ -34,6 +34,16 @@ export async function deleteProductFromEntry(projectId, offerId, entryId, produc
       .catch(error => handleErrors(error, onError));
 }
 
+export async function submitEditedEntryProduct(projectId, offerId, entryId, productId, product, onError, callback){
+  axios.put('projects/' + projectId + '/offers/' + offerId + '/entries/' + entryId  + '/products/' + productId, product)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
 export async function getEntriesFromContract(projectId, contractId, onError, callback) {
   axios.get('projects/' + projectId + '/contracts/' + contractId + '/entries')
       .then(res => {
