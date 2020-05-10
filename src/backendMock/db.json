@@ -1,84 +1,31 @@
 {
   "employees": [
     {
-      "id": 1,
-      "roles": {
-        "admin": true,
-        "sales": true,
-        "pl": true,
-        "employee": true
-      },
-      "email": "desaos@students.zhaw.ch",
-      "firstname": "Adriana",
-      "lastname": "De-Sao-Jose"
+      "email": "Hans.Ferdinand@first.ch",
+      "firstname": "okay",
+      "lastname": "google",
+      "roles": [
+        "Verkäufer",
+        "Projektleiter"
+      ],
+      "id": 1
     },
     {
-      "id": 2,
-      "roles": {
-        "admin": true,
-        "sales": true,
-        "pl": true,
-        "employee": true
-      },
-      "email": "vieceadr@students.zhaw.ch",
-      "firstname": "Adrian",
-      "lastname": "Vieceli"
-    },
-    {
-      "id": 3,
-      "roles": {
-        "admin": true,
-        "sales": false,
-        "pl": false,
-        "employee": false
-      },
-      "email": "vontifel@students.zhaw.ch",
-      "firstname": "Felix",
-      "lastname": "von Tiedemann"
-    },
-    {
-      "id": 4,
-      "roles": {
-        "admin": true,
-        "sales": false,
-        "pl": false,
-        "employee": false
-      },
-      "email": "monteric@students.zhaw.ch",
-      "firstname": "Ricardo",
-      "lastname": "Monteiro"
-    },
-    {
-      "roles": {
-        "admin": true,
-        "pl": false,
-        "sales": false,
-        "employee": true
-      },
-      "email": "adrian.vieceli@gmail.com",
-      "firstname": "Adrian",
-      "lastname": "Vieceli",
-      "id": 6
+      "email": "admin@firma.com",
+      "firstname": "admin",
+      "lastname": "gogogol",
+      "roles": [
+        "Admin"
+      ],
+      "id": 2
     }
   ],
   "entries": [
     {
-      "title": "Arbeit",
-      "discount": 5,
-      "offerId": 9,
-      "id": 4
-    },
-    {
-      "title": "Mal schauen",
-      "discount": 12.21,
+      "title": "Technikraum",
+      "discount": 0,
       "offerId": "9",
-      "id": 5
-    },
-    {
-      "title": "encore une foi",
-      "discount": 1,
-      "offerId": "9",
-      "id": 6
+      "id": 1
     }
   ],
   "offers": [
@@ -298,13 +245,14 @@
   ],
   "entryProducts": [
     {
-      "amount": 12,
+      "amount": 5,
       "discount": 0,
-      "description": "Kassensystem",
+      "description": "Steckdosen für Geräte",
       "name": "Grosse Steckdose",
       "unit": "kilo",
       "price": 21,
-      "entryId": "4",
+      "product_id": 2,
+      "entryId": "1",
       "id": 1
     }
   ],
