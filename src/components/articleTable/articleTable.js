@@ -35,12 +35,16 @@ const ArticleTable = ({ products, discount, confirmDeleteProduct, editProduct, .
       <TableCell align="right">{(entry.discount ? entry.discount : 0).toFixed(2).toString().concat("%")}</TableCell>
       <TableCell align="right">{(entry.discount ? entry.amount * entry.price * (1 - (entry.discount / 100)) : entry.amount * entry.price).toFixed(2)}</TableCell>
       <TableCell align="right">
-        <IconButton onClick={() => confirmDeleteProduct(entry.product_id)} >
-          <FontAwesomeIcon icon={faTrash} />
-        </IconButton>
-        <IconButton onClick={() => editProduct(entry)}>
-          <FontAwesomeIcon icon={faPen} />
-        </IconButton>
+        {deactivateFunctions ?
+          null :
+          <>
+            <IconButton onClick={() => confirmDeleteProduct(entry.product_id)} >
+              <FontAwesomeIcon icon={faTrash} />
+            </IconButton>
+            <IconButton onClick={() => editProduct(entry)}>
+              <FontAwesomeIcon icon={faPen} />
+            </IconButton>
+          </>}
       </TableCell>
     </TableRow>
   )) : null;
