@@ -96,6 +96,11 @@ const SinglePage = () => {
     });
   }
 
+  const updateContracts = () => {
+    setContractData(null);
+    API.getContracts(setErrorMessage, setContracts);
+  }
+
 
   let addProjectCard = [];
   
@@ -136,7 +141,7 @@ const SinglePage = () => {
         contractData={contractData}
         projectId={contractData.projectId}
         onError={setErrorMessage}
-        onClose={() => setContractData(null)}
+        onClose={updateContracts}
       />
     } else if (projects || contracts) {
       if (projects) {
