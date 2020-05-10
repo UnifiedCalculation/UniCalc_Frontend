@@ -198,7 +198,6 @@ const DynamicEntry = ({ projectId, offerId, contractId, invoiceId, entryData, on
     const body = entryProducts && entry ?
         <ArticleTable
             projectId={projectId}
-            offerId={offerId}
             entryId={entry.id}
             products={entryProducts}
             discount={entry.discount}
