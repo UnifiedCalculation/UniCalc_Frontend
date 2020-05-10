@@ -134,10 +134,11 @@ const InvoiceDisplay = ({ invoiceData, projectId, onClose, onError, ...props }) 
             <DynamicEntry
                 key={index + "-entry"}
                 projectId={projectId}
-                offerId={invoice.id}
+                invoiceId={invoice.id}
                 entryData={entry}
                 onChange={triggerUpdate}
                 onError={onError}
+                deactivateFunctions
             />)
         : <Loading text={"Lade Daten..."} />;
 
