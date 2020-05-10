@@ -251,15 +251,13 @@ export default function UserTable({employees, getEmployees, setErrorMessage}) {
   }
 
   const submitEmployee = () => {
-    submitNewEmployee(employeeData, setErrorMessage)
+    submitNewEmployee(employeeData, setErrorMessage, loadEmployees)
     setShowAddEmployeeDialog(false)
-    loadEmployees()
   }
 
   const updateEmployeeData = () => {
-    updateEmployee(employeeData, setErrorMessage)
+    updateEmployee(employeeData, setErrorMessage, loadEmployees)
     setShowEditEmployeeDialog(false)
-    loadEmployees()
   }
 
   const loadEmployees = () => {
