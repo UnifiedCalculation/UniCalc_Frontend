@@ -116,31 +116,13 @@
   ],
   "contracts": [
     {
-      "id": 2,
+      "id": 1,
       "projectId": 1,
       "name": "Auftrag 2",
       "created_at": "2020-04-07T17:57:37.468Z",
       "updated_at": "2020-04-07T17:57:37.468Z",
       "discount": null,
       "employee_id": 2
-    },
-    {
-      "offer_id": 2,
-      "id": 3
-    },
-    {
-      "name": "neue offerte",
-      "payment_target": "undefined Tage",
-      "updated_at": "2020-05-06T15:26:40.032Z",
-      "projectId": 1,
-      "id": 4
-    },
-    {
-      "name": "test123",
-      "payment_target": "undefined Tage",
-      "updated_at": "2020-05-06T15:26:46.657Z",
-      "projectId": 1,
-      "id": 5
     }
   ],
   "npks": [
@@ -254,6 +236,83 @@
       "product_id": 2,
       "entryId": "1",
       "id": 1
+    },
+    {
+      "amount": 12,
+      "discount": 0,
+      "description": "Tiefkühler",
+      "name": "Grosse Steckdose",
+      "unit": "kilo",
+      "price": 21,
+      "product_id": 2,
+      "entryId": "1",
+      "id": 2
+    },
+    {
+      "amount": 5,
+      "discount": 0,
+      "description": "Steckdosen für Geräte",
+      "name": "Grosse Steckdose",
+      "unit": "kilo",
+      "price": 21,
+      "product_id": 2,
+      "invoiceId": "1",
+      "id": 3
+    },
+    {
+      "amount": 5,
+      "discount": 0,
+      "description": "Steckdosen für Geräte",
+      "name": "Grosse Steckdose",
+      "unit": "kilo",
+      "price": 21,
+      "product_id": 2,
+      "contractId": "1",
+      "id": 3
+    },
+    {
+      "amount": 12,
+      "discount": 1,
+      "description": "asd",
+      "name": "Grosse Steckdose",
+      "unit": "kilo",
+      "price": 21,
+      "product_id": 2,
+      "contractId": "1",
+      "id": 4
+    },
+    {
+      "amount": 42,
+      "discount": 12,
+      "description": "Testinvoice",
+      "name": "Grosse Steckdose",
+      "unit": "kilo",
+      "price": 21,
+      "product_id": 2,
+      "invoiceId": "1",
+      "id": 5
+    },
+    {
+      "amount": 120,
+      "discount": 1,
+      "description": "assaddas",
+      "name": "Grosse Steckdose",
+      "unit": "kilo",
+      "price": 21,
+      "product_id": 2,
+      "contractId": "1",
+      "id": 6
+    },
+    {
+      "amount": 121212,
+      "discount": 15,
+      "description": "asd",
+      "name": "test",
+      "unit": "meter",
+      "price": 123,
+      "product_id": 7,
+      "contractId": "1",
+      "id": 7
     }
   ],
   "customers": [

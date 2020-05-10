@@ -11,5 +11,13 @@
     "/user/projects": "/projects?employee_id=1",
     "/user/contracts": "/contracts?employee_id=1",
     "/projects/:id/invoices": "/invoices?projectId=:id",
+    "/projects/*/invoices/:id": "/invoices/:id",
+    "/projects/*/invoices/:id/entries": "/invoices/id=:id/entries",
+    "/projects/*/invoices/*/entries/:id": "/entries/:id",
+    "/projects/*/invoices/*/entries/:id/products": "/invoices/:id/entryProducts",
+    "/projects/*/contracts/:id": "/contracts/:id",
+    "/projects/*/contracts/:id/entries": "/contracts/id=:id/entries",
+    "/projects/*/contracts/*/entries/:id": "/entries/:id",
+    "/projects/*/contracts/*/entries/:id/products": "/contracts/:id/entryProducts",
     "/contracts/:id/assignedEmployee":"/contracts/:id"
 }
