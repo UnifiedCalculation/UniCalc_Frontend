@@ -45,7 +45,7 @@ const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }
     }
 
     const addNewEntry = (entry) => {
-        API.addNewEntryToOffer(projectId, contract.id, entry, onError, triggerUpdate);
+        API.addNewEntryToContract(projectId, contract.id, entry, onError, triggerUpdate);
         setNewEntryDialogViewState(false);
     }
 
