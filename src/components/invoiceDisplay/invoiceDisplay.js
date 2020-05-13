@@ -86,7 +86,7 @@ const InvoiceDisplay = ({ invoiceData, projectId, onClose, onError, ...props }) 
 
     const user = useContext(UserContext);
 
-    const functionsDisabled = !(user && ((user.roles.includes("Admin") || user.roles.includes("Verkäufer"))));
+    const functionsDisabled = !(user && ((user.roles.some(element => element.name == "Admin") || user.roles.some(element => element.name == "Verkäufer"))));
 
     const warnBeforeDeletion = () => {
         setAlertViewState(true);

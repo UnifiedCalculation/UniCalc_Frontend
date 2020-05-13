@@ -55,14 +55,14 @@ const SinglePage = () => {
   useEffect(() => {
     if (user) {
       switch (true) {
-        case user.roles.includes("Admin"):
+        case user.roles.some(element => element.name == "Admin"):
           API.getContracts(setErrorMessage, setContracts);
-        case user.roles.includes("Verkäufer"):
+        case user.roles.some(element => element.name == "Verkäufer"):
           API.getProjects(setErrorMessage, setProjects);
           break;
-        case user.roles.includes("Projektleiter"):
+        case user.roles.some(element => element.name == "Projektleiter"):
           API.getUserProjects(setErrorMessage, setProjects);
-        case user.roles.includes("Mitarbeiter"):
+        case user.roles.some(element => element.name == "Mitarbeiter"):
           API.getUserContracts(setErrorMessage, setContracts);
           break;
         default:
@@ -110,7 +110,7 @@ const SinglePage = () => {
     addProjectCard.push(
       <DynamicCard
         hidden={
-          user && !(user.roles.includes("Verkäufer") || user.roles.includes("Admin"))}
+          user && !(user.roles.some(element => element.name == "Verkäufer") || user.roles.some(element => element.name == "Admin"))}
         key={'0-projectCard'}
         projectName={'Neues Projekt'}
         description={'Hier eine neues Projekt erstellen!'}

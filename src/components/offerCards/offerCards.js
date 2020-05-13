@@ -77,7 +77,7 @@ const OfferCards = ({ offers, setOfferDetails, onNewOffer }) => {
                 id="panel2a-header"
             >
                 <Typography className={classes.heading} gutterBottom variant="h5" component="h2">Offerten</Typography>
-                <IconButton className={classes.tertiaryHeadingButton} onClick={triggerNewOfferDialog} disabled={!(user && ((user.roles.includes("Admin") || user.roles.includes("Verkäufer")))) }>
+                <IconButton className={classes.tertiaryHeadingButton} onClick={triggerNewOfferDialog} disabled={!(user && ((user.roles.some(element => element.name == "Admin") || user.roles.some(element => element.name == "Verkäufer")))) }>
                     <FontAwesomeIcon icon={faPen} />
                 </IconButton>
             </ExpansionPanelSummary>
