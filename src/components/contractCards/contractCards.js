@@ -11,7 +11,6 @@ const ContractCards = ({ contracts, setContractDetails }) => {
 
     const useStyles = makeStyles((theme) => ({
         panel: {
-            maxWidth: '95%',
             padding: 25
         },
         flexCards: {
