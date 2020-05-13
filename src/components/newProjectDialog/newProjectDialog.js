@@ -50,7 +50,7 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, projectId, ...p
         },
         {
             id: 'payment_target',
-            label: 'Tage, um Rechnungen zu zahlen',
+            label: 'Zahlungsziel',
             type: 'text',
             required: false
         }

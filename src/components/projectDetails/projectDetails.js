@@ -47,7 +47,7 @@ const ProjectDetails = ({projectData}) => {
 
                     <TableRow key={4 + "-projectDetails"}>
                         <TableCell component="th" scope="row">
-                            Festgelegte Zeit zu zahlen
+                            Zahlungsziel
                             </TableCell>
                         <TableCell align="right">{projectData.payment_target}</TableCell>
                     </TableRow>
