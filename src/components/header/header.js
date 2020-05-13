@@ -46,15 +46,15 @@ const Header = ({ onSettingsClick, onError }) => {
   const user = useContext(UserContext);
 
   const settings = user? 
-    (user.roles.includes("Admin") || user.roles.includes("Verkäufer"))?
+    (user.roles.some(element => element.name == "Admin") || user.roles.some(element => element.name == "Verkäufer"))?
     <>
-      <div className={classes.username}>{user.firstName + ' ' + user.lastName}</div>
+      <div className={classes.username}>{user.firstname + ' ' + user.lastname}</div>
       <IconButton className={classes.button} onClick={onSettingsClick}>
         <FontAwesomeIcon icon={faCogs} />
       </IconButton>
     </>
     :
-    <div className={classes.username}>{user.firstName + ' ' + user.lastName}</div>
+    <div className={classes.username}>{user.firstname + ' ' + user.lastname}</div>
     : null;
 
   return (

@@ -104,7 +104,7 @@ const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }
 
     const user = useContext(UserContext);
 
-    const functionsDisabled = !(user.roles.includes("Admin") || user.roles.includes("Verkäufer") || user.roles.includes("Projektleiter"));
+    const functionsDisabled = !(user.roles.some(element => element.name == "Admin") || user.roles.some(element => element.name == "Verkäufer") || user.roles.some(element => element.name == "Projektleiter"));
 
     const warnBeforeDeletion = () => {
         setAlertViewState(true);
