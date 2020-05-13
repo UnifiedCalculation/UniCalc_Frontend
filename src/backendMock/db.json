@@ -827,11 +827,14 @@
     }
   ],
   "user": {
-    "firstName": "Alberto",
-    "lastName": "Rodriguez",
+    "firstname": "Alberto",
+    "lastname": "Rodriguez",
     "id": 1,
     "roles": [
-      "Admin"
+      {
+        "id": 1,
+        "name": "Admin"
+      }
     ]
   },
   "invoices": [
