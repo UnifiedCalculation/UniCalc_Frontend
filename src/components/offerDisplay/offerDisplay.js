@@ -129,7 +129,7 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
                     data-testid="offerDisplay-button-newSegment"
                     disabled={functionsDisabled}
                 >
-                    Neuen Segment hinzufügen
+                    Neues Segment hinzufügen
                 </Button>
                 <Button
                     disabled={(offer.id ? false : true) || functionsDisabled}

@@ -11,7 +11,7 @@ import TextField from '@material-ui/core/TextField';
  */
 const NewEntrySegmentDialog = ({ onCancel, onSubmit, show, segmentName, discount, entryId, ...props }) => {
 
-    const acceptButtonText = 'Annehmen';
+    const acceptButtonText = 'Bestätigen';
     const cancelButtonText = 'Abbrechen';
     const title = 'Neues Segment erstellen';
     const text = 'Tragen Sie bitte alle Felder ein, um ein neues Segment zu erstellen.';

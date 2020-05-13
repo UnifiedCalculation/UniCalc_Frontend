@@ -116,12 +116,8 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
                 <ExpansionPanelSummary
                     aria-controls="panel1a-content"
                     id="panel1a-header"
-
                 >
                     <Typography className={classes.heading} gutterBottom variant="h5" component="h2">{projectData.name}</Typography>
-                    <IconButton className={classes.tertiaryHeadingButton} >
-                        <FontAwesomeIcon icon={faPen} />
-                    </IconButton>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     {projectDetails}

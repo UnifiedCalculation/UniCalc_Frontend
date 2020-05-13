@@ -5,7 +5,7 @@
     "/projects/*/offers/:id": "/offers/:id",
     "/projects/*/offers/:id/entries": "/offers/:id/entries",
     "/projects/*/offers/*/entries/:id": "/entries/:id",
-    "/projects/*/offers/*/entries/:id/products": "/entries/:id/entryProducts",
+    "/projects/*/offers/*/entries/:id/articles": "/entries/:id/entryProducts",
     "/employees": "/employees",
     "/npks/:id": "/npks/id=:id",
     "/user/projects": "/projects?employee_id=1",
@@ -14,10 +14,10 @@
     "/projects/*/invoices/:id": "/invoices/:id",
     "/projects/*/invoices/:id/entries": "/invoices/id=:id/entries",
     "/projects/*/invoices/*/entries/:id": "/entries/:id",
-    "/projects/*/invoices/*/entries/:id/products": "/invoices/:id/entryProducts",
+    "/projects/*/invoices/*/entries/:id/articles": "/invoices/:id/entryProducts",
     "/projects/*/contracts/:id": "/contracts/:id",
     "/projects/*/contracts/:id/entries": "/contracts/id=:id/entries",
     "/projects/*/contracts/*/entries/:id": "/entries/:id",
-    "/projects/*/contracts/*/entries/:id/products": "/contracts/:id/entryProducts",
+    "/projects/*/contracts/*/entries/:id/articles": "/contracts/:id/entryProducts",
     "/contracts/:id/assignedEmployee":"/contracts/:id"
 }
