@@ -11,6 +11,7 @@ import SnackbarOverlay from '../snackbar/snackbar';
 import AdminOptions from "../layouts/adminOptions/adminOptions";
 import ContractDisplay from '../contractDisplay/contractDisplay';
 
+
 export const UserContext = createContext();
 
 const useStyles = makeStyles((theme) => ({
