@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from '../layouts/header/logo.png';
+import Logo from '../header/logo.png';
 import Typography from '@material-ui/core/Typography';
 import TextField from "@material-ui/core/TextField";
 import MenuItem from '@material-ui/core/MenuItem';
