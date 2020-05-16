@@ -32,14 +32,14 @@ const ProductTable = ({products}) => {
       return createData(
           item.number,
           item.name,
-          item.price.toFixed(2),
+          Number(item.price).toFixed(2),
           item.unit,
           item.description);
     } else {
       return createData(
           (item.npk + "." + item.number),
           item.name,
-          item.price.toFixed(2),
+          Number(item.price).toFixed(2),
           item.unit,
           item.description);
     }
