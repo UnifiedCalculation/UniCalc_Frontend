@@ -32,8 +32,8 @@ const ArticleTable = ({ products, discount, confirmDeleteProduct, editProduct, d
       <TableCell align="right">{entry.amount}</TableCell>
       <TableCell align="right">{entry.unit}</TableCell>
       <TableCell align="right">{entry.price}</TableCell>
-      <TableCell align="right">{(entry.discount ? entry.discount : 0).toFixed(2).toString().concat("%")}</TableCell>
-      <TableCell align="right">{(entry.discount ? entry.amount * entry.price * (1 - (entry.discount / 100)) : entry.amount * entry.price).toFixed(2)}</TableCell>
+      <TableCell align="right">{Number((entry.discount ? entry.discount : 0)).toFixed(2).toString().concat("%")}</TableCell>
+      <TableCell align="right">{Number((entry.discount ? Number(entry.amount) * Number(entry.price) * (1 - (Number(entry.discount) / 100)) : entry.amount * entry.price)).toFixed(2)}</TableCell>
       <TableCell align="right">
         {deactivateFunctions ?
           null :
@@ -55,13 +55,13 @@ const ArticleTable = ({ products, discount, confirmDeleteProduct, editProduct, d
     if (products) {
       products.forEach(entry => {
         if (entry.discount) {
-          total += entry.amount * entry.price * (1 - (entry.discount / 100));
+          total += Number(entry.amount) * Number(entry.price) * (1 - (Number(entry.discount) / 100));
         } else {
-          total += entry.amount * entry.price;
+          total += Number(entry.amount) * Number(entry.price);
         }
       });
     }
-    total *= discount ? (1 - (discount / 100)) : 1;
+    total *= discount ? (1 - (Number(discount) / 100)) : 1;
     return total;
   }
 
@@ -86,7 +86,7 @@ const ArticleTable = ({ products, discount, confirmDeleteProduct, editProduct, d
       <TableCell align="right"></TableCell>
       <TableCell align="right"></TableCell>
       <TableCell align="right"></TableCell>
-      <TableCell align="right">{(discount ? discount : 0).toFixed(2).toString().concat("%")}</TableCell>
+      <TableCell align="right">{Number((discount ? discount : 0)).toFixed(2).toString().concat("%")}</TableCell>
       <TableCell align="right">{calculateTotal().toFixed(2)}</TableCell>
     </TableRow>;
 
