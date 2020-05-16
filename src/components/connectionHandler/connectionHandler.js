@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 if (process.env.NODE_ENV === 'development') {
-  axios.defaults.baseURL = 'http://localhost:800';
+  axios.defaults.baseURL = 'http://localhost:3000';
 }
 
 function handleErrors(error, callback) {
@@ -15,7 +15,7 @@ function handleErrors(error, callback) {
 }
 
 export async function getEntriesFromOffer(projectId, offerId, onError, callback) {
-  axios.get('projects/' + projectId + '/forms/offers/' + offerId + '/entries')
+  axios.get('projects/' + projectId + '/forms/' + offerId + '/entries')
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -25,7 +25,8 @@ export async function getEntriesFromOffer(projectId, offerId, onError, callback)
 }
 
 export async function deleteProductFromEntryInOffer(projectId, offerId, entryId, productId, onError, callback){
-  axios.delete('projects/' + projectId + '/forms/offers/' + offerId + '/entries/' + entryId  + '/articles/' + productId)
+
+  axios.delete('projects/' + projectId + '/forms/' + offerId + '/entries/' + entryId  + '/articles/' + productId)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -35,7 +36,7 @@ export async function deleteProductFromEntryInOffer(projectId, offerId, entryId,
 }
 
 export async function deleteProductFromEntryInContract(projectId, contractId, entryId, productId, onError, callback){
-  axios.delete('projects/' + projectId + '/forms/contracts/' + contractId + '/entries/' + entryId  + '/articles/' + productId)
+  axios.delete('projects/' + projectId + '/forms/' + contractId + '/entries/' + entryId  + '/articles/' + productId)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -45,7 +46,7 @@ export async function deleteProductFromEntryInContract(projectId, contractId, en
 }
 
 export async function submitEditedEntryProductInOffer(projectId, offerId, entryId, productId, product, onError, callback){
-  axios.put('projects/' + projectId + '/forms/offers/' + offerId + '/entries/' + entryId  + '/articles/' + productId, product)
+  axios.put('projects/' + projectId + '/forms/' + offerId + '/entries/' + entryId  + '/articles/' + productId, product)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -55,7 +56,7 @@ export async function submitEditedEntryProductInOffer(projectId, offerId, entryI
 }
 
 export async function submitEditedEntryProductInContract(projectId, contractId, entryId, productId, product, onError, callback){
-  axios.put('projects/' + projectId + '/forms/contracts/' + contractId + '/entries/' + entryId  + '/articles/' + productId, product)
+  axios.put('projects/' + projectId + '/forms/' + contractId + '/entries/' + entryId  + '/articles/' + productId, product)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -65,7 +66,7 @@ export async function submitEditedEntryProductInContract(projectId, contractId, 
 }
 
 export async function getEntriesFromContract(projectId, contractId, onError, callback) {
-  axios.get('projects/' + projectId + '/forms/contracts/' + contractId + '/entries')
+  axios.get('projects/' + projectId + '/forms/' + contractId + '/entries')
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -75,7 +76,7 @@ export async function getEntriesFromContract(projectId, contractId, onError, cal
 }
 
 export async function getEntriesFromInvoice(projectId, invoiceId, onError, callback) {
-  axios.get('projects/' + projectId + '/forms/invoices/' + invoiceId + '/entries')
+  axios.get('projects/' + projectId + '/forms/' + invoiceId + '/entries')
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -126,7 +127,7 @@ export async function getUserContracts(onError, callback) {
 
 
 export async function updateOfferEntryData(projectId, offerId, entryId, entry, onError, callback) {
-  axios.put('projects/' + projectId + '/forms/offers/' + offerId + '/entries/' + entryId, entry)
+  axios.put('projects/' + projectId + '/forms/' + offerId + '/entries/' + entryId, entry)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -136,7 +137,7 @@ export async function updateOfferEntryData(projectId, offerId, entryId, entry, o
 }
 
 export async function updateContractEntryData(projectId, contractId, entryId, entry, onError, callback) {
-  axios.put('projects/' + projectId + '/forms/contracts/' + contractId + '/entries/' + entryId, entry)
+  axios.put('projects/' + projectId + '/forms/' + contractId + '/entries/' + entryId, entry)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -146,7 +147,7 @@ export async function updateContractEntryData(projectId, contractId, entryId, en
 }
 
 export async function getEntryDataForOffer(projectId, offerId, entryId, onError, callback) {
-  axios.get('projects/' + projectId + '/forms/offers/' + offerId + '/entries/' + entryId)
+  axios.get('projects/' + projectId + '/forms/' + offerId + '/entries/' + entryId)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -156,7 +157,7 @@ export async function getEntryDataForOffer(projectId, offerId, entryId, onError,
 }
 
 export async function getEntryDataForInvoice(projectId, invoiceId, entryId, onError, callback) {
-  axios.get('projects/' + projectId + '/forms/invoices/' + invoiceId + '/entries/' + entryId)
+  axios.get('projects/' + projectId + '/forms/' + invoiceId + '/entries/' + entryId)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -166,7 +167,7 @@ export async function getEntryDataForInvoice(projectId, invoiceId, entryId, onEr
 }
 
 export async function getEntryProductsForOffer(projectId, offerId, entryId, onError, callback) {
-  axios.get('projects/' + projectId + '/forms/offers/' + offerId + '/entries/' + entryId +'/articles')
+  axios.get('projects/' + projectId + '/forms/' + offerId + '/entries/' + entryId +'/articles')
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -176,7 +177,7 @@ export async function getEntryProductsForOffer(projectId, offerId, entryId, onEr
 }
 
 export async function getEntryDataForContract(projectId, contractId, entryId, onError, callback) {
-  axios.get('projects/' + projectId + '/forms/contracts/' + contractId + '/entries/' + entryId)
+  axios.get('projects/' + projectId + '/forms/' + contractId + '/entries/' + entryId)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -186,7 +187,7 @@ export async function getEntryDataForContract(projectId, contractId, entryId, on
 }
 
 export async function getEntryProductsForContract(projectId, contractId, entryId, onError, callback) {
-  axios.get('projects/' + projectId + '/forms/contracts/' + contractId + '/entries/' + entryId +'/articles')
+  axios.get('projects/' + projectId + '/forms/' + contractId + '/entries/' + entryId +'/articles')
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -196,7 +197,7 @@ export async function getEntryProductsForContract(projectId, contractId, entryId
 }
 
 export async function getEntryProductsForInvoice(projectId, invoiceId, entryId, onError, callback) {
-  axios.get('projects/' + projectId + '/forms/invoices/' + invoiceId + '/entries/' + entryId +'/articles')
+  axios.get('projects/' + projectId + '/forms/' + invoiceId + '/entries/' + entryId +'/articles')
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -246,7 +247,7 @@ export async function getInvoicesFromProject(projectId, onError, callback) {
 }
 
 export async function deleteOfferFromProject(projectId, offerId, onError, callback){
-  axios.delete('projects/' + projectId + '/forms/offers/' + offerId)
+  axios.delete('projects/' + projectId + '/forms/' + offerId)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -256,7 +257,7 @@ export async function deleteOfferFromProject(projectId, offerId, onError, callba
 }
 
 export async function deleteInvoiceFromProject(projectId, invoiceId, onError, callback){
-  axios.delete('projects/' + projectId + '/forms/invoices/' + invoiceId)
+  axios.delete('projects/' + projectId + '/forms/' + invoiceId)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -266,7 +267,7 @@ export async function deleteInvoiceFromProject(projectId, invoiceId, onError, ca
 }
 
 export async function changeEmployeeAssigneToContract(contractId, employeeId, onError, callback){
-  axios.put('forms/contracts/' + contractId + '/assignedEmployee', { employee_id: employeeId })
+  axios.put('forms/' + contractId + '/assignedEmployee', { employee_id: employeeId })
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -326,7 +327,7 @@ export async function saveContractToProject(projectId, contract, onError, callba
 }
 
 export async function deleteEntryFromOffer(projectId, offerId, entryId, onError, callback) {
-  axios.delete('projects/' + projectId + '/forms/offers/' + offerId + '/entries/' + entryId)
+  axios.delete('projects/' + projectId + '/forms/' + offerId + '/entries/' + entryId)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -336,7 +337,7 @@ export async function deleteEntryFromOffer(projectId, offerId, entryId, onError,
 }
 
 export async function deleteEntryFromContract(projectId, contractId, entryId, onError, callback) {
-  axios.delete('projects/' + projectId + '/forms/contracts/' + contractId + '/entries/' + entryId)
+  axios.delete('projects/' + projectId + '/forms/' + contractId + '/entries/' + entryId)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -346,7 +347,7 @@ export async function deleteEntryFromContract(projectId, contractId, entryId, on
 }
 
 export async function deleteContractFromProject(projectId, contractId, onError, callback) {
-  axios.delete('projects/' + projectId + '/forms/contracts/' + contractId)
+  axios.delete('projects/' + projectId + '/forms/' + contractId)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -366,7 +367,7 @@ export async function getUserData(onError, callback){
 }
 
 export async function addArticleToOfferEntry(projectId, offerId, entryId, article, onError, callback) {
-  axios.post('projects/' + projectId + '/forms/offers/' + offerId + '/entries/' + entryId + '/articles', article)
+  axios.post('projects/' + projectId + '/forms/' + offerId + '/entries/' + entryId + '/articles', article)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -376,7 +377,7 @@ export async function addArticleToOfferEntry(projectId, offerId, entryId, articl
 }
 
 export async function addArticleToContractEntry(projectId, contractId, entryId, article, onError, callback) {
-  axios.post('projects/' + projectId + '/forms/contracts/' + contractId + '/entries/' + entryId + '/articles', article)
+  axios.post('projects/' + projectId + '/forms/' + contractId + '/entries/' + entryId + '/articles', article)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -386,7 +387,7 @@ export async function addArticleToContractEntry(projectId, contractId, entryId, 
 }
 
 export async function addNewEntryToOffer(projectId, offerId, entry, onError, callback) {
-  axios.post('projects/' + projectId + '/forms/offers/' + offerId + '/entries', entry)
+  axios.post('projects/' + projectId + '/forms/' + offerId + '/entries', entry)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -396,7 +397,7 @@ export async function addNewEntryToOffer(projectId, offerId, entry, onError, cal
 }
 
 export async function addNewEntryToContract(projectId, contractId, entry, onError, callback) {
-  axios.post('projects/' + projectId + '/forms/contracts/' + contractId + '/entries', entry)
+  axios.post('projects/' + projectId + '/forms/' + contractId + '/entries', entry)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -417,7 +418,7 @@ export async function updateOffer(projectId, offer, onError, callback) {
 
 export async function getOfferAsPDF(projectId, offerId, onError, callback) {
   if (offerId) {
-    axios.get('projects/' + projectId + '/forms/offers/' + offerId + '/pdf')
+    axios.get('projects/' + projectId + '/forms/' + offerId + '/pdf')
         .catch(error => handleErrors(error, onError));
   } else {
     onError("Can't get Offer as PDF as it has no ID!")
@@ -435,7 +436,7 @@ export async function getContractAsPDF(projectId, contracId, onError, callback) 
 
 export async function getInvoiceAsPDF(projectId, invoiceId, onError, callback) {
   if (invoiceId) {
-    axios.get('projects/' + projectId + '/forms/invoices/' + invoiceId + '/pdf')
+    axios.get('projects/' + projectId + '/forms/' + invoiceId + '/pdf')
         .catch(error => handleErrors(error, onError));
   } else {
     onError("Can't get Offer as PDF as it has no ID!")
@@ -473,7 +474,7 @@ export async function submitNewProduct(articleData, onError, callback) {
 }
 
 export async function getOfferData(projectId, offerId, onError, callback) {
-  axios.get('projects/' + projectId + '/forms/offers/' + offerId)
+  axios.get('projects/' + projectId + '/forms/' + offerId)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -483,7 +484,7 @@ export async function getOfferData(projectId, offerId, onError, callback) {
 }
 
 export async function getContractData(projectId, contractId, onError, callback) {
-  axios.get('projects/' + projectId + '/forms/contracts/' + contractId)
+  axios.get('projects/' + projectId + '/forms/' + contractId)
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -493,7 +494,7 @@ export async function getContractData(projectId, contractId, onError, callback) 
 }
 
 export async function getInvoiceData(projectId, invoiceId, onError, callback) {
-  axios.get('projects/' + projectId + '/forms/invoices/' + invoiceId)
+  axios.get('projects/' + projectId + '/forms/' + invoiceId)
       .then(res => {
         if (callback) {
           callback(res.data);
