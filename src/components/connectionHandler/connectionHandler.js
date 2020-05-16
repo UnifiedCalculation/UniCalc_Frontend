@@ -25,6 +25,7 @@ export async function getEntriesFromOffer(projectId, offerId, onError, callback)
 }
 
 export async function deleteProductFromEntryInOffer(projectId, offerId, entryId, productId, onError, callback){
+
   axios.delete('projects/' + projectId + '/forms/' + offerId + '/entries/' + entryId  + '/articles/' + productId)
       .then(res => {
         if (callback) {
