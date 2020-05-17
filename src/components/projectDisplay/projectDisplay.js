@@ -54,20 +54,26 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
 
     const closeOfferDetails = () => {
         setOffers(null);
-        getOffersFromProject();
+        updateCards();
         setOfferDetails(null);
     }
 
     const closeContractDetails = () => {
         setContracts(null);
-        getContractsFromProject();
+        updateCards();
         setContractDetails(null);
     }
 
     const closeInvoiceDetails = () => {
         setInvoices(null);
-        getInvoicesFromProject();
+        updateCards();
         setInvoiceDetails(null);
+    }
+
+    const updateCards = () => {
+        getOffersFromProject();
+        getContractsFromProject();
+        closeInvoiceDetails();
     }
 
     const useStyles = makeStyles((theme) => ({
