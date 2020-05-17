@@ -124,10 +124,8 @@ const DynamicEntry = ({ projectId, offerId, contractId, invoiceId, entryData, on
     const addNewArticle = (article) => {
         setAddArticleDialogShowState(false);
         if (offerId != null) {
-            console.log("B funktioniert nicht")
             API.addArticleToOfferEntry(projectId, offerId, entry.id, article, onError, updateData);
         } else if (contractId != null) {
-            console.log("B funktioniert")
             API.addArticleToContractEntry(projectId, contractId, entry.id, article, onError, updateData);
         }
     }
@@ -139,10 +137,8 @@ const DynamicEntry = ({ projectId, offerId, contractId, invoiceId, entryData, on
 
     const deleteEntryConfirmed = () => {
         if (offerId != null) {
-            console.log("C funktioniert nicht")
             API.deleteEntryFromOffer(projectId, offerId, entry.id, onError, onChange);
         } else if (contractId != null) {
-            console.log("C funktioniert")
             API.deleteEntryFromContract(projectId, contractId, entry.id, onError, onChange);
         }
         setDeleteEntryAlertShowState(false);
@@ -153,6 +149,7 @@ const DynamicEntry = ({ projectId, offerId, contractId, invoiceId, entryData, on
     }
 
     const editEntryData = (entryData) => {
+        console.log(JSON.stringify(entryData));
         if (offerId != null) {
             API.updateOfferEntryData(projectId, offerId, entry.id, entryData, onError, onChange);
         } else if (contractId != null) {

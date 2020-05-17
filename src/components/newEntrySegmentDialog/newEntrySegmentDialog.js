@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField';
  * @param {Function} onSubmit 
  * @param {Boolean} show
  */
-const NewEntrySegmentDialog = ({ onCancel, onSubmit, show, segmentName, discount, entryId, ...props }) => {
+const NewEntrySegmentDialog = ({ onCancel, onSubmit, show, segmentName=' ' , discount, entryId, ...props }) => {
 
     const acceptButtonText = 'Bestätigen';
     const cancelButtonText = 'Abbrechen';
@@ -34,7 +34,7 @@ const NewEntrySegmentDialog = ({ onCancel, onSubmit, show, segmentName, discount
                 step: "0.01" 
             },
             required: false,
-            value: discount? discount : 0,
+            value: discount,
         }
     ];
 
@@ -56,7 +56,7 @@ const NewEntrySegmentDialog = ({ onCancel, onSubmit, show, segmentName, discount
     );
   
     const parseNewEntry = (entry) => {
-        console.log("Wert nach submit: " + JSON.parse(entry));
+        console.log(JSON.stringify(entry))
         onSubmit(entry);
     };
     return (

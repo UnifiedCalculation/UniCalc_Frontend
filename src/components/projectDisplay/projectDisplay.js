@@ -73,7 +73,7 @@ const ProjectDisplay = ({ projectData, onShowOffer, onClose, onError, onChange, 
     const updateCards = () => {
         getOffersFromProject();
         getContractsFromProject();
-        closeInvoiceDetails();
+        getInvoicesFromProject();
     }
 
     const useStyles = makeStyles((theme) => ({
