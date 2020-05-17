@@ -287,7 +287,7 @@ export async function getEmployeeData(employeeId, onError, callback) {
 }
 
 export async function turnOfferIntoContract(projectId, offerId, onError, callback) {
-  axios.post('projects/' + projectId + '/forms/status/contracts', {offer_id: offerId})
+  axios.post('projects/' + projectId + '/forms/' + offerId + '/status/contracts', )
       .then(res => {
         if (callback) {
           callback(res.data);
@@ -297,7 +297,7 @@ export async function turnOfferIntoContract(projectId, offerId, onError, callbac
 }
 
 export async function turnContractIntoInvoice(projectId, contractId, onError, callback) {
-  axios.post('projects/' + projectId + '/forms/status/invoices', {contract_id: contractId})
+  axios.post('projects/' + projectId + '/forms/' + contractId + '/status/invoices')
       .then(res => {
         if (callback) {
           callback(res.data);
