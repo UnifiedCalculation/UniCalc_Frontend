@@ -110,12 +110,17 @@ const InvoiceDisplay = ({ invoiceData, projectId, onClose, onError, ...props }) 
                 <Typography className={classes.offerTitle} >{invoice.name}</Typography>
             </ExpansionPanelSummary>
             <div className={classes.buttonsAlign}>
+                
+            <a href={"/projects/" + projectId + "/forms/" + invoice.id + "/pdf"}
+                    target={"_blank"}
+                >
                 <Button
                     disabled={(invoice.id ? false : true) || functionsDisabled}
                     onClick={loadInvoiceAsPDF}
                 >
                     Schlussrechnung als PDF laden
                 </Button>
+                </a>
                 <Button
                     disabled={(invoice.id ? false : true) || functionsDisabled}
                     onClick={warnBeforeDeletion}
