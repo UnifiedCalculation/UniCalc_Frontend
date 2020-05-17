@@ -94,15 +94,7 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
             textAlign: "center",
         },
         a: {
-            '&:link':{
-                textDecoration: 'none'
-            },
-            '&:visited':{
-                textDecoration: 'none'
-            },
-            '&:hover':{
-                textDecoration: 'none'
-            }
+            textDecorationStyle: 'none'
         }
     }));
 
