@@ -80,6 +80,17 @@ const InvoiceDisplay = ({ invoiceData, projectId, onClose, onError, ...props }) 
         buttonsAlign: {
             textAlign: "center",
         },
+        a: {
+            '&:link':{
+                textDecoration: 'none'
+            },
+            '&:visited':{
+                textDecoration: 'none'
+            },
+            '&:hover':{
+                textDecoration: 'none'
+            }
+        }
     }));
 
     const classes = useStyles();
@@ -111,7 +122,7 @@ const InvoiceDisplay = ({ invoiceData, projectId, onClose, onError, ...props }) 
             </ExpansionPanelSummary>
             <div className={classes.buttonsAlign}>
                 
-            <a href={"/projects/" + projectId + "/forms/" + invoice.id + "/pdf"}
+            <a className={classes.a}href={"/projects/" + projectId + "/forms/" + invoice.id + "/pdf"}
                     target={"_blank"}
                 >
                 <Button

@@ -192,11 +192,10 @@ const DynamicEntry = ({ projectId, offerId, contractId, invoiceId, entryData, on
         productToEdit.amount = changedProduct.amount;
         productToEdit.discount = changedProduct.discount;
         productToEdit.description = changedProduct.discount;
-        productToEdit.entry_id = entry.id;
         if (offerId != null) {
-            API.submitEditedEntryProductInOffer(projectId, offerId, entry.id, productToEdit.product_id, productToEdit, onError, updateData);
+            API.submitEditedEntryProductInOffer(projectId, offerId, entry.id, productToEdit.article_id, productToEdit, onError, updateData);
         } else if (contractId != null) {
-            API.submitEditedEntryProductInContract(projectId, contractId, entry.id, productToEdit.product_id, productToEdit, onError, updateData);
+            API.submitEditedEntryProductInContract(projectId, contractId, entry.id, productToEdit.article_id, productToEdit, onError, updateData);
         }
 
     }
