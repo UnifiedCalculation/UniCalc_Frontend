@@ -57,7 +57,7 @@ const SinglePage = () => {
     if (user) {
       switch (true) {
         case user.roles.some(element => element.name == "Admin"):
-          API.getContracts(setErrorMessage, setContracts);
+          API.getUserContracts(setErrorMessage, setContracts);
         case user.roles.some(element => element.name == "Verkäufer"):
           API.getProjects(setErrorMessage, setProjects);
           break;
@@ -99,7 +99,7 @@ const SinglePage = () => {
 
   const updateContracts = () => {
     setContractData(null);
-    API.getContracts(setErrorMessage, setContracts);
+    API.getUsercontracts(setErrorMessage, setContracts);
   }
 
 
