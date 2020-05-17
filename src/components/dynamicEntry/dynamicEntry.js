@@ -153,13 +153,10 @@ const DynamicEntry = ({ projectId, offerId, contractId, invoiceId, entryData, on
     }
 
     const editEntryData = (entryData) => {
-        let newEntry;
-        newEntry.title = entryData.title;
-        newEntry.discount = entryData.discount;
         if (offerId != null) {
-            API.updateOfferEntryData(projectId, offerId, entry.id, newEntry, onError, onChange);
+            API.updateOfferEntryData(projectId, offerId, entry.id, entryData, onError, onChange);
         } else if (contractId != null) {
-            API.updateContractEntryData(projectId, contractId, entry.id, newEntry, onError, onChange);
+            API.updateContractEntryData(projectId, contractId, entry.id, entryData, onError, onChange);
         }
         setEditEntryDialogShowState(false);
     }
