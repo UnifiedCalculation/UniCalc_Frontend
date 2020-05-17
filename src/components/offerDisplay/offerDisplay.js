@@ -107,7 +107,7 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
 
     const deleteOffer = () => {
         API.deleteOfferFromProject(projectId, offer.id, onError, afterDelete);
-        
+
     }
 
     const afterDelete = () => {
@@ -131,12 +131,15 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
                 >
                     Neues Segment hinzufügen
                 </Button>
-                <Button
-                    disabled={(offer.id ? false : true) || functionsDisabled}
-                    onClick={loadOfferAsPdf}
+                <a href={"/projects/" + projectId + "/forms/" + offer.id + "/pdf"}
+                    target={"_blank"}
                 >
-                    Offerte als PDF laden
+                    <Button
+                        disabled={(offer.id ? false : true) || functionsDisabled}
+                    >
+                        Offerte als PDF laden
                 </Button>
+                </a>
                 <Button
                     disabled={(offer.id ? false : true) || functionsDisabled}
                     onClick={turnOfferIntoContract}
