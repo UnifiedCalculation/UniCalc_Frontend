@@ -99,7 +99,7 @@ const SinglePage = () => {
 
   const updateContracts = () => {
     setContractData(null);
-    API.getUsercontracts(setErrorMessage, setContracts);
+    API.getUserContracts(setErrorMessage, setContracts);
   }
 
 
