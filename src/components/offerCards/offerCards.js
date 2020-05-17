@@ -8,7 +8,7 @@ import DynamicCard from '../dynamicCard/dynamicCard';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 
 import { UserContext } from '../singlePage/singlePage';
@@ -77,7 +77,7 @@ const OfferCards = ({ offers, setOfferDetails, onNewOffer }) => {
             >
                 <Typography className={classes.heading} gutterBottom variant="h5" component="h2">Offerten</Typography>
                 <IconButton className={classes.tertiaryHeadingButton} onClick={triggerNewOfferDialog} disabled={!(user && ((user.roles.some(element => element.name == "Admin") || user.roles.some(element => element.name == "Verkäufer")))) }>
-                    <FontAwesomeIcon icon={faPen} />
+                    <FontAwesomeIcon icon={faPlus} />
                 </IconButton>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails className={classes.flexCards}>
