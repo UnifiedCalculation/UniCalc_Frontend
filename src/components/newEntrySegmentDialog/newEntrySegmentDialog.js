@@ -48,7 +48,7 @@ const NewEntrySegmentDialog = ({ onCancel, onSubmit, show, segmentName, discount
             key={index + '-textField'}
             label={entry.label}
             required={entry.required}
-            defaultValue= {entry.value ? entry.value : null}
+            defaultValue= {entry.value ? entry.value : 0}
             fullWidth
             multiline={entry.type !== "email" && entry.type !== "number"}
             margin='dense'
@@ -56,7 +56,7 @@ const NewEntrySegmentDialog = ({ onCancel, onSubmit, show, segmentName, discount
     );
   
     const parseNewEntry = (entry) => {
-        entry.discount = Number(entry.discount);
+        console.log("Wert nach submit: " + JSON.parse(entry));
         onSubmit(entry);
     };
     return (
