@@ -76,8 +76,10 @@ const AddNpkProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProd
 
   const parseArticleData = (articleData) => {
     articleData.price = parseInt(articleData.price);
-    articleData.name = (articleData.npk.split(" "))[1]
-    articleData.npk = (articleData.npk.split(" "))[0]
+    const npk = npks.find(element => element.id == articleData.npk.split(" ")[0]);
+    articleData.name = npk.name;
+    articleData.npk_id = (articleData.npk.split(" "))[0];
+    articleData.number = articleData.npk_id + "." + articleData.number;
     saveNewArticle(articleData);
   }
 
