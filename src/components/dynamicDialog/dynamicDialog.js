@@ -17,7 +17,7 @@ import { useTheme } from '@material-ui/core/styles';
  * @param {Function} onAccept 
  * @param {Boolean} show
  */
-const DynamicDialog = ({ title, text, onCancel, cancelButtonText, onAccept, acceptButtonText, show, children }) => {
+const DynamicDialog = ({ title, text, onCancel, cancelButtonText, onAccept, acceptButtonText, show, children, ...props }) => {
 
     const useStyles = makeStyles((theme) => ({
         formControl: {
@@ -27,6 +27,9 @@ const DynamicDialog = ({ title, text, onCancel, cancelButtonText, onAccept, acce
         selectEmpty: {
             marginTop: theme.spacing(5),
         },
+        dialog:{
+            position:'relative'
+        }
     }));
 
     const classes = useStyles();
@@ -68,6 +71,7 @@ const DynamicDialog = ({ title, text, onCancel, cancelButtonText, onAccept, acce
             form={title + '-inputFormDialog'}
             color="primary"
             autoFocus
+            disabled={props.disableAcceptButton}
         >
             {acceptButtonText}
         </Button>
@@ -75,7 +79,9 @@ const DynamicDialog = ({ title, text, onCancel, cancelButtonText, onAccept, acce
         <Button
             color="primary"
             autoFocus
-            onClick={onAccept}>
+            onClick={onAccept}
+            disabled={props.disableAcceptButton}
+        >
             {acceptButtonText}
         </Button>
 
@@ -89,7 +95,7 @@ const DynamicDialog = ({ title, text, onCancel, cancelButtonText, onAccept, acce
                 fullScreen={fullScreen}
             >
                 <DialogTitle id={title + '-new-form-dialog-title'}>{title}</DialogTitle>
-                <DialogContent dividers={true} >
+                <DialogContent dividers={true} className={classes.dialog}>
                     <DialogContentText id={title + '-new-form-dialog-description'}>
                         {text}
                     </DialogContentText>
