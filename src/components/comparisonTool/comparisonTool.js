@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import SwipeableViews from 'react-swipeable-views';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -101,36 +100,33 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
     }
 
     const selectOld = (entryId, articleId) => {
-        const editData = {};
-        Object.assign(editData, editedData);
+        setSelected(true);
+        const editData = Object.assign({}, editedData);
         editData.entries[entryId].articles_entries[articleId].amount = 
-        editedData.entries[entryId].articles_entries[articleId].amount.old; 
+        data.entries[entryId].articles_entries[articleId].amount.old; 
         
         editData.entries[entryId].articles_entries[articleId].discount = 
-        editedData.entries[entryId].articles_entries[articleId].discount.old; 
+        data.entries[entryId].articles_entries[articleId].discount.old; 
 
         editData.entries[entryId].articles_entries[articleId].description = 
-        editedData.entries[entryId].articles_entries[articleId].description.old; 
+        data.entries[entryId].articles_entries[articleId].description.old; 
 
-        setEditedData(editedData);
-        setSelected(true);
+        setEditedData(editData);
     }
 
     const selectNew = (entryId, articleId) => {
-        const editData = {};
-        Object.assign(editData, editedData);
+        setSelected(true);
+        const editData = Object.assign({}, editedData);
         editData.entries[entryId].articles_entries[articleId].amount = 
-        editedData.entries[entryId].articles_entries[articleId].amount.new; 
+        data.entries[entryId].articles_entries[articleId].amount.new; 
         
         editData.entries[entryId].articles_entries[articleId].discount = 
-        editedData.entries[entryId].articles_entries[articleId].discount.new; 
+        data.entries[entryId].articles_entries[articleId].discount.new; 
 
         editData.entries[entryId].articles_entries[articleId].description = 
-        editedData.entries[entryId].articles_entries[articleId].description.new; 
+        data.entries[entryId].articles_entries[articleId].description.new; 
 
-        setEditedData(editedData);
-        setSelected(true);
-
+        setEditedData(editData);
     }
 
     const theme = useTheme();
@@ -160,13 +156,7 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
 
     const children = tables ?
         <>
-            <SwipeableViews
-                axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                index={index}
-                onChangeIndex={handleChangeIndex}
-            >
-                {tables}
-            </SwipeableViews>
+            {tables}
             {stepper}
         </>
         : <Loading text={"Bereite Daten vor..."} />;
