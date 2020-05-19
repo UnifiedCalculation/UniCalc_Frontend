@@ -211,6 +211,7 @@ const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }
                 show={selectEmployeeViewState}
                 />
             <ComparisonTool 
+                show={showComparisonTool}
                 onError={onError}
                 contractId={contract.id}
                 onSubmit={submitInvoice}

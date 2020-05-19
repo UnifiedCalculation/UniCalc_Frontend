@@ -18,7 +18,7 @@ import Loading from '../loading/loading';
 import ArticleTableEntry from '../articleTable/articleTableEntry';
 import ArticleTableHead from '../articleTable/articleTableHead';
 
-const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, ...props }) => {
+const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...props }) => {
 
     const [index, setIndex] = useState(0);
     const [tables, setTables] = useState(null);
@@ -175,11 +175,11 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, ...props }) =
             text={'Wählen Sie die Punkte aus, die auf der Schlussrechnung genommen werden sollen. Wenn Sie noch Einträge bearbeiten möchten, '
                 + 'drücke Sie auf abbrechen und bearbeiten Sie diese in der Auftragsansicht. Der Obere Eintrag ist der von der Offerte, der untere der vom Auftrag. '
                 + 'Durch das drücken auf einen Artikel wird dieser ausgewählt.'}
-            show={true}
-            onAccept={() => console.log(JSON.stringify(editedData))}
+            show={show}
+            onAccept={() => onSubmit(editedData)}
             acceptButtonText={'Änderungen speichern'}
             disableAcceptButton={!(index === size - 1 && selected)}
-            onCancel={() => alert(size)}
+            onCancel={onCancel}
             cancelButtonText={'Abbrechen'}
         >
             {children}
