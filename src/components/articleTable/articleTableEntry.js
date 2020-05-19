@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 const ArticleTableEntry = ({ entry, children, onClick, ...props }) => {
 
   return (
-    <tbody>
       <TableRow onClick={onClick} hover={onClick ? true : false}>
         <TableCell component="th" scope="row">
           {entry.name}
@@ -20,7 +19,6 @@ const ArticleTableEntry = ({ entry, children, onClick, ...props }) => {
           {children}
         </TableCell>
       </TableRow>
-    </tbody>
   );
 }
 
