@@ -82,7 +82,7 @@ const AddNpkProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProd
     articleData.name = npks.find(entry => entry.number == articleData.npk.split(" ")[0].split(".")[0]).name;
     articleData.npk_id = npks.find(entry => entry.number == articleData.npk.split(" ")[0].split(".")[1]).id;
     articleData.number = articleData.npk_id + "." + articleData.number;
-    onSubmit(articleData);
+    saveNewArticle(articleData);
   }
 
   useEffect(() => {

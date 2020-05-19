@@ -28,7 +28,11 @@ const AddProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProduct
       id: 'price',
       label: 'Preis',
       type: 'number',
-      required: true
+      required: true,
+      inputProps: { 
+        min: "0",  
+        step: "0.05" 
+    },
     },
     {
       id: 'unit',
