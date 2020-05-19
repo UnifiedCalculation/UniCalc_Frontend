@@ -17,10 +17,31 @@ import Loading from '../loading/loading';
 import ArticleTableEntry from '../articleTable/articleTableEntry';
 import ArticleTableHead from '../articleTable/articleTableHead';
 
+
+
+
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box p={3}>
+                    <Typography>{children}</Typography>
+                </Box>
+            )}
+        </div>
+    );
+}
+
 const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...props }) => {
 
-    const [index, setIndex] = useState(0);
-    const [tables, setTables] = useState(null);
+    const [tabIndex, setIndex] = useState(0);
 
     const [data, setData] = useState(null);
     const [editedData, setEditedData] = useState(null);
@@ -43,40 +64,40 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
         }
     }, [show]);
 
-    useEffect(() => {
-        if (data) {
-            let length = 0;
-            let currSize = 0;
-            const content = [];
-            data.entries.forEach((entry, entryIndex) => {
-                entry.articles_entries.forEach((article, articleIndex) => {
-                    content.push(
-                        <TabPanel value={entryIndex + articleIndex} index={entryIndex + articleIndex} key={'swipe-panel-article-comparison-' + currSize}>
-                            <TableContainer component={Paper}>
-                                <Table aria-label={"comparison-table-" + currSize}>
-                                    <ArticleTableHead hideFunctionColumn />
-                                    <ArticleTableEntry entry={getOldEntry(article)} onClick={() => selected? null : selectOld(entryIndex, articleIndex)} />
-                                    <ArticleTableEntry entry={getNewEntry(article)} onClick={() => selected? null : selectNew(entryIndex, articleIndex)} />
-                                </Table>
-                            </TableContainer>
-                        </TabPanel>
-                    );
-                    currSize++;
-                    length++;
-                })
+    const createTables = () => {
+        const tables = [];
+        let currSize = 0;
+        data.entries.forEach((entry, entryIndex) => {
+            entry.articles_entries.forEach((article, articleIndex) => {
+                tables.push(
+                    <TabPanel value={tabIndex} index={entryIndex + articleIndex} key={'swipe-panel-article-comparison-' + currSize}>
+                        <TableContainer >
+                            <Table aria-label={"comparison-table-" + currSize}>
+                                <ArticleTableHead hideFunctionColumn />
+                                <ArticleTableEntry entry={getOldEntry(article)} onClick={() => selected ? null : selectOld(entryIndex, articleIndex)} />
+                                <ArticleTableEntry entry={getNewEntry(article)} onClick={() => selected ? null : selectNew(entryIndex, articleIndex)} />
+                            </Table>
+                        </TableContainer>
+                    </TabPanel>
+                );
+                currSize++;
             })
-            setTables(content);
-            setSize(length);
-        }
-    }, [data])
+        })
+        return tables;
+    };
 
     const manipulateData = (comparisonData) => {
+        let length = 0;
         delete comparisonData.created_at;
         delete comparisonData.updated_at;
         comparisonData.entries.forEach(entry => {
             delete entry.created_at;
             delete entry.updated_at;
+            entry.articles_entries.forEach(article => 
+                length++
+            )
         });
+        setSize(length);
         setData(comparisonData);
         setEditedData(comparisonData);
     }
@@ -102,11 +123,6 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
     const selectOld = (entryId, articleId) => {
         setSelected(true);
         const editData = Object.assign({}, editedData);
-        editData.entries[entryId].articles_entries[articleId].amount = 
-        data.entries[entryId].articles_entries[articleId].amount.old; 
-        
-        editData.entries[entryId].articles_entries[articleId].discount = 
-        data.entries[entryId].articles_entries[articleId].discount.old; 
 
         editData.entries[entryId].articles_entries[articleId].description = 
         data.entries[entryId].articles_entries[articleId].description.old; 
