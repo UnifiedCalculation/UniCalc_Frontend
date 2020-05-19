@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import SelectArticleDialog from '../components/selectArticleDialog/selectArticleDialog';
+import SelectArticleDialog from '../components/selectProductDialog/selectProductDialog';
 
 describe('Testing', () => {
 
