@@ -46,7 +46,7 @@ const Header = ({ onSettingsClick, onError }) => {
   const user = useContext(UserContext);
 
   const logout = () => {
-    API.logout(onError);
+    API.logoutUser(onError);
   }
 
   const settings = user? 
