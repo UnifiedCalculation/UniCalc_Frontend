@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, } from '@testing-library/react';
-import RegistrationForm from '../components/registrationFrom/registrationFrom';
+import RegistrationForm from '../components/registrationForm/registrationForm';
 
 it('renders the username input field', () => {
   const { getByText } = render(<RegistrationForm />);
@@ -19,7 +19,7 @@ it('renders the registration button', () => {
 
 it('renders the icon upload button', () => {
   const { getByText } = render(<RegistrationForm />);
-  expect(getByText("Firmenlogo laden")).toBeInTheDocument();
+  expect(getByText("Firmenlogo laden*")).toBeInTheDocument();
 });
 
 it('renders the password repeat input field', () => {
@@ -69,7 +69,7 @@ it('renders the webpage input field', () => {
 
 it('renders the phone number input field', () => {
   const { getByText } = render(<RegistrationForm />);
-  expect(getByText("Telefonnumer")).toBeInTheDocument();
+  expect(getByText("Telefonnummer")).toBeInTheDocument();
 });
 
 it('renders the company name input field', () => {
