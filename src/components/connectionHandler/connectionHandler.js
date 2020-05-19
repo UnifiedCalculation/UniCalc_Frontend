@@ -24,6 +24,16 @@ export async function getEntriesFromOffer(projectId, offerId, onError, callback)
       .catch(error => handleErrors(error, onError));
 }
 
+export async function logoutUser(onError, callback) {
+  axios.get('logout/' + projectId + '/forms/' + offerId + '/entries')
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
 export async function deleteProductFromEntryInOffer(projectId, offerId, entryId, productId, onError, callback){
 
   axios.delete('projects/' + projectId + '/forms/' + offerId + '/entries/' + entryId  + '/articles_entries/' + productId)

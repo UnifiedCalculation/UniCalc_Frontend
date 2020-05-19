@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import * as API from '../connectionHandler/connectionHandler'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCogs } from '@fortawesome/free-solid-svg-icons'
+import { faCogs, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { IconButton } from '@material-ui/core';
 
 const Header = ({ onSettingsClick, onError }) => {
@@ -45,12 +45,19 @@ const Header = ({ onSettingsClick, onError }) => {
 
   const user = useContext(UserContext);
 
+  const logout = () => {
+    API.logout(onError);
+  }
+
   const settings = user? 
     (user.roles.some(element => element.name == "Admin") || user.roles.some(element => element.name == "Verkäufer"))?
     <>
       <div className={classes.username}>{user.firstname + ' ' + user.lastname}</div>
       <IconButton className={classes.button} onClick={onSettingsClick}>
         <FontAwesomeIcon icon={faCogs} />
+      </IconButton>
+      <IconButton className={classes.button} onClick={logout}>
+        <FontAwesomeIcon icon={faSignOutAlt} />
       </IconButton>
     </>
     :

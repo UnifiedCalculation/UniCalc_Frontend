@@ -93,8 +93,9 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
         buttonsAlign: {
             textAlign: "center",
         },
-        a: {
-            textDecorationStyle: 'none'
+        link: {
+            textDecorationStyle: 'none',
+
         }
     }));
 
@@ -134,7 +135,7 @@ const OfferDisplay = ({ offerData, projectId, onClose, onError, ...props }) => {
                 >
                     Neues Segment hinzufügen
                 </Button>
-                <a className={classes.a} href={"/projects/" + projectId + "/forms/" + offer.id + "/pdf"}
+                <a className={classes.link} href={"/projects/" + projectId + "/forms/" + offer.id + "/pdf"}
                     target={"_blank"}
                 >
                     <Button
