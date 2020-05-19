@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import DynamicDialog from "../../../dynamicDialog/dynamicDialog";
-import PropTypes, {func} from "prop-types";
+import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import {getNpks, submitNewProduct} from "../../../connectionHandler/connectionHandler";
@@ -23,7 +23,11 @@ const AddNpkProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProd
       id: 'price',
       label: 'Preis',
       type: 'number',
-      required: true
+      required: true,
+      inputProps: { 
+        min: "0",  
+        step: "0.05" 
+    },
     },
     {
       id: 'unit',
@@ -75,12 +79,10 @@ const AddNpkProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProd
   }
 
   const parseArticleData = (articleData) => {
-    articleData.price = parseInt(articleData.price);
-    const npk = npks.find(element => element.id == articleData.npk.split(" ")[0]);
-    articleData.name = npk.name;
-    articleData.npk_id = (articleData.npk.split(" "))[0];
+    articleData.name = npks.find(entry => entry.number == articleData.npk.split(" ")[0].split(".")[0]).name;
+    articleData.npk_id = npks.find(entry => entry.number == articleData.npk.split(" ")[0].split(".")[1]).id;
     articleData.number = articleData.npk_id + "." + articleData.number;
-    saveNewArticle(articleData);
+    onSubmit(articleData);
   }
 
   useEffect(() => {
@@ -91,8 +93,9 @@ const AddNpkProductDialog = ({setErrorMessage, onCancel, onSubmit, show, setProd
 
       <Autocomplete
           id="npk-autocomplete"
-          options={npks}
-          getOptionLabel={(option) => option.id + ' ' + option.name}
+          options={npks.filter(entry => entry.npk_id != null)}
+          groupBy={option => npks.find(entry => entry.id == option.npk_id).number + ' '  + npks.find(entry => entry.id == option.npk_id).name}
+          getOptionLabel={option => npks.find(entry => entry.id == option.npk_id).number + '.' + option.number + ' ' + option.name}
           renderInput={(params) =>
               <TextField
                   {...params}
