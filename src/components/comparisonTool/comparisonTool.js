@@ -39,8 +39,10 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
     const classes = useStyles();
 
     useEffect(() => {
-        API.getComparisonDataForContract(contractId, onError, manipulateData);
-    }, [])
+        if(show){
+            API.getComparisonDataForContract(contractId, onError, manipulateData);
+        }
+    }, [show]);
 
     useEffect(() => {
         if (data) {
