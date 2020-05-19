@@ -123,9 +123,14 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
     const selectOld = (entryId, articleId) => {
         setSelected(true);
         const editData = Object.assign({}, editedData);
+        editData.entries[entryId].articles_entries[articleId].amount =
+            data.entries[entryId].articles_entries[articleId].amount.old;
 
-        editData.entries[entryId].articles_entries[articleId].description = 
-        data.entries[entryId].articles_entries[articleId].description.old; 
+        editData.entries[entryId].articles_entries[articleId].discount =
+            data.entries[entryId].articles_entries[articleId].discount.old;
+
+        editData.entries[entryId].articles_entries[articleId].description =
+            data.entries[entryId].articles_entries[articleId].description.old;
 
         setEditedData(editData);
     }
@@ -133,26 +138,20 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
     const selectNew = (entryId, articleId) => {
         setSelected(true);
         const editData = Object.assign({}, editedData);
-        editData.entries[entryId].articles_entries[articleId].amount = 
-        data.entries[entryId].articles_entries[articleId].amount.new; 
-        
-        editData.entries[entryId].articles_entries[articleId].discount = 
-        data.entries[entryId].articles_entries[articleId].discount.new; 
+        editData.entries[entryId].articles_entries[articleId].amount =
+            data.entries[entryId].articles_entries[articleId].amount.new;
 
-        editData.entries[entryId].articles_entries[articleId].description = 
-        data.entries[entryId].articles_entries[articleId].description.new; 
+        editData.entries[entryId].articles_entries[articleId].discount =
+            data.entries[entryId].articles_entries[articleId].discount.new;
+
+        editData.entries[entryId].articles_entries[articleId].description =
+            data.entries[entryId].articles_entries[articleId].description.new;
 
         setEditedData(editData);
     }
 
-    const theme = useTheme();
-
-    const handleChangeIndex = (index) => {
-        setIndex(index);
-    };
-
     const handleNext = () => {
-        setIndex(index + 1);
+        setIndex(tabIndex + 1);
         setSelected(false);
     }
 
@@ -160,15 +159,17 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
         variant="progress"
         steps={size}
         position="static"
-        activeStep={index}
+        activeStep={tabIndex}
         className={classes.stepper}
         nextButton={
-            <Button size="small" onClick={handleNext} disabled={index === size - 1 || !selected}>
+            <Button size="small" onClick={handleNext} disabled={tabIndex === size - 1 || !selected}>
                 Vor
-        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+                <KeyboardArrowRight />
             </Button>
         }
     />
+
+    const tables = data ? createTables() : null;
 
     const children = tables ?
         <>
@@ -186,7 +187,7 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
             show={show}
             onAccept={() => onSubmit(editedData)}
             acceptButtonText={'Änderungen speichern'}
-            disableAcceptButton={!(index === size - 1 && selected)}
+            disableAcceptButton={!(tabIndex === size - 1 && selected)}
             onCancel={onCancel}
             cancelButtonText={'Abbrechen'}
         >
@@ -194,26 +195,6 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
         </DynamicDialog>
     )
 
-}
-
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`full-width-tabpanel-${index}`}
-            aria-labelledby={`full-width-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Box p={3}>
-                    {children}
-                </Box>
-            )}
-        </div>
-    );
 }
 
 export default ComparisonTool;
