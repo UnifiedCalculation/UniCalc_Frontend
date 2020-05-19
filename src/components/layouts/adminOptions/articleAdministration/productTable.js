@@ -27,7 +27,7 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
   }
 
   const rows = products.map(function (item) {
-    if (item.npk === "") {
+    if (item.npk != null) {
       return createData(
           item.number,
           item.name,
