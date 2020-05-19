@@ -25,7 +25,7 @@ export async function getEntriesFromOffer(projectId, offerId, onError, callback)
 }
 
 export async function logoutUser(onError, callback) {
-  axios.get('logout/' + projectId + '/forms/' + offerId + '/entries')
+  axios.get('logout')
       .then(res => {
         if (callback) {
           callback(res.data);
