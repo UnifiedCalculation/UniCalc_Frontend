@@ -103,8 +103,7 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
     }
 
     const getOldEntry = (entry) => {
-        const oldEntry = {};
-        Object.assign(oldEntry, entry);
+        const oldEntry = Object.assign({}, entry);
         oldEntry.discount = entry.discount.old;
         oldEntry.description = entry.description.old;
         oldEntry.amount = entry.amount.old;
@@ -112,8 +111,7 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
     }
 
     const getNewEntry = (entry) => {
-        const newEntry = {};
-        Object.assign(newEntry, entry);
+        const newEntry = Object.assign({}, entry);
         newEntry.discount = entry.discount.new;
         newEntry.description = entry.description.new;
         newEntry.amount = entry.amount.new;

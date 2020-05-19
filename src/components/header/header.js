@@ -45,10 +45,6 @@ const Header = ({ onSettingsClick, onError }) => {
 
   const user = useContext(UserContext);
 
-  const logout = () => {
-    API.logoutUser(onError);
-  }
-
   const settings = user? 
     (user.roles.some(element => element.name == "Admin") || user.roles.some(element => element.name == "Verkäufer"))?
     <>
@@ -56,7 +52,7 @@ const Header = ({ onSettingsClick, onError }) => {
       <IconButton className={classes.button} onClick={onSettingsClick}>
         <FontAwesomeIcon icon={faCogs} />
       </IconButton>
-      <IconButton className={classes.button} onClick={logout}>
+      <IconButton className={classes.button} href={'logout'}>
         <FontAwesomeIcon icon={faSignOutAlt} />
       </IconButton>
     </>
