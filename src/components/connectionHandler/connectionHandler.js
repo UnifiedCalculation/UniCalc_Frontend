@@ -473,6 +473,26 @@ export async function submitNewProduct(articleData, onError, callback) {
       .catch(error => handleErrors(error, onError));
 }
 
+export async function submitInvoiceFromComparison(projectId, comparisonData, onError, callback){
+  axios.post('projects/' + projectId + '/forms/status/invoice', comparisonData)
+      .then(res => {
+        if (callback) {
+          callback(res.data);
+        }
+      })
+      .catch(error => handleErrors(error, onError));
+}
+
+export async function getComparisonDataForContract(contractId, onError, callback){
+  axios.get('forms/compare/' + contractId)
+  .then(res => {
+    if (callback) {
+      callback(res.data);
+    }
+  })
+  .catch(error => handleErrors(error, onError));
+}
+
 export async function getOfferData(projectId, offerId, onError, callback) {
   axios.get('projects/' + projectId + '/forms/' + offerId)
       .then(res => {

@@ -15,6 +15,7 @@ import { UserContext } from '../singlePage/singlePage';
 
 import * as API from '../connectionHandler/connectionHandler';
 import BackButton from '../layouts/backButton/backButton';
+import ComparisonTool from '../comparisonTool/comparisonTool';
 
 
 
@@ -23,6 +24,7 @@ const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }
     const [contract, setContract] = useState(contractData);
     const [entries, setEntries] = useState(null);
     const [showAlert, setAlertViewState] = useState(false);
+    const [showComparisonTool, setComparisonToolViewState] = useState(false);
     const [employee, setEmployee] = useState(null);
     const [selectEmployeeViewState, setSelectEmployeeDialogViewState] = useState(false);
 
@@ -119,6 +121,15 @@ const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }
         onClose();
     }
 
+    const submitInvoice = (comparisonData) => {
+        API.submitInvoiceFromComparison(projectId, comparisonData, onError, afterSubmit)
+    }
+
+    const afterSubmit = () => {
+        setComparisonToolViewState(false);
+        onClose();
+    }
+
     const assignedEmployee = employee ?
         <Typography className={classes.assignedEmployee} >
             {"Zuständiger Mitarbeiter: " + employee.firstname + ' ' + employee.lastname}
@@ -142,10 +153,10 @@ const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }
                     Neuen Segment hinzufügen
                 </Button>
                 <Button
-                    disabled={functionsDisabled}
-                    onClick={turnContractIntoInvoice}
+                    onClick={() => setComparisonToolViewState(true)}
+                    data-testid="offerDisplay-button-newSegment"
                 >
-                    Auftrag zu Schlussrechnung umwandeln
+                    Schlussrechnungsassistent starten
                 </Button>
                 <Button
                     onClick={() => setSelectEmployeeDialogViewState(true)}
@@ -199,6 +210,12 @@ const ContractDisplay = ({ contractData, projectId, onClose, onError, ...props }
                 onError={onError} 
                 show={selectEmployeeViewState}
                 />
+            <ComparisonTool 
+                onError={onError}
+                contractId={contract.id}
+                onSubmit={submitInvoice}
+                onCancel={() => setComparisonToolViewState(false)}
+            />
         </>
 
     return (
