@@ -6,7 +6,7 @@ import axios from 'axios';
 jest.mock('axios');
 afterAll(cleanup)
 afterEach(() => {
-  jest.clearAllMocks() // clear axios mocks after each test
+    jest.clearAllMocks()
 })
 
 
@@ -68,13 +68,22 @@ describe('Testing', () => {
 
     describe('buttons', () => {
 
+        it('renders the correct buttons in an empty offer', async () => {
+            const { getByTestId, queryByText, getByText } = render(
+                <OfferDisplay offerData={emptyOffer} onError={console.log} />
+            );
+
+
+            expect(getByText("Offerte als PDF laden")).toBeInTheDocument();
+            expect(getByText("Neues Segment hinzufügen")).toBeInTheDocument();
+
+        });
 
         it('renders the correct buttons in an existing offer', async () => {
             const { getByTestId, getByText } = render(
-                <OfferDisplay offerData={offer} onError={console.log}/>
+                <OfferDisplay offerData={offer} onError={console.log} />
             );
 
-            await waitForElement(() => getByTestId('offerDisplay-header'));
 
             expect(getByText("Offerte als PDF laden")).toBeInTheDocument();
             expect(getByText("Neues Segment hinzufügen")).toBeInTheDocument();
