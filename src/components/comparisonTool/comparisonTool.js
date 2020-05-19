@@ -124,13 +124,13 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
         setSelected(true);
         const editData = Object.assign({}, editedData);
         editData.entries[entryId].articles_entries[articleId].amount =
-            data.entries[entryId].articles_entries[articleId].amount.old;
+        Object.assign({},data.entries[entryId].articles_entries[articleId].amount.old);
 
         editData.entries[entryId].articles_entries[articleId].discount =
-            data.entries[entryId].articles_entries[articleId].discount.old;
+        Object.assign({},data.entries[entryId].articles_entries[articleId].discount.old);
 
         editData.entries[entryId].articles_entries[articleId].description =
-            data.entries[entryId].articles_entries[articleId].description.old;
+        Object.assign({},data.entries[entryId].articles_entries[articleId].description.old);
 
         setEditedData(editData);
     }
@@ -139,13 +139,13 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
         setSelected(true);
         const editData = Object.assign({}, editedData);
         editData.entries[entryId].articles_entries[articleId].amount =
-            data.entries[entryId].articles_entries[articleId].amount.new;
+            Object.assign({},data.entries[entryId].articles_entries[articleId].amount.new);
 
         editData.entries[entryId].articles_entries[articleId].discount =
-            data.entries[entryId].articles_entries[articleId].discount.new;
+        Object.assign({},data.entries[entryId].articles_entries[articleId].discount.new);
 
         editData.entries[entryId].articles_entries[articleId].description =
-            data.entries[entryId].articles_entries[articleId].description.new;
+        Object.assign({},data.entries[entryId].articles_entries[articleId].description.new);
 
         setEditedData(editData);
     }
