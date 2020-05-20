@@ -60,7 +60,8 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
 
     useEffect(() => {
         if(show){
-            API.getComparisonDataForContract(contractId, onError, manipulateData);
+            //API.getComparisonDataForContract(contractId, onError, manipulateData);
+            manipulateData(props.data)
         }
     }, [show]);
 
@@ -88,8 +89,17 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
 
     const manipulateData = (comparisonData) => {
         let length = 0;
-        console.log(comparisonData);
+        delete comparisonData.created_at;
+        delete comparisonData.updated_at;
+        comparisonData.entries.forEach(entry => {
+            delete entry.created_at;
+            delete entry.updated_at;
+            entry.articles_entries.forEach(article => 
+                length++
+            )
+        });
         setSize(length);
+        console.log(comparisonData);
         setData(comparisonData);
         setEditedData(comparisonData);
     }
