@@ -16,7 +16,7 @@ import Paper from '@material-ui/core/Paper';
 import {getProducts} from "../../../connectionHandler/connectionHandler";
 
 
-const ProductTable = ({setErrorMessage, products, setProducts}) => {
+const ProductTable = ({npks, setErrorMessage, products, setProducts}) => {
 
   useEffect(() => {
     getProducts(setErrorMessage, setProducts)
@@ -27,12 +27,22 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
   }
 
   const rows = products.map(function (item) {
-      return createData(
+        if(item.npk_id != null){
+          return createData(
+            (npks.find(npk => npks.find(entry => entry.id == item.npk_id).npk_id == npk.id).number + '.' + npks.find(entry => entry.id == item.npk_id).number + '.' + item.number ),
+            item.name,
+            Number(item.price).toFixed(2),
+            item.unit,
+            item.description);
+
+        } else {
+          return createData(
           item.number,
           item.name,
           Number(item.price).toFixed(2),
           item.unit,
           item.description);
+        }
   });
 
   function descendingComparator(a, b, orderBy) {
