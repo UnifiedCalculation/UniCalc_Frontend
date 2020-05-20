@@ -192,6 +192,7 @@ const DynamicEntry = ({ projectId, offerId, contractId, invoiceId, entryData, on
         } else if (contractId != null) {
             API.submitEditedEntryProductInContract(projectId, contractId, entry.id, productToEdit.article_id, productToEdit, onError, updateData);
         }
+        closeEditProductDialog();
 
     }
 
