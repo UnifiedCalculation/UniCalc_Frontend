@@ -27,21 +27,12 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
   }
 
   const rows = products.map(function (item) {
-    if (item.npk != null) {
       return createData(
           item.number,
           item.name,
           Number(item.price).toFixed(2),
           item.unit,
           item.description);
-    } else {
-      return createData(
-          (item.npk + "." + item.number),
-          item.name,
-          Number(item.price).toFixed(2),
-          item.unit,
-          item.description);
-    }
   });
 
   function descendingComparator(a, b, orderBy) {
