@@ -60,8 +60,7 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
 
     useEffect(() => {
         if(show){
-            //API.getComparisonDataForContract(contractId, onError, manipulateData);
-            manipulateData(props.data);
+            API.getComparisonDataForContract(contractId, onError, manipulateData);
         }
     }, [show]);
 
