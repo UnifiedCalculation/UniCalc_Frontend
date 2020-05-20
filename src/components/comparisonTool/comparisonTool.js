@@ -60,7 +60,8 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
 
     useEffect(() => {
         if(show){
-            API.getComparisonDataForContract(contractId, onError, manipulateData);
+            //API.getComparisonDataForContract(contractId, onError, manipulateData);
+            manipulateData(props.data);
         }
     }, [show]);
 
@@ -88,15 +89,7 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
 
     const manipulateData = (comparisonData) => {
         let length = 0;
-        delete comparisonData.created_at;
-        delete comparisonData.updated_at;
-        comparisonData.entries.forEach(entry => {
-            delete entry.created_at;
-            delete entry.updated_at;
-            entry.articles_entries.forEach(article => 
-                length++
-            )
-        });
+        console.log(comparisonData);
         setSize(length);
         setData(comparisonData);
         setEditedData(comparisonData);
@@ -120,30 +113,29 @@ const ComparisonTool = ({ contractId, onSubmit, onCancel, onError, show, ...prop
 
     const selectOld = (entryId, articleId) => {
         setSelected(true);
-        const editData = Object.assign({}, editedData);
+        const editData = editedData
         editData.entries[entryId].articles_entries[articleId].amount =
-        Object.assign({},data.entries[entryId].articles_entries[articleId].amount.old);
-
+        data.entries[entryId].articles_entries[articleId].amount.old
         editData.entries[entryId].articles_entries[articleId].discount =
-        Object.assign({},data.entries[entryId].articles_entries[articleId].discount.old);
+        data.entries[entryId].articles_entries[articleId].discount.old
 
         editData.entries[entryId].articles_entries[articleId].description =
-        Object.assign({},data.entries[entryId].articles_entries[articleId].description.old);
-
+        data.entries[entryId].articles_entries[articleId].description.old
+        
         setEditedData(editData);
     }
 
     const selectNew = (entryId, articleId) => {
         setSelected(true);
-        const editData = Object.assign({}, editedData);
+        const editData = editedData
         editData.entries[entryId].articles_entries[articleId].amount =
-            Object.assign({},data.entries[entryId].articles_entries[articleId].amount.new);
+        data.entries[entryId].articles_entries[articleId].amount.new
 
         editData.entries[entryId].articles_entries[articleId].discount =
-        Object.assign({},data.entries[entryId].articles_entries[articleId].discount.new);
+        data.entries[entryId].articles_entries[articleId].discount.new
 
         editData.entries[entryId].articles_entries[articleId].description =
-        Object.assign({},data.entries[entryId].articles_entries[articleId].description.new);
+        data.entries[entryId].articles_entries[articleId].description.new
 
         setEditedData(editData);
     }
