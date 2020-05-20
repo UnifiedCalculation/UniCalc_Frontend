@@ -92,7 +92,7 @@ const NewProjectDialog = ({ customers, onCancel, onSubmit, show, projectId, ...p
 
     const prepareData = (data) => {
         data.customer_id = customers.find(element => 
-            (element.lastName + ' ' + element.firstName) === data.customer).id;
+            (element.lastname + ' ' + element.firstname) === data.customer).id;
             data.payment_target = data.payment_target || "30 Tage";
         delete data.customer;
 
