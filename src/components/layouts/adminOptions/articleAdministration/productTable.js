@@ -246,10 +246,7 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
 
                       return (
                           <TableRow
-                              hover
-                              role="checkbox"
-                              tabIndex={-1}
-                              key={row.id + 'tableRow'}
+                              key={row.id + 'tableRow' + index}
                           >
                             <TableCell align="left" component="th" id={labelId} scope="row">
                               {row.id}
@@ -263,7 +260,7 @@ const ProductTable = ({setErrorMessage, products, setProducts}) => {
                     })}
                 {emptyRows > 0 && (
                     <TableRow style={{height: (dense ? 33 : 53) * emptyRows}}>
-                      <TableCell colSpan={6}/>
+                      <TableCell colSpan={5}/>
                     </TableRow>
                 )}
               </TableBody>
